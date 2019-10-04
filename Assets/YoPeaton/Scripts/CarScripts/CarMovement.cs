@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CarMovement : MonoBehaviour
 {
@@ -9,17 +7,50 @@ public class CarMovement : MonoBehaviour
     [SerializeField]
     private float maxSpeed = 0.0f;
     [SerializeField]
+    private float brakeSpeed = 0.0f;
+    [SerializeField]
     private float acceleration = 0.0f;
-    public bool testAccel = true;
-    private void Update()
-    {
-        if (testAccel)
-        {
-            this.gameObject.transform.Translate(Vector3.right * Time.deltaTime);
+
+    private float currentSpeed = 0.0f;
+    private bool isBraking = false;
+
+    private void Update() {
+        if (Input.GetKey(KeyCode.B)) {
+            isBraking = true;
         }
-        if(!testAccel)
-        {
-            this.gameObject.transform.Translate(Vector3.zero);
+        else {
+            isBraking = false;
+        }
+    }
+
+    private void FixedUpdate() {
+        if (isBraking) {
+            ApplyBrakes();
+        }
+        else {
+            Accelerate();
+        }
+        MoveToNextPosition();
+    }
+
+    private void Accelerate() {
+        if (currentSpeed < maxSpeed) {
+            currentSpeed += acceleration * Time.deltaTime;
+        }
+        else if (currentSpeed >  maxSpeed) {
+            currentSpeed = maxSpeed;
+        }
+    }
+
+    private void MoveToNextPosition() {
+        Vector3 currentPosition = carBody.position;
+        Vector3 nextPosition = currentPosition + (Vector3.right * currentSpeed * Time.deltaTime);
+        carBody.MovePosition(nextPosition);
+    }
+
+    public void ApplyBrakes() {
+        if (currentSpeed > 0.0f) {
+            currentSpeed -= brakeSpeed * Time.deltaTime;
         }
     }
 }
