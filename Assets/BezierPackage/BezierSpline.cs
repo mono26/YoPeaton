@@ -2,7 +2,6 @@
 using System;
 
 public class BezierSpline : MonoBehaviour {
-
 	[SerializeField]
 	private Vector3[] points;
 
@@ -197,9 +196,15 @@ public class BezierSpline : MonoBehaviour {
 		};
 	}
 
+	/// <summary>
+	/// Returns the lenght of the whole spline.
+	/// </summary>
+	/// <returns></returns>
 	public float GetLength()
 	{
 		float totalLegth = 0.0f;
+		// Because a bezier spline is made of curves we should add 3. 
+		// Also because the last point of one curve is the first of the next one.
 		for (int i = 0; i < ControlPointCount - 1; i += 3)
 		{
 			totalLegth += Bezier.GetLenght(points[i], points[i + 1], points[i + 2], points[i + 3]);

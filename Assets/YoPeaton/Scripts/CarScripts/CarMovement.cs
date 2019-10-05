@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CarMovement : MonoBehaviour
+public class CarMovement : MonoBehaviour, IMovable
 {
     [SerializeField]
     private Rigidbody2D carBody = null;
@@ -11,7 +11,7 @@ public class CarMovement : MonoBehaviour
     [SerializeField]
     private float acceleration = 0.0f;
     [SerializeField]
-    private BezierSpline pathToFollow = null;
+    private FollowPath followComponent = null;
 
     private float currentSpeed = 0.0f;
     private float progressInPath = 0.0f;
@@ -20,8 +20,17 @@ public class CarMovement : MonoBehaviour
     private bool move = true;
 
     private void Start() {
-        pathLength = pathToFollow.GetLength();
+        pathLength = followComponent.GetLength();
     }
+
+    private void OnEnable() {
+        followComponent.OnPathCompleted(OnPathCompleted);
+    }
+
+    private void OnDisable() {
+        followComponent.ClearFromPathCompleted(OnPathCompleted);
+    }
+
     private void Update() {
         if (Input.GetKey(KeyCode.B)) {
             isBraking = true;
@@ -32,10 +41,6 @@ public class CarMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (transform.position.Equals(pathToFollow.GetControlPoint(pathToFollow.ControlPointCount - 1)))
-        {
-            move = false;
-        }
         if (isBraking) {
             ApplyBrakes();
         }
@@ -49,7 +54,9 @@ public class CarMovement : MonoBehaviour
         }
         if (move)
         {
-            MoveToNextPosition(GetMovementDirection(progressInPath / timeToFinishPath));
+            float t = progressInPath / timeToFinishPath;
+            DebugController.LogMessage(string.Format("t: {0}", t));
+            MoveToNextPosition(followComponent.GetNextDirection(t));
             progressInPath += Time.fixedDeltaTime;
         }
     }
@@ -75,8 +82,8 @@ public class CarMovement : MonoBehaviour
         }
     }
 
-    private Vector3 GetMovementDirection(float time)
+    private void OnPathCompleted()
     {
-        return pathToFollow.GetDirection(time);
+        move = false;
     }
 }

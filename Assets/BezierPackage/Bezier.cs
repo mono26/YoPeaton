@@ -36,9 +36,17 @@ public static class Bezier {
 			3f * t * t * (p3 - p2);
 	}
 
+	/// <summary>
+	/// Gets the lenght of a curve made of 4 points.
+	/// </summary>
+	/// <param name="p0">Point 1.</param>
+	/// <param name="p1">Point 2.</param>
+	/// <param name="p2">Point 3.</param>
+	/// <param name="p3">Point 4.</param>
+	/// <returns></returns>
 	public static float GetLenght(Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
 	{
-		int steps = 100;
+		int steps = 50;
 		float arclenght = 0.0f;
 		float tIncrement = 1.0f / (float)steps;
 		for (int i = 1; i <= steps; i++)
@@ -46,6 +54,7 @@ public static class Bezier {
 			float t = (float)i / (float)steps;
 			Vector3 point = GetPoint(p0, p1, p2, p3, t);
 			Vector3 previousPoint = GetPoint(p0, p1, p2, p3, t - tIncrement);
+			Debug.DrawLine(previousPoint, point, Color.magenta, 10.0f);
 			arclenght += (point - previousPoint).magnitude;
 		}
 		return arclenght;
