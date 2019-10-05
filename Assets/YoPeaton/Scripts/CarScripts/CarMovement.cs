@@ -10,10 +10,18 @@ public class CarMovement : MonoBehaviour
     private float brakeSpeed = 0.0f;
     [SerializeField]
     private float acceleration = 0.0f;
+    [SerializeField]
+    private BezierSpline pathToFollow = null;
 
     private float currentSpeed = 0.0f;
+    private float progressInPath = 0.0f;
+    private float pathLength = 0.0f;
     private bool isBraking = false;
+    private bool move = true;
 
+    private void Start() {
+        pathLength = pathToFollow.GetLength();
+    }
     private void Update() {
         if (Input.GetKey(KeyCode.B)) {
             isBraking = true;
@@ -24,13 +32,26 @@ public class CarMovement : MonoBehaviour
     }
 
     private void FixedUpdate() {
+        if (transform.position.Equals(pathToFollow.GetControlPoint(pathToFollow.ControlPointCount - 1)))
+        {
+            move = false;
+        }
         if (isBraking) {
             ApplyBrakes();
         }
         else {
             Accelerate();
         }
-        MoveToNextPosition();
+        float timeToFinishPath = pathLength / currentSpeed;
+        if (float.IsNaN(timeToFinishPath))
+        {
+            timeToFinishPath = 0.0f;
+        }
+        if (move)
+        {
+            MoveToNextPosition(GetMovementDirection(progressInPath / timeToFinishPath));
+            progressInPath += Time.fixedDeltaTime;
+        }
     }
 
     private void Accelerate() {
@@ -42,9 +63,9 @@ public class CarMovement : MonoBehaviour
         }
     }
 
-    private void MoveToNextPosition() {
+    private void MoveToNextPosition(Vector3 _direction) {
         Vector3 currentPosition = carBody.position;
-        Vector3 nextPosition = currentPosition + (Vector3.right * currentSpeed * Time.deltaTime);
+        Vector3 nextPosition = currentPosition + (_direction * currentSpeed * Time.deltaTime);
         carBody.MovePosition(nextPosition);
     }
 
@@ -52,5 +73,10 @@ public class CarMovement : MonoBehaviour
         if (currentSpeed > 0.0f) {
             currentSpeed -= brakeSpeed * Time.deltaTime;
         }
+    }
+
+    private Vector3 GetMovementDirection(float time)
+    {
+        return pathToFollow.GetDirection(time);
     }
 }

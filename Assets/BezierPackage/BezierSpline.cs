@@ -196,4 +196,14 @@ public class BezierSpline : MonoBehaviour {
 			BezierControlPointMode.Free
 		};
 	}
+
+	public float GetLength()
+	{
+		float totalLegth = 0.0f;
+		for (int i = 0; i < ControlPointCount - 1; i += 3)
+		{
+			totalLegth += Bezier.GetLenght(points[i], points[i + 1], points[i + 2], points[i + 3]);
+		}
+		return totalLegth;
+	}
 }
