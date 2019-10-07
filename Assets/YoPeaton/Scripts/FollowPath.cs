@@ -9,13 +9,10 @@ public class FollowPath : MonoBehaviour
 
     [SerializeField]
     private BezierSpline pathToFollow = null;
-    [SerializeField]
-    private IMovable movableComponent = null;
 
     private bool moveComponent = true;
 
-    public Vector3 GetNextDirection(float time)
-    {
+    public Vector3 GetNextDirection(float time) {
         if (time >= 1.0f)
         {
             OnPathCompleted();
@@ -23,13 +20,27 @@ public class FollowPath : MonoBehaviour
         return pathToFollow.GetDirection(time);
     }
 
-    private void OnPathCompleted()
-    {
+    public Vector3 GetNextPosition(float time) {
+        if (time >= 1.0f)
+        {
+            OnPathCompleted();
+        }
+        return pathToFollow.GetPoint(time);
+    }
+
+    public BezierSpline GetNextPosiblePath() {
+        BezierSpline nextPath = pathToFollow.GetConnectedPath();
+        if (nextPath) {
+            pathToFollow = nextPath;
+        }
+        return nextPath;
+    }
+
+    private void OnPathCompleted() {
         PathCompletedEvent?.Invoke();
     }
 
-    public float GetLength()
-    {
+    public float GetLength() {
         return pathToFollow.GetLength();
     }
 

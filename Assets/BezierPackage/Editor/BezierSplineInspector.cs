@@ -21,6 +21,7 @@ public class BezierSplineInspector : Editor {
 	private int selectedIndex = -1;
 
 	public override void OnInspectorGUI () {
+		DrawDefaultInspector();
 		spline = target as BezierSpline;
 		EditorGUI.BeginChangeCheck();
 		bool loop = EditorGUILayout.Toggle("Loop", spline.Loop);

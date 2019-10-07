@@ -1,12 +1,21 @@
 ﻿using UnityEngine;
 using System;
 
+[System.Serializable]
+public class PathConections {
+	public BezierSpline next = null;
+	public BezierSpline previous = null;
+	public BezierSpline left = null;
+	public BezierSpline right = null;
+}
+
 public class BezierSpline : MonoBehaviour {
 	[SerializeField]
 	private Vector3[] points;
-
 	[SerializeField]
 	private BezierControlPointMode[] modes;
+	[SerializeField]
+	private PathConections connections = null;
 
 	[SerializeField]
 	private bool loop;
@@ -27,6 +36,20 @@ public class BezierSpline : MonoBehaviour {
 	public int ControlPointCount {
 		get {
 			return points.Length;
+		}
+	}
+
+	private void OnDrawGizmos() {
+		int steps = 50;
+		Vector3 previousPoint = transform.position;
+		Vector3 point = transform.position;
+		for (int i = 0; i < steps; i++) {
+			point = GetPoint((float)i / (float)steps);
+			Gizmos.color = Color.cyan;
+			Gizmos.DrawLine(previousPoint, point);
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawWireSphere(point, 0.15f);
+			previousPoint = point;
 		}
 	}
 
@@ -210,5 +233,9 @@ public class BezierSpline : MonoBehaviour {
 			totalLegth += Bezier.GetLenght(points[i], points[i + 1], points[i + 2], points[i + 3]);
 		}
 		return totalLegth;
+	}
+
+	public BezierSpline GetConnectedPath() {
+		return connections.next;
 	}
 }

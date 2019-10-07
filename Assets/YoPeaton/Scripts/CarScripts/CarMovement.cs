@@ -21,6 +21,7 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void Start() {
         pathLength = followComponent.GetLength();
+        progressInPath = 0.0f;
     }
 
     private void OnEnable() {
@@ -56,7 +57,8 @@ public class CarMovement : MonoBehaviour, IMovable
         {
             float t = progressInPath / timeToFinishPath;
             DebugController.LogMessage(string.Format("t: {0}", t));
-            MoveToNextPosition(followComponent.GetNextDirection(t));
+            // MoveWithDirection(followComponent.GetNextDirection(t));
+            MoveToNextPosition(followComponent.GetNextPosition(t));
             progressInPath += Time.fixedDeltaTime;
         }
     }
@@ -70,10 +72,14 @@ public class CarMovement : MonoBehaviour, IMovable
         }
     }
 
-    private void MoveToNextPosition(Vector3 _direction) {
+    private void MoveWithDirection(Vector3 _direction) {
         Vector3 currentPosition = carBody.position;
         Vector3 nextPosition = currentPosition + (_direction * currentSpeed * Time.deltaTime);
         carBody.MovePosition(nextPosition);
+    }
+
+    private void MoveToNextPosition(Vector3 _position) {
+        carBody.MovePosition(_position);
     }
 
     public void ApplyBrakes() {
@@ -84,6 +90,14 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void OnPathCompleted()
     {
-        move = false;
+        BezierSpline nextPath = followComponent.GetNextPosiblePath();
+        if (nextPath) {
+            pathLength = followComponent.GetLength();
+            progressInPath = 0.0f;
+        }
+        else {
+            
+        }
+        
     }
 }
