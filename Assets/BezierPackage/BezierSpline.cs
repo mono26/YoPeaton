@@ -1,12 +1,18 @@
 ﻿using UnityEngine;
 using System;
 
-[System.Serializable]
-public class PathConections {
-	public BezierSpline north = null;
-	public BezierSpline east = null;
-	public BezierSpline west = null;
-	public BezierSpline south = null;
+public enum Directions {
+	North, East, West, South
+}
+
+public struct DirectionPathPair {
+	public Directions direction;
+	public BezierSpline path;
+
+	public DirectionPathPair(Directions _direction, BezierSpline _path) {
+		direction = _direction;
+		path = _path;
+	}
 }
 
 public class BezierSpline : MonoBehaviour {
@@ -15,7 +21,7 @@ public class BezierSpline : MonoBehaviour {
 	[SerializeField]
 	private BezierControlPointMode[] modes;
 	[SerializeField]
-	private PathConections connections = null;
+	private DirectionPathPair[] connections = null;
 
 	[SerializeField]
 	private bool loop;
@@ -36,6 +42,12 @@ public class BezierSpline : MonoBehaviour {
 	public int ControlPointCount {
 		get {
 			return points.Length;
+		}
+	}
+
+	public DirectionPathPair[] Getconections {
+		get {
+			return connections;
 		}
 	}
 
@@ -237,9 +249,5 @@ public class BezierSpline : MonoBehaviour {
 			totalLegth += Bezier.GetLenght(points[i], points[i + 1], points[i + 2], points[i + 3]);
 		}
 		return totalLegth;
-	}
-
-	public BezierSpline GetConnectedPath() {
-		return connections.next;
 	}
 }

@@ -29,7 +29,7 @@ public class FollowPath : MonoBehaviour
     }
 
     public BezierSpline GetNextPosiblePath() {
-        BezierSpline nextPath = pathToFollow.GetConnectedPath();
+        BezierSpline nextPath = pathToFollow.Getconections[0].path;
         if (nextPath) {
             pathToFollow = nextPath;
         }
