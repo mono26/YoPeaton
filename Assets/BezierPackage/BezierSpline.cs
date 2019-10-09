@@ -3,10 +3,10 @@ using System;
 
 [System.Serializable]
 public class PathConections {
-	public BezierSpline next = null;
-	public BezierSpline previous = null;
-	public BezierSpline left = null;
-	public BezierSpline right = null;
+	public BezierSpline north = null;
+	public BezierSpline east = null;
+	public BezierSpline west = null;
+	public BezierSpline south = null;
 }
 
 public class BezierSpline : MonoBehaviour {
@@ -47,9 +47,13 @@ public class BezierSpline : MonoBehaviour {
 			point = GetPoint((float)i / (float)steps);
 			Gizmos.color = Color.cyan;
 			Gizmos.DrawLine(previousPoint, point);
-			Gizmos.color = Color.magenta;
-			Gizmos.DrawWireSphere(point, 0.15f);
 			previousPoint = point;
+		}
+		Matrix4x4 matrix = transform.localToWorldMatrix;
+		for (int i = 0; i < points.Length; i++) {
+			point = points[i];
+			Gizmos.color = Color.magenta;
+			Gizmos.DrawWireSphere(matrix.MultiplyPoint(point), 0.15f); 
 		}
 	}
 
