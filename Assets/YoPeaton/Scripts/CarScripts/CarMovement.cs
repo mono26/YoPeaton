@@ -56,10 +56,13 @@ public class CarMovement : MonoBehaviour, IMovable
         if (move)
         {
             float t = progressInPath / timeToFinishPath;
-            DebugController.LogMessage(string.Format("t: {0}", t));
-            // MoveWithDirection(followComponent.GetNextDirection(t));
-            MoveToNextPosition(followComponent.GetNextPosition(t));
             progressInPath += Time.fixedDeltaTime;
+            // MoveWithDirection(followComponent.GetNextDirection(t));
+            Vector3 nextPosition = Vector3.Lerp(transform.position, followComponent.GetNextPosition(t), t);
+            Debug.DrawRay(nextPosition, Vector3.right, Color.red, 10.0f);
+            Debug.DrawRay(nextPosition, Vector3.up, Color.red, 10.0f);
+            Debug.Log(t);
+            MoveToNextPosition(nextPosition);
         }
     }
 

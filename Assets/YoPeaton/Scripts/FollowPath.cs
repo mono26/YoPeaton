@@ -21,15 +21,17 @@ public class FollowPath : MonoBehaviour
     }
 
     public Vector3 GetNextPosition(float time) {
+        Vector3 point = pathToFollow.GetPoint(time);
         if (time >= 1.0f)
         {
             OnPathCompleted();
         }
-        return pathToFollow.GetPoint(time);
+        return point;
     }
 
     public BezierSpline GetNextPosiblePath() {
-        BezierSpline nextPath = pathToFollow.Getconections[0].path;
+        DirectionPathPair[] connections = pathToFollow.Getconections;
+        BezierSpline nextPath = connections[Random.Range(0, connections.Length)].path;
         if (nextPath) {
             pathToFollow = nextPath;
         }

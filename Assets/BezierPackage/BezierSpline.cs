@@ -5,6 +5,7 @@ public enum Directions {
 	North, East, West, South
 }
 
+[System.Serializable]
 public struct DirectionPathPair {
 	public Directions direction;
 	public BezierSpline path;
