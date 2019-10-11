@@ -22,40 +22,6 @@ public class CarMovement : MonoBehaviour, IMovable
         }
     }
 
-    private void Update() {
-        if (Input.GetKey(KeyCode.B)) {
-            isBraking = true;
-        }
-        else {
-            isBraking = false;
-        }
-    }
-
-    // private void FixedUpdate() {
-    //     if (isBraking) {
-    //         ApplyBrakes();
-    //     }
-    //     else {
-    //         Accelerate();
-    //     }
-    //     float timeToFinishPath = pathLength / currentSpeed;
-    //     if (float.IsNaN(timeToFinishPath))
-    //     {
-    //         timeToFinishPath = 0.0f;
-    //     }
-    //     if (move)
-    //     {
-    //         float t = progressInPath / timeToFinishPath;
-    //         progressInPath += Time.fixedDeltaTime;
-    //         // MoveWithDirection(followComponent.GetNextDirection(t));
-    //         Vector3 nextPosition = Vector3.Lerp(transform.position, followComponent.GetNextPosition(t), t);
-    //         Debug.DrawRay(nextPosition, Vector3.right, Color.red, 10.0f);
-    //         Debug.DrawRay(nextPosition, Vector3.up, Color.red, 10.0f);
-    //         Debug.Log(t);
-    //         MoveToNextPosition(nextPosition);
-    //     }
-    // }
-
     private void Accelerate() {
         if (currentSpeed < maxSpeed) {
             currentSpeed += acceleration * Time.fixedDeltaTime;
