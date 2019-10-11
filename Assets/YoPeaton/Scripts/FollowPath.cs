@@ -1,18 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
-    public delegate void FollowPathEvent();
-    private FollowPathEvent PathCompletedEvent;
+    private Action PathCompletedEvent;
 
     [SerializeField]
     private BezierSpline pathToFollow = null;
 
     private bool moveComponent = true;
     private float pathLength;
-    private float progressInPath = 0.0f;
 
     public float GetPathLeght {
         get {
@@ -20,15 +19,8 @@ public class FollowPath : MonoBehaviour
         }
     }
 
-    public float GetProgressInPath {
-        get {
-            return progressInPath;
-        }
-    }
-
     void Start() {
         pathLength = GetLength();
-        progressInPath = 0.0f;
     }
 
     public Vector3 GetNextDirection(float time) {
@@ -41,7 +33,6 @@ public class FollowPath : MonoBehaviour
 
     public Vector3 GetNextPosition(float time) {
         Vector3 point = pathToFollow.GetPoint(time);
-        progressInPath = time;
         if (time >= 1.0f)
         {
             OnPathCompleted();
@@ -53,18 +44,20 @@ public class FollowPath : MonoBehaviour
         BezierSpline nextPath = null;
         DirectionPathPair[] connections = pathToFollow.Getconections;
         if (connections.Length > 0) {
-            nextPath = connections[Random.Range(0, connections.Length)].path;
+            nextPath = connections[UnityEngine.Random.Range(0, connections.Length)].path;
         }
         return nextPath;
     }
 
     private void OnPathCompleted() {
         BezierSpline nextPath = GetNextPosiblePath();
+        pathToFollow = nextPath;
         if (nextPath) {
             pathLength = GetLength();
-            progressInPath = 0.0f;
         }
-        pathToFollow = nextPath;
+        else {
+            pathLength = 0.0f;
+        }
         PathCompletedEvent?.Invoke();
     }
 
@@ -76,7 +69,7 @@ public class FollowPath : MonoBehaviour
     /// Subscribe delegate to the OnPathComplete event.
     /// </summary>
     /// <param name="onPathCompleteAction"> Function delegate to subscribe.</param>
-    public void OnPathCompleted(FollowPathEvent onPathCompleteAction) {
+    public void OnPathCompleted(Action onPathCompleteAction) {
         PathCompletedEvent += onPathCompleteAction;
     }
 
@@ -84,7 +77,7 @@ public class FollowPath : MonoBehaviour
     /// Unsubscribe delegate to the OnPathComplete event.
     /// </summary>
     /// <param name="onPathCompleteAction"> Function delegate to unsubscribe.</param>
-    public void ClearFromPathCompleted(FollowPathEvent onPathCompleteAction) {
+    public void ClearFromPathCompleted(Action onPathCompleteAction) {
         PathCompletedEvent -= onPathCompleteAction;
     }
 

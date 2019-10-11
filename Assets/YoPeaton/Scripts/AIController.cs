@@ -9,7 +9,21 @@ public class AIController : MonoBehaviour
     [SerializeField]
     private FollowPath followComponent;
 
+    float distanceTravelled;
+    private float timeOnCurrentPath;
     private bool move = true;
+
+    public IMovable GetMovableComponent {
+        get {
+            if (movableComponent == null) {
+                movableComponent = GetComponent<IMovable>();
+                if (movableComponent == null) {
+                    DebugController.LogMessage(string.Format("Gameobject {0} doesn't have IMovable component", gameObject.name));
+                }
+            }
+            return movableComponent;
+        }
+    }
 
     private void OnEnable() {
         followComponent.OnPathCompleted(OnPathCompleted);
@@ -21,25 +35,23 @@ public class AIController : MonoBehaviour
 
     private void FixedUpdate() {
         if (ShouldStop()) {
-            movableComponent.SlowDown();
+            GetMovableComponent?.SlowDown();
         }
         else {
-            movableComponent.SpeedUp();
+            GetMovableComponent?.SpeedUp();
         }
-        float timeToFinishPath = followComponent.GetPathLeght / movableComponent.GetCurrentSpeed;
-        if (float.IsNaN(timeToFinishPath))
-        {
-            timeToFinishPath = 0.0f;
-        }
-        if (move)
-        {
-            float t = followComponent.GetProgressInPath / timeToFinishPath;
-            // MoveWithDirection(followComponent.GetNextDirection(t));
-            Vector3 nextPosition = Vector3.Lerp(transform.position, followComponent.GetNextPosition(t), t);
-            Debug.DrawRay(nextPosition, Vector3.right, Color.red, 10.0f);
-            Debug.DrawRay(nextPosition, Vector3.up, Color.red, 10.0f);
-            Debug.Log(t);
-            movableComponent.MoveToPosition(nextPosition);
+        if (followComponent) {
+            // float timeToFinishPath = followComponent.GetPathLeght / GetMovableComponent.GetCurrentSpeed;
+            distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
+            // if (float.IsNaN(timeToFinishPath)) {
+            //     timeToFinishPath = 0.0f;
+            // }
+            if (move) {
+                // float t = timeOnCurrentPath / timeToFinishPath;
+                float t = distanceTravelled / followComponent.GetPathLeght;
+                // timeOnCurrentPath += Time.fixedDeltaTime;
+                GetMovableComponent?.MoveToPosition(followComponent.GetNextPosition(t));
+            }
         }
     }
 
@@ -51,10 +63,11 @@ public class AIController : MonoBehaviour
     private void OnPathCompleted()
     {
         if (followComponent.HasPath()) {
-            move = false;
+            timeOnCurrentPath = 0.0f;
+            distanceTravelled = 0.0f;
         }
         else {
-
+            move = false;
         }
     }
 }

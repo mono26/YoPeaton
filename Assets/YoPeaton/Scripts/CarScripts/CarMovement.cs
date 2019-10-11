@@ -11,6 +11,7 @@ public class CarMovement : MonoBehaviour, IMovable
     [SerializeField]
     private float acceleration = 0.0f;
 
+    [SerializeField]
     private float currentSpeed = 0.0f;
     private bool isBraking = false;
     private bool move = true;
@@ -57,7 +58,7 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void Accelerate() {
         if (currentSpeed < maxSpeed) {
-            currentSpeed += acceleration * Time.deltaTime;
+            currentSpeed += acceleration * Time.fixedDeltaTime;
         }
         else if (currentSpeed >  maxSpeed) {
             currentSpeed = maxSpeed;
@@ -76,7 +77,7 @@ public class CarMovement : MonoBehaviour, IMovable
 
     public void ApplyBrakes() {
         if (currentSpeed > 0.0f) {
-            currentSpeed -= brakeSpeed * Time.deltaTime;
+            currentSpeed -= brakeSpeed * Time.fixedDeltaTime;
         }
     }
 
