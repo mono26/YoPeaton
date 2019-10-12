@@ -34,7 +34,7 @@ public class CarMovement : MonoBehaviour, IMovable
     private void MoveWithDirection(Vector3 _direction) {
         Vector3 currentPosition = carBody.position;
         Vector3 nextPosition = currentPosition + (_direction * currentSpeed * Time.deltaTime);
-        carBody.MovePosition(nextPosition);
+        MoveToNextPosition(nextPosition);
     }
 
     private void MoveToNextPosition(Vector3 _position) {

@@ -51,7 +51,6 @@ public abstract class EntityController : MonoBehaviour
             GetMovableComponent?.SpeedUp();
         }
         if (GetFollowPathComponent) {
-            DebugController.LogMessage(GetMovableComponent.GetCurrentSpeed.ToString());
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
                 float t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
