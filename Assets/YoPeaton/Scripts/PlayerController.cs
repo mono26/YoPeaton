@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlayerController : EntityController
 {
+    [SerializeField]
+    private PlayerCarInput input = null;
+
+    protected void Awake() {
+        if (!input) {
+            input = GetComponent<PlayerCarInput>();
+        }
+    }
+
     protected override bool ShouldStop() {
-        bool isBraking = false;
-        if (Input.GetKey(KeyCode.B)) {
-            isBraking = true;
-        }
-        else {
-            isBraking = false;
-        }
-        return isBraking;
+        return input.IsBraking;
     }
 }

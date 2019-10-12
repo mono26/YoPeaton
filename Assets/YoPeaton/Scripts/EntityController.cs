@@ -7,8 +7,8 @@ public abstract class EntityController : MonoBehaviour
     [SerializeField]
     private FollowPath followComponent;
 
-    float distanceTravelled;
-    private float timeOnCurrentPath;
+    float distanceTravelled = 0.0f;
+    private float timeOnCurrentPath = 0.0f;
     private bool move = true;
 
     protected IMovable GetMovableComponent {
@@ -51,6 +51,7 @@ public abstract class EntityController : MonoBehaviour
             GetMovableComponent?.SpeedUp();
         }
         if (GetFollowPathComponent) {
+            DebugController.LogMessage(GetMovableComponent.GetCurrentSpeed.ToString());
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
                 float t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
