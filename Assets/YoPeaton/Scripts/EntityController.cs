@@ -61,8 +61,10 @@ public abstract class EntityController : MonoBehaviour
     private void OnPathCompleted()
     {
         if (GetFollowPathComponent.HasPath()) {
-            timeOnCurrentPath = 0.0f;
-            distanceTravelled = 0.0f;
+            timeOnCurrentPath = followComponent.GetTParameter(transform.position);
+            Debug.Log("timeOnCurrentPath: " + timeOnCurrentPath);
+            distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
+            Debug.Log("distanceTravelled: " + distanceTravelled);
         }
         else {
             move = false;

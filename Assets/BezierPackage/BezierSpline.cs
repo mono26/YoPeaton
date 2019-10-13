@@ -247,8 +247,22 @@ public class BezierSpline : MonoBehaviour {
 		// Also because the last point of one curve is the first of the next one.
 		for (int i = 0; i < ControlPointCount - 1; i += 3)
 		{
-			totalLegth += Bezier.GetLenght(points[i], points[i + 1], points[i + 2], points[i + 3]);
+			totalLegth += Bezier.GetTotalLenght(points[i], points[i + 1], points[i + 2], points[i + 3]);
 		}
 		return totalLegth;
+	}
+
+	public float GetLengthAt(float _tParameter) {
+		return _tParameter * GetLength();
+	}
+
+	public float GetTParameter(Vector3 _pointToCheck) {
+		MinDistanceAtTPair result = new MinDistanceAtTPair();
+		for (int i = 0; i < ControlPointCount - 1; i += 3)
+		{
+			BezierTParameterRequest request = new BezierTParameterRequest(points[i], points[i + 1], points[i + 2], points[i + 3], _pointToCheck);
+			result = Bezier.GetClosestTParameter(request, result);
+		}
+		return result.tParameter;
 	}
 }

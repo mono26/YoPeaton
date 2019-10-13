@@ -88,4 +88,12 @@ public class FollowPath : MonoBehaviour
         }
         return hasPath;
     }
+
+    public float GetTParameter(Vector3 _pointToCheck) {
+        return pathToFollow.GetTParameter(_pointToCheck);
+    }
+
+    public float GetLengthAt(float _tParameter) {
+        return pathToFollow.GetLengthAt(_tParameter);
+    }
 }
