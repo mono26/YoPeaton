@@ -8,7 +8,6 @@ public abstract class EntityController : MonoBehaviour
     private FollowPath followComponent;
 
     float distanceTravelled = 0.0f;
-    private float timeOnCurrentPath = 0.0f;
     private bool move = true;
 
     protected IMovable GetMovableComponent {
@@ -33,6 +32,17 @@ public abstract class EntityController : MonoBehaviour
             }
             return followComponent;
         }
+    }
+
+    private void Start() {
+        GetInitialValuesToStartPath();
+    }
+
+    private void GetInitialValuesToStartPath() {
+        float timeOnCurrentPath = followComponent.GetTParameter(transform.position);
+        Debug.Log("timeOnCurrentPath: " + timeOnCurrentPath);
+        distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
+        Debug.Log("distanceTravelled: " + distanceTravelled);
     }
 
     private void OnEnable() {
@@ -61,10 +71,7 @@ public abstract class EntityController : MonoBehaviour
     private void OnPathCompleted()
     {
         if (GetFollowPathComponent.HasPath()) {
-            timeOnCurrentPath = followComponent.GetTParameter(transform.position);
-            Debug.Log("timeOnCurrentPath: " + timeOnCurrentPath);
-            distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
-            Debug.Log("distanceTravelled: " + distanceTravelled);
+            GetInitialValuesToStartPath();
         }
         else {
             move = false;

@@ -33,12 +33,19 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void MoveWithDirection(Vector3 _direction) {
         Vector3 currentPosition = carBody.position;
-        Vector3 nextPosition = currentPosition + (_direction * currentSpeed * Time.deltaTime);
+        Vector3 nextPosition = currentPosition + (_direction.normalized * currentSpeed * Time.fixedDeltaTime);
         MoveToNextPosition(nextPosition);
     }
 
     private void MoveToNextPosition(Vector3 _position) {
         carBody.MovePosition(_position);
+        RotateInDirectionOfPosition(_position);
+    }
+
+    private void RotateInDirectionOfPosition(Vector3 _position) {
+        Vector3 directionTowardsPosition = (_position - transform.position).normalized;
+        Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, 0.5f);
+        transform.right = targetRotation;
     }
 
     public void ApplyBrakes() {

@@ -242,14 +242,17 @@ public class BezierSpline : MonoBehaviour {
 	/// <returns></returns>
 	public float GetLength()
 	{
-		float totalLegth = 0.0f;
-		// Because a bezier spline is made of curves we should add 3. 
-		// Also because the last point of one curve is the first of the next one.
-		for (int i = 0; i < ControlPointCount - 1; i += 3)
+		int steps = 50;
+		float splineLenght = 0.0f;
+		float tIncrement = 1.0f / (float)steps;
+		for (int i = 1; i <= steps; i++)
 		{
-			totalLegth += Bezier.GetTotalLenght(points[i], points[i + 1], points[i + 2], points[i + 3]);
+			float t = (float)i / (float)steps;
+			Vector3 point = GetPoint(t);
+			Vector3 previousPoint = GetPoint(t - tIncrement);
+			splineLenght += (point - previousPoint).magnitude;
 		}
-		return totalLegth;
+		return splineLenght;
 	}
 
 	public float GetLengthAt(float _tParameter) {
@@ -257,12 +260,38 @@ public class BezierSpline : MonoBehaviour {
 	}
 
 	public float GetTParameter(Vector3 _pointToCheck) {
-		MinDistanceAtTPair result = new MinDistanceAtTPair();
+		MinDistanceAtTPair result = new MinDistanceAtTPair(float.NaN, float.NaN);
 		for (int i = 0; i < ControlPointCount - 1; i += 3)
 		{
-			BezierTParameterRequest request = new BezierTParameterRequest(points[i], points[i + 1], points[i + 2], points[i + 3], _pointToCheck);
-			result = Bezier.GetClosestTParameter(request, result);
+			BezierTParameterRequest request = new BezierTParameterRequest(_pointToCheck);
+			result = GetClosestTParameter(request, result);
 		}
 		return result.tParameter;
+	}
+
+	private MinDistanceAtTPair GetClosestTParameter(BezierTParameterRequest request, MinDistanceAtTPair _minDistanceAtT) {
+		float mid = (request.startingT + request.endT)/2.0f;
+		// Base case for recursion.
+		if ((request.endT - request.startingT) < request.thresholdT) {
+			_minDistanceAtT.tParameter = mid;
+			return _minDistanceAtT;
+		}
+		// The two halves have param range [start, mid] and [mid, end]. We decide which one to use by using a midpoint param calculation for each section.
+		float paramA = (request.startingT+mid) / 2.0f;
+		float paramB = (mid+request.endT) / 2.0f;
+		Vector3 posA = GetPoint(paramA);
+		Vector3 posB = GetPoint(paramB);
+		float distASq = (posA - request.pointToCheck).sqrMagnitude;
+		float distBSq = (posB - request.pointToCheck).sqrMagnitude;
+		if (distASq < distBSq) {
+			request.endT = mid;
+			_minDistanceAtT.minSqrDistance = distASq;
+		}		
+		else {
+			request.startingT = mid;
+			_minDistanceAtT.minSqrDistance = distBSq;
+		}		
+		// The (tail) recursive call.
+		return GetClosestTParameter(request, _minDistanceAtT);
 	}
 }

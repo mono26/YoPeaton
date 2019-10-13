@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DebugController
 {
-    [SerializeField]
     private static bool debugActive = true;
+    private static float drawDebugDuration = 10.0f;
 
     /// <summary>
     /// Logs a raw message without formating.
@@ -14,6 +14,12 @@ public class DebugController
     public static void LogMessage(string message) {
         if (debugActive) {
             Debug.Log(message);
+        }
+    }
+
+    public static void DrawDebugRay(Vector3 _origin, Vector3 _direction, float _lenght, Color _color) {
+        if (debugActive) {
+            Debug.DrawRay(_origin, _direction * _lenght, _color, drawDebugDuration);
         }
     }
 }
