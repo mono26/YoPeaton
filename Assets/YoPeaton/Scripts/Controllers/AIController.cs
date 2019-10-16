@@ -9,8 +9,10 @@ public class AIController : EntityController
     [SerializeField]
     private LayerMask layersToCheckCollision;
 
+    private Crosswalk currentCrossingZone;
+
     private void Update() {
-        if (IsThereAObstacleUpFront()) {
+        if (IsThereAObstacleUpFront() || IsThereAPedestrianInTheCurrentCrossingZone()) {
             stateMachine.SwitchToState(AIState.SlowDown);
         }
         else {
@@ -43,5 +45,20 @@ public class AIController : EntityController
         // Only for debuging, should be removed later.
         DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, debugColor);
         return stop;
+    }
+
+    private bool IsThereAPedestrianInTheCurrentCrossingZone() {
+        bool pedestrian = false;
+        if (currentCrossingZone) {
+            pedestrian = currentCrossingZone.CanCross(gameObject.tag);
+        }
+        return pedestrian;
+    }
+
+    private void OnTriggerEnter2D(Collider2D _other) {
+        if (_other.CompareTag("HotZone")) {
+            HotZoneTrigger zone = _other.GetComponent<HotZoneTrigger>();
+            zone.GetOwner.CanCross(gameObject.tag);
+        }
     }
 }
