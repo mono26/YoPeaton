@@ -6,6 +6,8 @@ public abstract class EntityController : MonoBehaviour
     private IMovable movableComponent;
     [SerializeField]
     private FollowPath followComponent;
+    [SerializeField]
+    private float probabilityOfChanginDirection = 50.0f;
 
     float distanceTravelled = 0.0f;
     private bool move = true;
@@ -45,14 +47,6 @@ public abstract class EntityController : MonoBehaviour
         Debug.Log("distanceTravelled: " + distanceTravelled);
     }
 
-    private void OnEnable() {
-        GetFollowPathComponent.OnPathCompleted(OnPathCompleted);
-    }
-
-    private void OnDisable() {
-        GetFollowPathComponent.ClearFromPathCompleted(OnPathCompleted);
-    }
-
     private void FixedUpdate() {
         if (ShouldStop()) {
             GetMovableComponent?.SlowDown();
@@ -64,11 +58,11 @@ public abstract class EntityController : MonoBehaviour
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
                 float t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
-                GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetNextPosition(t));
+                GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
             }
         }
     }
-    private void OnPathCompleted()
+    private void OnPathChanged()
     {
         if (GetFollowPathComponent.HasPath()) {
             GetInitialValuesToStartPath();
@@ -79,4 +73,14 @@ public abstract class EntityController : MonoBehaviour
     }
 
     protected abstract bool ShouldStop();
+
+    protected virtual void OnTriggerEnter2D(Collider2D _other) {
+        if (_other.CompareTag("ChangeOfDirection")) {
+            if (Random.Range(0.0f, 1.0f) * 100 > probabilityOfChanginDirection) {
+                DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
+                DirectionPathPair[] conections = directionChanger.Getconections;
+                BezierSpline nextPath = conections[Random.Range(0, conections.Length)].path;
+            }
+        }
+    }
 }

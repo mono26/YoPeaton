@@ -1,28 +1,11 @@
 ﻿using UnityEngine;
 using System;
 
-public enum Directions {
-	North, East, West, South
-}
-
-[System.Serializable]
-public struct DirectionPathPair {
-	public Directions direction;
-	public BezierSpline path;
-
-	public DirectionPathPair(Directions _direction, BezierSpline _path) {
-		direction = _direction;
-		path = _path;
-	}
-}
-
 public class BezierSpline : MonoBehaviour {
 	[SerializeField]
 	private Vector3[] points;
 	[SerializeField]
 	private BezierControlPointMode[] modes;
-	[SerializeField]
-	private DirectionPathPair[] connections = null;
 
 	[SerializeField]
 	private bool loop;
@@ -43,12 +26,6 @@ public class BezierSpline : MonoBehaviour {
 	public int ControlPointCount {
 		get {
 			return points.Length;
-		}
-	}
-
-	public DirectionPathPair[] Getconections {
-		get {
-			return connections;
 		}
 	}
 

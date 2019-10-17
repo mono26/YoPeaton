@@ -55,10 +55,10 @@ public class AIController : EntityController
         return pedestrian;
     }
 
-    private void OnTriggerEnter2D(Collider2D _other) {
+    protected override void OnTriggerEnter2D(Collider2D _other) {
+        base.OnTriggerEnter2D(_other);
         if (_other.CompareTag("HotZone")) {
-            HotZoneTrigger zone = _other.GetComponent<HotZoneTrigger>();
-            zone.GetOwner.CanCross(gameObject.tag);
+            currentCrossingZone = _other.GetComponent<Crosswalk>();
         }
     }
 }
