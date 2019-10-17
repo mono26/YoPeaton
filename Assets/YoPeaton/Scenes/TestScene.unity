@@ -169,7 +169,6 @@ MonoBehaviour:
   - {x: 4.0804143, y: 0, z: 0}
   - {x: 5.0804143, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &75736961
 GameObject:
@@ -202,6 +201,37 @@ Transform:
   - {fileID: 343445243}
   - {fileID: 552349680}
   m_Father: {fileID: 184932106}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &125280742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 125280743}
+  m_Layer: 0
+  m_Name: DirectionChagers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &125280743
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125280742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1033642302}
+  m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &152504697
@@ -356,6 +386,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &238982764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 238982765}
+  - component: {fileID: 238982766}
+  m_Layer: 0
+  m_Name: SideWalk (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &238982765
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238982764}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 5.38, y: -1.87, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1626040412}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &238982766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 238982764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b154883273c2845f39445c8015d81639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0, y: 0.00000047683716, z: 0}
+  - {x: 1, y: 0.00000047683716, z: 0}
+  - {x: 3.663197, y: 0, z: 0}
+  - {x: 4.663197, y: 0, z: 0}
+  modes: 0000000000000000
+  loop: 0
 --- !u!1 &243296702
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,7 +485,6 @@ MonoBehaviour:
   - {x: 5.4371843, y: 0, z: 0}
   - {x: 6.4371843, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &251481289
 GameObject:
@@ -456,7 +535,6 @@ MonoBehaviour:
   - {x: 0.5332062, y: 0, z: 0}
   - {x: 1.5332062, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &270568563
 GameObject:
@@ -507,7 +585,6 @@ MonoBehaviour:
   - {x: 4.2582283, y: 0, z: 0}
   - {x: 5.2582283, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &276473339
 GameObject:
@@ -558,7 +635,6 @@ MonoBehaviour:
   - {x: 0.5332062, y: 0, z: 0}
   - {x: 1.5332062, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &343445242
 GameObject:
@@ -609,9 +685,6 @@ MonoBehaviour:
   - {x: 8.036837, y: -0.8201318, z: 0}
   - {x: 8.040428, y: 1.4266968, z: 0}
   modes: 0000000000000000
-  connections:
-  - direction: 1
-    path: {fileID: 1451386930}
   loop: 0
 --- !u!1 &360889425
 GameObject:
@@ -662,7 +735,6 @@ MonoBehaviour:
   - {x: 5.465155, y: -0.0000009536743, z: 0}
   - {x: 6.465155, y: -0.0000009536743, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &421998144
 GameObject:
@@ -713,7 +785,6 @@ MonoBehaviour:
   - {x: 0.78666794, y: 0, z: 0}
   - {x: 1.786668, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &423326758
 GameObject:
@@ -764,7 +835,6 @@ MonoBehaviour:
   - {x: 14.519835, y: 0, z: 0}
   - {x: 15.519835, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &444223466
 GameObject:
@@ -898,9 +968,6 @@ MonoBehaviour:
   - {x: 8.027588, y: -0.550426, z: 0}
   - {x: 8.042335, y: 1.239418, z: 0}
   modes: 0000000000000000
-  connections:
-  - direction: 1
-    path: {fileID: 1524130439}
   loop: 0
 --- !u!1001 &522453392
 PrefabInstance:
@@ -1032,6 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followComponent: {fileID: 522453394}
+  probabilityOfChanginDirection: 50
   stateMachine: {fileID: 522453398}
   maxDistanceToCheckForStop: 3
   layersToCheckCollision:
@@ -1063,6 +1131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followComponent: {fileID: 522453394}
+  probabilityOfChanginDirection: 50
   input: {fileID: 522453396}
 --- !u!114 &522453398
 MonoBehaviour:
@@ -1126,7 +1195,6 @@ MonoBehaviour:
   - {x: 0.79391015, y: 0, z: 0}
   - {x: 1.7939101, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &552349679
 GameObject:
@@ -1177,7 +1245,6 @@ MonoBehaviour:
   - {x: 4.162008, y: 0, z: 0}
   - {x: 5.162008, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &563569259
 GameObject:
@@ -1228,7 +1295,56 @@ MonoBehaviour:
   - {x: 0.78666794, y: 0, z: 0}
   - {x: 1.786668, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
+  loop: 0
+--- !u!1 &591410529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591410530}
+  - component: {fileID: 591410531}
+  m_Layer: 0
+  m_Name: SideWalk
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &591410530
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591410529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.53, y: -1.87, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1626040412}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &591410531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591410529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b154883273c2845f39445c8015d81639, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points:
+  - {x: 0, y: 0.00000047683716, z: 0}
+  - {x: 1, y: 0.00000047683716, z: 0}
+  - {x: 8.914669, y: 0.00000047683716, z: 0}
+  - {x: 9.914669, y: 0.00000047683716, z: 0}
+  modes: 0000000000000000
   loop: 0
 --- !u!1 &630594326
 GameObject:
@@ -1350,7 +1466,6 @@ MonoBehaviour:
   - {x: 17.506727, y: 0, z: 0}
   - {x: 18.506727, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &748602451
 GameObject:
@@ -1401,7 +1516,6 @@ MonoBehaviour:
   - {x: 4.06859, y: 0, z: 0}
   - {x: 5.06859, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &785012513
 GameObject:
@@ -1452,7 +1566,6 @@ MonoBehaviour:
   - {x: 0.9165478, y: 0, z: 0}
   - {x: 1.9165478, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &813862756
 GameObject:
@@ -1503,7 +1616,6 @@ MonoBehaviour:
   - {x: 14.519835, y: 0, z: 0}
   - {x: 15.519835, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &817938312
 GameObject:
@@ -1586,7 +1698,6 @@ MonoBehaviour:
   - {x: 7.042325, y: -0.0000009536743, z: 0}
   - {x: 8.042325, y: -0.0000009536743, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &839584671
 GameObject:
@@ -1637,7 +1748,6 @@ MonoBehaviour:
   - {x: 2.5764594, y: -0.00000047683716, z: 0}
   - {x: 3.5764594, y: -0.00000047683716, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &858152245
 GameObject:
@@ -1688,7 +1798,6 @@ MonoBehaviour:
   - {x: 11.056446, y: 0, z: 0}
   - {x: 12.056446, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &916695757
 GameObject:
@@ -1739,7 +1848,6 @@ MonoBehaviour:
   - {x: 0.79391015, y: 0, z: 0}
   - {x: 1.7939101, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &926639323
 GameObject:
@@ -1847,7 +1955,6 @@ MonoBehaviour:
   - {x: 2.586576, y: 0, z: 0}
   - {x: 3.586576, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &941610057
 GameObject:
@@ -1898,7 +2005,6 @@ MonoBehaviour:
   - {x: 5.4396286, y: -0.0000009536743, z: 0}
   - {x: 6.4396286, y: -0.0000009536743, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &947442732
 GameObject:
@@ -1949,7 +2055,6 @@ MonoBehaviour:
   - {x: 4.2582283, y: 0, z: 0}
   - {x: 5.2582283, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &986260826
 GameObject:
@@ -2057,7 +2162,6 @@ MonoBehaviour:
   - {x: 4.06859, y: 0, z: 0}
   - {x: 5.06859, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!4 &1005335674
 Transform:
@@ -2122,7 +2226,6 @@ MonoBehaviour:
   - {x: 8.356908, y: 0, z: 0}
   - {x: 9.356908, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1021097663
 GameObject:
@@ -2173,8 +2276,78 @@ MonoBehaviour:
   - {x: 0.5332062, y: 0, z: 0}
   - {x: 1.5332062, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
+--- !u!1 &1033642301
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1033642302}
+  - component: {fileID: 1033642304}
+  - component: {fileID: 1033642303}
+  m_Layer: 0
+  m_Name: DirectionChange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1033642302
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033642301}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -12.792, y: 7.033, z: -133.45831}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 125280743}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1033642303
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033642301}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1}
+  m_EdgeRadius: 0
+--- !u!114 &1033642304
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033642301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9288fa56f9c3bbe4689bc436f53723fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  connections: []
 --- !u!1 &1065896607
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,7 +2468,6 @@ MonoBehaviour:
   - {x: 11.055049, y: -0.0000009536743, z: 0}
   - {x: 12.055049, y: -0.0000009536743, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1172279276
 GameObject:
@@ -2346,7 +2518,6 @@ MonoBehaviour:
   - {x: 0.79391015, y: 0, z: 0}
   - {x: 1.7939101, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1174016090
 GameObject:
@@ -2397,7 +2568,6 @@ MonoBehaviour:
   - {x: 0.79629076, y: 0, z: 0}
   - {x: 1.7962908, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1186751391
 GameObject:
@@ -2483,7 +2653,6 @@ MonoBehaviour:
   - {x: 0.5332062, y: 0, z: 0}
   - {x: 1.5332062, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1251216847
 GameObject:
@@ -2534,7 +2703,6 @@ MonoBehaviour:
   - {x: 2.5801759, y: -0.00000071525574, z: 0}
   - {x: 3.5801759, y: -0.00000071525574, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1253452512
 GameObject:
@@ -2585,7 +2753,6 @@ MonoBehaviour:
   - {x: 4.0809374, y: 0, z: 0}
   - {x: 5.0809374, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1280870110
 GameObject:
@@ -2748,7 +2915,6 @@ MonoBehaviour:
   - {x: 17.509615, y: 0, z: 0}
   - {x: 18.509615, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1380840292
 GameObject:
@@ -2785,7 +2951,6 @@ MonoBehaviour:
   - {x: 4.2582283, y: 0, z: 0}
   - {x: 5.2582283, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!4 &1380840294
 Transform:
@@ -2850,7 +3015,6 @@ MonoBehaviour:
   - {x: 0.78666794, y: 0, z: 0}
   - {x: 1.786668, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1451386928
 GameObject:
@@ -2901,7 +3065,6 @@ MonoBehaviour:
   - {x: 2.2109833, y: 0, z: 0}
   - {x: 3.2109833, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1488520229
 GameObject:
@@ -2938,7 +3101,6 @@ MonoBehaviour:
   - {x: 0.78666794, y: 0, z: 0}
   - {x: 1.786668, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!4 &1488520231
 Transform:
@@ -3003,9 +3165,6 @@ MonoBehaviour:
   - {x: 0.63308525, y: 0, z: 0}
   - {x: 1.9165478, y: 0, z: 0}
   modes: 0000000000000000
-  connections:
-  - direction: 1
-    path: {fileID: 1451386930}
   loop: 0
 --- !u!1 &1589509085
 GameObject:
@@ -3056,7 +3215,6 @@ MonoBehaviour:
   - {x: 4.1742353, y: 0, z: 0}
   - {x: 5.1742353, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1600846750
 GameObject:
@@ -3142,8 +3300,39 @@ MonoBehaviour:
   - {x: 32.5934, y: 0, z: 0}
   - {x: 33.5934, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
+--- !u!1 &1626040411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1626040412}
+  m_Layer: 0
+  m_Name: SideWalks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1626040412
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626040411}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.268184, y: 14.044814, z: -102.05725}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 591410530}
+  - {fileID: 238982765}
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1674406808 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4596458464309138019, guid: 390a1378530e0b442842171c35b679a8,
@@ -3163,6 +3352,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followComponent: {fileID: 1674406812}
+  probabilityOfChanginDirection: 50
   input: {fileID: 1674406810}
 --- !u!114 &1674406810
 MonoBehaviour:
@@ -3190,6 +3380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followComponent: {fileID: 1674406812}
+  probabilityOfChanginDirection: 50
   stateMachine: {fileID: 1674406813}
   maxDistanceToCheckForStop: 3
   layersToCheckCollision:
@@ -3269,7 +3460,6 @@ MonoBehaviour:
   - {x: 4.2582283, y: 0, z: 0}
   - {x: 5.2582283, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1001 &1864662644
 PrefabInstance:
@@ -3419,7 +3609,6 @@ MonoBehaviour:
   - {x: 0.78666794, y: 0, z: 0}
   - {x: 1.786668, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1926644478
 GameObject:
@@ -3470,7 +3659,6 @@ MonoBehaviour:
   - {x: 0.79629076, y: 0, z: 0}
   - {x: 1.7962908, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1947156112
 GameObject:
@@ -3521,7 +3709,6 @@ MonoBehaviour:
   - {x: 4.06859, y: 0, z: 0}
   - {x: 5.06859, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1951979175
 GameObject:
@@ -3572,7 +3759,6 @@ MonoBehaviour:
   - {x: 3.0035095, y: -0.0000009536743, z: 0}
   - {x: 4.0035095, y: -0.0000009536743, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &1964087282
 GameObject:
@@ -3694,7 +3880,6 @@ MonoBehaviour:
   - {x: 8.356908, y: 0, z: 0}
   - {x: 9.356908, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &2029190972
 GameObject:
@@ -3745,7 +3930,6 @@ MonoBehaviour:
   - {x: 8.356908, y: 0, z: 0}
   - {x: 9.356908, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &2046413230
 GameObject:
@@ -3796,7 +3980,6 @@ MonoBehaviour:
   - {x: 2.5810752, y: -0.0000009536743, z: 0}
   - {x: 3.5810752, y: -0.0000009536743, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &2105950256
 GameObject:
@@ -3847,7 +4030,6 @@ MonoBehaviour:
   - {x: 0.78666794, y: 0, z: 0}
   - {x: 1.786668, y: 0, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
 --- !u!1 &2120738560
 GameObject:
@@ -3898,5 +4080,4 @@ MonoBehaviour:
   - {x: 0.5435202, y: -0.0000009536743, z: 0}
   - {x: 1.5435202, y: -0.0000009536743, z: 0}
   modes: 0000000000000000
-  connections: []
   loop: 0
