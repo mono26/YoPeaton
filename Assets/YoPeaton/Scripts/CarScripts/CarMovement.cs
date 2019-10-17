@@ -10,65 +10,21 @@ public class CarMovement : MonoBehaviour, IMovable
     private float brakeSpeed = 0.0f;
     [SerializeField]
     private float acceleration = 0.0f;
-    [SerializeField]
-    private FollowPath followComponent = null;
 
+    [SerializeField]
     private float currentSpeed = 0.0f;
-    private float progressInPath = 0.0f;
-    private float pathLength = 0.0f;
     private bool isBraking = false;
     private bool move = true;
 
-    private void Start() {
-        pathLength = followComponent.GetLength();
-        progressInPath = 0.0f;
-    }
-
-    private void OnEnable() {
-        followComponent.OnPathCompleted(OnPathCompleted);
-    }
-
-    private void OnDisable() {
-        followComponent.ClearFromPathCompleted(OnPathCompleted);
-    }
-
-    private void Update() {
-        if (Input.GetKey(KeyCode.B)) {
-            isBraking = true;
-        }
-        else {
-            isBraking = false;
-        }
-    }
-
-    private void FixedUpdate() {
-        if (isBraking) {
-            ApplyBrakes();
-        }
-        else {
-            Accelerate();
-        }
-        float timeToFinishPath = pathLength / currentSpeed;
-        if (float.IsNaN(timeToFinishPath))
-        {
-            timeToFinishPath = 0.0f;
-        }
-        if (move)
-        {
-            float t = progressInPath / timeToFinishPath;
-            progressInPath += Time.fixedDeltaTime;
-            // MoveWithDirection(followComponent.GetNextDirection(t));
-            Vector3 nextPosition = Vector3.Lerp(transform.position, followComponent.GetNextPosition(t), t);
-            Debug.DrawRay(nextPosition, Vector3.right, Color.red, 10.0f);
-            Debug.DrawRay(nextPosition, Vector3.up, Color.red, 10.0f);
-            Debug.Log(t);
-            MoveToNextPosition(nextPosition);
+    public float GetCurrentSpeed {
+        get {
+            return currentSpeed;
         }
     }
 
     private void Accelerate() {
         if (currentSpeed < maxSpeed) {
-            currentSpeed += acceleration * Time.deltaTime;
+            currentSpeed += acceleration * Time.fixedDeltaTime;
         }
         else if (currentSpeed >  maxSpeed) {
             currentSpeed = maxSpeed;
@@ -87,20 +43,19 @@ public class CarMovement : MonoBehaviour, IMovable
 
     public void ApplyBrakes() {
         if (currentSpeed > 0.0f) {
-            currentSpeed -= brakeSpeed * Time.deltaTime;
+            currentSpeed -= brakeSpeed * Time.fixedDeltaTime;
         }
     }
 
-    private void OnPathCompleted()
-    {
-        BezierSpline nextPath = followComponent.GetNextPosiblePath();
-        if (nextPath) {
-            pathLength = followComponent.GetLength();
-            progressInPath = 0.0f;
-        }
-        else {
-            
-        }
-        
+    public void SpeedUp() {
+        Accelerate();
+    }
+
+    public void SlowDown() {
+        ApplyBrakes();
+    }
+
+    public void MoveToPosition(Vector3 position) {
+        MoveToNextPosition(position);
     }
 }

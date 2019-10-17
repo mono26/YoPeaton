@@ -1,16 +1,27 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
-    public delegate void FollowPathEvent();
-    private FollowPathEvent PathCompletedEvent;
+    private Action PathCompletedEvent;
 
     [SerializeField]
     private BezierSpline pathToFollow = null;
 
     private bool moveComponent = true;
+    private float pathLength;
+
+    public float GetPathLeght {
+        get {
+            return pathLength;
+        }
+    }
+
+    void Start() {
+        pathLength = GetLength();
+    }
 
     public Vector3 GetNextDirection(float time) {
         if (time >= 1.0f)
@@ -30,15 +41,23 @@ public class FollowPath : MonoBehaviour
     }
 
     public BezierSpline GetNextPosiblePath() {
+        BezierSpline nextPath = null;
         DirectionPathPair[] connections = pathToFollow.Getconections;
-        BezierSpline nextPath = connections[Random.Range(0, connections.Length)].path;
-        if (nextPath) {
-            pathToFollow = nextPath;
+        if (connections.Length > 0) {
+            nextPath = connections[UnityEngine.Random.Range(0, connections.Length)].path;
         }
         return nextPath;
     }
 
     private void OnPathCompleted() {
+        BezierSpline nextPath = GetNextPosiblePath();
+        pathToFollow = nextPath;
+        if (nextPath) {
+            pathLength = GetLength();
+        }
+        else {
+            pathLength = 0.0f;
+        }
         PathCompletedEvent?.Invoke();
     }
 
@@ -50,7 +69,7 @@ public class FollowPath : MonoBehaviour
     /// Subscribe delegate to the OnPathComplete event.
     /// </summary>
     /// <param name="onPathCompleteAction"> Function delegate to subscribe.</param>
-    public void OnPathCompleted(FollowPathEvent onPathCompleteAction) {
+    public void OnPathCompleted(Action onPathCompleteAction) {
         PathCompletedEvent += onPathCompleteAction;
     }
 
@@ -58,7 +77,15 @@ public class FollowPath : MonoBehaviour
     /// Unsubscribe delegate to the OnPathComplete event.
     /// </summary>
     /// <param name="onPathCompleteAction"> Function delegate to unsubscribe.</param>
-    public void ClearFromPathCompleted(FollowPathEvent onPathCompleteAction) {
+    public void ClearFromPathCompleted(Action onPathCompleteAction) {
         PathCompletedEvent -= onPathCompleteAction;
+    }
+
+    public bool HasPath() {
+        bool hasPath = false;
+        if (pathToFollow) {
+            hasPath = true;
+        }
+        return hasPath;
     }
 }

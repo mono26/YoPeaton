@@ -918,6 +918,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4596458464309138023, guid: 390a1378530e0b442842171c35b679a8,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4596458464309138023, guid: 390a1378530e0b442842171c35b679a8,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4596458464309138016, guid: 390a1378530e0b442842171c35b679a8,
         type: 3}
       propertyPath: m_SortingOrder
@@ -928,8 +938,44 @@ PrefabInstance:
       propertyPath: pathToFollow
       value: 
       objectReference: {fileID: 456887021}
+    - target: {fileID: 4596458464309138018, guid: 390a1378530e0b442842171c35b679a8,
+        type: 3}
+      propertyPath: brakeSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 390a1378530e0b442842171c35b679a8, type: 3}
+--- !u!1 &522453393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4596458464309138019, guid: 390a1378530e0b442842171c35b679a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 522453392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &522453394 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4596458464309138022, guid: 390a1378530e0b442842171c35b679a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 522453392}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522453393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83a64c380b4ab3c42bd6f215275b3c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &522453395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522453393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db2591bbd145894a8583fdb8cc36228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followComponent: {fileID: 522453394}
 --- !u!1 &542202050
 GameObject:
   m_ObjectHideFlags: 0
@@ -2519,7 +2565,7 @@ MonoBehaviour:
   points:
   - {x: 0, y: 0, z: 0}
   - {x: 1.4168763, y: 0, z: 0}
-  - {x: 0.9165478, y: 0, z: 0}
+  - {x: 0.63308525, y: 0, z: 0}
   - {x: 1.9165478, y: 0, z: 0}
   modes: 0000000000000000
   connections:

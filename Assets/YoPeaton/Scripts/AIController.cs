@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class AIController : MonoBehaviour
+public class AIController : EntityController
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float distanceTravelled;
+    private float timeOnCurrentPath;
+    private bool move = true;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+    protected override bool ShouldStop() {
+        // Raycast for a vehicle up front.
+        // Raycast for pedestrians.
+        return false;
     }
 }
