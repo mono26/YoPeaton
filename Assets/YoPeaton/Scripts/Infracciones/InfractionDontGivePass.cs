@@ -13,7 +13,8 @@ public class InfractionDontGivePass : InfractionSO
 
     protected override bool RuleToCheck()
     {
-        if (AreThereActivePedestrians)
+        var rbObject = evaluatedObject.GetComponent<Rigidbody2D>();
+        if (AreThereActivePedestrians && rbObject.velocity != Vector2.zero)
         {
             return true;
         }
