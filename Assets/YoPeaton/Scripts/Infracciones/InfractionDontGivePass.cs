@@ -2,17 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InfractionDontGivePass : MonoBehaviour
+[CreateAssetMenu(fileName = "DontGivePassInfraction", menuName = "Don't Give Way Infraction")]
+public class InfractionDontGivePass : InfractionSO
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    /*Infraccion de no detenerse cuando hay una persona esperando o acercandose mucho al paso peatonal, cuando se toque el carro
+    que se va a evaluar, este chequea si esta en colision con un triger de vehicleHotZone de este pase y chequea el padre del trigger 
+    a ver si dentro del collider de peatones de ese mismo padre hay peaton, si lo hay, y no se detiene (llega al collider del pase peatonal)
+    Se levanta una infraccion con el ruletocheck*/
 
-    // Update is called once per frame
-    void Update()
+
+    protected override bool RuleToCheck()
     {
-        
-    }
+        if (AreThereActivePedestrians)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }   
 }
