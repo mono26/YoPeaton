@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Car
   - Pedestrian
+  - HotZone
+  - CrossWalk
+  - ChangeOfDirection
   layers:
   - Default
   - TransparentFX

@@ -8,21 +8,55 @@ public class AIController : EntityController
     private float maxDistanceToCheckForStop = 3.0f;
     [SerializeField]
     private LayerMask layersToCheckCollision;
-
+    [SerializeField]
     private Crosswalk currentCrossingZone;
+    [SerializeField]
+    private float stopProbability = 50.0f;
 
     private void Update() {
-        if (IsThereAObstacleUpFront() || IsThereAPedestrianInTheCurrentCrossingZone()) {
-            stateMachine.SwitchToState(AIState.SlowDown);
-        }
-        else {
-            stateMachine.SwitchToState(AIState.Moving);
+        if (!ShouldStop()) {
+            if (gameObject.CompareTag("Pedestrian")) {
+                if (!CanCrossCurrentCrossingZone()) {
+                    stateMachine.SwitchToState(AIState.SlowDown);
+                }
+                else if (IsThereAObstacleUpFront()) {
+                    stateMachine.SwitchToState(AIState.SlowDown);
+                }
+                else {
+                    stateMachine.SwitchToState(AIState.Moving);
+                }
+            }
+            else {
+                if (IsThereAObstacleUpFront()) {
+                    stateMachine.SwitchToState(AIState.SlowDown);
+                }
+                else {
+                    stateMachine.SwitchToState(AIState.Moving);
+                }
+            }
         }
         // Check all the posible conditions for a transition in the state machine
     }
 
     protected override bool ShouldStop() {
-        return stateMachine.GetCurrentState.Equals(AIState.SlowDown);
+        bool stop = false;
+        if (stateMachine.GetCurrentState.Equals(AIState.StopAtCrossWalk)) {
+            if (currentCrossingZone && !CanCrossCurrentCrossingZone()) {
+                stop = true;
+            }
+            else {
+                stateMachine.SwitchToState(AIState.Moving);
+            }
+        }
+        return stop;
+    }
+
+    protected override bool ShouldSlowDown() {
+        bool slowdown = false;
+        if (stateMachine.GetCurrentState.Equals(AIState.SlowDown)) {
+            slowdown = true;
+        }
+        return slowdown;
     }
 
     private bool IsThereAObstacleUpFront() {
@@ -47,18 +81,45 @@ public class AIController : EntityController
         return stop;
     }
 
-    private bool IsThereAPedestrianInTheCurrentCrossingZone() {
-        bool pedestrian = false;
+    private bool CanCrossCurrentCrossingZone() {
+        bool canCross = true;
         if (currentCrossingZone) {
-            pedestrian = currentCrossingZone.CanCross(gameObject.tag);
+            canCross = currentCrossingZone.CanCross(gameObject.tag);
         }
-        return pedestrian;
+        return canCross;
     }
 
     protected override void OnTriggerEnter2D(Collider2D _other) {
         base.OnTriggerEnter2D(_other);
         if (_other.CompareTag("HotZone")) {
-            currentCrossingZone = _other.GetComponent<Crosswalk>();
+            Crosswalk crossWalk = _other.transform.parent.parent.GetComponent<Crosswalk>();
+            if (!crossWalk.JustFinishedCrossing(this)) {
+                currentCrossingZone = crossWalk;
+                if (gameObject.tag.Equals("Car")) {
+                    float randomNumber = Random.Range(0.0f, 1.0f) * 100;
+                    if (randomNumber > stopProbability && !CanCrossCurrentCrossingZone()) {
+                        stateMachine.SwitchToState(AIState.StopAtCrossWalk);
+                    }
+                }
+            }
+        }
+        if (gameObject.tag.Equals("Pedestrian") && _other.CompareTag("CrossWalk")) {
+            Crosswalk crossWalk = _other.transform.parent.GetComponent<Crosswalk>();
+            currentCrossingZone = crossWalk;
+            if (!crossWalk.CanCross(gameObject.tag)) {
+                stateMachine.SwitchToState(AIState.SlowDown);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D _other) {
+        if (_other.CompareTag("CrossWalk")) {
+            if (currentCrossingZone) {
+                Crosswalk crossWalk = _other.transform.parent.GetComponent<Crosswalk>();
+                if (crossWalk && currentCrossingZone.Equals(crossWalk)) {
+                    currentCrossingZone = null;
+                }
+            }
         }
     }
 }

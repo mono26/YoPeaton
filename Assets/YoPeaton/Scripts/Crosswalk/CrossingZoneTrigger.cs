@@ -5,8 +5,6 @@ using UnityEngine;
 public class CrossingZoneTrigger : MonoBehaviour
 {
     [SerializeField]
-    private string hotZoneType = "";
-    [SerializeField]
     private Crosswalk owner;
 
     private void OnTriggerEnter2D(Collider2D _other) {

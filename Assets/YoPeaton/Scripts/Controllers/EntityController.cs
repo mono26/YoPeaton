@@ -6,8 +6,6 @@ public abstract class EntityController : MonoBehaviour
     private IMovable movableComponent;
     [SerializeField]
     private FollowPath followComponent;
-    [SerializeField]
-    private float probabilityOfChanginDirection = 50.0f;
 
     float distanceTravelled = 0.0f;
     private bool move = true;
@@ -42,13 +40,12 @@ public abstract class EntityController : MonoBehaviour
 
     private void GetInitialValuesToStartPath() {
         float timeOnCurrentPath = followComponent.GetTParameter(transform.position);
-        Debug.Log("timeOnCurrentPath: " + timeOnCurrentPath);
         distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
-        Debug.Log("distanceTravelled: " + distanceTravelled);
     }
 
     private void FixedUpdate() {
-        if (ShouldStop()) {
+        if (ShouldSlowDown() || ShouldStop()) {
+            DebugController.LogMessage("Slowing down");
             GetMovableComponent?.SlowDown();
         }
         else {
@@ -62,25 +59,19 @@ public abstract class EntityController : MonoBehaviour
             }
         }
     }
-    private void OnPathChanged()
-    {
-        if (GetFollowPathComponent.HasPath()) {
-            GetInitialValuesToStartPath();
-        }
-        else {
-            move = false;
-        }
-    }
 
     protected abstract bool ShouldStop();
 
+    protected abstract bool ShouldSlowDown();
+
     protected virtual void OnTriggerEnter2D(Collider2D _other) {
         if (_other.CompareTag("ChangeOfDirection")) {
-            if (Random.Range(0.0f, 1.0f) * 100 > probabilityOfChanginDirection) {
-                DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
-                DirectionPathPair[] conections = directionChanger.Getconections;
-                BezierSpline nextPath = conections[Random.Range(0, conections.Length)].path;
-            }
+            DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
+            DirectionPathPair[] conections = directionChanger.Getconections;
+            BezierSpline nextPath = conections[Random.Range(0, conections.Length)].path;
+            followComponent.SetPath = nextPath;
+            GetInitialValuesToStartPath();
+            DebugController.LogMessage("Got new path");
         }
     }
 }
