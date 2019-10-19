@@ -1,13 +1,14 @@
-﻿using System.Collections;
+﻿using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Crosswalk : MonoBehaviour
 {
     [SerializeField]
-    private List<EntityController> waitingPedestrians;
+    private List<WaitTicket> waitingPedestrians;
     [SerializeField]
-    private List<EntityController> waitingCars;
+    private List<WaitTicket> waitingCars;
     [SerializeField]
     private List<EntityController> crossingPedestrians;
     [SerializeField]
@@ -15,28 +16,64 @@ public class Crosswalk : MonoBehaviour
     [SerializeField]
     private List<EntityController> finishingCross;
 
+    /// <summary>
+    /// Called when a entity enter the crosswalk hotzone.
+    /// </summary>
+    /// <param name="_entity">Entity that entered.</param>
     public void OnEntering(EntityController _entity) {
         if (_entity.CompareTag("Pedestrian")) {
-            if (!waitingPedestrians.Contains(_entity) && !finishingCross.Contains(_entity)) {
-                waitingPedestrians.Add(_entity);
+            if (!HasAlreadyATicket(_entity) && !finishingCross.Contains(_entity)) {
+                WaitTicket newTicket = new WaitTicket(_entity);
+                waitingPedestrians.Add(newTicket);
             }
         }
         else if (_entity.CompareTag("Car")) {
-            if (!waitingCars.Contains(_entity) && !finishingCross.Contains(_entity)) {
-                waitingCars.Add(_entity);
+            if (!HasAlreadyATicket(_entity) && !finishingCross.Contains(_entity)) {
+                WaitTicket newTicket = new WaitTicket(_entity);
+                waitingCars.Add(newTicket);
             }
         }
     }
 
+    /// <summary>
+    /// Check if that entity already has a ticket.
+    /// </summary>
+    /// <param name="_entity">Entity to check in  existing tickets.</param>
+    /// <returns></returns>
+    private bool HasAlreadyATicket(EntityController _entity) {
+        bool hasTicket = false;
+        if (_entity.CompareTag("Car")) {
+            for (int i = 0; i < waitingCars.Count; i++) {
+                if (waitingCars[i].waitingEntity.Equals(_entity)) {
+                    hasTicket = true;
+                    break;
+                }
+            }
+        }
+        else {
+            for (int i = 0; i < waitingPedestrians.Count; i++) {
+                if (waitingPedestrians[i].waitingEntity.Equals(_entity)) {
+                    hasTicket = true;
+                    break;
+                }
+            }
+        }
+        return hasTicket;
+    }
+
+    /// <summary>
+    /// Called when a entity exits the crosswalk hotzone.
+    /// </summary>
+    /// <param name="_entity">Entity that exited.</param>
     public void OnExited(EntityController _entity) {
         if (_entity.CompareTag("Pedestrian")) {
-            if (waitingPedestrians.Contains(_entity)) {
-                waitingPedestrians.Remove(_entity);
+            if (HasAlreadyATicket(_entity)) {
+                ClearTicket(_entity);
             }
         }
         else if (_entity.CompareTag("Car")) {
-            if (waitingCars.Contains(_entity)) {
-                waitingCars.Remove(_entity);
+            if (HasAlreadyATicket(_entity)) {
+                ClearTicket(_entity);
             }
         }
         if (finishingCross.Contains(_entity)) {
@@ -44,6 +81,29 @@ public class Crosswalk : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Clear the existing tickets that belong to the entity.
+    /// </summary>
+    /// <param name="_entity"> Entity to check for tickets.</param>
+    private void ClearTicket(EntityController _entity) {
+        if (_entity.CompareTag("Car")) {
+            IEnumerable<WaitTicket> existingTickets = waitingCars.Where(ticket => ticket.waitingEntity.Equals(_entity));
+            for (int i = 0; i < existingTickets.Count(); i++) {
+                waitingCars.Remove(existingTickets.ElementAt(i));
+            }
+        }
+        else {
+            IEnumerable<WaitTicket> existingTickets = waitingPedestrians.Where(ticket => ticket.waitingEntity.Equals(_entity));
+            for (int i = 0; i < existingTickets.Count(); i++) {
+                waitingPedestrians.Remove(existingTickets.ElementAt(i));
+            }
+        }
+    }
+
+    /// <summary>
+    /// Called when a entity started crossing the crosswalk.
+    /// </summary>
+    /// <param name="_entity">Entity that started crossing.</param>
     public void OnStartedCrossing(EntityController _entity) {
         if (_entity.CompareTag("Pedestrian")) {
             if (!crossingPedestrians.Contains(_entity)) {
@@ -57,6 +117,10 @@ public class Crosswalk : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Called when a entity finished crossing the crosswalk.
+    /// </summary>
+    /// <param name="_entity">Entity that finished crossing the crosswalk.</param>
     public void OnFinishedCrossing(EntityController _entity) {
         if (_entity.CompareTag("Pedestrian"))
         {
@@ -72,20 +136,61 @@ public class Crosswalk : MonoBehaviour
         finishingCross.Add(_entity);
     }
 
-    public bool CanCross(string _entityType)
+    /// <summary>
+    /// Check if the entity can cross the crosswalk.
+    /// </summary>
+    /// <param name="_entity">Entity to check if it can cross.</param>
+    /// <returns>Returns true for if the entity can cross, false if not.</returns>
+    public bool CanCross(EntityController _entity)
     {
         bool cross = true;
-        if (_entityType.Equals("Car")) {
-            if (crossingPedestrians.Count > 0 || waitingPedestrians.Count > 0) {
+        if (_entity.CompareTag("Car")) {
+            if (crossingPedestrians.Count > 0) {
                 cross = false;
             }
+            else if (waitingPedestrians.Count > 0) {
+                WaitTicket entityTicket = GetWaitingTicket(_entity);
+                for (int i = 0; i < waitingPedestrians.Count; i++) {
+                    if (waitingPedestrians[i].waitStartTime < entityTicket.waitStartTime) {
+                        cross = false;
+                    }
+                }
+            }
         }
-        else if (_entityType.Equals("Pedestrian")) {
+        else {
             if (crossingCars.Count > 0) {
                 cross = false;
             }
+            else if (waitingCars.Count > 0) {
+                WaitTicket entityTicket = GetWaitingTicket(_entity);
+                for (int i = 0; i < waitingCars.Count; i++) {
+                    if (waitingCars[i].waitStartTime < entityTicket.waitStartTime) {
+                        cross = false;
+                    }
+                }
+            }
         }
         return cross;
+    }
+
+    /// <summary>
+    /// Gets the actual waiting ticket for the entity.
+    /// </summary>
+    /// <param name="_entity">Enity to look for ticket.</param>
+    /// <returns></returns>
+    public WaitTicket GetWaitingTicket(EntityController _entity) {
+        WaitTicket tiquetToReturn = new WaitTicket(_entity);
+        IEnumerable<WaitTicket> existingTickets;
+        if (_entity.CompareTag("Car")) {
+            existingTickets = waitingCars.Where(ticket => ticket.waitingEntity.Equals(_entity));
+        }
+        else {
+            existingTickets = waitingPedestrians.Where(ticket => ticket.waitingEntity.Equals(_entity));
+        }
+        if (existingTickets.Count() > 0) {
+            tiquetToReturn = existingTickets.ElementAt(0);
+        }
+        return tiquetToReturn;
     }
 
     public bool JustFinishedCrossing(EntityController _entity) {
