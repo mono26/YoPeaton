@@ -19,6 +19,13 @@ public class FollowPath : MonoBehaviour
         }
     }
 
+    public BezierSpline SetPath {
+        set {
+            pathToFollow = value;
+            pathLength = GetLength();
+        }
+    }
+
     void Start() {
         pathLength = GetLength();
     }

@@ -19,7 +19,7 @@ public class DebugController
 
     public static void DrawDebugRay(Vector3 _origin, Vector3 _direction, float _lenght, Color _color) {
         if (debugActive) {
-            Debug.DrawRay(_origin, _direction * _lenght, _color, drawDebugDuration);
+            // Debug.DrawRay(_origin, _direction * _lenght, _color, drawDebugDuration);
         }
     }
 }

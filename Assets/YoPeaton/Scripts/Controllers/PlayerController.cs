@@ -16,4 +16,8 @@ public class PlayerController : EntityController
     protected override bool ShouldStop() {
         return input.IsBraking;
     }
+
+    protected override bool ShouldSlowDown() {
+        return input.IsBraking;
+    }
 }

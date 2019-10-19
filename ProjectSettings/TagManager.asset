@@ -7,7 +7,7 @@ TagManager:
   - Car
   - Pedestrian
   - HotZone
-  - VehicleHotZone
+  - CrossWalk
   - ChangeOfDirection
   layers:
   - Default
@@ -19,7 +19,7 @@ TagManager:
   - 
   - 
   - Car
-  - Pedestrian
+  - 
   - 
   - 
   - 
