@@ -14,25 +14,20 @@ public class AIController : EntityController
     private float stopProbability = 50.0f;
 
     private void Update() {
-        if (!ShouldStop()) {
-            if (gameObject.CompareTag("Pedestrian")) {
-                if (!CanCrossCurrentCrossingZone()) {
-                    stateMachine.SwitchToState(AIState.SlowDown);
-                }
-                else if (IsThereAObstacleUpFront()) {
-                    stateMachine.SwitchToState(AIState.SlowDown);
-                }
-                else {
-                    stateMachine.SwitchToState(AIState.Moving);
-                }
+        if (ShouldStop()) {
+            if (currentCrossingZone && CanCrossCurrentCrossingZone()) {
+                stateMachine.SwitchToState(AIState.Moving);
+            }
+        }
+        else {
+            if (!CanCrossCurrentCrossingZone()) {
+                stateMachine.SwitchToState(AIState.SlowDown);
+            }
+            else if (IsThereAObstacleUpFront()) {
+                stateMachine.SwitchToState(AIState.SlowDown);
             }
             else {
-                if (IsThereAObstacleUpFront()) {
-                    stateMachine.SwitchToState(AIState.SlowDown);
-                }
-                else {
-                    stateMachine.SwitchToState(AIState.Moving);
-                }
+                stateMachine.SwitchToState(AIState.Moving);
             }
         }
         // Check all the posible conditions for a transition in the state machine
@@ -43,9 +38,6 @@ public class AIController : EntityController
         if (stateMachine.GetCurrentState.Equals(AIState.StopAtCrossWalk)) {
             if (currentCrossingZone && !CanCrossCurrentCrossingZone()) {
                 stop = true;
-            }
-            else {
-                stateMachine.SwitchToState(AIState.Moving);
             }
         }
         return stop;

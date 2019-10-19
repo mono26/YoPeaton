@@ -7,4 +7,5 @@ public interface IMovable {
     void SpeedUp();
     void MoveToPosition(Vector3 nextPosition);
     void SlowDown();
+    void SlowToStop();
 }

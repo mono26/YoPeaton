@@ -44,7 +44,11 @@ public abstract class EntityController : MonoBehaviour
     }
 
     private void FixedUpdate() {
-        if (ShouldSlowDown() || ShouldStop()) {
+        if (ShouldStop()) {
+            DebugController.LogMessage("STOP!");
+            GetMovableComponent?.SlowDown();
+        }
+        else if (ShouldSlowDown()) {
             DebugController.LogMessage("Slowing down");
             GetMovableComponent?.SlowDown();
         }

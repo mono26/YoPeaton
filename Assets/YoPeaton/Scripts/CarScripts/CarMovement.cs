@@ -59,6 +59,12 @@ public class CarMovement : MonoBehaviour, IMovable
     }
 
     public void SlowDown() {
+        // Clamp to a min value.
+        ApplyBrakes();
+    }
+
+    public void SlowToStop() {
+        // Clamp to zero.
         ApplyBrakes();
     }
 
