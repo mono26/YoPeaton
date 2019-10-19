@@ -23,41 +23,43 @@ public class SignalIdentification : MonoBehaviour
     private string correctAnswer;
     [SerializeField]
     private string selectedName;
-    [SerializeField]
-    private Canvas optInButton;
-    [SerializeField]
-    private Canvas identifyCrossingCanvas;
+
 
     //Funciones genericas (se pueden desplazar al script de controlador una vez se cree)
     private void Start()
     {
-        optInButton.enabled = false;
-        identifyCrossingCanvas.enabled = false;
+
     }
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
     {
-        optInButton.enabled = true;
+        //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
+        //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
+        CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
         correctAnswer = collision.name;
         return correctAnswer;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        optInButton.enabled = false;
+        //Se desactiva el canvas de identificar la señal una vez sale de ella//
+        CanvasManager._instance.BackToBaseCanvas();
+        //CanvasManager._instance.optInButtonCanvas.enabled = false;
         correctAnswer = null;
     }
 
     public void ActivateCrossingIdentificationCanvas()
     {
-        identifyCrossingCanvas.enabled = true;
-        optInButton.enabled = false;
+        CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
+        /*CanvasManager._instance.identifyCrossingCanvas.enabled = true;
+        CanvasManager._instance.optInButtonCanvas.enabled = false;*/
     }
 
     public void CheckAnswer(string selectedAnswer)
     {
         if (correctAnswer == selectedAnswer)
         {
+            ScoreManager.AddScore(50);
             Debug.Log("Escogiste la respuesta correcta");
         }
 
@@ -65,7 +67,7 @@ public class SignalIdentification : MonoBehaviour
         {
             Debug.LogError("Te equivocaste, wey");
         }
-        identifyCrossingCanvas.enabled = false;
+        CanvasManager._instance.BackToBaseCanvas();
     }
 
 }

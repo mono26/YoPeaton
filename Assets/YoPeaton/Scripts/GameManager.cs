@@ -2,17 +2,31 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public static class GameManager
 {
-    // Start is called before the first frame update
-    void Start()
+    public static bool isPaused;
+    public static void FinishLevel(bool isPlayerVictorious)
     {
-        
-    }
+        if(isPlayerVictorious)
+        {
 
-    // Update is called once per frame
-    void Update()
+        }
+        else
+        {
+
+        }
+    } 
+
+    public static void PauseGame()
     {
-        
+        isPaused = !isPaused;
+        if(isPaused)
+        {
+            Time.timeScale = 0;
+        }
+        else
+        {
+            Time.timeScale = 1;
+        }
     }
 }
