@@ -84,7 +84,7 @@ public class AIController : EntityController
     private bool CanCrossCurrentCrossingZone() {
         bool canCross = true;
         if (currentCrossingZone) {
-            canCross = currentCrossingZone.CanCross(gameObject.tag);
+            canCross = currentCrossingZone.CanCross(this);
         }
         return canCross;
     }
@@ -106,7 +106,7 @@ public class AIController : EntityController
         if (gameObject.tag.Equals("Pedestrian") && _other.CompareTag("CrossWalk")) {
             Crosswalk crossWalk = _other.transform.parent.GetComponent<Crosswalk>();
             currentCrossingZone = crossWalk;
-            if (!crossWalk.CanCross(gameObject.tag)) {
+            if (!crossWalk.CanCross(this)) {
                 stateMachine.SwitchToState(AIState.SlowDown);
             }
         }
