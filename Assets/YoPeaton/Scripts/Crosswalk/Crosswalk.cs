@@ -144,7 +144,7 @@ public class Crosswalk : MonoBehaviour
     public bool CanCross(EntityController _entity)
     {
         bool cross = true;
-        if (_entity.CompareTag("Car")) {
+        if (_entity.CompareTag("Car") && !crossingCars.Contains(_entity)) {
             if (crossingPedestrians.Count > 0) {
                 cross = false;
             }
@@ -157,7 +157,7 @@ public class Crosswalk : MonoBehaviour
                 }
             }
         }
-        else {
+        else if (_entity.CompareTag("Pedestrian") && !crossingPedestrians.Contains(_entity)) {
             if (crossingCars.Count > 0) {
                 cross = false;
             }
