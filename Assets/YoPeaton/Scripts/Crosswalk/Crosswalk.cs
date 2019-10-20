@@ -6,15 +6,15 @@ using UnityEngine;
 public class Crosswalk : MonoBehaviour
 {
     [SerializeField]
-    private List<WaitTicket> waitingPedestrians;
+    private List<WaitTicket> waitingPedestrians = new List<WaitTicket>();
     [SerializeField]
-    private List<WaitTicket> waitingCars;
+    private List<WaitTicket> waitingCars = new List<WaitTicket>();
     [SerializeField]
-    private List<EntityController> crossingPedestrians;
+    private List<EntityController> crossingPedestrians = new List<EntityController>();
     [SerializeField]
-    private List<EntityController> crossingCars;
+    private List<EntityController> crossingCars = new List<EntityController>();
     [SerializeField]
-    private List<EntityController> finishingCross;
+    private List<EntityController> finishingCross = new List<EntityController>();
 
     /// <summary>
     /// Called when a entity enter the crosswalk hotzone.

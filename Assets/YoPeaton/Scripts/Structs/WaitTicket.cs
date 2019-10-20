@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WaitTicket : MonoBehaviour
+public struct WaitTicket
 {
     public EntityController waitingEntity;
     public System.DateTime waitStartTime;

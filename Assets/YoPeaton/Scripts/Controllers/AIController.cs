@@ -1,84 +1,47 @@
 ﻿using UnityEngine;
 
-public class AIController : EntityController
-{
+public class AIController : EntityController {
     [SerializeField]
     private AIStateMachine stateMachine = null;
     [SerializeField]
-    private float maxDistanceToCheckForStop = 3.0f;
-    [SerializeField]
-    private LayerMask layersToCheckCollision;
+    private AITransitionsController transitionController;
     [SerializeField]
     private Crosswalk currentCrossingZone;
-    [SerializeField]
-    private float stopProbability = 50.0f;
 
-    private void Update() {
-        if (ShouldStop()) {
-            if (currentCrossingZone && CanCrossCurrentCrossingZone()) {
-                stateMachine.SwitchToState(AIState.Moving);
-            }
+    public AIState GetCurrentState {
+        get {
+            return stateMachine.GetCurrentState;
         }
-        else {
-            if (!CanCrossCurrentCrossingZone()) {
-                stateMachine.SwitchToState(AIState.SlowDown);
-            }
-            else if (IsThereAObstacleUpFront()) {
-                stateMachine.SwitchToState(AIState.SlowDown);
-            }
-            else {
-                stateMachine.SwitchToState(AIState.Moving);
-            }
-        }
-        // Check all the posible conditions for a transition in the state machine
     }
 
-    protected override bool ShouldStop() {
-        bool stop = false;
-        if (stateMachine.GetCurrentState.Equals(AIState.StopAtCrossWalk)) {
-            if (currentCrossingZone && !CanCrossCurrentCrossingZone()) {
-                stop = true;
+    public Crosswalk GetCurrentCorosingZone {
+        get {
+            return currentCrossingZone;
+        }
+    }
+
+    private void Awake() {
+        // Catching the transitions controller.
+        if (!transitionController) {
+            transitionController = GetComponent<AITransitionsController>();
+            if (!transitionController) {
+                transitionController = gameObject.AddComponent<AITransitionsController>();
             }
         }
-        return stop;
-    }
-
-    protected override bool ShouldSlowDown() {
-        bool slowdown = false;
-        if (stateMachine.GetCurrentState.Equals(AIState.SlowDown)) {
-            slowdown = true;
-        }
-        return slowdown;
-    }
-
-    private bool IsThereAObstacleUpFront() {
-        bool stop = false;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, maxDistanceToCheckForStop, layersToCheckCollision);
-        // Only for debuging, should be removed later.
-        Color debugColor = Color.green;
-        if (hits.Length > 0) {
-            GameObject objectHit;
-            for (int i = 0; i < hits.Length; i++) {
-                objectHit = hits[i].collider.gameObject;
-                if (objectHit && !objectHit.Equals(gameObject)) {
-                    if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-                        stop = true;
-                        debugColor = Color.red;
-                    }
-                }
+        transitionController.SetController = this;
+        // Catching the state machine.
+        if (!stateMachine) {
+            stateMachine = GetComponent<AIStateMachine>();
+            if (!stateMachine) {
+                stateMachine = gameObject.AddComponent<AIStateMachine>();
             }
         }
-        // Only for debuging, should be removed later.
-        DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, debugColor);
-        return stop;
     }
 
-    private bool CanCrossCurrentCrossingZone() {
-        bool canCross = true;
-        if (currentCrossingZone) {
-            canCross = currentCrossingZone.CanCross(this);
-        }
-        return canCross;
+    protected override void FixedUpdate() {
+        // First check posible transitions.
+        transitionController.CheckTransitions();
+        base.FixedUpdate();
     }
 
     protected override void OnTriggerEnter2D(Collider2D _other) {
@@ -87,19 +50,22 @@ public class AIController : EntityController
             Crosswalk crossWalk = _other.transform.parent.parent.GetComponent<Crosswalk>();
             if (!crossWalk.JustFinishedCrossing(this)) {
                 currentCrossingZone = crossWalk;
-                if (gameObject.tag.Equals("Car")) {
-                    float randomNumber = Random.Range(0.0f, 1.0f) * 100;
-                    if (randomNumber > stopProbability && !CanCrossCurrentCrossingZone()) {
-                        stateMachine.SwitchToState(AIState.StopAtCrossWalk);
-                    }
-                }
+                transitionController.OnCrossWalkEntered();
             }
         }
-        if (gameObject.tag.Equals("Pedestrian") && _other.CompareTag("CrossWalk")) {
+        if (_other.CompareTag("CrossWalk")) {
             Crosswalk crossWalk = _other.transform.parent.GetComponent<Crosswalk>();
-            currentCrossingZone = crossWalk;
-            if (!crossWalk.CanCross(this)) {
-                stateMachine.SwitchToState(AIState.SlowDown);
+            if (currentCrossingZone) {
+                // If we entered first a hot zone and then a crosswalk, and both crosswalks references are different. Something weird just happend.
+                if (!currentCrossingZone.Equals(crossWalk)) {
+                    DebugController.LogMessage("Whoops something weird just happend...");
+                    currentCrossingZone = crossWalk;
+                    transitionController.OnCrossWalkEntered();
+                }
+            }
+            else {
+                currentCrossingZone = crossWalk;
+                transitionController.OnCrossWalkEntered();
             }
         }
     }
@@ -113,5 +79,17 @@ public class AIController : EntityController
                 }
             }
         }
+    }
+
+    public void SwitchToState(AIState _newState) {
+        stateMachine.SwitchToState(_newState);
+    }
+
+    protected override bool ShouldStop() {
+        return GetCurrentState.Equals(AIState.StopAtCrossWalk);
+    }
+
+    protected override bool ShouldSlowDown() {
+        return GetCurrentState.Equals(AIState.SlowDown);
     }
 }

@@ -43,7 +43,7 @@ public abstract class EntityController : MonoBehaviour
         distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
     }
 
-    private void FixedUpdate() {
+    protected virtual void FixedUpdate() {
         if (ShouldStop()) {
             DebugController.LogMessage("STOP!");
             GetMovableComponent?.SlowDown();
