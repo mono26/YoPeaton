@@ -68,4 +68,8 @@ public class FollowPath : MonoBehaviour
     public float GetLengthAt(float _tParameter) {
         return pathToFollow.GetLengthAt(_tParameter);
     }
+
+    public bool IsTheEndOfPath(Vector3 _pointToCheck) {
+        return !(pathToFollow.GetTParameter(_pointToCheck) < 0.95f);
+    }
 }

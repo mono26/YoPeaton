@@ -84,9 +84,7 @@ public class AITransitionsController : MonoBehaviour
                     }
                 }
             }
-        }
-        // Only for debuging, should be removed later.
-        DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, debugColor);
+        }       
         return stop;
     }
 
