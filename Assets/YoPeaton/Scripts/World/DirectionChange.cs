@@ -27,4 +27,16 @@ public class DirectionChange : MonoBehaviour
             return connections;
         }
     }
+
+    private void OnDrawGizmos() {
+        if (connections.Length > 0) {
+            for (int i = 0; i < connections.Length; i++) {
+                if (connections[i].path) {
+                    float t = connections[i].path.GetTParameter(transform.position);
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawLine(connections[i].path.GetPoint(t), transform.position);
+                }
+            }
+        }
+    }
 }

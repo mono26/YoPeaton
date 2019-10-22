@@ -6,8 +6,11 @@ public abstract class EntityController : MonoBehaviour
     private IMovable movableComponent;
     [SerializeField]
     private FollowPath followComponent;
+    [SerializeField]
+    private float changeDirectionProbability = 50.0f;
 
-    float distanceTravelled = 0.0f;
+    private float distanceTravelled = 0.0f;
+    private float lastTPArameter = 0.0f;
     private bool move = true;
 
     protected IMovable GetMovableComponent {
@@ -41,10 +44,15 @@ public abstract class EntityController : MonoBehaviour
     private void GetInitialValuesToStartPath() {
         float timeOnCurrentPath = followComponent.GetTParameter(transform.position);
         distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
+        lastTPArameter = timeOnCurrentPath;
     }
 
-    private void FixedUpdate() {
-        if (ShouldSlowDown() || ShouldStop()) {
+    protected virtual void FixedUpdate() {
+        if (ShouldStop()) {
+            DebugController.LogMessage("STOP!");
+            GetMovableComponent?.SlowDown();
+        }
+        else if (ShouldSlowDown()) {
             DebugController.LogMessage("Slowing down");
             GetMovableComponent?.SlowDown();
         }
@@ -53,9 +61,13 @@ public abstract class EntityController : MonoBehaviour
         }
         if (GetFollowPathComponent) {
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
+            if (distanceTravelled < lastTPArameter) {
+                distanceTravelled = lastTPArameter;
+            }
             if (move) {
                 float t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
                 GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
+                lastTPArameter = t;
             }
         }
     }
@@ -66,12 +78,18 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D _other) {
         if (_other.CompareTag("ChangeOfDirection")) {
-            DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
-            DirectionPathPair[] conections = directionChanger.Getconections;
-            BezierSpline nextPath = conections[Random.Range(0, conections.Length)].path;
-            followComponent.SetPath = nextPath;
-            GetInitialValuesToStartPath();
-            DebugController.LogMessage("Got new path");
+            float chanceOfChangingDirection = 100.0f;
+            if (!followComponent.IsTheEndOfPath(_other.transform.position)) {
+                chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
+            }
+            if (chanceOfChangingDirection > changeDirectionProbability) {
+                DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
+                int numberOfConnections = directionChanger.Getconections.Length;
+                followComponent.SetPath = directionChanger.Getconections[Random.Range(0, numberOfConnections)].path;
+                GetInitialValuesToStartPath();
+                movableComponent.SlowDown(50.0f);
+                DebugController.LogMessage("Got new path");
+            }
         }
     }
 }
