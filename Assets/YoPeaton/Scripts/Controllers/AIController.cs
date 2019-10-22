@@ -48,7 +48,15 @@ public class AIController : EntityController {
         base.OnTriggerEnter2D(_other);
         if (_other.CompareTag("HotZone")) {
             Crosswalk crossWalk = _other.transform.parent.parent.GetComponent<Crosswalk>();
-            if (!crossWalk.JustFinishedCrossing(this)) {
+            if (currentCrossingZone) {
+                // If we entered first a hot zone and then a crosswalk, and both crosswalks references are different. Something weird just happend.
+                if (!currentCrossingZone.Equals(crossWalk)) {
+                    DebugController.LogMessage("Whoops something weird just happend...");
+                    currentCrossingZone = crossWalk;
+                    transitionController.OnCrossWalkEntered();
+                }
+            }
+            else {
                 currentCrossingZone = crossWalk;
                 transitionController.OnCrossWalkEntered();
             }

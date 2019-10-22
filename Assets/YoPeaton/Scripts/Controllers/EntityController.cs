@@ -9,7 +9,8 @@ public abstract class EntityController : MonoBehaviour
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
 
-    float distanceTravelled = 0.0f;
+    private float distanceTravelled = 0.0f;
+    private float lastTPArameter = 0.0f;
     private bool move = true;
 
     protected IMovable GetMovableComponent {
@@ -43,6 +44,7 @@ public abstract class EntityController : MonoBehaviour
     private void GetInitialValuesToStartPath() {
         float timeOnCurrentPath = followComponent.GetTParameter(transform.position);
         distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
+        lastTPArameter = timeOnCurrentPath;
     }
 
     protected virtual void FixedUpdate() {
@@ -59,9 +61,13 @@ public abstract class EntityController : MonoBehaviour
         }
         if (GetFollowPathComponent) {
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
+            if (distanceTravelled < lastTPArameter) {
+                distanceTravelled = lastTPArameter;
+            }
             if (move) {
                 float t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
                 GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
+                lastTPArameter = t;
             }
         }
     }
@@ -81,6 +87,7 @@ public abstract class EntityController : MonoBehaviour
                 int numberOfConnections = directionChanger.Getconections.Length;
                 followComponent.SetPath = directionChanger.Getconections[Random.Range(0, numberOfConnections)].path;
                 GetInitialValuesToStartPath();
+                movableComponent.SlowDown(50.0f);
                 DebugController.LogMessage("Got new path");
             }
         }

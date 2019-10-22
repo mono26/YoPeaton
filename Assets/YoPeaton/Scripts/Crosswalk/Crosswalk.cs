@@ -13,8 +13,6 @@ public class Crosswalk : MonoBehaviour
     private List<EntityController> crossingPedestrians = new List<EntityController>();
     [SerializeField]
     private List<EntityController> crossingCars = new List<EntityController>();
-    [SerializeField]
-    private List<EntityController> finishingCross = new List<EntityController>();
 
     /// <summary>
     /// Called when a entity enter the crosswalk hotzone.
@@ -22,13 +20,13 @@ public class Crosswalk : MonoBehaviour
     /// <param name="_entity">Entity that entered.</param>
     public void OnEntering(EntityController _entity) {
         if (_entity.CompareTag("Pedestrian")) {
-            if (!HasAlreadyATicket(_entity) && !finishingCross.Contains(_entity)) {
+            if (!HasAlreadyATicket(_entity)) {
                 WaitTicket newTicket = new WaitTicket(_entity);
                 waitingPedestrians.Add(newTicket);
             }
         }
         else if (_entity.CompareTag("Car")) {
-            if (!HasAlreadyATicket(_entity) && !finishingCross.Contains(_entity)) {
+            if (!HasAlreadyATicket(_entity)) {
                 WaitTicket newTicket = new WaitTicket(_entity);
                 waitingCars.Add(newTicket);
             }
@@ -75,9 +73,6 @@ public class Crosswalk : MonoBehaviour
             if (HasAlreadyATicket(_entity)) {
                 ClearTicket(_entity);
             }
-        }
-        if (finishingCross.Contains(_entity)) {
-            finishingCross.Remove(_entity);
         }
     }
 
@@ -133,7 +128,6 @@ public class Crosswalk : MonoBehaviour
                 crossingCars.Remove(_entity);
             }
         }
-        finishingCross.Add(_entity);
     }
 
     /// <summary>
@@ -151,7 +145,7 @@ public class Crosswalk : MonoBehaviour
             else if (waitingPedestrians.Count > 0) {
                 WaitTicket entityTicket = GetWaitingTicket(_entity);
                 for (int i = 0; i < waitingPedestrians.Count; i++) {
-                    if (waitingPedestrians[i].waitStartTime < entityTicket.waitStartTime) {
+                    if (waitingPedestrians[i].waitStartTime <= entityTicket.waitStartTime) {
                         cross = false;
                     }
                 }
@@ -191,13 +185,5 @@ public class Crosswalk : MonoBehaviour
             tiquetToReturn = existingTickets.ElementAt(0);
         }
         return tiquetToReturn;
-    }
-
-    public bool JustFinishedCrossing(EntityController _entity) {
-        bool justCrossed = false;
-        if (finishingCross.Contains(_entity)) {
-            justCrossed = true;
-        }
-        return justCrossed;
     }
 }

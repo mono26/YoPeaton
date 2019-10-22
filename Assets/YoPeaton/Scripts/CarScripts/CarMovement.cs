@@ -66,6 +66,10 @@ public class CarMovement : MonoBehaviour, IMovable
         ApplyBrakes();
     }
 
+    public void SlowDown(float _slowPercent) {
+        currentSpeed = currentSpeed * (_slowPercent / 100);
+    }
+
     public void SlowToStop() {
         // Clamp to zero.
         ApplyBrakes();
