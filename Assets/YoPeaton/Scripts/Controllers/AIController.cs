@@ -44,51 +44,6 @@ public class AIController : EntityController {
         base.FixedUpdate();
     }
 
-    protected override void OnTriggerEnter2D(Collider2D _other) {
-        base.OnTriggerEnter2D(_other);
-        if (_other.CompareTag("HotZone")) {
-            Crosswalk crossWalk = _other.transform.parent.parent.GetComponent<Crosswalk>();
-            if (currentCrossingZone) {
-                // If we entered first a hot zone and then a crosswalk, and both crosswalks references are different. Something weird just happend.
-                if (!currentCrossingZone.Equals(crossWalk)) {
-                    DebugController.LogMessage("Whoops something weird just happend...");
-                    currentCrossingZone = crossWalk;
-                    transitionController.OnCrossWalkEntered();
-                }
-            }
-            else {
-                currentCrossingZone = crossWalk;
-                transitionController.OnCrossWalkEntered();
-            }
-        }
-        if (_other.CompareTag("CrossWalk")) {
-            Crosswalk crossWalk = _other.transform.parent.GetComponent<Crosswalk>();
-            if (currentCrossingZone) {
-                // If we entered first a hot zone and then a crosswalk, and both crosswalks references are different. Something weird just happend.
-                if (!currentCrossingZone.Equals(crossWalk)) {
-                    DebugController.LogMessage("Whoops something weird just happend...");
-                    currentCrossingZone = crossWalk;
-                    transitionController.OnCrossWalkEntered();
-                }
-            }
-            else {
-                currentCrossingZone = crossWalk;
-                transitionController.OnCrossWalkEntered();
-            }
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D _other) {
-        if (_other.CompareTag("CrossWalk")) {
-            if (currentCrossingZone) {
-                Crosswalk crossWalk = _other.transform.parent.GetComponent<Crosswalk>();
-                if (crossWalk && currentCrossingZone.Equals(crossWalk)) {
-                    currentCrossingZone = null;
-                }
-            }
-        }
-    }
-
     public void SwitchToState(AIState _newState) {
         stateMachine.SwitchToState(_newState);
     }
@@ -99,5 +54,17 @@ public class AIController : EntityController {
 
     protected override bool ShouldSlowDown() {
         return GetCurrentState.Equals(AIState.SlowDown);
+    }
+
+    public void OnCrossWalkEntered(Crosswalk _crossWalk) {
+        currentCrossingZone = _crossWalk;
+        transitionController.OnCrossWalkEntered();
+    }
+
+    public void OnCrossWalkExited(Crosswalk _crossWalk) {
+        if (currentCrossingZone.Equals(_crossWalk)) {
+            currentCrossingZone = null;
+            SwitchToState(AIState.Moving);
+        }
     }
 }

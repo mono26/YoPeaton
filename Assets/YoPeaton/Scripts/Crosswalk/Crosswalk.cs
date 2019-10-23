@@ -186,4 +186,21 @@ public class Crosswalk : MonoBehaviour
         }
         return tiquetToReturn;
     }
+
+    private void OnTriggerEnter2D(Collider2D _other) {
+        if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) {
+            AIController ai = _other.transform.GetComponent<AIController>();
+            OnEntering(ai);
+            ai.OnCrossWalkEntered(this);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D _other) {
+        if (_other.CompareTag("Car") || _other.CompareTag("Pedestrian")) {
+            AIController ai = _other.transform.GetComponent<AIController>();
+            OnExited(ai);
+            OnFinishedCrossing(ai);
+            ai.OnCrossWalkExited(this);
+        }
+    }
 }

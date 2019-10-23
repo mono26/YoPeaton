@@ -47,8 +47,13 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void RotateInDirectionOfPosition(Vector3 _position) {
         Vector3 directionTowardsPosition = (_position - transform.position).normalized;
-        Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
-        transform.right = targetRotation;
+        bool isOpositeDirection = Vector3.Dot(transform.right, directionTowardsPosition) < 0;
+        if (!isOpositeDirection) {
+            Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
+            transform.right = targetRotation;
+        }
+        // Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
+        // transform.right = targetRotation;
     }
 
     public void ApplyBrakes() {

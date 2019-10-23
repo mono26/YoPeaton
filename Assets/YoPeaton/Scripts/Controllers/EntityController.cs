@@ -82,7 +82,7 @@ public abstract class EntityController : MonoBehaviour
             if (!followComponent.IsTheEndOfPath(_other.transform.position)) {
                 chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
             }
-            if (chanceOfChangingDirection > changeDirectionProbability) {
+            if (chanceOfChangingDirection >= 100 - changeDirectionProbability) {
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
                 int numberOfConnections = directionChanger.Getconections.Length;
                 followComponent.SetPath = directionChanger.Getconections[Random.Range(0, numberOfConnections)].path;
