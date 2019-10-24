@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum AIState
 {
-    Moving, SlowDown, StopAtCrossWalk
+    Moving, SlowDown, StopAtCrossWalk, CrossingCrossWalk
 }
 public class AIStateMachine : MonoBehaviour
 {

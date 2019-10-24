@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4596458464309138019
+--- !u!1 &270182541731555055
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,40 +8,43 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4596458464309138023}
-  - component: {fileID: 4596458464309138016}
-  - component: {fileID: 4596458464309138017}
-  - component: {fileID: 4596458464309138018}
-  - component: {fileID: 4596458464309138022}
-  - component: {fileID: 3768399934981099020}
+  - component: {fileID: 270182541731555054}
+  - component: {fileID: 270182541731555047}
+  - component: {fileID: 270182541731555046}
+  - component: {fileID: 270182541731555045}
+  - component: {fileID: 270182541731555040}
+  - component: {fileID: 270182541731555044}
+  - component: {fileID: 270182541731555041}
+  - component: {fileID: 270182541731555042}
+  - component: {fileID: 270182541731555043}
   m_Layer: 8
-  m_Name: Car
-  m_TagString: Car
+  m_Name: AIPedestrian_PFB
+  m_TagString: Pedestrian
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4596458464309138023
+--- !u!4 &270182541731555054
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596458464309138019}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.02, y: -4.14, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_GameObject: {fileID: 270182541731555055}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalPosition: {x: -9.74, y: 5.854, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4596458464309138016
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!212 &270182541731555047
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596458464309138019}
+  m_GameObject: {fileID: 270182541731555055}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -72,9 +75,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9912573, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -84,14 +87,14 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &4596458464309138017
+--- !u!50 &270182541731555046
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596458464309138019}
+  m_GameObject: {fileID: 270182541731555055}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -105,43 +108,43 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4596458464309138018
+--- !u!114 &270182541731555045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596458464309138019}
+  m_GameObject: {fileID: 270182541731555055}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d00af334cadf43f41b156bd92a883f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carBody: {fileID: 4596458464309138017}
-  maxSpeed: 1
-  brakeSpeed: 0.5
-  acceleration: 0.5
+  carBody: {fileID: 270182541731555046}
+  maxSpeed: 0.3
+  brakeSpeed: 0.1
+  acceleration: 0.1
   currentSpeed: 0
---- !u!114 &4596458464309138022
+--- !u!114 &270182541731555040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596458464309138019}
+  m_GameObject: {fileID: 270182541731555055}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83a64c380b4ab3c42bd6f215275b3c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pathToFollow: {fileID: 0}
---- !u!61 &3768399934981099020
+--- !u!61 &270182541731555044
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4596458464309138019}
+  m_GameObject: {fileID: 270182541731555055}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -161,3 +164,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.1, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &270182541731555041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270182541731555055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3572a15efcf1204baac997ebe829ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+--- !u!114 &270182541731555042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270182541731555055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db2591bbd145894a8583fdb8cc36228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followComponent: {fileID: 270182541731555040}
+  changeDirectionProbability: 50
+  stateMachine: {fileID: 270182541731555041}
+  transitionController: {fileID: 270182541731555043}
+  currentCrossingZone: {fileID: 0}
+--- !u!114 &270182541731555043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270182541731555055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bcb4b6f04f4a774dae5ebe75c95099d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopProbability: 100
+  maxDistanceToCheckForStop: 3
+  layersToCheckCollision:
+    serializedVersion: 2
+    m_Bits: 0
+  aiEntity: {fileID: 270182541731555042}
