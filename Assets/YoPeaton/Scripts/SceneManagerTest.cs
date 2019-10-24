@@ -27,8 +27,13 @@ public class SceneManagerTest : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void LoadNextScene(string sceneToLoad)
+    public void LoadScene(string sceneToLoad)
     {
         SceneManager.LoadScene(sceneToLoad);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 }
