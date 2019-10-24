@@ -5,21 +5,21 @@ using UnityEngine;
 public static class GameManager
 {
     public static bool isPaused;
+
+    //private static int printScore;
     public static void FinishLevel(bool isPlayerVictorious)
     {
         if(isPlayerVictorious)
         {
-
-        }
-        else
-        {
-
+            SceneManagerTest.LoadNextScene("VictoryScreenScene");
+           //printScore = ScoreManager.instance.CalculateFinalScore();
         }
     } 
 
     public static void PauseGame()
     {
         isPaused = !isPaused;
+        Debug.LogWarning("Is Paused: " + isPaused);
         if(isPaused)
         {
             Time.timeScale = 0;
@@ -29,4 +29,5 @@ public static class GameManager
             Time.timeScale = 1;
         }
     }
+    
 }

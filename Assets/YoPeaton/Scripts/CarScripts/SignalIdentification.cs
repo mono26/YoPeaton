@@ -25,19 +25,21 @@ public class SignalIdentification : MonoBehaviour
     private string selectedName;
 
 
-    //Funciones genericas (se pueden desplazar al script de controlador una vez se cree)
-    private void Start()
-    {
-
-    }
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
     {
         //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
         //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-        CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
-        correctAnswer = collision.name;
-        return correctAnswer;
+        if(collision.tag == "HotZone")
+        { 
+            CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
+            correctAnswer = collision.name;
+            return correctAnswer;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
@@ -59,12 +61,13 @@ public class SignalIdentification : MonoBehaviour
     {
         if (correctAnswer == selectedAnswer)
         {
-            ScoreManager.AddScore(50);
+            ScoreManager.instance.AddAnswer(true);
             Debug.Log("Escogiste la respuesta correcta");
         }
 
         else
         {
+            ScoreManager.instance.AddAnswer(false);
             Debug.LogError("Te equivocaste, wey");
         }
         CanvasManager._instance.BackToBaseCanvas();
