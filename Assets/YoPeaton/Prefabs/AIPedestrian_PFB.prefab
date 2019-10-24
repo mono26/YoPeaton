@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 270182541731555042}
   - component: {fileID: 270182541731555043}
   m_Layer: 8
-  m_Name: Pedestrian
+  m_Name: AIPedestrian_PFB
   m_TagString: Pedestrian
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9912573, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -29,7 +29,7 @@ public class AITransitionsController : MonoBehaviour
             }
         }
         else {
-            if (!CanCrossCurrentCrossingZone()) {
+            if (!IsCrossingACrossWalk() && !CanCrossCurrentCrossingZone()) {
                 aiEntity.SwitchToState(AIState.SlowDown);
             }
             else if (IsThereAObstacleUpFront()) {
@@ -68,6 +68,14 @@ public class AITransitionsController : MonoBehaviour
         return slowdown;
     }
 
+    private bool IsCrossingACrossWalk() {
+        bool isCrossing = false;
+        if (aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
+            isCrossing = true;
+        }
+        return isCrossing;
+    }
+
     private bool IsThereAObstacleUpFront() {
         bool stop = false;
         RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, maxDistanceToCheckForStop, layersToCheckCollision);
@@ -89,9 +97,15 @@ public class AITransitionsController : MonoBehaviour
     }
 
     public void OnCrossWalkEntered() {
-        float randomNumber = Random.Range(0.0f, 1.0f) * 100;
-        if (randomNumber > stopProbability && !CanCrossCurrentCrossingZone()) {
-            aiEntity.SwitchToState(AIState.StopAtCrossWalk);
+        if (aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
+            float randomNumber = Random.Range(0.0f, 1.0f) * 100;
+            if (randomNumber >= 100 - stopProbability && !CanCrossCurrentCrossingZone()) {
+                aiEntity.SwitchToState(AIState.StopAtCrossWalk);
+            }
+            else {
+                aiEntity.SwitchToState(AIState.CrossingCrossWalk);
+                aiEntity.GetCurrentCorosingZone.OnStartedCrossing(aiEntity);
+            }
         }
     }
 }
