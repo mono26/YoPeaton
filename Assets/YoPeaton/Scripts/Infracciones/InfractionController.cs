@@ -28,7 +28,6 @@ public class InfractionController : MonoBehaviour
                                     _other.gameObject.transform.root.GetChild(1).GetChild(1).GetComponent<HotZoneTrigger>().objectsInTriggerCount;
 
             Debug.LogWarning("Active Pedestrian Count: " + ActivePedestrianCount);
-            Debug.LogWarning("Entered If Statement");
             for (int i = 0; i < infractionsArray.Length; i++)
             {
                 /*Debug.LogWarning("Entered First For Loop");
@@ -36,6 +35,7 @@ public class InfractionController : MonoBehaviour
                 Debug.LogWarning("Length of i: " + infractionsArray.Length);
                 Debug.Log("Infractions Length: " + infractionsArray.Length);
                 Debug.Log("Pedestrian HotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
+
                 infractionsArray[i].currentPedestrianHotZones = new GameObject[2];
                 if (ActivePedestrianCount > 0)
                 {
@@ -45,20 +45,23 @@ public class InfractionController : MonoBehaviour
                 {
                     infractionsArray[i].AreThereActivePedestrians = false;
                 }
-                Debug.LogWarning("Are there active pedestrians? " + infractionsArray[i].AreThereActivePedestrians);
-                for (int j = 0; j < _other.gameObject.transform.root.GetChild(2).childCount; j++)
-                {
-                    /*Debug.LogWarning("Entered Second For Loop");
-                    Debug.LogWarning("j: " + j);
-                    Debug.LogWarning("Length of j: " + _other.gameObject.transform.root.GetChild(1).childCount);
-                    Debug.LogWarning("Length of PedestrianHotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
-                    infractionsArray[i].currentPedestrianHotZones[j] = _other.gameObject.transform.root.GetChild(1).GetChild(j).gameObject;
-                    Debug.LogWarning("Hijo: " + infractionsArray[i].currentPedestrianHotZones[j].name);
-                }
+                    for (int j = 0; j < _other.gameObject.transform.root.GetChild(2).childCount; j++)
+                    {
+                        /*Debug.LogWarning("Entered Second For Loop");
+                        Debug.LogWarning("j: " + j);
+                        Debug.LogWarning("Length of j: " + _other.gameObject.transform.root.GetChild(1).childCount);
+                        Debug.LogWarning("Length of PedestrianHotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
+                        infractionsArray[i].currentPedestrianHotZones[j] = _other.gameObject.transform.root.GetChild(1).GetChild(j).gameObject;
+                        Debug.LogWarning("Hijo: " + infractionsArray[i].currentPedestrianHotZones[j].name);
+                    }
                 Debug.LogWarning("1) CheckAllInfractions Running (Evaluando el array de infracciones)");
                 infractionsArray[i].evaluatedObject = controlledObject;
                 infractionsArray[i].CheckForRuleViolation();
-        }
+                if(infractionsArray[i].CheckForRuleViolation() == true)
+                {
+                    ScoreManager.instance.AddInfraction();
+                }
+             }
 
 
         /*for (int i = 0; i < infractionsArray.Length; i++)

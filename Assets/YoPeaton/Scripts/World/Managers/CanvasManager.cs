@@ -49,7 +49,10 @@ public class CanvasManager : MonoBehaviour
         currentActiveCanvas = baseCanvas.name;
     }
 
-
+    private void Update()
+    {
+        Debug.LogError("Timescale: " + Time.timeScale);
+    }
     //MANEJO DE CANVAS//
     public void ActivatePauseCanvas()
     {
@@ -81,7 +84,9 @@ public class CanvasManager : MonoBehaviour
     //BOTONES//
     public void PressPauseBtn()
     {
+        Debug.LogWarning("Press Pause Button");
         GameManager.PauseGame();
+        ActivatePauseCanvas();
     }
 
     public void BackToBaseCanvas()
