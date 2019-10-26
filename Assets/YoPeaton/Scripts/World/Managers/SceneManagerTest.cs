@@ -35,6 +35,7 @@ public class SceneManagerTest : MonoBehaviour
         {
             case "victoryscreenscene":
                 Debug.LogError("Cargue la scena de victoria");
+                ScoreManager.CalculateFinalScore();
                 CanvasManager._instance.FillTextArray();
                 //CanvasManager._instance.CountToWhileWaiting();
                 //ScoreManager.instance.TestFillScoreArray();

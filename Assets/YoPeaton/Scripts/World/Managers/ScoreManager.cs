@@ -28,13 +28,13 @@ public class ScoreManager : MonoBehaviour
     public static int finalScore;
     public float countDuration = 2f;
 
-    public static int correctAnswers;
-    public static int wrongAnswers;
+    public static int correctAnswers = 2;
+    public static int wrongAnswers = 1;
 
-    public static int infractionsCommited;
+    public static int infractionsCommited = 3;
 
-    public static int wrongReports;
-    public static int correctReports;
+    public static int wrongReports = 4;
+    public static int correctReports = 5;
 
     public static int correctReportScore;
     public static int correctAnswerScore;
@@ -66,8 +66,10 @@ public class ScoreManager : MonoBehaviour
     }
 
 
-    private static int CalculateFinalScore()
+    public static int CalculateFinalScore()
     {
+        Debug.LogError("Going to calculate Final Scores");
+
         correctReportScore = correctReports * scoreForCorrectInputs;
         correctAnswerScore = correctAnswers * scoreForCorrectInputs;
 
@@ -77,6 +79,13 @@ public class ScoreManager : MonoBehaviour
         InfractionScore = infractionsCommited * 100;
 
         finalScore = (correctAnswerScore + correctReportScore) - (InfractionScore + wrongAnswerScore + wrongReportScore);
+
+        Debug.LogError("Wrong reports: " + wrongReports + ", wrong report score: " + wrongReportScore);
+        Debug.LogError("Wrong answer: " + wrongAnswers + ", wrong answer score: " + wrongAnswerScore);
+        Debug.LogError("correct reports: " + correctReports + ", correct report score: " + correctReportScore);
+        Debug.LogError("correct answer: " + correctAnswers + ", correct answer score: " + correctAnswerScore);
+        Debug.LogError("Total Score: " + finalScore);
+
         return finalScore;
     }
 
