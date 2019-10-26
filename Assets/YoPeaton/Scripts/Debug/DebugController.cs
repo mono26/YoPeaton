@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DebugController
 {
-    private static bool debugActive = true;
-    private static float drawDebugDuration = 10.0f;
+    public static bool debugActive = true;
+    public static float drawDebugDuration = 10.0f;
 
     /// <summary>
     /// Logs a raw message without formating.

@@ -14,7 +14,7 @@ public class AIController : EntityController {
         }
     }
 
-    public Crosswalk GetCurrentCorosingZone {
+    public Crosswalk GetCurrentCrossingZone {
         get {
             return currentCrossingZone;
         }
@@ -49,7 +49,7 @@ public class AIController : EntityController {
     }
 
     protected override bool ShouldStop() {
-        return GetCurrentState.Equals(AIState.StopAtCrossWalk);
+        return GetCurrentState.Equals(AIState.WaitingAtCrossWalk);
     }
 
     protected override bool ShouldSlowDown() {
@@ -57,11 +57,13 @@ public class AIController : EntityController {
     }
 
     public void OnCrossWalkEntered(Crosswalk _crossWalk) {
+        DebugController.LogMessage("Entered crosswalk");
         currentCrossingZone = _crossWalk;
         transitionController.OnCrossWalkEntered();
     }
 
     public void OnCrossWalkExited(Crosswalk _crossWalk) {
+        DebugController.LogMessage("Exited crosswalk");
         if (currentCrossingZone.Equals(_crossWalk)) {
             currentCrossingZone = null;
             SwitchToState(AIState.Moving);

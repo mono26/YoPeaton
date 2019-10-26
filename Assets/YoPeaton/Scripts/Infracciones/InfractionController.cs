@@ -22,12 +22,12 @@ public class InfractionController : MonoBehaviour
         controlledObject = this.gameObject;
 
     }
-    public void CheckAllInfractions(Collider2D _other)
+    public void CheckAllInfractions(Crosswalk _crosswalk)
     {
-            ActivePedestrianCount = _other.gameObject.transform.root.GetChild(1).GetChild(0).GetComponent<HotZoneTrigger>().objectsInTriggerCount +
-                                    _other.gameObject.transform.root.GetChild(1).GetChild(1).GetComponent<HotZoneTrigger>().objectsInTriggerCount;
+            ActivePedestrianCount = _crosswalk.GetNumberOfCrossingPedestrians;
 
-            Debug.LogWarning("Active Pedestrian Count: " + ActivePedestrianCount);
+            DebugController.LogWarningMessage("Active Pedestrian Count: " + ActivePedestrianCount);
+            DebugController.LogErrorMessage("Checking infractions");
             for (int i = 0; i < infractionsArray.Length; i++)
             {
                 /*Debug.LogWarning("Entered First For Loop");
@@ -36,29 +36,28 @@ public class InfractionController : MonoBehaviour
                 Debug.Log("Infractions Length: " + infractionsArray.Length);
                 Debug.Log("Pedestrian HotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
 
-                infractionsArray[i].currentPedestrianHotZones = new GameObject[2];
-                if (ActivePedestrianCount > 0)
-                {
+                // infractionsArray[i].currentPedestrianHotZones = new GameObject[2];
+                if (ActivePedestrianCount > 0) {
                     infractionsArray[i].AreThereActivePedestrians = true;
                 }
-                else
-                {
+                else {
                     infractionsArray[i].AreThereActivePedestrians = false;
                 }
-                    for (int j = 0; j < _other.gameObject.transform.root.GetChild(2).childCount; j++)
-                    {
-                        /*Debug.LogWarning("Entered Second For Loop");
-                        Debug.LogWarning("j: " + j);
-                        Debug.LogWarning("Length of j: " + _other.gameObject.transform.root.GetChild(1).childCount);
-                        Debug.LogWarning("Length of PedestrianHotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
-                        infractionsArray[i].currentPedestrianHotZones[j] = _other.gameObject.transform.root.GetChild(1).GetChild(j).gameObject;
-                        Debug.LogWarning("Hijo: " + infractionsArray[i].currentPedestrianHotZones[j].name);
-                    }
+                // for (int j = 0; j < _other.gameObject.transform.root.GetChild(2).childCount; j++)
+                // {
+                //     /*Debug.LogWarning("Entered Second For Loop");
+                //     Debug.LogWarning("j: " + j);
+                //     Debug.LogWarning("Length of j: " + _other.gameObject.transform.root.GetChild(1).childCount);
+                //     Debug.LogWarning("Length of PedestrianHotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
+                //     // infractionsArray[i].currentPedestrianHotZones[j] = _other.gameObject.transform.root.GetChild(1).GetChild(j).gameObject;
+                //     // Debug.LogWarning("Hijo: " + infractionsArray[i].currentPedestrianHotZones[j].name);
+                // }
                 Debug.LogWarning("1) CheckAllInfractions Running (Evaluando el array de infracciones)");
                 infractionsArray[i].evaluatedObject = controlledObject;
                 infractionsArray[i].CheckForRuleViolation();
                 if(infractionsArray[i].CheckForRuleViolation() == true)
                 {
+                    DebugController.LogErrorMessage("infraction commited: " + gameObject.name);
                     ScoreManager.instance.AddInfraction();
                 }
              }
@@ -70,14 +69,11 @@ public class InfractionController : MonoBehaviour
         }*/
     }
 
-    private void OnTriggerEnter2D(Collider2D _other)
-    {
-        if (_other.CompareTag("HotZone"))
-        {
-            CheckAllInfractions(_other);
+    private void OnTriggerEnter2D(Collider2D _other) {
+        if (_other.CompareTag("CrossWalk")) {
+            CheckAllInfractions(_other.GetComponent<Crosswalk>());
         }
         
     }
-
 
 }

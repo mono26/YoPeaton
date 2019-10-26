@@ -59,6 +59,7 @@ public class CarMovement : MonoBehaviour, IMovable
     public void ApplyBrakes() {
         if (currentSpeed > 0.0f) {
             currentSpeed -= brakeSpeed * Time.fixedDeltaTime;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0.0f, maxSpeed);
         }
     }
 

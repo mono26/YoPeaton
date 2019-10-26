@@ -24,8 +24,9 @@ public class AITransitionsController : MonoBehaviour
 
     public void CheckTransitions() {
         if (ShouldStop()) {
-            if (aiEntity.GetCurrentCorosingZone && CanCrossCurrentCrossingZone()) {
-                aiEntity.SwitchToState(AIState.Moving);
+            if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone()) {
+                aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
+                aiEntity.SwitchToState(AIState.CrossingCrossWalk);
             }
         }
         else {
@@ -35,27 +36,22 @@ public class AITransitionsController : MonoBehaviour
             else if (IsThereAObstacleUpFront()) {
                 aiEntity.SwitchToState(AIState.SlowDown);
             }
-            else {
-                aiEntity.SwitchToState(AIState.Moving);
-            }
         }
         // Check all the posible conditions for a transition in the state machine
     }
 
     private bool CanCrossCurrentCrossingZone() {
         bool canCross = true;
-        if (aiEntity.GetCurrentCorosingZone) {
-            canCross = aiEntity.GetCurrentCorosingZone.CanCross(aiEntity);
+        if (aiEntity.GetCurrentCrossingZone) {
+            canCross = aiEntity.GetCurrentCrossingZone.CanCross(aiEntity);
         }
         return canCross;
     }
 
     private bool ShouldStop() {
         bool stop = false;
-        if (aiEntity.GetCurrentState.Equals(AIState.StopAtCrossWalk)) {
-            if (aiEntity.GetCurrentCorosingZone && !CanCrossCurrentCrossingZone()) {
-                stop = true;
-            }
+        if (aiEntity.GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) {
+            stop = true;
         }
         return stop;
     }
@@ -88,7 +84,6 @@ public class AITransitionsController : MonoBehaviour
                 if (objectHit && !objectHit.Equals(gameObject)) {
                     if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
                         stop = true;
-                        debugColor = Color.red;
                     }
                 }
             }
@@ -97,14 +92,14 @@ public class AITransitionsController : MonoBehaviour
     }
 
     public void OnCrossWalkEntered() {
-        if (aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
+        if (!aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
             float randomNumber = Random.Range(0.0f, 1.0f) * 100;
             if (randomNumber >= 100 - stopProbability && !CanCrossCurrentCrossingZone()) {
-                aiEntity.SwitchToState(AIState.StopAtCrossWalk);
+                aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
             }
             else {
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
-                aiEntity.GetCurrentCorosingZone.OnStartedCrossing(aiEntity);
+                aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
             }
         }
     }

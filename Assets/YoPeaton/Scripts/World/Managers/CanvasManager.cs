@@ -49,10 +49,6 @@ public class CanvasManager : MonoBehaviour
         currentActiveCanvas = baseCanvas.name;
     }
 
-    private void Update()
-    {
-        Debug.LogError("Timescale: " + Time.timeScale);
-    }
     //MANEJO DE CANVAS//
     public void ActivatePauseCanvas()
     {

@@ -13,7 +13,7 @@ public abstract class EntityController : MonoBehaviour
     private float lastTPArameter = 0.0f;
     private bool move = true;
 
-    protected IMovable GetMovableComponent {
+    public IMovable GetMovableComponent {
         get {
             if (movableComponent == null) {
                 movableComponent = GetComponent<IMovable>();
@@ -49,11 +49,11 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void FixedUpdate() {
         if (ShouldStop()) {
-            DebugController.LogMessage("STOP!");
+            // DebugController.LogMessage("STOP!");
             GetMovableComponent?.SlowDown();
         }
         else if (ShouldSlowDown()) {
-            DebugController.LogMessage("Slowing down");
+            // DebugController.LogMessage("Slowing down");
             GetMovableComponent?.SlowDown();
         }
         else {

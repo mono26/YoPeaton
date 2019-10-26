@@ -10,7 +10,7 @@ public abstract class InfractionSO : ScriptableObject
 
     public GameObject evaluatedObject;
 
-    public GameObject[]  currentPedestrianHotZones;
+    // public GameObject[]  currentPedestrianHotZones;
 
 
     public bool AreThereActivePedestrians;
