@@ -10,8 +10,9 @@ public abstract class InfractionSO : ScriptableObject
 
     public GameObject evaluatedObject;
 
-    public GameObject[]  currentPedestrianHotZones;
+    //public GameObject[]  currentPedestrianHotZones;
 
+    public GameObject currentPedestrianHotZone;
 
     public bool AreThereActivePedestrians;
     /*NOTA DE FIN DE DIA: Hay que usar esta variable para recibir la cantidad de peatones o vehiculos dentro del crosswalk actual, 

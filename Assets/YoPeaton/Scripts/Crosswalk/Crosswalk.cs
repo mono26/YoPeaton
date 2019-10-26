@@ -9,6 +9,9 @@ public class Crosswalk : MonoBehaviour
     private List<WaitTicket> waitingPedestrians = new List<WaitTicket>();
     [SerializeField]
     private List<WaitTicket> waitingCars = new List<WaitTicket>();
+
+    public List<WaitTicket> _waitingPedestrians { get; set; }
+
     [SerializeField]
     private List<EntityController> crossingPedestrians = new List<EntityController>();
     [SerializeField]

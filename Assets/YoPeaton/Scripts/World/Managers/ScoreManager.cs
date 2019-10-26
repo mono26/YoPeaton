@@ -25,53 +25,72 @@ public class ScoreManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    private static int score;
+    public static int finalScore;
     public float countDuration = 2f;
 
-    private static int correctAnswers;
-    private static int wrongAnswers;
+    public static int correctAnswers;
+    public static int wrongAnswers;
 
-    private static int infractionsCommited;
+    public static int infractionsCommited;
 
-    private static int wrongReports;
-    private static int correctReports;
+    public static int wrongReports;
+    public static int correctReports;
+
+    public static int correctReportScore;
+    public static int correctAnswerScore;
+
+    public static int wrongReportScore;
+    public static int wrongAnswerScore;
+
+    public static int InfractionScore;
+
+    public static int timeScore;
+
 
     [SerializeField]
-    private int scoreForCorrectInputs = 100;
+    private static int scoreForCorrectInputs = 100;
 
     [SerializeField]
-    private int scoreForWrongInputs = 60;
+    private static int scoreForWrongInputs = 60;
+
+
+
+    private void Start()
+    {
+
+    }
+
 
     public static void AddScore(int _score) {
-        score =+ _score;
+        finalScore = +_score;
     }
 
-    IEnumerator CountTo(int target)
+
+    private static int CalculateFinalScore()
     {
-        int start = score;
-        for (float timer = 0; timer < countDuration; timer += Time.deltaTime)
-        {
-            float progress = timer / countDuration;
-            score = (int)Mathf.Lerp(start, target, progress);
-            yield return null;
-        }
-        score = target;
+        correctReportScore = correctReports * scoreForCorrectInputs;
+        correctAnswerScore = correctAnswers * scoreForCorrectInputs;
+
+        wrongReportScore = wrongReports * scoreForWrongInputs;
+        wrongAnswerScore = wrongAnswers * scoreForWrongInputs;
+
+        InfractionScore = infractionsCommited * 100;
+
+        finalScore = (correctAnswerScore + correctReportScore) - (InfractionScore + wrongAnswerScore + wrongReportScore);
+        return finalScore;
     }
 
-    public int CalculateFinalScore()
+    public void TestFillScoreArray()
     {
-        var correctReportScore = correctReports * scoreForCorrectInputs;
-        var correctAnswerScore = correctAnswers * scoreForCorrectInputs;
-
-        var wrongReportScore = wrongReports * scoreForWrongInputs;
-        var wrongAnswerScore = wrongAnswers * scoreForWrongInputs;
-
-        var InfractionScore = infractionsCommited * 100;
-
-        score = (correctAnswerScore + correctReportScore) - (InfractionScore + wrongAnswerScore + wrongReportScore);
-        return score;
+        Debug.LogWarning("TEST FILL SCRE ARRAY");
+        correctAnswerScore = 1000;
+        correctReportScore = 1200;
+        wrongAnswerScore = 600;
+        wrongReportScore = 728;
+        InfractionScore = 1000;
+        timeScore = 5000;
+        //finalScore = CalculateFinalScore();
     }
-
     public void AddReport(bool isReportCorrect)
     {
         if(isReportCorrect)

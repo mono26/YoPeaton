@@ -24,8 +24,9 @@ public class InfractionController : MonoBehaviour
     }
     public void CheckAllInfractions(Collider2D _other)
     {
-            ActivePedestrianCount = _other.gameObject.transform.root.GetChild(1).GetChild(0).GetComponent<HotZoneTrigger>().objectsInTriggerCount +
-                                    _other.gameObject.transform.root.GetChild(1).GetChild(1).GetComponent<HotZoneTrigger>().objectsInTriggerCount;
+        ActivePedestrianCount = _other.GetComponent<Crosswalk>()._waitingPedestrians.Count;
+                                    /*_other.gameObject.transform.root.GetChild(1).GetChild(0).GetComponent<HotZoneTrigger>().objectsInTriggerCount +
+                                    _other.gameObject.transform.root.GetChild(1).GetChild(1).GetComponent<HotZoneTrigger>().objectsInTriggerCount*/
 
             Debug.LogWarning("Active Pedestrian Count: " + ActivePedestrianCount);
             for (int i = 0; i < infractionsArray.Length; i++)
@@ -34,10 +35,11 @@ public class InfractionController : MonoBehaviour
                 Debug.LogWarning("i: " + i);
                 Debug.LogWarning("Length of i: " + infractionsArray.Length);
                 Debug.Log("Infractions Length: " + infractionsArray.Length);
-                Debug.Log("Pedestrian HotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
+                Debug.Log("Pedestrian HotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);
+                infractionsArray[i].currentPedestrianHotZone = new GameObject();
+                infractionsArray[i].currentPedestrianHotZone = new GameObject();*/
 
-                infractionsArray[i].currentPedestrianHotZones = new GameObject[2];
-                if (ActivePedestrianCount > 0)
+            if (ActivePedestrianCount > 0)
                 {
                     infractionsArray[i].AreThereActivePedestrians = true;
                 }
@@ -45,23 +47,24 @@ public class InfractionController : MonoBehaviour
                 {
                     infractionsArray[i].AreThereActivePedestrians = false;
                 }
-                    for (int j = 0; j < _other.gameObject.transform.root.GetChild(2).childCount; j++)
-                    {
-                        /*Debug.LogWarning("Entered Second For Loop");
-                        Debug.LogWarning("j: " + j);
-                        Debug.LogWarning("Length of j: " + _other.gameObject.transform.root.GetChild(1).childCount);
-                        Debug.LogWarning("Length of PedestrianHotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);*/
-                        infractionsArray[i].currentPedestrianHotZones[j] = _other.gameObject.transform.root.GetChild(1).GetChild(j).gameObject;
-                        Debug.LogWarning("Hijo: " + infractionsArray[i].currentPedestrianHotZones[j].name);
-                    }
                 Debug.LogWarning("1) CheckAllInfractions Running (Evaluando el array de infracciones)");
                 infractionsArray[i].evaluatedObject = controlledObject;
                 infractionsArray[i].CheckForRuleViolation();
-                if(infractionsArray[i].CheckForRuleViolation() == true)
+                if (infractionsArray[i].CheckForRuleViolation() == true)
                 {
                     ScoreManager.instance.AddInfraction();
                 }
-             }
+            /*for (int j = 0; j < _other.gameObject.transform.root.GetChild(2).childCount; j++)
+            {
+                /*Debug.LogWarning("Entered Second For Loop");
+                Debug.LogWarning("j: " + j);
+                Debug.LogWarning("Length of j: " + _other.gameObject.transform.root.GetChild(1).childCount);
+                Debug.LogWarning("Length of PedestrianHotZones: " + infractionsArray[i].currentPedestrianHotZones.Length);
+                infractionsArray[i].currentPedestrianHotZones[j] = _other.gameObject.transform.root.GetChild(1).GetChild(j).gameObject;
+                Debug.LogWarning("Hijo: " + infractionsArray[i].currentPedestrianHotZones[j].name);
+            }*/
+
+        }
 
 
         /*for (int i = 0; i < infractionsArray.Length; i++)
