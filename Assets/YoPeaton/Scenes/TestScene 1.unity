@@ -273,6 +273,7 @@ Transform:
   m_Children:
   - {fileID: 1828037067}
   - {fileID: 896277266}
+  - {fileID: 1758509686}
   m_Father: {fileID: 1904160914}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -591,7 +592,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -873,7 +879,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -1123,7 +1134,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -1373,7 +1389,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -1720,22 +1741,22 @@ PrefabInstance:
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
@@ -1755,7 +1776,7 @@ PrefabInstance:
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 5651082319283368975, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
@@ -1853,6 +1874,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICar_PFB (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1927,6 +1953,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -2194,22 +2225,22 @@ PrefabInstance:
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
@@ -2229,7 +2260,7 @@ PrefabInstance:
     - target: {fileID: 5651082318340459107, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 5651082319283368975, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
@@ -2488,6 +2519,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICar_PFB (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2562,6 +2598,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -3042,7 +3083,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -3525,6 +3571,11 @@ PrefabInstance:
       propertyPath: stopProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3927,9 +3978,67 @@ Transform:
   m_Children:
   - {fileID: 953646081}
   - {fileID: 766060969}
+  - {fileID: 1303840921}
   m_Father: {fileID: 1904160914}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1024460249
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1024460250}
+  - component: {fileID: 1024460251}
+  m_Layer: 12
+  m_Name: StreetCollider
+  m_TagString: StreetBounds
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1024460250
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024460249}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.97, y: -0.92, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1939975635}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1024460251
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1024460249}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000047683716, y: 0.15577507}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10.431113, y: 3.279993}
+  m_EdgeRadius: 0
 --- !u!1001 &1044085242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3941,6 +4050,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AICar_PFB (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -4016,6 +4130,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -4339,6 +4458,63 @@ Transform:
   m_Father: {fileID: 1652189470}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1180239033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1180239034}
+  - component: {fileID: 1180239035}
+  m_Layer: 12
+  m_Name: StreetCollider
+  m_TagString: StreetBounds
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1180239034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180239033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.18, y: 6.99, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1521966810}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1180239035
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1180239033}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000047683716, y: 0.165874}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10.431113, y: 1.8056726}
+  m_EdgeRadius: 0
 --- !u!1 &1201680875
 GameObject:
   m_ObjectHideFlags: 0
@@ -4599,6 +4775,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICar_PFB (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4673,6 +4854,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -5068,6 +5254,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICar_PFB (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5142,6 +5333,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -5459,6 +5655,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1303840920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1303840921}
+  - component: {fileID: 1303840922}
+  m_Layer: 12
+  m_Name: StreetCollider
+  m_TagString: StreetBounds
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1303840921
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303840920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1021568313}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1303840922
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1303840920}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.37766337, y: -5.3344297}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.34345, y: 23.034449}
+  m_EdgeRadius: 0
 --- !u!1 &1307580381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5483,13 +5736,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1307580381}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.83, y: 0.069, z: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 5.831, y: 0.079, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1834991163}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &1307580383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5649,7 +5902,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -5949,7 +6207,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -6362,7 +6625,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -6612,7 +6880,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -6800,6 +7073,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 745190639}
+  - {fileID: 1180239034}
   m_Father: {fileID: 1142887755}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7176,7 +7450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connections:
   - direction: 2
-    path: {fileID: 848998708}
+    path: {fileID: 1406338282}
 --- !u!58 &1675016420
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -7193,6 +7467,63 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.05
+--- !u!1 &1758509685
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1758509686}
+  - component: {fileID: 1758509687}
+  m_Layer: 12
+  m_Name: StreetCollider
+  m_TagString: StreetBounds
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1758509686
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758509685}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.03, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 39159082}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1758509687
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1758509685}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.37766337, y: -5.3344297}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.34345, y: 23.034449}
+  m_EdgeRadius: 0
 --- !u!1001 &1777353701
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7204,6 +7535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: AICar_PFB (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -7279,6 +7615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -7526,14 +7867,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834991162}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.07, y: -3.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1307580382}
   m_Father: {fileID: 706393132}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1881059914
 GameObject:
   m_ObjectHideFlags: 0
@@ -7755,6 +8096,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICar_PFB (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7829,6 +8175,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -8032,6 +8383,7 @@ Transform:
   m_Children:
   - {fileID: 1206246982}
   - {fileID: 1959316058}
+  - {fileID: 1024460250}
   m_Father: {fileID: 1142887755}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8257,6 +8609,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICar_PFB (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8331,6 +8688,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -8580,6 +8942,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AICar_PFB (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 6354327461028499315, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6354327461028499319, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8654,6 +9021,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -8918,7 +9290,12 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 768
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2131213510417876369, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -9238,6 +9615,11 @@ PrefabInstance:
         type: 3}
       propertyPath: stopProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}

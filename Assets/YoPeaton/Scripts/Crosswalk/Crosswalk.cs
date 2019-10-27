@@ -155,9 +155,12 @@ public class Crosswalk : MonoBehaviour
             }
             else if (waitingPedestrians.Count > 0) {
                 WaitTicket entityTicket = GetWaitingTicket(_entity);
+                int comparisson;
                 for (int i = 0; i < waitingPedestrians.Count; i++) {
-                    if (entityTicket.waitStartTime < waitingPedestrians[i].waitStartTime) {
+                    comparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingPedestrians[i].waitStartTime);
+                    if (comparisson >= 0) {
                         cross = false;
+                        break;
                     }
                 }
             }
@@ -168,9 +171,12 @@ public class Crosswalk : MonoBehaviour
             }
             else if (waitingCars.Count > 0) {
                 WaitTicket entityTicket = GetWaitingTicket(_entity);
+                int comparisson;
                 for (int i = 0; i < waitingCars.Count; i++) {
-                    if (entityTicket.waitStartTime <= waitingCars[i].waitStartTime) {
+                    comparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingCars[i].waitStartTime);
+                    if (comparisson > 0) {
                         cross = false;
+                        break;
                     }
                 }
             }

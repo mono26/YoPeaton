@@ -96,7 +96,7 @@ MonoBehaviour:
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 0.5
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0
@@ -246,12 +246,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.7
+  m_fontSize: 0.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 0.5
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0
@@ -508,6 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followComponent: {fileID: 6354327461028499318}
   changeDirectionProbability: 50
+  isOnTheStreet: 0
   stateMachine: {fileID: 7486950390623095033}
   transitionController: {fileID: 7486950390623095037}
   currentCrossingZone: {fileID: 0}
@@ -630,12 +631,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.3
+  m_fontSize: 0.5
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 72
+  m_fontSizeMax: 0.5
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0

@@ -192,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followComponent: {fileID: 270182541731555040}
   changeDirectionProbability: 50
+  isOnTheStreet: 0
   stateMachine: {fileID: 270182541731555041}
   transitionController: {fileID: 270182541731555043}
   currentCrossingZone: {fileID: 0}
@@ -211,7 +212,7 @@ MonoBehaviour:
   maxDistanceToCheckForStop: 3
   layersToCheckCollision:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   aiEntity: {fileID: 270182541731555042}
 --- !u!1 &1363044618323740226
 GameObject:

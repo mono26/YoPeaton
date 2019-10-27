@@ -30,11 +30,14 @@ public class AITransitionsController : MonoBehaviour
             }
         }
         else {
-            if (!IsCrossingACrossWalk() && !CanCrossCurrentCrossingZone()) {
+            // if (!IsCrossingACrossWalk() && !CanCrossCurrentCrossingZone()) {
+            //     aiEntity.SwitchToState(AIState.SlowDown);
+            // }
+            if (IsThereAObstacleUpFront()) {
                 aiEntity.SwitchToState(AIState.SlowDown);
             }
-            else if (IsThereAObstacleUpFront()) {
-                aiEntity.SwitchToState(AIState.SlowDown);
+            else if (!IsCrossingACrossWalk()) {
+                aiEntity.SwitchToState(AIState.Moving);
             }
         }
         // Check all the posible conditions for a transition in the state machine
@@ -74,20 +77,21 @@ public class AITransitionsController : MonoBehaviour
 
     private bool IsThereAObstacleUpFront() {
         bool stop = false;
-        RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, maxDistanceToCheckForStop, layersToCheckCollision);
-        // Only for debuging, should be removed later.
-        Color debugColor = Color.green;
-        if (hits.Length > 0) {
-            GameObject objectHit;
-            for (int i = 0; i < hits.Length; i++) {
-                objectHit = hits[i].collider.gameObject;
-                if (objectHit && !objectHit.Equals(gameObject)) {
-                    if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-                        stop = true;
+        if (aiEntity.IsOnTheStreet) {
+            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, maxDistanceToCheckForStop, layersToCheckCollision);
+            if (hits.Length > 0) {
+                GameObject objectHit;
+                for (int i = 0; i < hits.Length; i++) {
+                    objectHit = hits[i].collider.gameObject;
+                    if (objectHit && !objectHit.Equals(gameObject)) {
+                        if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
+                            stop = true;
+                            DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, Color.red);
+                        }
                     }
                 }
             }
-        }       
+        }
         return stop;
     }
 
