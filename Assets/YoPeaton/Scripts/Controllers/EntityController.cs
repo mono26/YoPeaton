@@ -12,8 +12,16 @@ public abstract class EntityController : MonoBehaviour
     private float distanceTravelled = 0.0f;
     private float lastTPArameter = 0.0f;
     private bool move = true;
+    [SerializeField]
+    private bool isOnTheStreet = false;
 
-    protected IMovable GetMovableComponent {
+    public bool IsOnTheStreet {
+        get {
+            return isOnTheStreet;
+        }
+    }
+
+    public IMovable GetMovableComponent {
         get {
             if (movableComponent == null) {
                 movableComponent = GetComponent<IMovable>();
@@ -49,11 +57,11 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void FixedUpdate() {
         if (ShouldStop()) {
-            DebugController.LogMessage("STOP!");
+            // DebugController.LogMessage("STOP!");
             GetMovableComponent?.SlowDown();
         }
         else if (ShouldSlowDown()) {
-            DebugController.LogMessage("Slowing down");
+            // DebugController.LogMessage("Slowing down");
             GetMovableComponent?.SlowDown();
         }
         else {
@@ -61,13 +69,18 @@ public abstract class EntityController : MonoBehaviour
         }
         if (GetFollowPathComponent) {
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
-            if (distanceTravelled < lastTPArameter) {
-                distanceTravelled = lastTPArameter;
-            }
             if (move) {
-                float t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
-                GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
-                lastTPArameter = t;
+                float t;
+                if (distanceTravelled / GetFollowPathComponent.GetPathLeght < lastTPArameter) {
+                    t = lastTPArameter;
+                }
+                else {
+                    t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
+                }
+                if (!t.Equals(lastTPArameter)) {
+                    GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
+                    lastTPArameter = t;
+                }
             }
         }
     }
@@ -90,6 +103,21 @@ public abstract class EntityController : MonoBehaviour
                 movableComponent.SlowDown(50.0f);
                 DebugController.LogMessage("Got new path");
             }
+        }
+        else if (_other.CompareTag("StreetBounds")) {
+            isOnTheStreet = true;
+        }
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D _other) {
+        if (_other.CompareTag("StreetBounds")) {
+            isOnTheStreet = false;
+        }
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D _other) {
+        if (_other.CompareTag("StreetBounds")) {
+            isOnTheStreet = true;
         }
     }
 }

@@ -86,6 +86,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddInfraction()
     {
+        DebugController.LogErrorMessage("Infraction commited");
         infractionsCommited++;
     }
 

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2597126075013783014}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PedestrianHotZones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5651082318314259306}
   - component: {fileID: 5651082318314259309}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HotZone (1)
   m_TagString: CrossWalk
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -101,9 +101,9 @@ GameObject:
   - component: {fileID: 5651082318340459104}
   - component: {fileID: 8574809909142508040}
   - component: {fileID: 7449861766069977889}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CrossWalk_PFB
-  m_TagString: Untagged
+  m_TagString: CrossWalk
   m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -205,7 +205,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5651082318767513669}
   - component: {fileID: 5651082318767513668}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CrossWalkTrigger
   m_TagString: CrossWalk
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5651082319283368975}
   - component: {fileID: 5651082319283368974}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HotZone
   m_TagString: CrossWalk
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -318,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651082319379500033}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: CarHotZones
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1372012371116313752}
   - component: {fileID: 8252909761824676015}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HotZone
   m_TagString: CrossWalk
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -408,7 +408,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1857571232019657724}
   - component: {fileID: 2116025503432778912}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HotZone (1)
   m_TagString: CrossWalk
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
