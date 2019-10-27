@@ -13,7 +13,7 @@ public abstract class InfractionSO : ScriptableObject
     // public GameObject[]  currentPedestrianHotZones;
 
 
-    public bool AreThereActivePedestrians;
+    public bool AreThereCrossingPedestrians;
     /*NOTA DE FIN DE DIA: Hay que usar esta variable para recibir la cantidad de peatones o vehiculos dentro del crosswalk actual, 
      * y luego pasarle esa variable a cada uno de las infracciones que se van a evaluar, así se pueden realizar las otras reglas 
      * (cuando se toque el vehiculo, el infraction controller pide la cantidad de peatones dentro del trigger de hotzone al HotZoneTrigger

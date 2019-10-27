@@ -38,10 +38,10 @@ public class InfractionController : MonoBehaviour
 
                 // infractionsArray[i].currentPedestrianHotZones = new GameObject[2];
                 if (ActivePedestrianCount > 0) {
-                    infractionsArray[i].AreThereActivePedestrians = true;
+                    infractionsArray[i].AreThereCrossingPedestrians = true;
                 }
                 else {
-                    infractionsArray[i].AreThereActivePedestrians = false;
+                    infractionsArray[i].AreThereCrossingPedestrians = false;
                 }
                 // for (int j = 0; j < _other.gameObject.transform.root.GetChild(2).childCount; j++)
                 // {
@@ -57,7 +57,6 @@ public class InfractionController : MonoBehaviour
                 infractionsArray[i].CheckForRuleViolation();
                 if(infractionsArray[i].CheckForRuleViolation() == true)
                 {
-                    DebugController.LogErrorMessage("infraction commited: " + gameObject.name);
                     ScoreManager.instance.AddInfraction();
                 }
              }
@@ -69,11 +68,10 @@ public class InfractionController : MonoBehaviour
         }*/
     }
 
-    private void OnTriggerEnter2D(Collider2D _other) {
-        if (_other.CompareTag("CrossWalk")) {
-            CheckAllInfractions(_other.GetComponent<Crosswalk>());
-        }
+    // private void OnTriggerEnter2D(Collider2D _other) {
+    //     if (_other.CompareTag("CrossWalk")) {
+    //         CheckAllInfractions(_other.GetComponent<Crosswalk>());
+    //     }
         
-    }
-
+    // }
 }

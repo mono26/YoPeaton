@@ -512,6 +512,7 @@ MonoBehaviour:
   stateMachine: {fileID: 7486950390623095033}
   transitionController: {fileID: 7486950390623095037}
   currentCrossingZone: {fileID: 0}
+  behaviourController: {fileID: 4170307743252493958}
 --- !u!114 &7486950390623095033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -537,7 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a89bae200b3adb742b75c8b98fc852d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infractionsArray: []
+  infractionsArray:
+  - {fileID: 11400000, guid: 0466624b85555164e89de1aaf2d70638, type: 2}
   controlledObject: {fileID: 0}
   ActivePedestrianCount: 0
 --- !u!1 &7485323031687209544

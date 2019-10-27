@@ -7,6 +7,8 @@ public class AIController : EntityController {
     private AITransitionsController transitionController;
     [SerializeField]
     private Crosswalk currentCrossingZone;
+    [SerializeField]
+    private InfractionController behaviourController;
 
     public AIState GetCurrentState {
         get {
@@ -57,16 +59,20 @@ public class AIController : EntityController {
     }
 
     public void OnCrossWalkEntered(Crosswalk _crossWalk) {
-        DebugController.LogMessage("Entered crosswalk");
+        // DebugController.LogMessage("Entered crosswalk");
         currentCrossingZone = _crossWalk;
         transitionController.OnCrossWalkEntered();
     }
 
     public void OnCrossWalkExited(Crosswalk _crossWalk) {
-        DebugController.LogMessage("Exited crosswalk");
+        // DebugController.LogMessage("Exited crosswalk");
         if (currentCrossingZone.Equals(_crossWalk)) {
             currentCrossingZone = null;
             SwitchToState(AIState.Moving);
         }
+    }
+
+    public void CheckIfIsBreakingTheLaw() {
+        behaviourController?.CheckAllInfractions(currentCrossingZone);
     }
 }

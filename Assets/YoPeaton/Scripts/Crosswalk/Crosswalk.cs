@@ -106,7 +106,7 @@ public class Crosswalk : MonoBehaviour
     /// </summary>
     /// <param name="_entity">Entity that started crossing.</param>
     public void OnStartedCrossing(EntityController _entity) {
-        DebugController.LogMessage("Entity started crossing");
+        // DebugController.LogMessage("Entity started crossing");
         if (_entity.gameObject.CompareTag("Pedestrian")) {
             if (!crossingPedestrians.Contains(_entity)) {
                 crossingPedestrians.Add(_entity);
@@ -115,9 +115,9 @@ public class Crosswalk : MonoBehaviour
         else if (_entity.gameObject.CompareTag("Car")) {
             if (!crossingCars.Contains(_entity)) {
                 if (crossingPedestrians.Count > 0) {
-                    DebugController.LogMessage("This car is crossing with pedestrians doing it at the same time: " + gameObject.name);
+                    DebugController.LogMessage("This car is crossing with pedestrians doing it at the same time: " + _entity.gameObject.name);
                 }
-                DebugController.LogMessage("Adding car to crossing cars.");
+                // DebugController.LogMessage("Adding car to crossing cars.");
                 crossingCars.Add(_entity);
             }
         }

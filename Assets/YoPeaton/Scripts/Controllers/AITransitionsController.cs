@@ -27,6 +27,7 @@ public class AITransitionsController : MonoBehaviour
             if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone()) {
                 aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
+                aiEntity.CheckIfIsBreakingTheLaw();
             }
         }
         else {
@@ -98,12 +99,19 @@ public class AITransitionsController : MonoBehaviour
     public void OnCrossWalkEntered() {
         if (!aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
             float randomNumber = Random.Range(0.0f, 1.0f) * 100;
-            if (randomNumber >= 100 - stopProbability && !CanCrossCurrentCrossingZone()) {
+            bool canCross = CanCrossCurrentCrossingZone();
+            if (randomNumber >= 100 - stopProbability && !canCross) {
                 aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
             }
             else {
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
                 aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
+                aiEntity.CheckIfIsBreakingTheLaw();
+                // if (!canCross) {
+                //     // No dio via a un peaton.
+                //     DebugController.LogErrorMessage("Didn't clear the way for a pedestrian: " + gameObject.name);
+                //     ScoreManager.instance.AddInfraction();
+                // }
             }
         }
     }
