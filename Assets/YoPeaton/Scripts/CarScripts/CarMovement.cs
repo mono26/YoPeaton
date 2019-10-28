@@ -10,16 +10,27 @@ public class CarMovement : MonoBehaviour, IMovable
     private float brakeSpeed = 0.0f;
     [SerializeField]
     private float acceleration = 0.0f;
+    [SerializeField]
+    private AnimatorController animationComponent;
 
     [SerializeField]
     private float currentSpeed = 0.0f;
     private bool isBraking = false;
     private bool move = true;
+    public Vector3 currentDirection;
 
     public float GetCurrentSpeed {
         get {
             return currentSpeed;
         }
+    }
+
+    private void Start()
+    {
+        
+            animationComponent = this.GetComponent<AnimatorController>();
+        
+        
     }
 
     private void Accelerate() {
@@ -41,6 +52,16 @@ public class CarMovement : MonoBehaviour, IMovable
         Vector3 lerpedPosition = Vector2.Lerp(transform.position, _position, Time.fixedDeltaTime);
         carBody.MovePosition(lerpedPosition);
         RotateInDirectionOfPosition(lerpedPosition);
+
+        currentDirection = (_position - transform.position).normalized;
+        //Debug.LogWarning("Current Direction: " + currentDirection);
+        //Debug.LogError(currentDirection);
+
+        if (animationComponent != null)
+        {
+            animationComponent.SetCurrentAnimation(currentDirection);
+        }
+
         // carBody.MovePosition(_position);
         // RotateInDirectionOfPosition(_position);
     }
@@ -48,17 +69,18 @@ public class CarMovement : MonoBehaviour, IMovable
     private void RotateInDirectionOfPosition(Vector3 _position) {
         Vector3 directionTowardsPosition = (_position - transform.position).normalized;
         bool isOpositeDirection = Vector3.Dot(transform.right, directionTowardsPosition) < 0;
-        if (!isOpositeDirection) {
-            Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
-            transform.right = targetRotation;
-        }
-        // Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
-        // transform.right = targetRotation;
+        // if (!isOpositeDirection) {
+        //     Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
+        //     transform.right = targetRotation;
+        // }
+        Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
+        transform.right = targetRotation;
     }
 
     public void ApplyBrakes() {
         if (currentSpeed > 0.0f) {
             currentSpeed -= brakeSpeed * Time.fixedDeltaTime;
+            currentSpeed = Mathf.Clamp(currentSpeed, 0.0f, maxSpeed);
         }
     }
 

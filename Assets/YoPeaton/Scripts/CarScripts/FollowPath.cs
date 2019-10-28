@@ -39,6 +39,7 @@ public class FollowPath : MonoBehaviour
     }
 
     private void OnDirectionChanged(BezierSpline _nextPath) {
+        Debug.LogWarning("Object: " + this.gameObject.name + ", acabo de cambiar de dirección");
         pathToFollow = _nextPath;
         if (_nextPath) {
             pathLength = GetLength();

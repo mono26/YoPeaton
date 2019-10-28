@@ -17,6 +17,12 @@ public class Crosswalk : MonoBehaviour
     [SerializeField]
     private List<EntityController> crossingCars = new List<EntityController>();
 
+    public int GetNumberOfCrossingPedestrians {
+        get {
+            return crossingPedestrians.Count;
+        }
+    }
+
     /// <summary>
     /// Called when a entity enter the crosswalk hotzone.
     /// </summary>
@@ -103,13 +109,18 @@ public class Crosswalk : MonoBehaviour
     /// </summary>
     /// <param name="_entity">Entity that started crossing.</param>
     public void OnStartedCrossing(EntityController _entity) {
-        if (_entity.CompareTag("Pedestrian")) {
+        // DebugController.LogMessage("Entity started crossing");
+        if (_entity.gameObject.CompareTag("Pedestrian")) {
             if (!crossingPedestrians.Contains(_entity)) {
                 crossingPedestrians.Add(_entity);
             }
         }
-        else if (_entity.CompareTag("Car")) {
+        else if (_entity.gameObject.CompareTag("Car")) {
             if (!crossingCars.Contains(_entity)) {
+                if (crossingPedestrians.Count > 0) {
+                    DebugController.LogMessage("This car is crossing with pedestrians doing it at the same time: " + _entity.gameObject.name);
+                }
+                // DebugController.LogMessage("Adding car to crossing cars.");
                 crossingCars.Add(_entity);
             }
         }
@@ -141,28 +152,34 @@ public class Crosswalk : MonoBehaviour
     public bool CanCross(EntityController _entity)
     {
         bool cross = true;
-        if (_entity.CompareTag("Car") && !crossingCars.Contains(_entity)) {
+        if (_entity.gameObject.CompareTag("Car") && !crossingCars.Contains(_entity)) {
             if (crossingPedestrians.Count > 0) {
                 cross = false;
             }
             else if (waitingPedestrians.Count > 0) {
                 WaitTicket entityTicket = GetWaitingTicket(_entity);
+                int comparisson;
                 for (int i = 0; i < waitingPedestrians.Count; i++) {
-                    if (waitingPedestrians[i].waitStartTime <= entityTicket.waitStartTime) {
+                    comparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingPedestrians[i].waitStartTime);
+                    if (comparisson >= 0) {
                         cross = false;
+                        break;
                     }
                 }
             }
         }
-        else if (_entity.CompareTag("Pedestrian") && !crossingPedestrians.Contains(_entity)) {
+        else if (_entity.gameObject.CompareTag("Pedestrian") && !crossingPedestrians.Contains(_entity)) {
             if (crossingCars.Count > 0) {
                 cross = false;
             }
             else if (waitingCars.Count > 0) {
                 WaitTicket entityTicket = GetWaitingTicket(_entity);
+                int comparisson;
                 for (int i = 0; i < waitingCars.Count; i++) {
-                    if (waitingCars[i].waitStartTime < entityTicket.waitStartTime) {
+                    comparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingCars[i].waitStartTime);
+                    if (comparisson > 0) {
                         cross = false;
+                        break;
                     }
                 }
             }

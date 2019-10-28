@@ -993,6 +993,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrossingIdentificationCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1707608217384067956, guid: 546a9a84df2bf374caeaa4b4398087f9,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707608217384067961, guid: 546a9a84df2bf374caeaa4b4398087f9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1707608217384067960, guid: 546a9a84df2bf374caeaa4b4398087f9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1111,6 +1121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: OptInButtonCanvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8891396464088464863, guid: 6a9472d38874f1f49aa7854acbc02021,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8891396464088464862, guid: 6a9472d38874f1f49aa7854acbc02021,
         type: 3}
