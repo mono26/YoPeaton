@@ -6,6 +6,7 @@ public abstract class EntityController : MonoBehaviour
     private IMovable movableComponent;
     [SerializeField]
     private FollowPath followComponent;
+
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
 
@@ -14,6 +15,8 @@ public abstract class EntityController : MonoBehaviour
     private bool move = true;
     [SerializeField]
     private bool isOnTheStreet = false;
+
+
 
     public bool IsOnTheStreet {
         get {
