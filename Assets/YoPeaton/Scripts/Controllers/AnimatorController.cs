@@ -27,13 +27,15 @@ public class AnimatorController : MonoBehaviour
         //Debug.LogError(direction);
         //Debug.LogError(direction.x);
         //Debug.LogError(direction.y);
-        if (direction.x >= 1f)
+        if (direction.x >= 0f && direction.x<=1f)
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", false);
             animator.SetBool("Right", true);
             animator.SetBool("Left", false);
-        } else if (direction.x <= -1.0f)
+        } 
+        
+        else if (direction.x < 0f && direction.x >= -1.0f)
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", false);
@@ -41,14 +43,15 @@ public class AnimatorController : MonoBehaviour
             animator.SetBool("Left", true);
         }
 
-        if (direction.y >= 1.0f)
+        if (direction.y >= 0f && direction.y <= 1.0f)
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", true);
             animator.SetBool("Right", false);
             animator.SetBool("Left", false);
         }
-        else if (direction.y <= -1f)
+
+        else if (direction.y >= 0f && direction.y >= -1.0f)
         {
             animator.SetBool("Front", true);
             animator.SetBool("Back", false);

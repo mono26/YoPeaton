@@ -13,17 +13,31 @@ public class PlayerCarInput : MonoBehaviour
         }
     }
 
-    private void Update() {
+    public void Brake()
+    {
+        isBraking = true;
+        Debug.Log("Is Braking");
+        //return isBraking;
+    }
+
+    public void StopBrake()
+    {
+        isBraking = false;
+        Debug.Log("Stop Braking");
+        //return isBraking;
+    }
+    /*private void Update() {
         CheckBrakeInput();
     }
 
     private void CheckBrakeInput()
     {
         if (Input.GetMouseButton(0)) {
+            Debug.Log("Is Braking");
             isBraking = true;
         }
         else {
             isBraking = false;
         }
-    }
+    }*/
 }

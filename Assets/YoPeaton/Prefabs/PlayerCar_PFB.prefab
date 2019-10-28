@@ -324,12 +324,10 @@ GameObject:
   - component: {fileID: 6354327461028499312}
   - component: {fileID: 6354327461028499314}
   - component: {fileID: 6354327461028499318}
-  - component: {fileID: 7486950390623095037}
-  - component: {fileID: 7486950390623095039}
-  - component: {fileID: 7486950390623095033}
+  - component: {fileID: -4467070806191996947}
   - component: {fileID: 4170307743252493958}
   m_Layer: 8
-  m_Name: AICar_PFB
+  m_Name: PlayerCar_PFB
   m_TagString: Car
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathToFollow: {fileID: 0}
---- !u!114 &7486950390623095037
+--- !u!114 &-4467070806191996947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -486,47 +484,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6354327461028499315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bcb4b6f04f4a774dae5ebe75c95099d, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ccfe6ed01a3662408169dacdb7d4ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopProbability: 50
-  maxDistanceToCheckForStop: 3
-  layersToCheckCollision:
-    serializedVersion: 2
-    m_Bits: 0
-  aiEntity: {fileID: 7486950390623095039}
---- !u!114 &7486950390623095039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354327461028499315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6db2591bbd145894a8583fdb8cc36228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  followComponent: {fileID: 6354327461028499318}
-  changeDirectionProbability: 50
-  isOnTheStreet: 0
-  stateMachine: {fileID: 7486950390623095033}
-  transitionController: {fileID: 7486950390623095037}
-  currentCrossingZone: {fileID: 0}
-  behaviourController: {fileID: 4170307743252493958}
---- !u!114 &7486950390623095033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354327461028499315}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3572a15efcf1204baac997ebe829ffe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
+  correctAnswer: 
+  selectedName: 
 --- !u!114 &4170307743252493958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -841,4 +803,4 @@ MonoBehaviour:
   speedText: {fileID: 5658546317326457739}
   currentState: {fileID: 8899446154790984751}
   canCross: {fileID: 5164978588771306636}
-  aiToDebug: {fileID: 7486950390623095039}
+  aiToDebug: {fileID: 0}

@@ -94,6 +94,7 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D _other) {
         if (_other.CompareTag("ChangeOfDirection")) {
+            Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
             float chanceOfChangingDirection = 100.0f;
             if (!followComponent.IsTheEndOfPath(_other.transform.position)) {
                 chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;

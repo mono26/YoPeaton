@@ -17,7 +17,7 @@ public class CarMovement : MonoBehaviour, IMovable
     private float currentSpeed = 0.0f;
     private bool isBraking = false;
     private bool move = true;
-    private Vector3 currentDirection;
+    public Vector3 currentDirection;
 
     public float GetCurrentSpeed {
         get {
@@ -54,7 +54,7 @@ public class CarMovement : MonoBehaviour, IMovable
         RotateInDirectionOfPosition(lerpedPosition);
 
         currentDirection = (_position - transform.position).normalized;
-
+        //Debug.LogWarning("Current Direction: " + currentDirection);
         //Debug.LogError(currentDirection);
 
         if (animationComponent != null)

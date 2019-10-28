@@ -30,9 +30,10 @@ public class SignalIdentification : MonoBehaviour
     {
         //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
         //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-        if(collision.tag == "HotZone")
-        { 
-            CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
+        if(collision.tag == "CrossWalk")
+        {
+            //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
+            CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
             correctAnswer = collision.name;
             return correctAnswer;
         }
@@ -50,6 +51,17 @@ public class SignalIdentification : MonoBehaviour
         correctAnswer = null;
     }
 
+    public void AcceptSignalIdentification()
+    {
+        Debug.LogError("Accepted");
+        CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
+    }
+    public void DeclineSignalIdentification()
+    {
+        Debug.LogError("Declined");
+        CanvasManager._instance.BackToBaseCanvas();
+    }
+
     public void ActivateCrossingIdentificationCanvas()
     {
         CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
@@ -59,6 +71,7 @@ public class SignalIdentification : MonoBehaviour
 
     public void CheckAnswer(string selectedAnswer)
     {
+        selectedName = selectedAnswer;
         if (correctAnswer == selectedAnswer)
         {
             ScoreManager.instance.AddAnswer(true);
@@ -70,6 +83,7 @@ public class SignalIdentification : MonoBehaviour
             ScoreManager.instance.AddAnswer(false);
             Debug.LogError("Te equivocaste, wey");
         }
+        CanvasManager._instance.identifyCrossingCanvas.enabled = false;
         CanvasManager._instance.BackToBaseCanvas();
     }
 

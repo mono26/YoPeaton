@@ -12,7 +12,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     private Canvas pausaCanvas;
     [SerializeField]
-    public Canvas optInButtonCanvas;
+    public GameObject optInButtonCanvas;
     [SerializeField]
     public Canvas identifyCrossingCanvas;
 
@@ -39,9 +39,13 @@ public class CanvasManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Asignacion de canvas
+        //optInButtonCanvas = GameObject.Find("CrossWalkGuess");
+        //identifyCrossingCanvas = GameObject.Find("CrossingIdentificationCanvas").GetComponent<Canvas>();
+
         //Desastivar todos los otros canvas
         pausaCanvas.enabled = false;
-        optInButtonCanvas.enabled = false;
+        optInButtonCanvas.SetActive(false);
         identifyCrossingCanvas.enabled = false;
 
         //Activar unicamente el base
@@ -68,12 +72,12 @@ public class CanvasManager : MonoBehaviour
     {
         if (canvasToActivate == "OptInCanvas")
         {
-            optInButtonCanvas.enabled = true;
+            optInButtonCanvas.SetActive(true);
         }
         if (canvasToActivate == "SignalIdentificationCanvas")
         {
               identifyCrossingCanvas.enabled = true;
-              optInButtonCanvas.enabled = false;
+              optInButtonCanvas.SetActive(false);
         }
     }
 
@@ -88,5 +92,7 @@ public class CanvasManager : MonoBehaviour
     public void BackToBaseCanvas()
     {
         baseCanvas.enabled = true;
+        identifyCrossingCanvas.enabled = false;
+        optInButtonCanvas.SetActive(false);
     }
 }

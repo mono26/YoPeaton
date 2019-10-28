@@ -27,12 +27,12 @@ public abstract class InfractionSO : ScriptableObject
         //bool isRuleBroken = RuleToCheck();
         if (RuleToCheck())
         {
-            Debug.LogError(this.name + ": Broken Rule");
+            //Debug.LogError(this.name + ": Broken Rule");
             return true;
         }
         else
         {
-            Debug.LogError(this.name + ": No Rule Broken");
+            //Debug.LogError(this.name + ": No Rule Broken");
             return false;
         }
     }
