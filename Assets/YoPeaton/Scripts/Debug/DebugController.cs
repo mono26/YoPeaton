@@ -48,4 +48,17 @@ public class DebugController
             Debug.DrawLine(_origin, _endPosition, _color, drawDebugDuration);
         }
     }
+
+    public static void DrawDebugArrow(Vector3 _origin, Vector3 _endPosition, Color _color) {
+        if (debugActive) {
+            Vector3 arrowDirection = (_endPosition - _origin).normalized;
+            Quaternion arrowAngle1 = Quaternion.Euler(0, 0, 45.0f);
+            Quaternion arrowAngle2 = Quaternion.Euler(0, 0, -45.0f);
+            Vector3 side1 = arrowAngle1 * -arrowDirection;
+            Vector3 side2 = arrowAngle2 * -arrowDirection;
+            Debug.DrawLine(_origin, _endPosition, _color, drawDebugDuration);
+            DrawDebugRay(_endPosition, side1, 1.0f, _color);
+            DrawDebugRay(_endPosition, side2, 1.0f, _color);
+        }
+    }
 }

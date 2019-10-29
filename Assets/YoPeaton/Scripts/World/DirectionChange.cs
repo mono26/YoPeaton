@@ -33,7 +33,7 @@ public class DirectionChange : MonoBehaviour
             for (int i = 0; i < connections.Length; i++) {
                 if (connections[i].path) {
                     float t = connections[i].path.GetTParameter(transform.position);
-                    Gizmos.color = Color.blue;
+                    Gizmos.color = Color.green;
                     Gizmos.DrawLine(connections[i].path.GetPoint(t), transform.position);
                 }
             }
