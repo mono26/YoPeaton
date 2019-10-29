@@ -3036,7 +3036,7 @@ GameObject:
   - component: {fileID: 613519305}
   - component: {fileID: 613519304}
   m_Layer: 5
-  m_Name: Bocacalle
+  m_Name: TestLoadVictory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3092,7 +3092,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Bocacalle
+  m_Text: Test Load Victory
 --- !u!222 &613519305
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4084,11 +4084,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CrossingIdentificationCanvas
       objectReference: {fileID: 0}
-    - target: {fileID: 1707608217384067961, guid: 546a9a84df2bf374caeaa4b4398087f9,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1707608217384067960, guid: 546a9a84df2bf374caeaa4b4398087f9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4193,6 +4188,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707608217384067961, guid: 546a9a84df2bf374caeaa4b4398087f9,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1707608216191045703, guid: 546a9a84df2bf374caeaa4b4398087f9,
         type: 3}
@@ -4800,7 +4800,7 @@ GameObject:
   - component: {fileID: 1159873073}
   - component: {fileID: 1159873072}
   m_Layer: 5
-  m_Name: OptionBocacalle (1)
+  m_Name: TestLoadVictoryBtn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
