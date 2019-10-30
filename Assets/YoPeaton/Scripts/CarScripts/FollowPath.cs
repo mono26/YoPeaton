@@ -26,6 +26,12 @@ public class FollowPath : MonoBehaviour
         }
     }
 
+    public BezierSpline GetPath {
+        get {
+            return pathToFollow;
+        }
+    }
+
     void Start() {
         pathLength = GetLength();
     }

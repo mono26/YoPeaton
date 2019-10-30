@@ -94,18 +94,16 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D _other) {
         if (_other.CompareTag("ChangeOfDirection")) {
-            Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
             float chanceOfChangingDirection = 100.0f;
             if (!followComponent.IsTheEndOfPath(_other.transform.position)) {
                 chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
             }
             if (chanceOfChangingDirection >= 100 - changeDirectionProbability) {
+                Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
-                int numberOfConnections = directionChanger.Getconections.Length;
-                followComponent.SetPath = directionChanger.Getconections[Random.Range(0, numberOfConnections)].path;
+                followComponent.SetPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
                 GetInitialValuesToStartPath();
                 movableComponent.SlowDown(50.0f);
-                DebugController.LogMessage("Got new path");
             }
         }
         else if (_other.CompareTag("StreetBounds")) {
