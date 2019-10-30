@@ -101,9 +101,12 @@ public abstract class EntityController : MonoBehaviour
             if (chanceOfChangingDirection >= 100 - changeDirectionProbability) {
                 Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
-                followComponent.SetPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
-                GetInitialValuesToStartPath();
-                movableComponent.SlowDown(50.0f);
+                BezierSpline newPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
+                if (newPath) {
+                    followComponent.SetPath = newPath;
+                    GetInitialValuesToStartPath();
+                    movableComponent.SlowDown(50.0f);
+                }
             }
         }
         else if (_other.CompareTag("StreetBounds")) {
