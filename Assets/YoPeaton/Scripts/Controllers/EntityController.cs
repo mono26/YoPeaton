@@ -121,8 +121,10 @@ public abstract class EntityController : MonoBehaviour
     }
 
     protected virtual void OnTriggerStay2D(Collider2D _other) {
-        if (_other.CompareTag("StreetBounds")) {
-            isOnTheStreet = true;
+        if (!isOnTheStreet) {
+            if (_other.CompareTag("StreetBounds")) {
+                isOnTheStreet = true;
+            }
         }
     }
 }
