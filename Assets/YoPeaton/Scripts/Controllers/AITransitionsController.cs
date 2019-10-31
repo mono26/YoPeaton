@@ -80,16 +80,16 @@ public class AITransitionsController : MonoBehaviour
         bool stop = false;
         if (aiEntity.IsOnTheStreet) {
             RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, maxDistanceToCheckForStop, layersToCheckCollision);
-            DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, Color.green);
+            // DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, Color.green);
             if (hits.Length > 0) {
                 GameObject objectHit;
                 for (int i = 0; i < hits.Length; i++) {
                     objectHit = hits[i].collider.gameObject;
                     if (objectHit && !objectHit.Equals(gameObject)) {
                         if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-                            DebugController.LogMessage("Is gooing to crash!");
+                            // DebugController.LogMessage("Is gooing to crash!");
                             stop = true;
-                            DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, Color.red);
+                            // DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, Color.red);
                         }
                     }
                 }
