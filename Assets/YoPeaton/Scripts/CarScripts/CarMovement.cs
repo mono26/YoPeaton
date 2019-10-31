@@ -27,9 +27,9 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void Start()
     {
-        
-            animationComponent = this.GetComponent<AnimatorController>();
-        
+            
+        animationComponent = this.GetComponent<AnimatorController>();
+        animationComponent.SetAnimator("Female");
         
     }
 

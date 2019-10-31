@@ -17,11 +17,27 @@ public class AnimatorController : MonoBehaviour
         }
     }
 
+   
+
     void Start()
     {
         animator = this.GetComponent<Animator>();
     }
 
+    public void SetAnimator(string id)
+    {
+        Debug.Log(id);
+        Debug.Log("Hi");
+        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/YoPeaton/AnimatorControllers/Female");
+        /*  switch (id)
+          {
+              case "Male":
+                  animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/YoPeaton/AnimatorControllers/Male");
+                  break;
+
+          }*/
+
+    }
     public void SetCurrentAnimation(Vector3 direction)
     {
         //Debug.LogError(direction);
