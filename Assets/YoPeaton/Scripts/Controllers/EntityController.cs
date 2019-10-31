@@ -9,6 +9,8 @@ public abstract class EntityController : MonoBehaviour
 
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
+    [SerializeField]
+    private EntityTypes type;
 
     private float distanceTravelled = 0.0f;
     private float lastTPArameter = 0.0f;
@@ -94,18 +96,19 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D _other) {
         if (_other.CompareTag("ChangeOfDirection")) {
-            Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
             float chanceOfChangingDirection = 100.0f;
             if (!followComponent.IsTheEndOfPath(_other.transform.position)) {
                 chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
             }
             if (chanceOfChangingDirection >= 100 - changeDirectionProbability) {
+                Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
-                int numberOfConnections = directionChanger.Getconections.Length;
-                followComponent.SetPath = directionChanger.Getconections[Random.Range(0, numberOfConnections)].path;
-                GetInitialValuesToStartPath();
-                movableComponent.SlowDown(50.0f);
-                DebugController.LogMessage("Got new path");
+                BezierSpline newPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
+                if (newPath) {
+                    followComponent.SetPath = newPath;
+                    GetInitialValuesToStartPath();
+                    movableComponent.SlowDown(50.0f);
+                }
             }
         }
         else if (_other.CompareTag("StreetBounds")) {
@@ -120,8 +123,10 @@ public abstract class EntityController : MonoBehaviour
     }
 
     protected virtual void OnTriggerStay2D(Collider2D _other) {
-        if (_other.CompareTag("StreetBounds")) {
-            isOnTheStreet = true;
+        if (!isOnTheStreet) {
+            if (_other.CompareTag("StreetBounds")) {
+                isOnTheStreet = true;
+            }
         }
     }
 }

@@ -35,8 +35,15 @@ public class BezierSpline : MonoBehaviour {
 		Vector3 point = transform.position;
 		for (int i = 0; i < steps; i++) {
 			point = GetPoint((float)i / (float)steps);
+			Vector3 arrowDirection = (point - previousPoint).normalized;
+			Quaternion arrowAngle1 = Quaternion.Euler(0, 0, 45.0f);
+			Quaternion arrowAngle2 = Quaternion.Euler(0, 0, -45.0f);
+			Vector3 side1 = arrowAngle1 * -arrowDirection;
+			Vector3 side2 = arrowAngle2 * -arrowDirection;
 			Gizmos.color = Color.cyan;
 			Gizmos.DrawLine(previousPoint, point);
+			Gizmos.DrawRay(point, side1 * 0.1f);
+			Gizmos.DrawRay(point, side2 * 0.1f);
 			previousPoint = point;
 		}
 		Matrix4x4 matrix = transform.localToWorldMatrix;
