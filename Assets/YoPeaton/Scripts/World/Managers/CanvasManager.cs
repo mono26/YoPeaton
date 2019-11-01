@@ -80,7 +80,10 @@ public class CanvasManager : MonoBehaviour
 
     private void Update()
     {
-        timeLeftText.text = PlayerController.instance.lifeTime.ToString();
+        if (SceneManagerTest.GetCurrentScene() == "TestScene")
+        {
+            timeLeftText.text = PlayerController.lifeTime.ToString();
+        }
     }
     #region Manejo De Canvas
     //MANEJO DE CANVAS//
@@ -153,7 +156,7 @@ public class CanvasManager : MonoBehaviour
     {
         Debug.LogWarning("Press Pause Button");
         GameManager.PauseGame();
-        ActivatePauseCanvas();
+        //ActivatePauseCanvas();
     }
 
     public void PressLoadBtn()

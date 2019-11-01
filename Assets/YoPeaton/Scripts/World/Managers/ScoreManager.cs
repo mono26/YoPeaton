@@ -68,7 +68,7 @@ public class ScoreManager : MonoBehaviour
 
     public static int CalculateFinalScore()
     {
-        timeScore = Mathf.RoundToInt(PlayerController.instance.lifeTime);
+        timeScore = Mathf.RoundToInt(PlayerController.lifeTime);
         Debug.LogWarning("Going to calculate Final Scores");
 
         correctReportScore = (correctReports * scoreForCorrectInputs)/ 2;

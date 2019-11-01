@@ -45,6 +45,7 @@ public class SignalIdentification : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+
         //Se desactiva el canvas de identificar la señal una vez sale de ella//
         CanvasManager._instance.BackToBaseCanvas();
         //CanvasManager._instance.optInButtonCanvas.enabled = false;
@@ -53,6 +54,8 @@ public class SignalIdentification : MonoBehaviour
 
     public void AcceptSignalIdentification()
     {
+        //El tiempo se pone lento//
+        Time.timeScale = 0.5f;
         //Debug.LogWarning("Accepted");
         CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
     }
@@ -71,6 +74,8 @@ public class SignalIdentification : MonoBehaviour
 
     public void CheckAnswer(string selectedAnswer)
     {
+        //El tiempo se pone normal//
+        Time.timeScale = 1f;
         selectedName = selectedAnswer;
         if (correctAnswer == selectedAnswer)
         {

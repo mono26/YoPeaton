@@ -6,14 +6,14 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/YoPeaton/Scenes/TestScene.unity
+    guid: 7d71601cb0070d54c92d806083ec5c57
+  - enabled: 1
     path: Assets/YoPeaton/Scenes/MainMenu.unity
     guid: bcfd7a14ae328d44f9da0164eea7f26e
   - enabled: 1
     path: Assets/YoPeaton/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/YoPeaton/Scenes/TestScene.unity
-    guid: 7d71601cb0070d54c92d806083ec5c57
   - enabled: 1
     path: Assets/YoPeaton/Scenes/CameraTest.unity
     guid: 307e3b336e1188142a8f626af07b7982

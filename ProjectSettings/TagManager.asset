@@ -10,6 +10,7 @@ TagManager:
   - CrossWalk
   - ChangeOfDirection
   - StreetBounds
+  - Goal
   layers:
   - Default
   - TransparentFX
