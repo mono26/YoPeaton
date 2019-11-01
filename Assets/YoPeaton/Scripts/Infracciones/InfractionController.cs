@@ -22,6 +22,7 @@ public class InfractionController : MonoBehaviour
         controlledObject = this.gameObject;
 
     }
+    
     public void CheckAllInfractions(Crosswalk _crosswalk)
     {
             ActivePedestrianCount = _crosswalk.GetNumberOfCrossingPedestrians;

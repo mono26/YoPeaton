@@ -9,16 +9,33 @@ public class AITransitionsController : MonoBehaviour
     [SerializeField]
     private float maxDistanceToCheckForStop = 3.0f;
     [SerializeField]
-    private LayerMask layersToCheckCollision;
+    private int layersToCheckCollision;
 
 #region Dependencies
     [SerializeField]
     private AIController aiEntity;
 #endregion
 
+    private float colliderRadius;
+    private RaycastHit2D[] obstacles;
+    private RaycastHit2D obstacle;
+
     public AIController SetController {
         set {
             aiEntity = value;
+        }
+    }
+
+    private void Awake() {
+        colliderRadius = GetComponent<CircleCollider2D>().radius;
+    }
+
+    private void Start() {
+        if (gameObject.CompareTag("Car")) {
+            layersToCheckCollision = (1 << LayerMask.NameToLayer("Car")) | (1 << LayerMask.NameToLayer("Pedestrian"));
+        }
+        else {
+            layersToCheckCollision = (1 << LayerMask.NameToLayer("Car"));
         }
     }
 
@@ -79,18 +96,25 @@ public class AITransitionsController : MonoBehaviour
     private bool IsThereAObstacleUpFront() {
         bool stop = false;
         if (aiEntity.IsOnTheStreet) {
-            RaycastHit2D[] hits = Physics2D.RaycastAll(transform.position, transform.right, maxDistanceToCheckForStop, layersToCheckCollision);
-            // DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, Color.green);
-            if (hits.Length > 0) {
-                GameObject objectHit;
-                for (int i = 0; i < hits.Length; i++) {
-                    objectHit = hits[i].collider.gameObject;
-                    if (objectHit && !objectHit.Equals(gameObject)) {
-                        if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-                            // DebugController.LogMessage("Is gooing to crash!");
-                            stop = true;
-                            // DebugController.DrawDebugRay(transform.position, transform.right, maxDistanceToCheckForStop, Color.red);
-                        }
+            Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius * 2) * transform.localScale.x) + 0.1));
+            float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
+            obstacle = Physics2D.CircleCast((Vector2)startPosition, colliderRadius * transform.localScale.x, transform.right, distance, layersToCheckCollision);
+            // if (obstacles.Length > 0) {
+            //     GameObject objectHit;
+            //     for (int i = 0; i < obstacles.Length; i++) {
+            //         objectHit = obstacles[i].collider.gameObject;
+            //         if (objectHit && !objectHit.Equals(gameObject)) {
+            //             if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
+            //                 stop = true;
+            //             }
+            //         }
+            //     }
+            // }
+            if (obstacle) {
+                GameObject objectHit = obstacle.collider.gameObject;
+                if (objectHit && !objectHit.Equals(gameObject)) {
+                    if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
+                        stop = true;
                     }
                 }
             }
