@@ -28,13 +28,13 @@ public class ScoreManager : MonoBehaviour
     public static int finalScore;
     public float countDuration = 2f;
 
-    public static int correctAnswers = 2;
-    public static int wrongAnswers = 1;
+    public static int correctAnswers = 0;
+    public static int wrongAnswers = 0;
 
-    public static int infractionsCommited = 3;
+    public static int infractionsCommited = 0;
 
-    public static int wrongReports = 4;
-    public static int correctReports = 5;
+    public static int wrongReports = 0;
+    public static int correctReports = 0;
 
     public static int correctReportScore;
     public static int correctAnswerScore;
@@ -89,7 +89,7 @@ public class ScoreManager : MonoBehaviour
         return finalScore;
     }
 
-    public void TestFillScoreArray()
+    /*public void TestFillScoreArray()
     {
         Debug.LogWarning("TEST FILL SCRE ARRAY");
         correctAnswerScore = 1000;
@@ -99,10 +99,12 @@ public class ScoreManager : MonoBehaviour
         InfractionScore = 1000;
         timeScore = 5000;
         //finalScore = CalculateFinalScore();
-    }
+    }*/
+
     public void AddReport(bool isReportCorrect)
     {
-        if(isReportCorrect)
+        Debug.Log("Añadí un reporte y fue: " + isReportCorrect);
+        if (!isReportCorrect)
         {
             correctReports++;
         }
@@ -114,7 +116,7 @@ public class ScoreManager : MonoBehaviour
 
     public void AddInfraction()
     {
-        DebugController.LogErrorMessage("Infraction commited");
+        //DebugController.LogErrorMessage("Infraction commited");
         infractionsCommited++;
     }
 

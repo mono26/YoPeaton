@@ -103,7 +103,7 @@ public abstract class EntityController : MonoBehaviour
                 chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
             }
             if (chanceOfChangingDirection >= 100 - changeDirectionProbability) {
-                Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
+                //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
                 BezierSpline newPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
                 if (newPath) {

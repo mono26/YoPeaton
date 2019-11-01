@@ -27,7 +27,7 @@ public class AITransitionsController : MonoBehaviour
             if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone()) {
                 aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
-                aiEntity.CheckIfIsBreakingTheLaw();
+                //aiEntity.CheckIfIsBreakingTheLaw();
             }
         }
         else {
@@ -108,7 +108,7 @@ public class AITransitionsController : MonoBehaviour
             else {
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
                 aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
-                aiEntity.CheckIfIsBreakingTheLaw();
+                //aiEntity.CheckIfIsBreakingTheLaw();
                 // if (!canCross) {
                 //     // No dio via a un peaton.
                 //     DebugController.LogErrorMessage("Didn't clear the way for a pedestrian: " + gameObject.name);
