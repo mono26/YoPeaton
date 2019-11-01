@@ -7,10 +7,11 @@ public abstract class EntityController : MonoBehaviour
     [SerializeField]
     private FollowPath followComponent;
 
+
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
-    [SerializeField]
-    private EntityTypes type;
+    //[SerializeField]
+    //private EntityTypes type;
 
     private float distanceTravelled = 0.0f;
     private float lastTPArameter = 0.0f;
@@ -52,6 +53,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void Start() {
         GetInitialValuesToStartPath();
+
     }
 
     private void GetInitialValuesToStartPath() {

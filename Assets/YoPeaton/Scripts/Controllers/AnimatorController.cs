@@ -17,6 +17,8 @@ public class AnimatorController : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private RuntimeAnimatorController[] animatorControllers;
    
 
     void Start()
@@ -24,19 +26,9 @@ public class AnimatorController : MonoBehaviour
         animator = this.GetComponent<Animator>();
     }
 
-    public void SetAnimator(string id)
+    public void SetAnimator(EntityTypes type)
     {
-        Debug.Log(id);
-        Debug.Log("Hi");
-        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/YoPeaton/AnimatorControllers/Female");
-        /*  switch (id)
-          {
-              case "Male":
-                  animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("Assets/YoPeaton/AnimatorControllers/Male");
-                  break;
-
-          }*/
-
+        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimatorControllers/" + type);
     }
     public void SetCurrentAnimation(Vector3 direction)
     {

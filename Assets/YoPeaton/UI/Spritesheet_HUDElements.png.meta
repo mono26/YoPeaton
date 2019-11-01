@@ -26,6 +26,9 @@ TextureImporter:
   - first:
       213: 6704326607204923741
     second: HUDElements_CrossWalkGuess_BG
+  - first:
+      213: -5253500739941442394
+    second: HUDElements_PauseButton
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -230,13 +233,13 @@ TextureImporter:
       name: HUDElements_BlueButton
       rect:
         serializedVersion: 2
-        x: 341
+        x: 346
         y: 629
-        width: 252
+        width: 247
         height: 92
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 41, y: 38, z: 43, w: 38}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -285,6 +288,27 @@ TextureImporter:
       bones: []
       spriteID: 55c7894ca4d60d5439ed4cacebbf831a
       internalID: 6704326607204923741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HUDElements_PauseButton
+      rect:
+        serializedVersion: 2
+        x: 903
+        y: 630
+        width: 95
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0672f8a9b99794e499d3eb1331f006d8
+      internalID: -5253500739941442394
       vertices: []
       indices: 
       edges: []

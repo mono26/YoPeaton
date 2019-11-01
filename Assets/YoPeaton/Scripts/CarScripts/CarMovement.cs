@@ -5,19 +5,23 @@ public class CarMovement : MonoBehaviour, IMovable
     [SerializeField]
     private Rigidbody2D carBody = null;
     [SerializeField]
+    private AnimatorController animationComponent;
+    [SerializeField]
     private float maxSpeed = 0.0f;
     [SerializeField]
     private float brakeSpeed = 0.0f;
     [SerializeField]
     private float acceleration = 0.0f;
-    [SerializeField]
-    private AnimatorController animationComponent;
+
 
     [SerializeField]
     private float currentSpeed = 0.0f;
     private bool isBraking = false;
     private bool move = true;
     public Vector3 currentDirection;
+
+    [SerializeField]
+    private EntityTypes type;
 
     public float GetCurrentSpeed {
         get {
@@ -27,10 +31,10 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void Start()
     {
-            
-        animationComponent = this.GetComponent<AnimatorController>();
-        animationComponent.SetAnimator("Female");
         
+        animationComponent = this.GetComponent<AnimatorController>();
+        animationComponent.SetAnimator(type);
+
     }
 
     private void Accelerate() {
