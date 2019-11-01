@@ -13,12 +13,23 @@ public class InfractionDontGivePass : InfractionSO
 
     protected override bool RuleToCheck()
     {
-        if (AreThereCrossingPedestrians)
+        var rbObject = evaluatedObject.GetComponent<Rigidbody2D>();
+        var controller = evaluatedObject.GetComponent<AIController>();
+        if (AreThereCrossingPedestrians && controller.GetCurrentState.ToString() != "WaitingAtCrossWalk")
         {
+            Debug.LogError("ESTADO DEL AI CONTROLLER: " + controller.GetCurrentState.ToString());
+            ScoreManager.instance.AddReport(false);
+            Debug.Log("No Diste Via"); Debug.Log("REPORTE CORRECTO, HABIA ALGUEIN, ROMPIO LA LEY");
+            CanvasManager._instance.testReportText.text = "Reporte: Correcto";
+            CanvasManager._instance.StartResetCanvasCoroutine();
             return true;
         }
         else
         {
+            ScoreManager.instance.AddReport(true);
+            Debug.Log("BIEN NO HABIA NADIE"); Debug.Log("REPORTE INCORRECTO, NO HABIA NADIE AHÍ, PODIA PASAR");
+            CanvasManager._instance.testReportText.text = "Reporte: Incorrecto";
+            CanvasManager._instance.StartResetCanvasCoroutine();
             return false;
         }
     }   

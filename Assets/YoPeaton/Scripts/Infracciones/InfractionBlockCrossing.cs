@@ -20,12 +20,12 @@ public class InfractionBlockCrossing : InfractionSO
         if (hit && rbObject.velocity == Vector2.zero)
         {
             Debug.LogWarning ("3)Infraction Happened: "+"Infraction Name: " + this.name + " Evaluated Object: " + evaluatedObject.name);
-            return true;
+            return false;
         }
         else
         {
             Debug.LogWarning("3) Infraction Didn't Happened: " + "Infraction Name: " + this.name + " Evaluated Object: " + evaluatedObject.name);
-            return false;
+            return true;
         }
     }
 

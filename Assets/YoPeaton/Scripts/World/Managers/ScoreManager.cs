@@ -51,7 +51,7 @@ public class ScoreManager : MonoBehaviour
     private static int scoreForCorrectInputs = 100;
 
     [SerializeField]
-    private static int scoreForWrongInputs = 60;
+    private static int scoreForWrongInputs = 40;
 
 
 
@@ -68,23 +68,24 @@ public class ScoreManager : MonoBehaviour
 
     public static int CalculateFinalScore()
     {
-        Debug.LogError("Going to calculate Final Scores");
+        timeScore = Mathf.RoundToInt(PlayerController.instance.lifeTime);
+        Debug.LogWarning("Going to calculate Final Scores");
 
-        correctReportScore = correctReports * scoreForCorrectInputs;
+        correctReportScore = (correctReports * scoreForCorrectInputs)/ 2;
         correctAnswerScore = correctAnswers * scoreForCorrectInputs;
 
-        wrongReportScore = wrongReports * scoreForWrongInputs;
+        wrongReportScore = (wrongReports * scoreForWrongInputs)/2;
         wrongAnswerScore = wrongAnswers * scoreForWrongInputs;
 
         InfractionScore = infractionsCommited * 100;
 
-        finalScore = (correctAnswerScore + correctReportScore) - (InfractionScore + wrongAnswerScore + wrongReportScore);
+        finalScore = (timeScore + correctAnswerScore + correctReportScore) - (InfractionScore + wrongAnswerScore + wrongReportScore);
 
-        Debug.LogError("Wrong reports: " + wrongReports + ", wrong report score: " + wrongReportScore);
-        Debug.LogError("Wrong answer: " + wrongAnswers + ", wrong answer score: " + wrongAnswerScore);
-        Debug.LogError("correct reports: " + correctReports + ", correct report score: " + correctReportScore);
-        Debug.LogError("correct answer: " + correctAnswers + ", correct answer score: " + correctAnswerScore);
-        Debug.LogError("Total Score: " + finalScore);
+        Debug.LogWarning("Wrong reports: " + wrongReports + ", wrong report score: " + wrongReportScore);
+        Debug.LogWarning("Wrong answer: " + wrongAnswers + ", wrong answer score: " + wrongAnswerScore);
+        Debug.LogWarning("correct reports: " + correctReports + ", correct report score: " + correctReportScore);
+        Debug.LogWarning("correct answer: " + correctAnswers + ", correct answer score: " + correctAnswerScore);
+        Debug.LogWarning("Total Score: " + finalScore);
 
         return finalScore;
     }

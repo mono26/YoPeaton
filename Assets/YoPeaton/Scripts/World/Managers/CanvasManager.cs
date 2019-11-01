@@ -24,6 +24,13 @@ public class CanvasManager : MonoBehaviour
     public GameObject optInButtonCanvas;
     [SerializeField]
     public Canvas identifyCrossingCanvas;
+    [SerializeField]
+    public Text testReportText;
+    [SerializeField]
+    public Text testAnswerText;
+
+    public Text timeLeftText;
+
 
     private string currentActiveCanvas;
 
@@ -71,6 +78,10 @@ public class CanvasManager : MonoBehaviour
         currentActiveCanvas = baseCanvas.name;
     }
 
+    private void Update()
+    {
+        timeLeftText.text = PlayerController.instance.lifeTime.ToString();
+    }
     #region Manejo De Canvas
     //MANEJO DE CANVAS//
     public void ActivatePauseCanvas()
@@ -154,6 +165,12 @@ public class CanvasManager : MonoBehaviour
     #endregion
 
     #region Sequencia de corrutinas de conteo
+
+    public void StartResetCanvasCoroutine()
+    {
+        StartCoroutine(EraseFeedback());
+    }
+
     public void StartCountSequence()
     {
         StartCoroutine(Seq());
@@ -266,6 +283,14 @@ public class CanvasManager : MonoBehaviour
         }
         MaxScore = target;
         textsForScores[6].text = MaxScore.ToString();
+    }
+
+    public IEnumerator EraseFeedback()
+    {
+        yield return new WaitForSeconds(2);
+        //Machetazo para testeo, se deben resetear a tiempos diferentes//
+        testAnswerText.text = "Report: null";
+        testReportText.text = "Report: null";
     }
     #endregion
 

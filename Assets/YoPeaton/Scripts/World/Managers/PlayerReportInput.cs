@@ -49,7 +49,7 @@ public class PlayerReportInput : MonoBehaviour
 
             RaycastHit2D hit = Physics2D.Raycast(screenPos, Vector2.zero, Mathf.Infinity, mask);
 
-            print(hit.collider);
+            //print(hit.collider);
             if (hit)
             {
                 if (hit.collider.tag == "Car" && hit.collider.name != "PlayerCar_PFB")

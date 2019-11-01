@@ -5,6 +5,9 @@ using UnityEngine;
 public static class GameManager
 {
     public static bool isPaused;
+    public static float timeLeft;
+
+   
 
     //private static int printScore;
     public static void FinishLevel(bool isPlayerVictorious)

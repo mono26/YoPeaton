@@ -34,7 +34,7 @@ public class SceneManagerTest : MonoBehaviour
         switch (scene.name.ToLower())
         {
             case "victoryscreenscene":
-                Debug.LogError("Cargue la scena de victoria");
+                Debug.LogWarning("Cargue la scena de victoria");
                 ScoreManager.CalculateFinalScore();
                 CanvasManager._instance.FillTextArray();
                 //CanvasManager._instance.CountToWhileWaiting();

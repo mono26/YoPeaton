@@ -34,7 +34,7 @@ public class SignalIdentification : MonoBehaviour
         {
             //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
             CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
-            correctAnswer = collision.name;
+            correctAnswer = collision.GetComponent<Crosswalk>().GetCrossWalkType.ToString();
             return correctAnswer;
         }
         else
@@ -53,12 +53,12 @@ public class SignalIdentification : MonoBehaviour
 
     public void AcceptSignalIdentification()
     {
-        Debug.LogError("Accepted");
+        //Debug.LogWarning("Accepted");
         CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
     }
     public void DeclineSignalIdentification()
     {
-        Debug.LogError("Declined");
+        //Debug.LogWarning("Declined");
         CanvasManager._instance.BackToBaseCanvas();
     }
 
@@ -74,14 +74,16 @@ public class SignalIdentification : MonoBehaviour
         selectedName = selectedAnswer;
         if (correctAnswer == selectedAnswer)
         {
+            CanvasManager._instance.testAnswerText.text = "Respuesta: Correcta!";
             ScoreManager.instance.AddAnswer(true);
-            Debug.Log("Escogiste la respuesta correcta");
+            //Debug.Log("Escogiste la respuesta correcta");
         }
 
         else
         {
             ScoreManager.instance.AddAnswer(false);
-            Debug.LogError("Te equivocaste, wey");
+            CanvasManager._instance.testAnswerText.text = "Respuesta: Incorrecta :(";
+            //Debug.LogWarning("Te equivocaste, wey");
         }
         CanvasManager._instance.identifyCrossingCanvas.enabled = false;
         CanvasManager._instance.BackToBaseCanvas();
