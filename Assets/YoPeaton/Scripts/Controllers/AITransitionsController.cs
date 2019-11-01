@@ -114,7 +114,9 @@ public class AITransitionsController : MonoBehaviour
                 GameObject objectHit = obstacle.collider.gameObject;
                 if (objectHit && !objectHit.Equals(gameObject)) {
                     if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-                        stop = true;
+                        if (objectHit.GetComponent<EntityController>().IsOnTheStreet) {
+                            stop = true;
+                        }
                     }
                 }
             }
