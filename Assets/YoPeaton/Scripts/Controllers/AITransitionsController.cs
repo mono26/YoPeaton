@@ -48,9 +48,6 @@ public class AITransitionsController : MonoBehaviour
             }
         }
         else {
-            // if (!IsCrossingACrossWalk() && !CanCrossCurrentCrossingZone()) {
-            //     aiEntity.SwitchToState(AIState.SlowDown);
-            // }
             if (IsThereAObstacleUpFront()) {
                 aiEntity.SwitchToState(AIState.SlowDown);
             }
@@ -98,18 +95,8 @@ public class AITransitionsController : MonoBehaviour
         if (aiEntity.IsOnTheStreet) {
             Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius * 2) * transform.localScale.x) + 0.1));
             float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
-            obstacle = Physics2D.CircleCast((Vector2)startPosition, colliderRadius * transform.localScale.x, transform.right, distance, layersToCheckCollision);
-            // if (obstacles.Length > 0) {
-            //     GameObject objectHit;
-            //     for (int i = 0; i < obstacles.Length; i++) {
-            //         objectHit = obstacles[i].collider.gameObject;
-            //         if (objectHit && !objectHit.Equals(gameObject)) {
-            //             if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-            //                 stop = true;
-            //             }
-            //         }
-            //     }
-            // }
+            float checkRadius = (colliderRadius + colliderRadius/2) * transform.localScale.x;
+            obstacle = Physics2D.CircleCast((Vector2)startPosition, checkRadius, transform.right, distance, layersToCheckCollision);
             if (obstacle) {
                 GameObject objectHit = obstacle.collider.gameObject;
                 if (objectHit && !objectHit.Equals(gameObject)) {
@@ -135,11 +122,6 @@ public class AITransitionsController : MonoBehaviour
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
                 aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
                 aiEntity.CheckIfIsBreakingTheLaw();
-                // if (!canCross) {
-                //     // No dio via a un peaton.
-                //     DebugController.LogErrorMessage("Didn't clear the way for a pedestrian: " + gameObject.name);
-                //     ScoreManager.instance.AddInfraction();
-                // }
             }
         }
     }
