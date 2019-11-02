@@ -91,12 +91,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
+  m_fontSize: 7.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 0.5
+  m_fontSizeMax: 12
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0
@@ -246,12 +246,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
+  m_fontSize: 7.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 0.5
+  m_fontSizeMax: 12
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0
@@ -344,14 +344,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6354327461028499315}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.44, y: -4.72, z: 0}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_Children:
   - {fileID: 3287244231112115375}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &6354327461028499313
 Rigidbody2D:
   serializedVersion: 4
@@ -383,7 +383,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: -0.42}
@@ -485,9 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopProbability: 50
   maxDistanceToCheckForStop: 3
-  layersToCheckCollision:
-    serializedVersion: 2
-    m_Bits: 0
+  layersToCheckCollision: 0
   aiEntity: {fileID: 7486950390623095039}
 --- !u!114 &7486950390623095039
 MonoBehaviour:
@@ -661,12 +659,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 0.5
+  m_fontSize: 5.55
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 0
-  m_fontSizeMax: 0.5
+  m_fontSizeMax: 12
   m_fontStyle: 0
   m_textAlignment: 257
   m_characterSpacing: 0
@@ -753,7 +751,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8710108571166311787}
-  m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.14285716, y: 0.14285716, z: 1}
   m_Children:
@@ -762,11 +760,11 @@ RectTransform:
   - {fileID: 25962906052325408}
   m_Father: {fileID: 6354327461028499319}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0, y: -0.215}
-  m_SizeDelta: {x: 1.8395, y: 1.76}
+  m_AnchoredPosition: {x: -1.455, y: -0.7}
+  m_SizeDelta: {x: 30.578, y: 22.135}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5896136455927316690
 Canvas:
@@ -786,7 +784,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: 0
+  m_SortingLayerID: -335609511
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &4798822553641367023
