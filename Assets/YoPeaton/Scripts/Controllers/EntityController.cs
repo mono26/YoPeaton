@@ -10,8 +10,9 @@ public abstract class EntityController : MonoBehaviour
 
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
-    //[SerializeField]
-    //private EntityTypes type;
+    
+    [SerializeField]
+    private EntityTypes entityType;
 
     private float distanceTravelled = 0.0f;
     private float lastTPArameter = 0.0f;
@@ -48,6 +49,12 @@ public abstract class EntityController : MonoBehaviour
                 }
             }
             return followComponent;
+        }
+    }
+
+    public EntityTypes GetEntityType {
+        get {
+            return entityType;
         }
     }
 

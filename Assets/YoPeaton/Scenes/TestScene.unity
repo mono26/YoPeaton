@@ -1417,6 +1417,68 @@ Transform:
   m_Father: {fileID: 79481787}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 90}
+--- !u!1 &232907941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232907943}
+  - component: {fileID: 232907942}
+  m_Layer: 0
+  m_Name: AnimatorControllerDispatcher
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &232907942
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232907941}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4560b24c38885438b20237486435ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controllerPairs:
+  - entity: 4
+    controller: {fileID: 9100000, guid: eebb385cf8903344aae6649a071dd035, type: 2}
+  - entity: 6
+    controller: {fileID: 9100000, guid: bb26c37b2e0afb740963e53482a7d191, type: 2}
+  - entity: 7
+    controller: {fileID: 9100000, guid: 99b5a3efcf4486e4ebf55321faae070c, type: 2}
+  - entity: 5
+    controller: {fileID: 9100000, guid: d2b20559da1c7764e96a93e84974961c, type: 2}
+  - entity: 0
+    controller: {fileID: 9100000, guid: 58832dd201ed9be4282fd0dbb9ef5609, type: 2}
+  - entity: 1
+    controller: {fileID: 9100000, guid: d2b20559da1c7764e96a93e84974961c, type: 2}
+  - entity: 2
+    controller: {fileID: 9100000, guid: aa94c8517f0e2d14d949eed9b747bf59, type: 2}
+  - entity: 3
+    controller: {fileID: 9100000, guid: 99b5a3efcf4486e4ebf55321faae070c, type: 2}
+  - entity: 8
+    controller: {fileID: 9100000, guid: fae99a1c0acbe4841bb5ee8e208652bf, type: 2}
+--- !u!4 &232907943
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232907941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.51954675, y: 6.170245, z: -42.812733}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &239831308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1474,7 +1536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followComponent: {fileID: 6354327461408691776}
   changeDirectionProbability: 50
-  type: 0
+  entityType: 0
   isOnTheStreet: 0
   input: {fileID: 6354327461408691784}
 --- !u!1001 &262204146
@@ -1880,6 +1942,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
 --- !u!4 &364436780 stripped
@@ -1932,6 +1999,9 @@ MonoBehaviour:
   pausaCanvas: {fileID: 2045071702}
   optInButtonCanvas: {fileID: 733350317}
   identifyCrossingCanvas: {fileID: 1332634272}
+  testReportText: {fileID: 0}
+  testAnswerText: {fileID: 0}
+  timeLeftText: {fileID: 0}
 --- !u!4 &377220977
 Transform:
   m_ObjectHideFlags: 0
@@ -2512,6 +2582,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeDirectionProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
@@ -3657,6 +3732,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
 --- !u!4 &906524780 stripped
@@ -4022,6 +4102,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: CheckAnswer
       objectReference: {fileID: 0}
+    - target: {fileID: 1159873071, guid: 546a9a84df2bf374caeaa4b4398087f9, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 546a9a84df2bf374caeaa4b4398087f9, type: 3}
 --- !u!1001 &1044085242
@@ -4215,6 +4299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeDirectionProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
@@ -5054,6 +5143,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
 --- !u!4 &1218299360 stripped
@@ -5259,6 +5353,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeDirectionProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
@@ -7661,6 +7760,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
 --- !u!4 &1777353702 stripped
@@ -8177,6 +8281,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeDirectionProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
@@ -8741,6 +8850,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
 --- !u!4 &2046793029 stripped
@@ -8940,6 +9054,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeDirectionProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}
@@ -9818,11 +9937,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00af334cadf43f41b156bd92a883f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingEntity: {fileID: 0}
   carBody: {fileID: 6354327461408691783}
   maxSpeed: 0.5
   brakeSpeed: 0.25
   acceleration: 0.25
-  animationComponent: {fileID: 0}
   currentSpeed: 0
   currentDirection: {x: 0, y: 0, z: 0}
 --- !u!1 &6354327461408691781
@@ -10135,6 +10254,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: entityType
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1a9d797127b51544c91aefdebdd86012, type: 3}

@@ -1,11 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class CarMovement : MonoBehaviour, IMovable
 {
+    private System.Action<Vector3> onMovement;
+
+    [SerializeField]
+    private EntityController movingEntity;
     [SerializeField]
     private Rigidbody2D carBody = null;
-    [SerializeField]
-    private AnimatorController animationComponent;
+
     [SerializeField]
     private float maxSpeed = 0.0f;
     [SerializeField]
@@ -20,21 +24,16 @@ public class CarMovement : MonoBehaviour, IMovable
     private bool move = true;
     public Vector3 currentDirection;
 
-    [SerializeField]
-    private EntityTypes type;
-
     public float GetCurrentSpeed {
         get {
             return currentSpeed;
         }
     }
 
-    private void Start()
-    {
-        
-        animationComponent = this.GetComponent<AnimatorController>();
-        animationComponent.SetAnimator(type);
-
+    public EntityController GetEntity {
+        get {
+            return movingEntity;
+        }
     }
 
     private void Accelerate() {
@@ -57,17 +56,8 @@ public class CarMovement : MonoBehaviour, IMovable
         carBody.MovePosition(lerpedPosition);
         RotateInDirectionOfPosition(lerpedPosition);
 
-        currentDirection = (_position - transform.position).normalized;
-        //Debug.LogWarning("Current Direction: " + currentDirection);
-        //Debug.LogError(currentDirection);
-
-        if (animationComponent != null)
-        {
-            animationComponent.SetCurrentAnimation(currentDirection);
-        }
-
-        // carBody.MovePosition(_position);
-        // RotateInDirectionOfPosition(_position);
+        currentDirection = (lerpedPosition - transform.position).normalized;
+        onMovement?.Invoke(currentDirection);
     }
 
     private void RotateInDirectionOfPosition(Vector3 _position) {
@@ -108,5 +98,13 @@ public class CarMovement : MonoBehaviour, IMovable
 
     public void MoveToPosition(Vector3 position) {
         MoveToNextPosition(position);
+    }
+
+    public void AddOnMovement(Action<Vector3> _onMovementAction) {
+        onMovement += _onMovementAction;
+    }
+
+    public void RemoveOnMovement(Action<Vector3> _onMovementAction) {
+        onMovement -= _onMovementAction;
     }
 }

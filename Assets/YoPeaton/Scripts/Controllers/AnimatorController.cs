@@ -1,35 +1,32 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Text.RegularExpressions;
 
 public class AnimatorController : MonoBehaviour
 {
     private Animator animator;
-    public Animator Animator
-    {
-        get
-        {
-            return animator;
-        }
-        set
-        {
-            animator = value;
-        }
-    }
-
-    [SerializeField]
-    private RuntimeAnimatorController[] animatorControllers;
+    private IMovable movableComponent;
    
+#region Unity calls
+    private void Awake() {
+        animator = GetComponent<Animator>();
+        movableComponent = GetComponent<IMovable>();
+    }
 
     void Start()
     {
-        animator = this.GetComponent<Animator>();
+        string keyName = movableComponent.GetEntity.GetEntityType.ToString();
+        animator.runtimeAnimatorController = AnimatorControllerDispatcher.GetInstance.Request(keyName);
     }
 
-    public void SetAnimator(EntityTypes type)
-    {
-        animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>("AnimatorControllers/" + type);
+     void OnEnable() {
+        movableComponent.AddOnMovement(SetCurrentAnimation);
     }
+
+    void OnDisable() {
+        movableComponent.RemoveOnMovement(SetCurrentAnimation);
+    }
+#endregion
+
     public void SetCurrentAnimation(Vector3 direction)
     {
         //Debug.LogError(direction);

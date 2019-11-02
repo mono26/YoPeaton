@@ -24,7 +24,7 @@ GameObject:
   m_TagString: Pedestrian
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &270182541731555054
 Transform:
@@ -158,14 +158,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00af334cadf43f41b156bd92a883f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movingEntity: {fileID: 270182541731555042}
   carBody: {fileID: 270182541731555046}
-  animationComponent: {fileID: 0}
   maxSpeed: 0.3
   brakeSpeed: 0.2
   acceleration: 0.1
   currentSpeed: 0
   currentDirection: {x: 0, y: 0, z: 0}
-  type: 0
 --- !u!114 &270182541731555040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followComponent: {fileID: 270182541731555040}
   changeDirectionProbability: 50
-  type: 0
+  entityType: 0
   isOnTheStreet: 0
   stateMachine: {fileID: 270182541731555041}
   transitionController: {fileID: 270182541731555043}
@@ -240,7 +239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b796aa581aa47f645bb223630ff9613c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorControllers: []
 --- !u!1 &1363044618323740226
 GameObject:
   m_ObjectHideFlags: 0
