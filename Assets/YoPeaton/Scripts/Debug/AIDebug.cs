@@ -12,6 +12,8 @@ public class AIDebug : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI canCross;
     [SerializeField]
+    private TextMeshProUGUI onTheStreet;
+    [SerializeField]
     private AIController aiToDebug;
 
     private void Start() {
@@ -24,7 +26,8 @@ public class AIDebug : MonoBehaviour
         if (DebugController.debugActive) {
             speedText.text = aiToDebug.GetMovableComponent.GetCurrentSpeed.ToString();
             currentState.text = aiToDebug.GetCurrentState.ToString();
-            canCross.text = aiToDebug.GetCurrentCrossingZone?.CanCross(aiToDebug).ToString();
+            canCross.text = "Cross: " + aiToDebug.GetCurrentCrossingZone?.CanCross(aiToDebug).ToString();
+            onTheStreet.text = "Street: " + aiToDebug.IsOnTheStreet.ToString();
         }
     }
 }
