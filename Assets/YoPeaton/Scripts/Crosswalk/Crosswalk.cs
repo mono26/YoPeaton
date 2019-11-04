@@ -214,7 +214,7 @@ public class Crosswalk : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _other) {
         if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) {
-            AIController ai = _other.transform.GetComponent<AIController>();
+            EntityController ai = _other.transform.GetComponent<EntityController>();
             if (ai) {
                 OnEntering(ai);
                 ai.OnCrossWalkEntered(this);
@@ -224,7 +224,7 @@ public class Crosswalk : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D _other) {
         if (_other.CompareTag("Car") || _other.CompareTag("Pedestrian")) {
-            AIController ai = _other.transform.GetComponent<AIController>();
+            EntityController ai = _other.transform.GetComponent<EntityController>();
             if (ai) {
                 OnExited(ai);
                 OnFinishedCrossing(ai);

@@ -9,21 +9,22 @@ public abstract class EntityController : MonoBehaviour
     [SerializeField]
     private AnimatorController animationComponent;
 
-
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
     [SerializeField]
     private EntityTypes type;
-    //private EntityTypes entityType;
+    [SerializeField]
+    private float maxDistanceToCheckForStop = 3.0f;
+    [SerializeField]
+    private LayerMask layersToCheckCollision;
 
     private float distanceTravelled = 0.0f;
     private float lastTPArameter = 0.0f;
     private bool move = true;
-    [SerializeField]
     private bool isOnTheStreet = false;
+    private float colliderRadius;
 
-
-
+#region Properties
     public bool IsOnTheStreet {
         get {
             return isOnTheStreet;
@@ -59,14 +60,21 @@ public abstract class EntityController : MonoBehaviour
             return type;
         }
     }
+#endregion
 
-    private void Start() {
+    //Awake is always called before any Start functions
+    protected virtual void Awake()
+    {
+        colliderRadius = GetComponent<CircleCollider2D>().radius;
         SetEntityType();
         animationComponent = this.GetComponent<AnimatorController>();
         //animationComponent.SetAnimator(type);
         if (animationComponent) {
             animationComponent.SetCurrentAnimation(followComponent.GetDirection(Time.time));
         }
+    }
+
+    private void Start() {
         GetInitialValuesToStartPath();
     }
 
@@ -175,5 +183,39 @@ public abstract class EntityController : MonoBehaviour
                 isOnTheStreet = true;
             }
         }
+    }
+
+    public abstract void OnCrossWalkEntered(Crosswalk _crossWalk);
+
+    public abstract void OnCrossWalkExited(Crosswalk _crossWalk);
+
+    public abstract bool IsCrossingACrossWalk();
+
+    /// <summary>
+    /// Checks for a obstacle ahead.true If it's a pedestrian or car stops.
+    /// </summary>
+    /// <returns>True if there is a obstacle ahead. False if not.</returns>
+    public bool IsThereAObstacleUpFront() {
+        bool stop = false;
+        if (IsOnTheStreet) {
+            if (gameObject.CompareTag("Pedestrian") && IsCrossingACrossWalk()) {
+                //
+            }
+            else {
+                // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
+                Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
+                float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
+                float checkWidth = ((colliderRadius + colliderRadius/2) * 2) * transform.localScale.x;
+                GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
+                if (obstacle) {
+                    if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
+                        if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
+                            stop = true;
+                        }
+                    }
+                }
+            }
+        }
+        return stop;
     }
 }

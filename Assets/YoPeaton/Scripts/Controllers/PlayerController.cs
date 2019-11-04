@@ -8,25 +8,48 @@ public class PlayerController : EntityController
     [SerializeField]
     private PlayerCarInput input = null;
 
+    private bool isCrossingACrossWalk = false;
+    private float colliderRadius;
+
     //Awake is always called before any Start functions
-    void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         if (!input)
         {
             input = GetComponent<PlayerCarInput>();
         }
     }
 
-        //MACHETAZO PARA EL PUNTAJE//
+    //MACHETAZO PARA EL PUNTAJE//
     private void Update()
     { 
         lifeTime--;
     }
     protected override bool ShouldStop() {
-        return input.IsBraking;
+        return false;
+        // return input.IsBraking;
     }
 
     protected override bool ShouldSlowDown() {
-        return input.IsBraking;
+        bool slowdown = false;
+        if (IsThereAObstacleUpFront() || input.IsBraking) {
+            slowdown = true;
+        }
+        return slowdown;
+    }
+
+    public override bool IsCrossingACrossWalk() {
+        return isCrossingACrossWalk;
+    }
+
+    public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
+        // DebugController.LogMessage("Entered crosswalk");
+        isCrossingACrossWalk = true;
+    }
+
+    public override void OnCrossWalkExited(Crosswalk _crossWalk) {
+        // DebugController.LogMessage("Exited crosswalk");
+        isCrossingACrossWalk = false;
     }
 }

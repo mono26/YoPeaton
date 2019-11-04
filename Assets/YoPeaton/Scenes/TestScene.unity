@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas_HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 7626467794291610297, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7626467794291610301, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -669,6 +674,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -912,6 +922,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1116,6 +1131,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeDirectionProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -1766,7 +1786,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -2380,7 +2400,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -3089,6 +3109,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -3284,6 +3309,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 10.327066, y: 1.8338122}
   m_EdgeRadius: 0
+--- !u!1 &817240554
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 292570200}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 817240555}
+  m_Layer: 0
+  m_Name: CineMachineCamera (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &817240555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 292570200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 817240554}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &848998706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3510,7 +3565,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -4138,7 +4193,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -5036,7 +5091,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -5302,7 +5357,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -5829,6 +5884,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -6233,6 +6293,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -6603,6 +6668,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -6887,6 +6957,11 @@ PrefabInstance:
         type: 3}
       propertyPath: changeDirectionProbability
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -7767,7 +7842,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -8294,7 +8369,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -8867,7 +8942,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -9127,7 +9202,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 3237532715064729895, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -9471,6 +9546,11 @@ PrefabInstance:
       propertyPath: changeDirectionProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: layersToCheckCollision.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4806878755150426825, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -9673,6 +9753,61 @@ PrefabInstance:
     - target: {fileID: 2294547901461459543, guid: b7b7bda0b5079244289fa7842a8cc01b,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273158963274417149, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: maxDistanceToCheckForStop
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 467070330259772723, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467070330259772723, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467070330259772723, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467070330259772723, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467070330259772723, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 467070330259772723, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153314391577989610, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153314391577989610, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153314391577989610, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1153314391577989610, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -9902,7 +10037,7 @@ PrefabInstance:
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
       propertyPath: maxDistanceToCheckForStop
-      value: 2
+      value: 2.5
       objectReference: {fileID: 0}
     - target: {fileID: 7486950390623095037, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}
@@ -10008,6 +10143,11 @@ PrefabInstance:
         type: 3}
       propertyPath: type
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7486950390623095039, guid: 1a9d797127b51544c91aefdebdd86012,
+        type: 3}
+      propertyPath: changeDirectionProbability
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4445782721660433157, guid: 1a9d797127b51544c91aefdebdd86012,
         type: 3}

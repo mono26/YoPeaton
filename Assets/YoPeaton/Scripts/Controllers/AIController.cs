@@ -22,7 +22,8 @@ public class AIController : EntityController {
         }
     }
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         // Catching the transitions controller.
         if (!transitionController) {
             transitionController = GetComponent<AITransitionsController>();
@@ -68,13 +69,13 @@ public class AIController : EntityController {
         return GetCurrentState.Equals(AIState.SlowDown);
     }
 
-    public void OnCrossWalkEntered(Crosswalk _crossWalk) {
+    public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Entered crosswalk");
         currentCrossingZone = _crossWalk;
         transitionController.OnCrossWalkEntered();
     }
 
-    public void OnCrossWalkExited(Crosswalk _crossWalk) {
+    public override void OnCrossWalkExited(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Exited crosswalk");
         if (currentCrossingZone.Equals(_crossWalk)) {
             currentCrossingZone = null;
@@ -85,5 +86,13 @@ public class AIController : EntityController {
     public void CheckIfIsBreakingTheLaw() {
         if(currentCrossingZone != null)
         behaviourController?.CheckAllInfractions(currentCrossingZone);
+    }
+
+    public override bool IsCrossingACrossWalk() {
+        bool isCrossing = false;
+        if (GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
+            isCrossing = true;
+        }
+        return isCrossing;
     }
 }

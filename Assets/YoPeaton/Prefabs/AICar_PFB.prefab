@@ -483,10 +483,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopProbability: 50
-  maxDistanceToCheckForStop: 3.5
-  layersToCheckCollision:
-    serializedVersion: 2
-    m_Bits: 768
   aiEntity: {fileID: 7486950390623095039}
 --- !u!114 &7486950390623095039
 MonoBehaviour:
@@ -502,9 +498,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followComponent: {fileID: 6354327461028499318}
   animationComponent: {fileID: 0}
-  changeDirectionProbability: 50
+  changeDirectionProbability: 100
   type: 0
-  isOnTheStreet: 0
+  maxDistanceToCheckForStop: 2.5
+  layersToCheckCollision:
+    serializedVersion: 2
+    m_Bits: 768
   stateMachine: {fileID: 7486950390623095033}
   transitionController: {fileID: 7486950390623095037}
   currentCrossingZone: {fileID: 0}
