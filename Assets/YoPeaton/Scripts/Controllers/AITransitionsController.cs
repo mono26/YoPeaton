@@ -41,7 +41,7 @@ public class AITransitionsController : MonoBehaviour
             if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone()) {
                 aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
-                aiEntity.CheckIfIsBreakingTheLaw();
+                //aiEntity.CheckIfIsBreakingTheLaw();
             }
         }
         else {

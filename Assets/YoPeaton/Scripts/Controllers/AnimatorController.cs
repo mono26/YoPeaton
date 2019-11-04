@@ -5,9 +5,10 @@ public class AnimatorController : MonoBehaviour
 {
     private Animator animator;
     private IMovable movableComponent;
-   
-#region Unity calls
-    private void Awake() {
+
+    #region Unity calls
+    private void Awake()
+    {
         animator = GetComponent<Animator>();
         movableComponent = GetComponent<IMovable>();
     }
@@ -18,56 +19,54 @@ public class AnimatorController : MonoBehaviour
         animator.runtimeAnimatorController = AnimatorControllerDispatcher.GetInstance.Request(keyName);
     }
 
-     void OnEnable() {
+    void OnEnable()
+    {
         movableComponent.AddOnMovement(SetCurrentAnimation);
     }
 
-    void OnDisable() {
+    void OnDisable()
+    {
         movableComponent.RemoveOnMovement(SetCurrentAnimation);
     }
-#endregion
+    #endregion
 
     public void SetCurrentAnimation(Vector3 direction)
     {
         //Debug.LogError(direction);
         //Debug.LogError(direction.x);
         //Debug.LogError(direction.y);
-        if (direction == new Vector3(1.0f, 0f,0f))
+        if (direction.x >= 0f && direction.x <= 1f)
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", false);
             animator.SetBool("Right", true);
             animator.SetBool("Left", false);
-            return;
-        } 
-        
-        else if (direction == new Vector3(-1.0f, 0f, 0f))
+        }
+
+        else if (direction.x < 0f && direction.x >= -1.0f)
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", false);
             animator.SetBool("Right", false);
             animator.SetBool("Left", true);
-            return;
         }
 
-        if (direction == new Vector3(0f, 1f, 0f))
+        if (direction.y >= 0f && direction.y <= 1.0f)
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", true);
             animator.SetBool("Right", false);
             animator.SetBool("Left", false);
-            return;
         }
 
-        else if (direction == new Vector3(0f, -1f, 0f))
+        else if (direction.y >= 0f && direction.y >= -1.0f)
         {
             animator.SetBool("Front", true);
             animator.SetBool("Back", false);
             animator.SetBool("Right", false);
             animator.SetBool("Left", false);
-            return;
         }
-       
+
 
         //switch (direction)
         //{
