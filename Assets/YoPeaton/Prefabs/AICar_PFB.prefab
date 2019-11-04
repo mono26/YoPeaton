@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopProbability: 50
-  maxDistanceToCheckForStop: 3
+  maxDistanceToCheckForStop: 3.5
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 768

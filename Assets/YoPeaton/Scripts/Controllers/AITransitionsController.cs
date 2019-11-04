@@ -45,11 +45,13 @@ public class AITransitionsController : MonoBehaviour
             }
         }
         else {
-            if (!IsCrossingACrossWalk() && IsThereAObstacleUpFront()) {
-                aiEntity.SwitchToState(AIState.SlowDown);
-            }
-            else  {
-                aiEntity.SwitchToState(AIState.Moving);
+            if (!IsCrossingACrossWalk()) {
+                if (IsThereAObstacleUpFront()) {
+                    aiEntity.SwitchToState(AIState.SlowDown);
+                }
+                else {
+                    aiEntity.SwitchToState(AIState.Moving);
+                }
             }
         }
         // Check all the posible conditions for a transition in the state machine
@@ -101,10 +103,14 @@ public class AITransitionsController : MonoBehaviour
                 // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
                 Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
                 float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
-                float checkWidth = (colliderRadius + colliderRadius/2) * transform.localScale.x;
+                float checkWidth = ((colliderRadius + colliderRadius/2) * 2) * transform.localScale.x;
                 GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
                 if (obstacle) {
-                    stop = true;
+                    if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
+                        if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
+                            stop = true;
+                        }
+                    }
                 }
             }
         }
