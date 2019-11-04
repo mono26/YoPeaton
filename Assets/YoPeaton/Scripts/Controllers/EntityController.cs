@@ -6,13 +6,15 @@ public abstract class EntityController : MonoBehaviour
     private IMovable movableComponent;
     [SerializeField]
     private FollowPath followComponent;
+    [SerializeField]
+    private AnimatorController animationComponent;
 
 
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
-    
     [SerializeField]
-    private EntityTypes entityType;
+    private EntityTypes type;
+    //private EntityTypes entityType;
 
     private float distanceTravelled = 0.0f;
     private float lastTPArameter = 0.0f;
@@ -54,13 +56,45 @@ public abstract class EntityController : MonoBehaviour
 
     public EntityTypes GetEntityType {
         get {
-            return entityType;
+            return type;
         }
     }
 
     private void Start() {
+        SetEntityType();
+        animationComponent = this.GetComponent<AnimatorController>();
+        animationComponent.SetAnimator(type);
+        animationComponent.SetCurrentAnimation(followComponent.GetDirection(Time.time));
         GetInitialValuesToStartPath();
 
+
+    }
+
+    private void SetEntityType()
+    {
+        float probability = Random.Range(0f, 1f);
+
+        if(gameObject.tag == "Pedestrian")
+        {
+            if (probability < 0.5f)
+            {
+                type = EntityTypes.Male;
+            } else if (probability < 1f)
+            {
+                type = EntityTypes.Female;
+            }
+        }
+
+        if (gameObject.tag == "Car")
+        {
+            if(probability < 0.65f)
+            {
+                type = EntityTypes.BlueCar;
+            } else
+            {
+                type = EntityTypes.YellowCar;
+            }
+        }
     }
 
     private void GetInitialValuesToStartPath() {
@@ -114,6 +148,10 @@ public abstract class EntityController : MonoBehaviour
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
                 BezierSpline newPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
                 if (newPath) {
+                    if (animationComponent != null)
+                    {
+                        animationComponent.SetCurrentAnimation(newPath.GetDirection(Time.time));
+                    }
                     followComponent.SetPath = newPath;
                     GetInitialValuesToStartPath();
                     movableComponent.SlowDown(50.0f);
