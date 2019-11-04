@@ -386,9 +386,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.42}
+  m_Offset: {x: 0, y: -0}
   serializedVersion: 2
-  m_Radius: 2.19
+  m_Radius: 0.62
 --- !u!212 &6354327461028499312
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -501,8 +501,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   followComponent: {fileID: 6354327461028499318}
+  animationComponent: {fileID: 0}
   changeDirectionProbability: 50
-  entityType: 8
+  type: 0
   isOnTheStreet: 0
   stateMachine: {fileID: 7486950390623095033}
   transitionController: {fileID: 7486950390623095037}

@@ -64,10 +64,10 @@ public abstract class EntityController : MonoBehaviour
         SetEntityType();
         animationComponent = this.GetComponent<AnimatorController>();
         //animationComponent.SetAnimator(type);
-        animationComponent.SetCurrentAnimation(followComponent.GetDirection(Time.time));
+        if (animationComponent) {
+            animationComponent.SetCurrentAnimation(followComponent.GetDirection(Time.time));
+        }
         GetInitialValuesToStartPath();
-
-
     }
 
     private void SetEntityType()
