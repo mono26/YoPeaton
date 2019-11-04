@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AITransitionsController : MonoBehaviour
 {
@@ -89,6 +87,10 @@ public class AITransitionsController : MonoBehaviour
         return isCrossing;
     }
 
+    /// <summary>
+    /// Checks for a obstacle ahead.true If it's a pedestrian or car stops.
+    /// </summary>
+    /// <returns>True if there is a obstacle ahead. False if not.</returns>
     private bool IsThereAObstacleUpFront() {
         bool stop = false;
         if (aiEntity.IsOnTheStreet) {
@@ -96,52 +98,14 @@ public class AITransitionsController : MonoBehaviour
                 //
             }
             else {
-                Vector3 offsetPosition = transform.position + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
-                //This is the distance the center of the circle is going to move.
+                // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
+                Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
                 float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
-                float checkRadius = (colliderRadius + colliderRadius/2) * transform.localScale.x;
-                Vector3 startPosition = offsetPosition;
-                RaycastHit2D castHit1 = new RaycastHit2D();
-                RaycastHit2D castHit2 = new RaycastHit2D();
-                for (int i = 0; i < 3; i++) {
-                    // if (i.Equals(0)) {
-                    //     castHit1 = Physics2D.Raycast((Vector2)startPosition, transform.right, distance, layersToCheckCollision);
-                    // }
-                    // else {
-                    //     castHit1 = Physics2D.Raycast(startPosition + (transform.up * checkRadius/i), transform.right, distance, layersToCheckCollision);
-                    //     castHit2 = Physics2D.Raycast(startPosition + (transform.up * -checkRadius/i), transform.right, distance, layersToCheckCollision);
-                    // }
-                    castHit1 = Physics2D.Raycast(startPosition + (transform.up * checkRadius/i), transform.right, distance, layersToCheckCollision);
-                    DebugController.DrawDebugRay(startPosition + (transform.up * checkRadius/i), transform.right, distance, Color.magenta);
-                    castHit2 = Physics2D.Raycast(startPosition + (transform.up * -checkRadius/i), transform.right, distance, layersToCheckCollision);
-                    DebugController.DrawDebugRay(startPosition + (transform.up * -checkRadius/i), transform.right, distance, Color.magenta);
-                    if (castHit1.collider || castHit2.collider) {
-                        GameObject objectHit = (castHit1.collider) ? castHit1.collider.gameObject : castHit2.collider.gameObject;
-                        Vector3 hitPoint = (castHit1.collider) ? castHit1.point : castHit2.point;
-                        if (objectHit && !objectHit.Equals(gameObject)) {
-                            if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-                                if (objectHit.GetComponent<EntityController>().IsOnTheStreet) {
-                                    DebugController.DrawDebugLine(startPosition, hitPoint, Color.magenta);
-                                }
-                            }
-                        }
-                    }
+                float checkWidth = (colliderRadius + colliderRadius/2) * transform.localScale.x;
+                GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
+                if (obstacle) {
+                    stop = true;
                 }
-                // castHit = Physics2D.CircleCast((Vector2)startPosition, checkRadius, transform.right, distance, layersToCheckCollision);
-                // if (castHit) {
-                //     GameObject objectHit = castHit.collider.gameObject;
-                //     if (objectHit && !objectHit.Equals(gameObject)) {
-                //         if (objectHit.CompareTag("Pedestrian") || objectHit.CompareTag("Car")) {
-                //             if (objectHit.GetComponent<EntityController>().IsOnTheStreet) {
-                //                 DebugController.DrawDebugLine(startPosition, castHit.point, Color.magenta);
-                //                 stop = true;
-                //                 DebugController.DrawDebugCircle(startPosition, checkRadius, Color.green);
-                //                 DebugController.DrawDebugRay(startPosition, transform.right, distance, Color.green);
-                //                 DebugController.DrawDebugCircle(startPosition + transform.right * distance, checkRadius, Color.green);
-                //             }
-                //         }
-                //     }
-                // }
             }
         }
         return stop;
