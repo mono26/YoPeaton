@@ -21,9 +21,11 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     private Canvas pausaCanvas;
     [SerializeField]
-    public GameObject optInButtonCanvas;
+    public GameObject crosswalkGuessHUD;
     [SerializeField]
-    public Canvas identifyCrossingCanvas;
+    public GameObject crosswalkTypesButtons;
+    [SerializeField]
+    public GameObject crosswalkQuestionButtons;
     [SerializeField]
     public Text testReportText;
     [SerializeField]
@@ -67,15 +69,17 @@ public class CanvasManager : MonoBehaviour
     {
         currentScore = 0;
 
-        //scoresToCountTo = new int[7];
-        //Desastivar todos los otros canvas
-        pausaCanvas.enabled = false;
-        optInButtonCanvas.SetActive(false);
-        identifyCrossingCanvas.enabled = false;
-
         //Activar unicamente el base
         baseCanvas.enabled = true;
         currentActiveCanvas = baseCanvas.name;
+
+        //scoresToCountTo = new int[7];
+        //Desastivar todos los otros canvas
+        pausaCanvas.enabled = false;
+        crosswalkGuessHUD.SetActive(false);
+        crosswalkTypesButtons.SetActive(false);
+        //crosswalkQuestionButtons.SetActive(false);
+
     }
 
     private void Update()
@@ -105,20 +109,21 @@ public class CanvasManager : MonoBehaviour
     {
         if (canvasToActivate == "OptInCanvas")
         {
-            optInButtonCanvas.SetActive(true);
+            crosswalkGuessHUD.SetActive(true);
         }
         if (canvasToActivate == "SignalIdentificationCanvas")
         {
-            identifyCrossingCanvas.enabled = true;
-            optInButtonCanvas.SetActive(false);
+            crosswalkTypesButtons.SetActive(true);
+            crosswalkQuestionButtons.SetActive(false);
         }
     }
 
     public void BackToBaseCanvas()
     {
         baseCanvas.enabled = true;
-        identifyCrossingCanvas.enabled = false;
-        optInButtonCanvas.SetActive(false);
+        crosswalkTypesButtons.SetActive(false);
+        crosswalkQuestionButtons.SetActive(true);
+        crosswalkGuessHUD.SetActive(false);
     }
 
     #endregion

@@ -90,7 +90,7 @@ public class SignalIdentification : MonoBehaviour
             CanvasManager._instance.testAnswerText.text = "Respuesta: Incorrecta :(";
             //Debug.LogWarning("Te equivocaste, wey");
         }
-        CanvasManager._instance.identifyCrossingCanvas.enabled = false;
+        CanvasManager._instance.crosswalkTypesButtons.SetActive(false);
         CanvasManager._instance.BackToBaseCanvas();
     }
 
