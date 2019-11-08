@@ -9,7 +9,6 @@ public class PlayerController : EntityController
     private PlayerCarInput input = null;
 
     private bool isCrossingACrossWalk = false;
-    private float colliderRadius;
 
     //Awake is always called before any Start functions
     protected override void Awake()

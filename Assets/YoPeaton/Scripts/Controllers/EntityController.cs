@@ -23,6 +23,7 @@ public abstract class EntityController : MonoBehaviour
     private bool move = true;
     private bool isOnTheStreet = false;
     private float colliderRadius;
+    private Vector3 colliderOffset;
 
 #region Properties
     public bool IsOnTheStreet {
@@ -65,7 +66,9 @@ public abstract class EntityController : MonoBehaviour
     //Awake is always called before any Start functions
     protected virtual void Awake()
     {
-        colliderRadius = GetComponent<CircleCollider2D>().radius;
+        var collider = GetComponent<CircleCollider2D>();
+        colliderRadius = collider.radius;
+        colliderOffset = collider.offset;
         SetEntityType();
         animationComponent = this.GetComponent<AnimatorController>();
         //animationComponent.SetAnimator(type);
@@ -111,7 +114,8 @@ public abstract class EntityController : MonoBehaviour
         lastTPArameter = timeOnCurrentPath;
     }
 
-    protected virtual void FixedUpdate() {
+    protected virtual void Update() 
+    {
         if (ShouldStop()) {
             // DebugController.LogMessage("STOP!");
             GetMovableComponent?.SlowDown();
@@ -123,7 +127,10 @@ public abstract class EntityController : MonoBehaviour
         else {
             GetMovableComponent?.SpeedUp();
         }
-        if (GetFollowPathComponent) {
+    }
+
+    protected virtual void FixedUpdate() {
+        if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f) {
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
                 float t;
@@ -189,33 +196,45 @@ public abstract class EntityController : MonoBehaviour
 
     public abstract void OnCrossWalkExited(Crosswalk _crossWalk);
 
-    public abstract bool IsCrossingACrossWalk();
-
     /// <summary>
     /// Checks for a obstacle ahead.true If it's a pedestrian or car stops.
     /// </summary>
     /// <returns>True if there is a obstacle ahead. False if not.</returns>
     public bool IsThereAObstacleUpFront() {
         bool stop = false;
-        if (IsOnTheStreet) {
-            if (gameObject.CompareTag("Pedestrian") && IsCrossingACrossWalk()) {
-                //
-            }
-            else {
-                // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
-                Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
-                float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
-                float checkWidth = ((colliderRadius + colliderRadius/2) * 2) * transform.localScale.x;
-                GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
-                if (obstacle) {
-                    if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
-                        if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
-                            stop = true;
-                        }
+        if (IsOnTheStreet && !IsCrossingACrossWalk()) {
+            // if (gameObject.CompareTag("Pedestrian") && IsCrossingACrossWalk()) {
+            //     //
+            // }
+            // else {
+            //     // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
+            //     Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
+            //     float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
+            //     float checkWidth = ((colliderRadius + colliderRadius/2) * 2) * transform.localScale.x;
+            //     GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
+            //     if (obstacle) {
+            //         if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
+            //             if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
+            //                 stop = true;
+            //             }
+            //         }
+            //     }
+            // }
+            // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
+            Vector3 startPosition = transform.position + colliderOffset + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
+            float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
+            float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
+            GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
+            if (obstacle) {
+                if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
+                    if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
+                        stop = true;
                     }
                 }
             }
         }
         return stop;
     }
+
+    public abstract bool IsCrossingACrossWalk();
 }

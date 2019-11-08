@@ -2,10 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum AIState
-{
-    Moving, SlowDown, WaitingAtCrossWalk, CrossingCrossWalk
-}
 public class AIStateMachine : MonoBehaviour
 {
     [SerializeField]

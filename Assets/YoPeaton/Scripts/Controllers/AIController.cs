@@ -41,9 +41,13 @@ public class AIController : EntityController {
         }
     }
 
+    protected override void Update() {
+        transitionController.CheckTransitions();
+        base.Update();
+    }
+
     protected override void FixedUpdate() {
         // First check posible transitions.
-        transitionController.CheckTransitions();
         base.FixedUpdate();
     }
 
@@ -52,10 +56,19 @@ public class AIController : EntityController {
     }
 
     protected override bool ShouldStop() {
-        return GetCurrentState.Equals(AIState.WaitingAtCrossWalk);
+        // Si esta esperando en un crosswalk
+        bool stop = false;
+        if (GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
+            stop = true;
+        }
+        else if (GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) {
+            stop = true;
+        }
+        return stop;
     }
 
     protected override bool ShouldSlowDown() {
+        // Si esta por collisionar
         return GetCurrentState.Equals(AIState.SlowDown);
     }
 
@@ -89,10 +102,6 @@ public class AIController : EntityController {
     }
 
     public override bool IsCrossingACrossWalk() {
-        bool isCrossing = false;
-        if (GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
-            isCrossing = true;
-        }
-        return isCrossing;
+        return (GetCurrentCrossingZone != null && GetCurrentState.Equals(AIState.CrossingCrossWalk));
     }
 }

@@ -453,7 +453,7 @@ MonoBehaviour:
   movingEntity: {fileID: 7486950390623095039}
   carBody: {fileID: 6354327461028499313}
   maxSpeed: 0.5
-  brakeSpeed: 0.25
+  brakeSpeed: 10
   acceleration: 0.25
   currentSpeed: 0
   currentDirection: {x: 0, y: 0, z: 0}
