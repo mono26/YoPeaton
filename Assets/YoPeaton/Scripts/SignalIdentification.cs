@@ -79,7 +79,7 @@ public class SignalIdentification : MonoBehaviour
         selectedName = selectedAnswer;
         if (correctAnswer == selectedAnswer)
         {
-            CanvasManager._instance.testAnswerText.text = "Respuesta: Correcta!";
+            //CanvasManager._instance.testAnswerText.text = "Respuesta: Correcta!";
             ScoreManager.instance.AddAnswer(true);
             //Debug.Log("Escogiste la respuesta correcta");
         }
@@ -87,7 +87,7 @@ public class SignalIdentification : MonoBehaviour
         else
         {
             ScoreManager.instance.AddAnswer(false);
-            CanvasManager._instance.testAnswerText.text = "Respuesta: Incorrecta :(";
+            //CanvasManager._instance.testAnswerText.text = "Respuesta: Incorrecta :(";
             //Debug.LogWarning("Te equivocaste, wey");
         }
         CanvasManager._instance.crosswalkTypesButtons.SetActive(false);
