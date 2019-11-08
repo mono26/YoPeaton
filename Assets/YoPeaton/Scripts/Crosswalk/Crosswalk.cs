@@ -14,6 +14,7 @@ public class Crosswalk : MonoBehaviour
     [SerializeField]
     private List<EntityController> crossingCars = new List<EntityController>();
 
+    [SerializeField]
     private CrossWalkTypes type;
 
     public int GetNumberOfCrossingPedestrians {

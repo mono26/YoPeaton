@@ -81,12 +81,14 @@ public class SignalIdentification : MonoBehaviour
         {
             //CanvasManager._instance.testAnswerText.text = "Respuesta: Correcta!";
             ScoreManager.instance.AddAnswer(true);
+            CanvasManager._instance.ActivateCheckOrCross(true);
             //Debug.Log("Escogiste la respuesta correcta");
         }
 
         else
         {
             ScoreManager.instance.AddAnswer(false);
+            CanvasManager._instance.ActivateCheckOrCross(false);
             //CanvasManager._instance.testAnswerText.text = "Respuesta: Incorrecta :(";
             //Debug.LogWarning("Te equivocaste, wey");
         }

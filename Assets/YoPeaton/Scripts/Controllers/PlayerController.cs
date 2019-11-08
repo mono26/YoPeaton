@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : EntityController
 {
-    public static float lifeTime = 500f;
+    public static float lifeTime = 5000f;
     [SerializeField]
     private PlayerCarInput input = null;
 
@@ -21,10 +21,21 @@ public class PlayerController : EntityController
     }
 
     //MACHETAZO PARA EL PUNTAJE//
-    private void Update()
-    { 
-        lifeTime--;
-    }
+    /*protected override void FixedUpdate()
+    {
+       if (ShouldStop()) {
+            // DebugController.LogMessage("STOP!");
+            GetMovableComponent?.SlowDown();
+        }
+        else if (ShouldSlowDown()) {
+            // DebugController.LogMessage("Slowing down");
+            GetMovableComponent?.SlowDown();
+        }
+        else {
+            GetMovableComponent?.SpeedUp();
+        }
+         lifeTime--;
+    }*/
     protected override bool ShouldStop() {
         return false;
         // return input.IsBraking;

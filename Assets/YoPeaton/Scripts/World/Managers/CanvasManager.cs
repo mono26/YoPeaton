@@ -100,7 +100,7 @@ public class CanvasManager : MonoBehaviour
     {
         if (SceneManagerTest.GetCurrentScene() == "TestScene")
         {
-            // timeLeftText.text = PlayerController.lifeTime.ToString();
+            timeLeftText.text = PlayerController.lifeTime.ToString();
         }
     }
     #region Manejo De Canvas
