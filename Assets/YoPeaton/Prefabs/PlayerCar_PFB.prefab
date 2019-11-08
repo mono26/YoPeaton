@@ -320,6 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5162524990170631424}
   - component: {fileID: 3301391610185832270}
+  - component: {fileID: 4214992716920068867}
   - component: {fileID: 5162524990170631430}
   - component: {fileID: 5162524990170631431}
   - component: {fileID: 5162524990170631429}
@@ -368,6 +369,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.66
+--- !u!114 &4214992716920068867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162524990170631428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa84f2d62c6e004bb0af401fbe18915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
+  controller: {fileID: 0}
 --- !u!50 &5162524990170631430
 Rigidbody2D:
   serializedVersion: 4
@@ -529,12 +544,11 @@ MonoBehaviour:
   animationComponent: {fileID: 0}
   changeDirectionProbability: 50
   type: 9
-  isOnTheStreet: 0
   maxDistanceToCheckForStop: 3
-  input: {fileID: 5162524990170631433}
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 768
+  input: {fileID: 5162524990170631433}
 --- !u!95 &5162524990170631432
 Animator:
   serializedVersion: 3

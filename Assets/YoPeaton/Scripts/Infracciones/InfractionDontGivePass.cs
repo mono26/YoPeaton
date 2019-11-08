@@ -18,18 +18,20 @@ public class InfractionDontGivePass : InfractionSO
         if (AreThereCrossingPedestrians && controller.GetCurrentState.ToString() != "WaitingAtCrossWalk")
         {
             Debug.LogError("ESTADO DEL AI CONTROLLER: " + controller.GetCurrentState.ToString());
-            ScoreManager.instance.AddReport(false);
+            ScoreManager.instance.AddReport(true);
+            CanvasManager._instance.ActivateCheckOrCross(true);
             Debug.Log("No Diste Via"); Debug.Log("REPORTE CORRECTO, HABIA ALGUEIN, ROMPIO LA LEY");
-            CanvasManager._instance.testReportText.text = "Reporte: Correcto";
-            CanvasManager._instance.StartResetCanvasCoroutine();
+            //CanvasManager._instance.testReportText.text = "Reporte: Correcto";
+            //CanvasManager._instance.StartResetCanvasCoroutine();
             return true;
         }
         else
         {
-            ScoreManager.instance.AddReport(true);
+            ScoreManager.instance.AddReport(false);
+            CanvasManager._instance.ActivateCheckOrCross(false);
             Debug.Log("BIEN NO HABIA NADIE"); Debug.Log("REPORTE INCORRECTO, NO HABIA NADIE AHÍ, PODIA PASAR");
-            CanvasManager._instance.testReportText.text = "Reporte: Incorrecto";
-            CanvasManager._instance.StartResetCanvasCoroutine();
+            //CanvasManager._instance.testReportText.text = "Reporte: Incorrecto";
+            //CanvasManager._instance.StartResetCanvasCoroutine();
             return false;
         }
     }   

@@ -105,7 +105,7 @@ public class ScoreManager : MonoBehaviour
     public void AddReport(bool isReportCorrect)
     {
         Debug.Log("Añadí un reporte y fue: " + isReportCorrect);
-        if (!isReportCorrect)
+        if (isReportCorrect)
         {
             correctReports++;
         }

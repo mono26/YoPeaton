@@ -31,6 +31,19 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     public Text testAnswerText;
 
+    [SerializeField]
+    public Image checkAndCrossImg;
+
+    [SerializeField]
+    public GameObject checkAndCrossGO;
+
+    [SerializeField]
+    public Animator checkAndCrossAnimator;
+    [SerializeField]
+    public Sprite checkSprite;
+    [SerializeField]
+    public Sprite crossSprite;
+
     public Text timeLeftText;
 
 
@@ -67,6 +80,7 @@ public class CanvasManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        checkAndCrossImg.enabled = false;
         currentScore = 0;
 
         //Activar unicamente el base
@@ -127,6 +141,24 @@ public class CanvasManager : MonoBehaviour
     }
 
     #endregion
+
+    public void ActivateCheckOrCross(bool isCorrect)
+    { 
+        if(isCorrect)
+        {
+            checkAndCrossImg.enabled = true;
+            checkAndCrossImg.sprite = checkSprite;
+            checkAndCrossAnimator.enabled = true;
+            checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
+        }
+        else
+        {
+            checkAndCrossImg.enabled = true;
+            checkAndCrossImg.sprite = crossSprite;
+            checkAndCrossAnimator.enabled = true;
+            checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
+        }
+    }
 
     public void FillTextArray()
     {
