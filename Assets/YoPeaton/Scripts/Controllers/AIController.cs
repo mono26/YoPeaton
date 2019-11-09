@@ -22,6 +22,13 @@ public class AIController : EntityController {
         }
     }
 
+    public Vector3 GetCurrentDirection
+    {
+        get{
+            return this.GetFollowPathComponent.GetDirection(Time.time);
+        }
+    }
+
     protected override void Awake() {
         base.Awake();
         // Catching the transitions controller.

@@ -10,6 +10,8 @@ public class AIDebug : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI currentState;
     [SerializeField]
+    private TextMeshProUGUI currentDirection;
+    [SerializeField]
     private TextMeshProUGUI canCross;
     [SerializeField]
     private TextMeshProUGUI onTheStreet;
@@ -28,6 +30,7 @@ public class AIDebug : MonoBehaviour
             currentState.text = aiToDebug.GetCurrentState.ToString();
             canCross.text = "Cross: " + aiToDebug.GetCurrentCrossingZone?.CanCross(aiToDebug).ToString();
             onTheStreet.text = "Street: " + aiToDebug.IsOnTheStreet.ToString();
+            currentDirection.text = "Direction: " + aiToDebug.GetCurrentDirection.ToString();
         }
     }
 }

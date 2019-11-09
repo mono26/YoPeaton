@@ -56,7 +56,7 @@ public class CarMovement : MonoBehaviour, IMovable
         // carBody.MovePosition(lerpedPosition);
         // RotateInDirectionOfPosition(lerpedPosition);
         carBody.MovePosition(_position);
-        RotateInDirectionOfPosition(_position);
+        //RotateInDirectionOfPosition(_position);
 
         // currentDirection = (lerpedPosition - transform.position).normalized;
         // onMovement?.Invoke(currentDirection);
