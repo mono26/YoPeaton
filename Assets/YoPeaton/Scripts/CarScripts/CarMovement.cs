@@ -52,11 +52,15 @@ public class CarMovement : MonoBehaviour, IMovable
     }
 
     private void MoveToNextPosition(Vector3 _position) {
-        Vector3 lerpedPosition = Vector2.Lerp(transform.position, _position, Time.fixedDeltaTime);
-        carBody.MovePosition(lerpedPosition);
-        RotateInDirectionOfPosition(lerpedPosition);
+        // Vector3 lerpedPosition = Vector2.Lerp(transform.position, _position, Time.fixedDeltaTime);
+        // carBody.MovePosition(lerpedPosition);
+        // RotateInDirectionOfPosition(lerpedPosition);
+        carBody.MovePosition(_position);
+        RotateInDirectionOfPosition(_position);
 
-        currentDirection = (lerpedPosition - transform.position).normalized;
+        // currentDirection = (lerpedPosition - transform.position).normalized;
+        // onMovement?.Invoke(currentDirection);
+        currentDirection = (_position - transform.position).normalized;
         onMovement?.Invoke(currentDirection);
     }
 
