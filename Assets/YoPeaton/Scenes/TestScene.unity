@@ -1598,6 +1598,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 5651082318340459104, guid: 577f9ec29ec48fc43b1935732ac25c68,
+        type: 3}
+      propertyPath: type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5651082319283368975, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -1607,11 +1612,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.79100025
-      objectReference: {fileID: 0}
-    - target: {fileID: 5651082318340459104, guid: 577f9ec29ec48fc43b1935732ac25c68,
-        type: 3}
-      propertyPath: type
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577f9ec29ec48fc43b1935732ac25c68, type: 3}
@@ -2148,6 +2148,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 5651082318340459104, guid: 577f9ec29ec48fc43b1935732ac25c68,
+        type: 3}
+      propertyPath: type
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5651082319283368975, guid: 577f9ec29ec48fc43b1935732ac25c68,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -2157,11 +2162,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5651082318340459104, guid: 577f9ec29ec48fc43b1935732ac25c68,
-        type: 3}
-      propertyPath: type
-      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 577f9ec29ec48fc43b1935732ac25c68, type: 3}
@@ -2219,7 +2219,7 @@ GameObject:
   - component: {fileID: 414661561}
   - component: {fileID: 414661562}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 12
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -2728,7 +2728,7 @@ GameObject:
   - component: {fileID: 521531724}
   - component: {fileID: 521531725}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 6
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3294,7 +3294,7 @@ GameObject:
   - component: {fileID: 745190639}
   - component: {fileID: 745190640}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 3
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3344,7 +3344,7 @@ GameObject:
   - component: {fileID: 766060969}
   - component: {fileID: 766060970}
   m_Layer: 0
-  m_Name: Path (1)
+  m_Name: Path 14
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3530,7 +3530,7 @@ GameObject:
   - component: {fileID: 848998707}
   - component: {fileID: 848998708}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 5
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -3710,7 +3710,7 @@ GameObject:
   - component: {fileID: 896277266}
   - component: {fileID: 896277267}
   m_Layer: 0
-  m_Name: Path (1)
+  m_Name: Path 13
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -4198,7 +4198,7 @@ GameObject:
   - component: {fileID: 953646081}
   - component: {fileID: 953646080}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 2
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -5600,7 +5600,7 @@ GameObject:
   - component: {fileID: 1206246982}
   - component: {fileID: 1206246983}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 4
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6287,7 +6287,7 @@ GameObject:
   - component: {fileID: 1307580382}
   - component: {fileID: 1307580383}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 8
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6337,7 +6337,7 @@ GameObject:
   - component: {fileID: 1313268073}
   - component: {fileID: 1313268074}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 11
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -6777,7 +6777,7 @@ GameObject:
   - component: {fileID: 1406338281}
   - component: {fileID: 1406338282}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 9
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7102,7 +7102,7 @@ GameObject:
   - component: {fileID: 1439992220}
   - component: {fileID: 1439992221}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 7
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -7152,7 +7152,7 @@ GameObject:
   - component: {fileID: 1479402329}
   - component: {fileID: 1479402330}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 10
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -8628,7 +8628,7 @@ GameObject:
   - component: {fileID: 1828037067}
   - component: {fileID: 1828037068}
   m_Layer: 0
-  m_Name: Path
+  m_Name: Path 1
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -9192,7 +9192,7 @@ GameObject:
   - component: {fileID: 1959316058}
   - component: {fileID: 1959316059}
   m_Layer: 0
-  m_Name: Path (1)
+  m_Name: Path 15
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -10573,6 +10573,11 @@ PrefabInstance:
         type: 3}
       propertyPath: type
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273158963274417149, guid: b7b7bda0b5079244289fa7842a8cc01b,
+        type: 3}
+      propertyPath: changeDirectionProbability
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 467070330259772723, guid: b7b7bda0b5079244289fa7842a8cc01b,
         type: 3}

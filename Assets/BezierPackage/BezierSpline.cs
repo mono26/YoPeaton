@@ -182,6 +182,11 @@ public class BezierSpline : MonoBehaviour {
 		return transform.TransformPoint(Bezier.GetFirstDerivative(points[i], points[i + 1], points[i + 2], points[i + 3], t)) - transform.position;
 	}
 	
+	/// <summary>
+	/// Gets the direction at a point t inside the bezier spline.
+	/// </summary>
+	/// <param name="t">t parameter of the Bezier curve. B(t), must be clamped to 0 and 1. Being 0 the start and 1 the end.</param>
+	/// <returns></returns>
 	public Vector3 GetDirection (float t) {
 		return GetVelocity(t).normalized;
 	}

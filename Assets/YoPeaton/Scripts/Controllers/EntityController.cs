@@ -25,6 +25,12 @@ public abstract class EntityController : MonoBehaviour
     private float colliderRadius;
     private Vector3 colliderOffset;
 
+    [SerializeField]
+    private BezierSpline nextPath;
+    private float nextPathStarting_t_Parameter;
+    private float currentPathConnected_t_ParameterToNextPath;
+    private bool isChangingDirection = false;
+
 #region Properties
     public bool IsOnTheStreet {
         get {
@@ -141,6 +147,19 @@ public abstract class EntityController : MonoBehaviour
                     t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
                 }
                 if (!t.Equals(lastTPArameter)) {
+
+                    if (isChangingDirection && nextPath) {
+                        if (t >= currentPathConnected_t_ParameterToNextPath) {
+                            transform.position = nextPath.GetPoint(nextPathStarting_t_Parameter);
+                            // transform.right = nextPath.GetDirection(nextPathStarting_t_Parameter);
+                            followComponent.SetPath = nextPath;
+                            t = nextPathStarting_t_Parameter;
+                            GetInitialValuesToStartPath();
+                            movableComponent.SlowDown(50.0f);
+                            isChangingDirection = false;
+                            nextPath = null;
+                        }
+                    }
                     GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
                     lastTPArameter = t;
                 }
@@ -161,16 +180,22 @@ public abstract class EntityController : MonoBehaviour
             if (chanceOfChangingDirection >= 100 - changeDirectionProbability) {
                 //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
-                BezierSpline newPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
-                if (newPath) {
-                    if (animationComponent != null)
-                    {
-                        animationComponent.SetCurrentAnimation(newPath.GetDirection(Time.time));
-                    }
-                    followComponent.SetPath = newPath;
-                    GetInitialValuesToStartPath();
-                    movableComponent.SlowDown(50.0f);
+                nextPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
+                if (nextPath) {
+                    nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
+                    currentPathConnected_t_ParameterToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
+                    isChangingDirection = true;
                 }
+                // BezierSpline newPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
+                // if (newPath) {
+                //     if (animationComponent != null)
+                //     {
+                //         animationComponent.SetCurrentAnimation(newPath.GetDirection(Time.time));
+                //     }
+                //     followComponent.SetPath = newPath;
+                //     GetInitialValuesToStartPath();
+                //     movableComponent.SlowDown(50.0f);
+                // }
             }
         }
         else if (_other.CompareTag("StreetBounds")) {
