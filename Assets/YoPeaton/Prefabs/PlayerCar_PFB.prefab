@@ -32,10 +32,10 @@ RectTransform:
   m_Father: {fileID: 3608862414294763224}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.5, y: -3.125}
-  m_SizeDelta: {x: 5, y: 1.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8990024555839274524
 CanvasRenderer:
@@ -187,10 +187,10 @@ RectTransform:
   m_Father: {fileID: 3608862414294763224}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.5, y: -0.625}
-  m_SizeDelta: {x: 5, y: 1.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3478000776707356613
 CanvasRenderer:
@@ -467,7 +467,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingEntity: {fileID: 2273158963274417149}
   carBody: {fileID: 5162524990170631430}
-  maxSpeed: 0.5
+  maxSpeed: 2
   brakeSpeed: 0.25
   acceleration: 0.25
   currentSpeed: 0
@@ -542,9 +542,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followComponent: {fileID: 5162524990170631425}
   animationComponent: {fileID: 0}
-  changeDirectionProbability: 50
-  type: 9
-  maxDistanceToCheckForStop: 3
+  changeDirectionProbability: 100
+  type: 8
+  maxDistanceToCheckForStop: 2.5
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 768
@@ -613,10 +613,10 @@ RectTransform:
   m_Father: {fileID: 3608862414294763224}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.5, y: -4.375}
-  m_SizeDelta: {x: 5, y: 1.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &458070821882645909
 CanvasRenderer:
@@ -756,7 +756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3608862414294763224
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1071,10 +1071,10 @@ RectTransform:
   m_Father: {fileID: 3608862414294763224}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 2.5, y: -1.875}
-  m_SizeDelta: {x: 5, y: 1.25}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7717450964040822276
 CanvasRenderer:
