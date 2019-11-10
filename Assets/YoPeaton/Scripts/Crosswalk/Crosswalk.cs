@@ -194,6 +194,49 @@ public class Crosswalk : MonoBehaviour
     }
 
     /// <summary>
+    /// Use to see if the is any entity of the type waiting to cross.
+    /// </summary>
+    /// <param name="_entityType">Entity type to look if it's waiting for cross.</param>
+    /// <returns></returns>
+    public bool IsThereAEntityWaiting(EntityType _entityType) {
+        bool isAEntityWaiting = false;
+        if (_entityType.Equals(EntityType.Pedestrian)) {
+            if (waitingPedestrians.Count > 0) {
+                isAEntityWaiting = true;
+            }
+        }
+        else if (_entityType.Equals(EntityType.Car)) {
+            if (waitingCars.Count > 0) {
+                isAEntityWaiting = true;
+            }
+        }
+        return isAEntityWaiting;
+    }
+
+    /// <summary>
+    /// Use to see if the is a entity of the type requesting for cross.
+    /// </summary>
+    /// <param name="_entityType">Entity type to look if it's asking for cross.</param>
+    /// <returns></returns>
+    public bool IsThereAEntityAskingForPass(EntityType _entityType) {
+        bool isAnEntityAskingForPass = false;
+        if (_entityType.Equals(EntityType.Pedestrian)) {
+            for (int i = 0; i < waitingPedestrians.Count; i++) {
+                if (((AIController)waitingPedestrians[i].waitingEntity).GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) {
+                    isAnEntityAskingForPass = true;
+                    break;
+                }
+            }
+        }
+        // else if (_entityType.Equals(AIType.Car)) {
+        //     if (waitingCars.Count > 0) {
+        //         isAEntityWaiting = true;
+        //     }
+        // }
+        return isAnEntityAskingForPass;
+    }
+
+    /// <summary>
     /// Gets the actual waiting ticket for the entity.
     /// </summary>
     /// <param name="_entity">Enity to look for ticket.</param>

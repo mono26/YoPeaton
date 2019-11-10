@@ -5,7 +5,7 @@ using UnityEngine;
 // TODO refactor a Dictionary y custom inspector.
 [System.Serializable]
 public struct EntityAnimatorControllerPair {
-    public EntityTypes entity;
+    public EntitySubType entity;
     public RuntimeAnimatorController controller;
 }
 
@@ -20,7 +20,7 @@ public class AnimatorControllerDispatcher : Singleton<AnimatorControllerDispatch
 
     public RuntimeAnimatorController Request(string _nameKey) {
         RuntimeAnimatorController controllerToReturn = null;
-        EntityTypes requestedType = (EntityTypes)System.Enum.Parse(typeof(EntityTypes),  _nameKey);
+        EntitySubType requestedType = (EntitySubType)System.Enum.Parse(typeof(EntitySubType),  _nameKey);
         if (controllerPairs.Count > 0) {
             for (int i = 0; i < controllerPairs.Count; i++) {
                 if (controllerPairs[i].entity.Equals(requestedType)) {

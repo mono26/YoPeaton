@@ -2,21 +2,27 @@
 
 public abstract class EntityController : MonoBehaviour
 {
+#region Dependencies
     [SerializeField]
     private IMovable movableComponent;
     [SerializeField]
     private FollowPath followComponent;
     [SerializeField]
     private AnimatorController animationComponent;
+#endregion
 
+#region Variables
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
     [SerializeField]
-    private EntityTypes type;
+    private EntitySubType entitySubType;
     [SerializeField]
     private float maxDistanceToCheckForStop = 3.0f;
     [SerializeField]
     private LayerMask layersToCheckCollision;
+    [SerializeField]
+    private EntityType entityType;
+#endregion
 
     private float distanceTravelled = 0.0f;
     private float lastTParameter = 0.0f;
@@ -24,14 +30,13 @@ public abstract class EntityController : MonoBehaviour
     private bool isOnTheStreet = false;
     private float colliderRadius;
     private Vector3 colliderOffset;
-
-    [SerializeField]
     private BezierSpline nextPath;
     private float nextPathStarting_t_Parameter;
     private float currentPathConnected_t_ParameterToNextPath;
     private bool isChangingDirection = false;
 
 #region Properties
+
     public bool IsOnTheStreet {
         get {
             return isOnTheStreet;
@@ -62,9 +67,15 @@ public abstract class EntityController : MonoBehaviour
         }
     }
 
-    public EntityTypes GetEntityType {
+    public EntitySubType GetEntitySubType {
         get {
-            return type;
+            return entitySubType;
+        }
+    }
+
+    public EntityType GetEntityType {
+        get {
+            return entityType;
         }
     }
 #endregion
@@ -95,10 +106,10 @@ public abstract class EntityController : MonoBehaviour
         {
             if (probability < 0.5f)
             {
-                type = EntityTypes.Male;
+                entitySubType = EntitySubType.Male;
             } else if (probability < 1f)
             {
-                type = EntityTypes.Female;
+                entitySubType = EntitySubType.Female;
             }
         }
 
@@ -106,10 +117,10 @@ public abstract class EntityController : MonoBehaviour
         {
             if(probability < 0.65f)
             {
-                type = EntityTypes.BlueCar;
+                entitySubType = EntitySubType.BlueCar;
             } else
             {
-                type = EntityTypes.YellowCar;
+                entitySubType = EntitySubType.YellowCar;
             }
         }
     }

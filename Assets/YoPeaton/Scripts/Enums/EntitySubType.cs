@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EntityTypes
+public enum EntitySubType
 {
     Male, MaleWithDog, MaleWithBaby, MaleWithWalker, Female, FemaleWithDog, FemaleWithBaby, FemaleWithWalker, YellowCar ,BlueCar
 }

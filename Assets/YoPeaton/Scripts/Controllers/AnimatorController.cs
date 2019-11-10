@@ -5,28 +5,32 @@ public class AnimatorController : MonoBehaviour
 {
     private Animator animator;
     private IMovable movableComponent;
+    private AITransitionsController transitionsController;
 
     #region Unity calls
     private void Awake()
     {
         animator = GetComponent<Animator>();
         movableComponent = GetComponent<IMovable>();
+        transitionsController = GetComponent<AITransitionsController>();
     }
 
     void Start()
     {
-        string keyName = movableComponent.GetEntity.GetEntityType.ToString();
+        string keyName = movableComponent.GetEntity.GetEntitySubType.ToString();
         animator.runtimeAnimatorController = AnimatorControllerDispatcher.GetInstance.Request(keyName);
     }
 
     void OnEnable()
     {
         movableComponent.AddOnMovement(SetCurrentAnimation);
+        transitionsController.onStartedAskingForPass += OnStartedToAskForPass;
     }
 
     void OnDisable()
     {
         movableComponent.RemoveOnMovement(SetCurrentAnimation);
+        transitionsController.onStartedAskingForPass -= OnStartedToAskForPass;
     }
     #endregion
 
@@ -177,5 +181,9 @@ public class AnimatorController : MonoBehaviour
         //        animator.SetBool("Left", true);
         //        break;
         //}
+    }
+
+    public void OnStartedToAskForPass() {
+
     }
 }

@@ -24,7 +24,7 @@ public class AIController : EntityController {
 
     public Vector3 GetCurrentDirection
     {
-        get{
+        get {
             return this.GetFollowPathComponent.GetDirection(Time.time);
         }
     }
@@ -78,17 +78,7 @@ public class AIController : EntityController {
         // Si esta por collisionar
         return GetCurrentState.Equals(AIState.SlowDown);
     }
-
-    public bool getShouldStop()
-    {
-        return GetCurrentState.Equals(AIState.WaitingAtCrossWalk);
-    }
-
-    public bool getShouldSlowDown()
-    {
-        return GetCurrentState.Equals(AIState.SlowDown);
-    }
-
+    
     public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Entered crosswalk");
         currentCrossingZone = _crossWalk;

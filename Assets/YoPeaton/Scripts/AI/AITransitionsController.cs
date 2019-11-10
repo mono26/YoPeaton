@@ -1,9 +1,16 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class AITransitionsController : MonoBehaviour
 {
+    public Action onStartedAskingForPass;
+
     [SerializeField]
     private float stopProbability = 100.0f;
+    [SerializeField]
+    private float askForPassProbability = 0.0f;
+    [SerializeField]
+    private float giveCrossProbability = 0.0f;
 
 #region Dependencies
     [SerializeField]
@@ -29,8 +36,8 @@ public class AITransitionsController : MonoBehaviour
 
     public void CheckTransitions() {
         if (aiEntity.GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
-            // Run probability of wait for clear pass?!
-            if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone()) {
+            // TODO: Run probability of wait for clear pass?!
+            if (alreadyAskedForPass && aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone()) {
                 aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
                 aiEntity.SwitchToState(AIState.CrossingCrossWalk);
                 alreadyAskedForPass = false;
@@ -38,26 +45,23 @@ public class AITransitionsController : MonoBehaviour
             }
         }
         else if (aiEntity.GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) {
-            // Run probability of asking for pass. PEDESTRIANS ONLY!?
-            if (!alreadyAskedForPass && ShouldAskForPass()) {
-                aiEntity.SwitchToState(AIState.WaitingAtCrossWalkAndAskingForPass);
-                alreadyAskedForPass = true;
+            if (aiEntity.GetEntityType.Equals(EntityType.Pedestrian)) {
+                if (!alreadyAskedForPass && ShouldAskForCross()) {
+                    aiEntity.SwitchToState(AIState.WaitingAtCrossWalkAndAskingForPass);
+                    onStartedAskingForPass?.Invoke();
+                    alreadyAskedForPass = true;
+                }
             }
             if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone()) {
-                aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
-                aiEntity.SwitchToState(AIState.CrossingCrossWalk);
-                //aiEntity.CheckIfIsBreakingTheLaw();
+                // TODO: Run probability for letting an entity asking for pass cross?!
+                if (!ShouldGiveCross()) {
+                    aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
+                    aiEntity.SwitchToState(AIState.CrossingCrossWalk);
+                    //aiEntity.CheckIfIsBreakingTheLaw();
+                }
             }
         }
         else if (!aiEntity.IsCrossingACrossWalk()) {
-            // if (!aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
-            //     if (aiEntity.IsThereAObstacleUpFront()) {
-            //         aiEntity.SwitchToState(AIState.SlowDown);
-            //     }
-            //     else {
-            //         aiEntity.SwitchToState(AIState.Moving);
-            //     }
-            // }
             if (aiEntity.IsThereAObstacleUpFront()) {
                 aiEntity.SwitchToState(AIState.SlowDown);
             }
@@ -78,7 +82,7 @@ public class AITransitionsController : MonoBehaviour
 
     public void OnCrossWalkEntered() {
         if (!aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
-            float randomNumber = Random.Range(0.0f, 1.0f) * 100;
+            float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
             bool canCross = CanCrossCurrentCrossingZone();
             if (randomNumber >= 100 - stopProbability && !canCross) {
                 aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
@@ -91,7 +95,29 @@ public class AITransitionsController : MonoBehaviour
         }
     }
 
-    private bool ShouldAskForPass() {
+    /// <summary>
+    /// Use to run a probality to see if the ai should ask for cross in the crosswalk.
+    /// </summary>
+    /// <returns></returns>
+    private bool ShouldAskForCross() {
+        float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
+        bool askForPass = false;
+        if (randomNumber >= 100 - askForPassProbability) {
+            askForPass = true;
+        }
+        return false;
+    }
+
+    /// <summary>
+    /// Use to run a probality to see if the ai should allow another ai cross if it's asking for cross.
+    /// </summary>
+    /// <returns></returns>
+    private bool ShouldGiveCross() {
+        float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
+        bool giveCross = false;
+        if (randomNumber >= 100 - giveCrossProbability) {
+            giveCross = true;
+        }
         return false;
     }
 }
