@@ -19,7 +19,7 @@ public abstract class EntityController : MonoBehaviour
     private LayerMask layersToCheckCollision;
 
     private float distanceTravelled = 0.0f;
-    private float lastTPArameter = 0.0f;
+    private float lastTParameter = 0.0f;
     private bool move = true;
     private bool isOnTheStreet = false;
     private float colliderRadius;
@@ -78,13 +78,13 @@ public abstract class EntityController : MonoBehaviour
         SetEntityType();
         animationComponent = this.GetComponent<AnimatorController>();
         //animationComponent.SetAnimator(type);
-        if (animationComponent) {
-            animationComponent.SetCurrentAnimation(followComponent.GetDirection(Time.time));
-        }
     }
 
     private void Start() {
         GetInitialValuesToStartPath();
+        if (animationComponent) {
+            animationComponent.SetCurrentAnimation(followComponent.GetDirection(lastTParameter));
+        }
     }
 
     private void SetEntityType()
@@ -117,7 +117,7 @@ public abstract class EntityController : MonoBehaviour
     private void GetInitialValuesToStartPath() {
         float timeOnCurrentPath = followComponent.GetTParameter(transform.position);
         distanceTravelled = followComponent.GetLengthAt(timeOnCurrentPath);
-        lastTPArameter = timeOnCurrentPath;
+        lastTParameter = timeOnCurrentPath;
     }
 
     protected virtual void Update() 
@@ -140,13 +140,13 @@ public abstract class EntityController : MonoBehaviour
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
                 float t;
-                if (distanceTravelled / GetFollowPathComponent.GetPathLeght < lastTPArameter) {
-                    t = lastTPArameter;
+                if (distanceTravelled / GetFollowPathComponent.GetPathLeght < lastTParameter) {
+                    t = lastTParameter;
                 }
                 else {
                     t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
                 }
-                if (!t.Equals(lastTPArameter)) {
+                if (!t.Equals(lastTParameter)) {
 
                     if (isChangingDirection && nextPath) {
                         if (t >= currentPathConnected_t_ParameterToNextPath) {
@@ -161,7 +161,7 @@ public abstract class EntityController : MonoBehaviour
                         }
                     }
                     GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
-                    lastTPArameter = t;
+                    lastTParameter = t;
                 }
             }
         }
@@ -186,16 +186,6 @@ public abstract class EntityController : MonoBehaviour
                     currentPathConnected_t_ParameterToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
                     isChangingDirection = true;
                 }
-                // BezierSpline newPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
-                // if (newPath) {
-                //     if (animationComponent != null)
-                //     {
-                //         animationComponent.SetCurrentAnimation(newPath.GetDirection(Time.time));
-                //     }
-                //     followComponent.SetPath = newPath;
-                //     GetInitialValuesToStartPath();
-                //     movableComponent.SlowDown(50.0f);
-                // }
             }
         }
         else if (_other.CompareTag("StreetBounds")) {
@@ -228,28 +218,12 @@ public abstract class EntityController : MonoBehaviour
     public bool IsThereAObstacleUpFront() {
         bool stop = false;
         if (IsOnTheStreet && !IsCrossingACrossWalk()) {
-            // if (gameObject.CompareTag("Pedestrian") && IsCrossingACrossWalk()) {
-            //     //
-            // }
-            // else {
-            //     // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
-            //     Vector3 startPosition = transform.position + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
-            //     float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
-            //     float checkWidth = ((colliderRadius + colliderRadius/2) * 2) * transform.localScale.x;
-            //     GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
-            //     if (obstacle) {
-            //         if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
-            //             if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
-            //                 stop = true;
-            //             }
-            //         }
-            //     }
-            // }
-            // Wee have to calculate new distance and starposition values because we want to avoid detecting our selfs.
-            Vector3 startPosition = transform.position + colliderOffset + (transform.right * (float)(((colliderRadius) * transform.localScale.x) + 0.1));
+            Vector3 direction = (GetFollowPathComponent.GetPosition(lastTParameter + 0.1f) - GetFollowPathComponent.GetPosition(lastTParameter)).normalized;
+            Vector3 startPosition = transform.position + colliderOffset + (direction * (float)(((colliderRadius) * transform.localScale.x) + 0.1f));
             float distance = maxDistanceToCheckForStop - ((colliderRadius * 2) * transform.localScale.x);
             float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
-            GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, transform.up, checkWidth, transform.right, distance, layersToCheckCollision, 5);
+            Vector3 axis = Vector3.Cross(direction, Vector3.forward);
+            GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
             if (obstacle) {
                 if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
                     if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
