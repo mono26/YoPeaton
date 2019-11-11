@@ -164,10 +164,12 @@ public class Crosswalk : MonoBehaviour
             }
             else if (waitingPedestrians.Count > 0) {
                 WaitTicket entityTicket = GetWaitingTicket(_entity);
-                int comparisson;
+                int waitTimeComparisson;
+                int gaveCrossTimeComparison;
                 for (int i = 0; i < waitingPedestrians.Count; i++) {
-                    comparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingPedestrians[i].waitStartTime);
-                    if (comparisson >= 0) {
+                    waitTimeComparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingPedestrians[i].waitStartTime);
+                    gaveCrossTimeComparison = System.DateTime.Compare(entityTicket.gaveCrossTime, waitingPedestrians[i].waitStartTime);
+                    if (waitTimeComparisson >= 0 || (entityTicket.gaveCross && gaveCrossTimeComparison >= 0)) {
                         cross = false;
                         break;
                     }
@@ -180,10 +182,12 @@ public class Crosswalk : MonoBehaviour
             }
             else if (waitingCars.Count > 0) {
                 WaitTicket entityTicket = GetWaitingTicket(_entity);
-                int comparisson;
+                int waitTimeComparisson;
+                int gaveCrossTimeComparison;
                 for (int i = 0; i < waitingCars.Count; i++) {
-                    comparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingCars[i].waitStartTime);
-                    if (comparisson > 0) {
+                    waitTimeComparisson = System.DateTime.Compare(entityTicket.waitStartTime, waitingCars[i].waitStartTime);
+                    gaveCrossTimeComparison = System.DateTime.Compare(entityTicket.gaveCrossTime, waitingCars[i].waitStartTime);
+                    if (waitTimeComparisson >= 0 || (entityTicket.gaveCross && gaveCrossTimeComparison >= 0)) {
                         cross = false;
                         break;
                     }
@@ -218,7 +222,7 @@ public class Crosswalk : MonoBehaviour
     /// </summary>
     /// <param name="_entityType">Entity type to look if it's asking for cross.</param>
     /// <returns></returns>
-    public bool IsThereAEntityAskingForPass(EntityType _entityType) {
+    public bool IsThereAEntityAskingForCross(EntityType _entityType) {
         bool isAnEntityAskingForPass = false;
         if (_entityType.Equals(EntityType.Pedestrian)) {
             for (int i = 0; i < waitingPedestrians.Count; i++) {
@@ -242,7 +246,7 @@ public class Crosswalk : MonoBehaviour
     /// <param name="_entity">Enity to look for ticket.</param>
     /// <returns></returns>
     public WaitTicket GetWaitingTicket(EntityController _entity) {
-        WaitTicket tiquetToReturn = new WaitTicket(_entity);
+        WaitTicket tiquetToReturn = WaitTicket.invalidTicket;
         IEnumerable<WaitTicket> existingTickets;
         if (_entity.CompareTag("Car")) {
             existingTickets = waitingCars.Where(ticket => ticket.waitingEntity.Equals(_entity));
@@ -254,6 +258,16 @@ public class Crosswalk : MonoBehaviour
             tiquetToReturn = existingTickets.ElementAt(0);
         }
         return tiquetToReturn;
+    }
+
+    public void OnEntityGivingCross(EntityController _entityThatGaveCross) {
+        WaitTicket ticket = GetWaitingTicket(_entityThatGaveCross);
+        if (!ticket.Equals(WaitTicket.invalidTicket)) {
+            ticket.gaveCross = true;
+        }
+        else {
+            DebugController.LogErrorMessage(string.Format("{0} gave cross but there is no ticket under the entity" , _entityThatGaveCross.gameObject.name));
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D _other) {

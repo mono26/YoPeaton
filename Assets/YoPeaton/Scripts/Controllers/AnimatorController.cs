@@ -24,13 +24,13 @@ public class AnimatorController : MonoBehaviour
     void OnEnable()
     {
         movableComponent.AddOnMovement(SetCurrentAnimation);
-        transitionsController.onStartedAskingForPass += OnStartedToAskForPass;
+        transitionsController.onStartedAskingForCross += OnStartedToAskForPass;
     }
 
     void OnDisable()
     {
         movableComponent.RemoveOnMovement(SetCurrentAnimation);
-        transitionsController.onStartedAskingForPass -= OnStartedToAskForPass;
+        transitionsController.onStartedAskingForCross -= OnStartedToAskForPass;
     }
     #endregion
 
