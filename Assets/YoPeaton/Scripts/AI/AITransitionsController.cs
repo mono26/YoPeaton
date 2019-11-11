@@ -65,10 +65,12 @@ public class AITransitionsController : MonoBehaviour
                 if (alreadyGaveCross || !giveCross || !someoneIsWaiting) {
                     aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
                     aiEntity.SwitchToState(AIState.CrossingCrossWalk);
+                    alreadyGaveCross = false;
                     //aiEntity.CheckIfIsBreakingTheLaw();
                 }
                 else if (giveCross && !alreadyGaveCross) {
                     aiEntity.GetCurrentCrossingZone.OnEntityGivingCross(aiEntity);
+                    alreadyGaveCross = true;
                 }
             }
         }
