@@ -36,10 +36,20 @@ public class FollowPath : MonoBehaviour
         pathLength = GetLength();
     }
 
+    /// <summary>
+    /// Gets the direction at a point t inside the bezier spline.
+    /// </summary>
+    /// <param name="t">t parameter of the Bezier curve. B(t), must be clamped to 0 and 1. Being 0 the start and 1 the end.</param>
+    /// <returns></returns>
     public Vector3 GetDirection(float time) {
         return pathToFollow.GetDirection(time);
     }
 
+    /// <summary>
+    /// Gets the position at t inside the bezier spline.
+    /// </summary>
+    /// <param name="t">t parameter of the Bezier curve. B(t), must be clamped to 0 and 1. Being 0 the start and 1 the end.</param>
+    /// <returns></returns>
     public Vector3 GetPosition(float time) {
         return pathToFollow.GetPoint(time);
     }
