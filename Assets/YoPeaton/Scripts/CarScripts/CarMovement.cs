@@ -24,6 +24,9 @@ public class CarMovement : MonoBehaviour, IMovable
     private bool move = true;
     public Vector3 currentDirection;
 
+    [SerializeField]
+    private GameObject carLightsVFX;
+
     public float GetCurrentSpeed {
         get {
             return currentSpeed;
@@ -36,6 +39,12 @@ public class CarMovement : MonoBehaviour, IMovable
         }
     }
 
+    private void Start()
+    {
+        
+            ToggleBrakeLights(false);
+    }
+
     private void Accelerate() {
         if (currentSpeed < maxSpeed) {
             currentSpeed += acceleration * Time.fixedDeltaTime;
@@ -43,6 +52,7 @@ public class CarMovement : MonoBehaviour, IMovable
         else if (currentSpeed >  maxSpeed) {
             currentSpeed = maxSpeed;
         }
+        ToggleBrakeLights(false);
     }
 
     private void MoveWithDirection(Vector3 _direction) {
@@ -81,6 +91,7 @@ public class CarMovement : MonoBehaviour, IMovable
             currentSpeed -= brakeSpeed * Time.fixedDeltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0.0f, maxSpeed);
         }
+        ToggleBrakeLights(true);
     }
 
     public void SpeedUp() {
@@ -90,10 +101,28 @@ public class CarMovement : MonoBehaviour, IMovable
     public void SlowDown() {
         // Clamp to a min value.
         ApplyBrakes();
+        
+    }
+
+    private void ToggleBrakeLights(bool status)
+    {
+        if (GetEntity.GetEntityType == EntityTypes.BlueCar || GetEntity.GetEntityType == EntityTypes.YellowCar)
+        {
+            if (status && GetEntity.GetCurrentDirection == new Vector3(0, 1, 0))
+            {
+                carLightsVFX.SetActive(true);
+            }
+            else
+            {
+                carLightsVFX.SetActive(false);
+            }
+        }
+            
     }
 
     public void SlowDown(float _slowPercent) {
         currentSpeed = currentSpeed * (_slowPercent / 100);
+        ToggleBrakeLights(true);
     }
 
     public void SlowToStop() {

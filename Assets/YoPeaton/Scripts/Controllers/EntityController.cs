@@ -234,6 +234,12 @@ public abstract class EntityController : MonoBehaviour
         }
         return stop;
     }
-
+    public Vector3 GetCurrentDirection
+    {
+        get
+        {
+            return this.GetFollowPathComponent.GetDirection(Time.time);
+        }
+    }
     public abstract bool IsCrossingACrossWalk();
 }
