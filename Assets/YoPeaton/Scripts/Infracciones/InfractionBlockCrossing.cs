@@ -19,11 +19,17 @@ public class InfractionBlockCrossing : InfractionSO
         var rbObject = evaluatedObject.GetComponent<Rigidbody2D>();
         if (hit && rbObject.velocity == Vector2.zero)
         {
+            CanvasManager._instance.GenerateFeedback("BlockCrossingReportCorrect");
+            ScoreManager.instance.AddReport(true);
+            CanvasManager._instance.ActivateCheckOrCross(true);
             Debug.LogWarning ("3)Infraction Happened: "+"Infraction Name: " + this.name + " Evaluated Object: " + evaluatedObject.name);
             return false;
         }
         else
         {
+            ScoreManager.instance.AddReport(false);
+            CanvasManager._instance.ActivateCheckOrCross(false);
+            CanvasManager._instance.GenerateFeedback("WrongReport");
             Debug.LogWarning("3) Infraction Didn't Happened: " + "Infraction Name: " + this.name + " Evaluated Object: " + evaluatedObject.name);
             return true;
         }

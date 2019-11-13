@@ -4,19 +4,18 @@ using UnityEngine;
 
 public static class GameManager
 {
-    public static bool isPaused;
+    public static bool isPaused = false;
     public static float timeLeft;
 
    
 
     //private static int printScore;
-    public static void FinishLevel(bool isPlayerVictorious)
+    public static void FinishLevel()
     {
-        if(isPlayerVictorious)
-        {
+        if(SceneManagerTest.GetCurrentScene() != "VictoryScreenScene")
             SceneManagerTest.LoadNextScene("VictoryScreenScene");
            //printScore = ScoreManager.instance.CalculateFinalScore();
-        }
+        
     } 
 
     public static void PauseGame()

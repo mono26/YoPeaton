@@ -10,6 +10,11 @@ public class CanvasManager : MonoBehaviour
 
     public float duration = 1f;
 
+    [SerializeField]
+    private GameObject FeedBackTextGO;
+    [SerializeField]
+    private Text FeedBackText;
+
     private static int MaxScore;
     public float countDuration = 1f;
 
@@ -100,14 +105,14 @@ public class CanvasManager : MonoBehaviour
     {
         if (SceneManagerTest.GetCurrentScene() == "TestScene")
         {
-            timeLeftText.text = PlayerController.lifeTime.ToString();
+            timeLeftText.text = ScoreManager.lifeTime.ToString();
         }
     }
     #region Manejo De Canvas
     //MANEJO DE CANVAS//
     public void ActivatePauseCanvas()
     {
-        if (GameManager.isPaused)
+        if (!GameManager.isPaused)
         {
             baseCanvas.enabled = true;
             pausaCanvas.enabled = false;
@@ -150,6 +155,7 @@ public class CanvasManager : MonoBehaviour
             checkAndCrossImg.sprite = checkSprite;
             checkAndCrossAnimator.enabled = true;
             checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
+            StartCoroutine(DisapearCheckOrCross());
         }
         else
         {
@@ -157,6 +163,7 @@ public class CanvasManager : MonoBehaviour
             checkAndCrossImg.sprite = crossSprite;
             checkAndCrossAnimator.enabled = true;
             checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
+            StartCoroutine(DisapearCheckOrCross());
         }
     }
 
@@ -165,7 +172,6 @@ public class CanvasManager : MonoBehaviour
         //Llenar el array de textos para poder hacer un ciclo para llenar los textos con los scores con el countto//
         if (SceneManagerTest.GetCurrentScene() == "VictoryScreenScene")
         {
-
             textsForScores[0] = GameObject.Find("TiempoCounter").GetComponent<Text>();
             textsForScores[1] = GameObject.Find("RespuestasCorrectasCounter").GetComponent<Text>();
             textsForScores[2] = GameObject.Find("ReportesCorrectosCounter").GetComponent<Text>();
@@ -185,6 +191,56 @@ public class CanvasManager : MonoBehaviour
 
         }
     }
+    public void GenerateFeedback(string feedbackType)
+    { 
+        switch (feedbackType)
+        {
+            case "NoWayReportCorrect":
+                FeedBackText.enabled = true;
+                FeedBackText.color = Color.green;
+                FeedBackText.text = "No dio paso al peatón.";
+                StartCoroutine(DisapearFeedbackText());
+                break;
+            case "BlockCrossingReportCorrect":
+                FeedBackText.enabled = true;
+                FeedBackText.color = Color.green;
+                FeedBackText.text = "Bloqueando un paso peatonal.";
+                StartCoroutine(DisapearFeedbackText());
+                break;
+            case "WrongAnswer":
+                FeedBackText.enabled = true;
+                FeedBackText.color = Color.red;
+                FeedBackText.text = "¡Respuesta Incorrecta!";
+                StartCoroutine(DisapearFeedbackText());
+                break;
+            case "CorrectAnswer":
+                FeedBackText.enabled = true;
+                FeedBackText.color = Color.green;
+                FeedBackText.text = "¡Respuesta Correcta!";
+                StartCoroutine(DisapearFeedbackText());
+                break;
+            case "WrongReport":
+                FeedBackText.enabled = true;
+                FeedBackText.color = Color.red;
+                FeedBackText.text = "Conduciendo correctamente.";
+                StartCoroutine(DisapearFeedbackText());
+                break;
+        }
+    }
+
+    IEnumerator DisapearFeedbackText()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        if (SceneManagerTest.GetCurrentScene() == "TestScene")
+            FeedBackText.enabled = false;
+    }
+
+    IEnumerator DisapearCheckOrCross()
+    {
+        yield return new WaitForSecondsRealtime(2);
+        if (SceneManagerTest.GetCurrentScene() == "TestScene")
+            checkAndCrossImg.enabled = false;
+    }
 
     #region Manejo de Botones
 
@@ -193,7 +249,7 @@ public class CanvasManager : MonoBehaviour
     {
         Debug.LogWarning("Press Pause Button");
         GameManager.PauseGame();
-        //ActivatePauseCanvas();
+        ActivatePauseCanvas();
     }
 
     public void PressLoadBtn()
@@ -201,6 +257,7 @@ public class CanvasManager : MonoBehaviour
         //SceneManagerTest.instance.LoadVictory();
         SceneManagerTest.instance.LoadVictory();
     }
+
 
     #endregion
 

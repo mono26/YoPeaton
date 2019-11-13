@@ -47,7 +47,11 @@ public class SceneManagerTest : MonoBehaviour
     public static void LoadNextScene(string sceneToLoad)
     {
         SceneManager.LoadScene(sceneToLoad);
+    }
 
+    public void LoadScene(string sceneToLoad)
+    {
+        SceneManager.LoadScene(sceneToLoad);
     }
 
     public void LoadVictory()

@@ -28,10 +28,13 @@ public class SignalIdentification : MonoBehaviour
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
     {
+
         //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
         //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-        if(collision.tag == "CrossWalk")
+        if (collision.tag == "CrossWalk")
         {
+            Time.timeScale = 0.5f;
+            Debug.Log("Time Scale: " + Time.timeScale);
             //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
             CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
             correctAnswer = collision.GetComponent<Crosswalk>().GetCrossWalkType.ToString();
@@ -45,7 +48,8 @@ public class SignalIdentification : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-
+        Time.timeScale =1f;
+        Debug.Log("Time Scale: " + Time.timeScale);
         //Se desactiva el canvas de identificar la señal una vez sale de ella//
         CanvasManager._instance.BackToBaseCanvas();
         //CanvasManager._instance.optInButtonCanvas.enabled = false;
@@ -62,6 +66,7 @@ public class SignalIdentification : MonoBehaviour
     public void DeclineSignalIdentification()
     {
         //Debug.LogWarning("Declined");
+        Time.timeScale = 1;
         CanvasManager._instance.BackToBaseCanvas();
     }
 
@@ -79,18 +84,17 @@ public class SignalIdentification : MonoBehaviour
         selectedName = selectedAnswer;
         if (correctAnswer == selectedAnswer)
         {
-            //CanvasManager._instance.testAnswerText.text = "Respuesta: Correcta!";
+            CanvasManager._instance.GenerateFeedback("CorrectAnswer");
+
             ScoreManager.instance.AddAnswer(true);
             CanvasManager._instance.ActivateCheckOrCross(true);
-            //Debug.Log("Escogiste la respuesta correcta");
         }
 
         else
         {
             ScoreManager.instance.AddAnswer(false);
             CanvasManager._instance.ActivateCheckOrCross(false);
-            //CanvasManager._instance.testAnswerText.text = "Respuesta: Incorrecta :(";
-            //Debug.LogWarning("Te equivocaste, wey");
+            CanvasManager._instance.GenerateFeedback("WrongAnswer");
         }
         CanvasManager._instance.crosswalkTypesButtons.SetActive(false);
         CanvasManager._instance.BackToBaseCanvas();

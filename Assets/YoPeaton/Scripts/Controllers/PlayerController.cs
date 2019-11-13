@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : EntityController
 {
-    public static float lifeTime = 5000f;
     [SerializeField]
     private PlayerCarInput input = null;
 

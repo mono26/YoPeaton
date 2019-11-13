@@ -28,6 +28,8 @@ public class ScoreManager : MonoBehaviour
     public static int finalScore;
     public float countDuration = 2f;
 
+    public static int lifeTime = 500;
+
     public static int correctAnswers = 0;
     public static int wrongAnswers = 0;
 
@@ -54,21 +56,31 @@ public class ScoreManager : MonoBehaviour
     private static int scoreForWrongInputs = 40;
 
 
-
-    private void Start()
-    {
-
-    }
-
-
     public static void AddScore(int _score) {
         finalScore = +_score;
     }
 
+    private void Update()
+    {
+        if(Time.timeScale ==1)
+        lifeTime--;
+        if(lifeTime <= 0 && SceneManagerTest.GetCurrentScene() != "VictoryScreenScene")
+        {
+            lifeTime = 0;
+            {
+                StartCoroutine(FinishLevelCR());
+            }
+        }
+    }
 
+    IEnumerator FinishLevelCR()
+    {
+        yield return new WaitForSeconds(1);
+        GameManager.FinishLevel();
+    }
     public static int CalculateFinalScore()
     {
-        timeScore = Mathf.RoundToInt(PlayerController.lifeTime);
+        timeScore = lifeTime;
         Debug.LogWarning("Going to calculate Final Scores");
 
         correctReportScore = (correctReports * scoreForCorrectInputs)/ 2;
