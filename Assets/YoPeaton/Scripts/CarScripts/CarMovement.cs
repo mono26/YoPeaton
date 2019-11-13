@@ -30,6 +30,14 @@ public class CarMovement : MonoBehaviour, IMovable
         }
     }
 
+    public float GetMaxSpeed
+    {
+        get
+        {
+            return maxSpeed;
+        }
+    }
+
     public EntityController GetEntity {
         get {
             return movingEntity;

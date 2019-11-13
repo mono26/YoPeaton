@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 5162524990170631433}
   - component: {fileID: 2761844312484328689}
   - component: {fileID: 2273158963274417149}
+  - component: {fileID: 5084227755347083799}
   - component: {fileID: 5162524990170631432}
   - component: {fileID: 53463038678503411}
   m_Layer: 8
@@ -543,13 +544,26 @@ MonoBehaviour:
   followComponent: {fileID: 5162524990170631425}
   animationComponent: {fileID: 0}
   changeDirectionProbability: 100
-  type: 8
+  entitySubType: 0
   maxDistanceToCheckForStop: 2.5
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 768
-  nextPath: {fileID: 0}
+  entityType: 0
   input: {fileID: 5162524990170631433}
+--- !u!114 &5084227755347083799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162524990170631428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d93c9fac7ba20424f9c3704047676787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerRadius: 1
 --- !u!95 &5162524990170631432
 Animator:
   serializedVersion: 3
