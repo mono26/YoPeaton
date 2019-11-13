@@ -380,11 +380,28 @@ PrefabInstance:
       propertyPath: m_Color.b
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2337863048488374806, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 572446cdcad1ed04a98380a2f65be73c,
+        type: 3}
+    - target: {fileID: 2337863048488374806, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_FontData.m_FontStyle
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7626467793369409779, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4098605855527679719, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 572446cdcad1ed04a98380a2f65be73c,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
 --- !u!224 &2304011 stripped
