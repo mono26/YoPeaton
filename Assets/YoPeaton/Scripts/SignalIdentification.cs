@@ -49,7 +49,7 @@ public class SignalIdentification : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Time.timeScale =1f;
-        Debug.Log("Time Scale: " + Time.timeScale);
+        //Debug.Log("Time Scale: " + Time.timeScale);
         //Se desactiva el canvas de identificar la señal una vez sale de ella//
         CanvasManager._instance.BackToBaseCanvas();
         //CanvasManager._instance.optInButtonCanvas.enabled = false;

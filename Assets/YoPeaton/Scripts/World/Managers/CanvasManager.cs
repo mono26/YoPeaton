@@ -112,11 +112,7 @@ public class CanvasManager : MonoBehaviour
         if (SceneManagerTest.GetCurrentScene() == "TestScene")
         {
             fillPercent = (playerGO.GetComponent<CarMovement>().GetCurrentSpeed / playerGO.GetComponent<CarMovement>().GetMaxSpeed);
-            if(playerGO.GetComponent<CarMovement>().GetCurrentSpeed == playerGO.GetComponent<CarMovement>().GetMaxSpeed)
-            {
-                Debug.LogError("Velocidad Maxima Alcanzada");
-            }
-            Debug.Log("Fill Percent: "  + fillPercent);
+            //Debug.Log("Fill Percent: "  + fillPercent);
             speedImage.fillAmount = fillPercent;
             timeLeftText.text = ScoreManager.lifeTime.ToString();
         }
