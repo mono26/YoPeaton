@@ -102,6 +102,15 @@ public class CarMovement : MonoBehaviour, IMovable
         //ToggleBrakeLights(true);
     }
 
+    private void ApplyInmediateStop()
+    {
+        currentSpeed = 0;
+    }
+
+    public void ShouldInmediatlyStop()
+    {
+        ApplyInmediateStop();
+    }
     public void SpeedUp() {
         Accelerate();
     }

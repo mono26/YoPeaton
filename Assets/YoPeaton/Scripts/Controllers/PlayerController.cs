@@ -33,14 +33,47 @@ public class PlayerController : EntityController
         }
          lifeTime--;
     }*/
+
+    protected override void Update()
+    {
+        if (ShouldStop())
+        {
+            // DebugController.LogMessage("STOP!");
+            GetMovableComponent?.SlowDown();
+        }
+        else if (ShouldSlowDown())
+        {
+            // DebugController.LogMessage("Slowing down");
+            GetMovableComponent?.SlowDown();
+        }
+        else if (ShouldStopInmediatly())
+        {
+            //DebugController.LogMessage("¡Colision!");
+            GetMovableComponent?.ShouldInmediatlyStop();
+        }
+        else
+        {
+            GetMovableComponent?.SpeedUp();
+        }
+    }
+
     protected override bool ShouldStop() {
+
         return false;
         // return input.IsBraking;
     }
 
+    public bool ShouldStopInmediatly()
+    {
+        if (IsThereAObstacleUpFront())
+            return true;
+        else
+            return false;
+    }
+
     protected override bool ShouldSlowDown() {
         bool slowdown = false;
-        if (IsThereAObstacleUpFront() || input.IsBraking) {
+        if (input.IsBraking) {
             slowdown = true;
         }
         return slowdown;

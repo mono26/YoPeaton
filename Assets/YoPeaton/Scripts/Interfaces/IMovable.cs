@@ -14,6 +14,8 @@ public interface IMovable {
     /// <param name="_slowPercent">Percentage to reduce speed to.</param>
     void SlowDown(float _slowPercent);
     void SlowToStop();
+    void ShouldInmediatlyStop();
+
     void AddOnMovement(System.Action<Vector3> _onMovementAction);
     void RemoveOnMovement(System.Action<Vector3> _onMovementAction);
 }
