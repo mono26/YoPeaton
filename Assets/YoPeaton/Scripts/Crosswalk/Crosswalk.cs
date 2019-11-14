@@ -224,7 +224,7 @@ public class Crosswalk : MonoBehaviour
         bool isAnEntityAskingForPass = false;
         if (_entityType.Equals(EntityType.Pedestrian)) {
             for (int i = 0; i < waitingPedestrians.Count; i++) {
-                if (((AIController)waitingPedestrians[i].waitingEntity).GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) {
+                if (((AIController)waitingPedestrians[i].waitingEntity).GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
                     isAnEntityAskingForPass = true;
                     break;
                 }

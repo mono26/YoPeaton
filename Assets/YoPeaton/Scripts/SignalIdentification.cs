@@ -37,7 +37,7 @@ public class SignalIdentification : MonoBehaviour
             Debug.Log("Time Scale: " + Time.timeScale);
             //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
             CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
-            correctAnswer = collision.GetComponent<Crosswalk>().GetCrossWalkType.ToString();
+            correctAnswer = collision.transform.GetComponentInParentRecursive<Crosswalk>().GetCrossWalkType.ToString();
             return correctAnswer;
         }
         else

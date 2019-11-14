@@ -91,10 +91,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 1
-  m_fontSizeBase: 36
+  m_fontSize: 0.7
+  m_fontSizeBase: 0.7
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 1
   m_fontStyle: 0
@@ -246,10 +246,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 1
-  m_fontSizeBase: 36
+  m_fontSize: 0.7
+  m_fontSizeBase: 0.7
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 1
   m_fontStyle: 0
@@ -550,6 +550,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   entityType: 0
+  exitedCrosswalkClearTime: 3
   input: {fileID: 5162524990170631433}
 --- !u!114 &5084227755347083799
 MonoBehaviour:
@@ -686,10 +687,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 1
-  m_fontSizeBase: 36
+  m_fontSize: 0.7
+  m_fontSizeBase: 0.7
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 1
   m_fontStyle: 0
@@ -778,7 +779,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7452163876610344732}
-  m_LocalRotation: {x: 0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: -1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.14285716, y: 0.14285716, z: 1}
   m_Children:
@@ -789,10 +790,10 @@ RectTransform:
   - {fileID: 6893864243886785329}
   m_Father: {fileID: 5162524990170631424}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -180}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0, y: -0.215}
+  m_AnchoredPosition: {x: -1.316, y: -0.215}
   m_SizeDelta: {x: 7.9138, y: 7.9138}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5645449973050426021
@@ -897,6 +898,7 @@ MonoBehaviour:
   currentDirection: {fileID: 5656351270197513591}
   canCross: {fileID: 6351855178615475963}
   onTheStreet: {fileID: 1153314391577989610}
+  obstacle: {fileID: 0}
   aiToDebug: {fileID: 0}
 --- !u!1 &8171153499230612890
 GameObject:
@@ -989,10 +991,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 1
-  m_fontSizeBase: 36
+  m_fontSize: 0.7
+  m_fontSizeBase: 0.7
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 1
   m_fontStyle: 0
@@ -1144,10 +1146,10 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 1
-  m_fontSizeBase: 36
+  m_fontSize: 0.7
+  m_fontSizeBase: 0.7
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 1
   m_fontStyle: 0

@@ -11,9 +11,13 @@ public static class ExtentionMethods
     /// <typeparam name="T">Type of component to look for.</typeparam>
     /// <returns>Returns first component found.</returns>
     public static T GetComponentInParentRecursive<T>(this Transform target) where T : MonoBehaviour {
-        T parentComponent = target.parent.GetComponent<T>();
-        if (!parentComponent) {
-            parentComponent = GetComponentInParentRecursive<T>(target.parent);
+        T parentComponent = null;
+        if (target.parent)
+        {
+            parentComponent = target.parent.GetComponent<T>();
+            if (!parentComponent) {
+                parentComponent = GetComponentInParentRecursive<T>(target.parent);
+            }
         }
         return parentComponent;
     }

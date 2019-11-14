@@ -53,11 +53,6 @@ public class AIController : EntityController {
         base.Update();
     }
 
-    protected override void FixedUpdate() {
-        // First check posible transitions.
-        base.FixedUpdate();
-    }
-
     public void SwitchToState(AIState _newState) {
         stateMachine?.SwitchToState(_newState);
     }

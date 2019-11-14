@@ -16,6 +16,8 @@ public class AIDebug : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI onTheStreet;
     [SerializeField]
+    private TextMeshProUGUI obstacle;
+    [SerializeField]
     private AIController aiToDebug;
 
     private void Start() {
@@ -46,6 +48,10 @@ public class AIDebug : MonoBehaviour
             if (currentDirection)
             {
                 currentDirection.text = "Direction: " + aiToDebug.GetCurrentDirection.ToString();
+            }
+            if (obstacle)
+            {
+                obstacle.text = "Obstacle: " + aiToDebug.IsThereAObstacleUpFront().ToString();
             }
         }
     }
