@@ -79,12 +79,7 @@ public class Crosswalk : MonoBehaviour
     /// </summary>
     /// <param name="_entity">Entity that exited.</param>
     public void OnExited(EntityController _entity) {
-        if (_entity.CompareTag("Pedestrian")) {
-            if (HasAlreadyATicket(_entity)) {
-                ClearTicket(_entity);
-            }
-        }
-        else if (_entity.CompareTag("Car")) {
+        if (_entity.gameObject.CompareTag("Pedestrian") || _entity.gameObject.CompareTag("Car")) {
             if (HasAlreadyATicket(_entity)) {
                 ClearTicket(_entity);
             }
@@ -139,12 +134,15 @@ public class Crosswalk : MonoBehaviour
     public void OnFinishedCrossing(EntityController _entity) {
         if (_entity.CompareTag("Pedestrian"))
         {
-            if (crossingPedestrians.Contains(_entity)) {
+            if (crossingPedestrians.Contains(_entity)) 
+            {
                 crossingPedestrians.Remove(_entity);
             }
         }
-        else if (_entity.CompareTag("Car")) {
-            if (crossingCars.Contains(_entity)) {
+        else if (_entity.CompareTag("Car")) 
+        {
+            if (crossingCars.Contains(_entity)) 
+            {
                 crossingCars.Remove(_entity);
             }
         }
@@ -272,21 +270,21 @@ public class Crosswalk : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D _other) {
         if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) {
-            EntityController ai = _other.transform.GetComponent<EntityController>();
-            if (ai) {
-                OnEntering(ai);
-                ai.OnCrossWalkEntered(this);
+            EntityController entity = _other.transform.GetComponent<EntityController>();
+            if (entity  && !entity.JustExitedCrossWalk(this)) {
+                OnEntering(entity);
+                entity.OnCrossWalkEntered(this);
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D _other) {
         if (_other.CompareTag("Car") || _other.CompareTag("Pedestrian")) {
-            EntityController ai = _other.transform.GetComponent<EntityController>();
-            if (ai) {
-                OnExited(ai);
-                OnFinishedCrossing(ai);
-                ai.OnCrossWalkExited(this);
+            EntityController entity = _other.transform.GetComponent<EntityController>();
+            if (entity) {
+                OnExited(entity);
+                OnFinishedCrossing(entity);
+                entity.OnCrossWalkExited(this);
             }
         }
     }

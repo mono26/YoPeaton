@@ -26,11 +26,27 @@ public class AIDebug : MonoBehaviour
 
     private void Update() {
         if (DebugController.debugActive) {
-            speedText.text = aiToDebug.GetMovableComponent.GetCurrentSpeed.ToString();
-            currentState.text = aiToDebug.GetCurrentState.ToString();
-            canCross.text = "Cross: " + aiToDebug.GetCurrentCrossingZone?.CanCross(aiToDebug).ToString();
-            onTheStreet.text = "Street: " + aiToDebug.IsOnTheStreet.ToString();
-            currentDirection.text = "Direction: " + aiToDebug.GetCurrentDirection.ToString();
+            if (speedText)
+            {
+                speedText.text = aiToDebug.GetMovableComponent.GetCurrentSpeed.ToString();
+            }
+            if (currentState)
+            {
+                currentState.text = aiToDebug.GetCurrentState.ToString();
+            }
+            if (canCross)
+            {
+                canCross.text = "Cross: " + aiToDebug.GetCurrentCrossingZone?.CanCross(aiToDebug).ToString();
+            }
+            
+            if (onTheStreet)
+            {
+                onTheStreet.text = "Street: " + aiToDebug.IsOnTheStreet.ToString();
+            }
+            if (currentDirection)
+            {
+                currentDirection.text = "Direction: " + aiToDebug.GetCurrentDirection.ToString();
+            }
         }
     }
 }

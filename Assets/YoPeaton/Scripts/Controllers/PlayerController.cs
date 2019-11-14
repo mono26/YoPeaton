@@ -7,8 +7,6 @@ public class PlayerController : EntityController
     [SerializeField]
     private PlayerCarInput input = null;
 
-    private bool isCrossingACrossWalk = false;
-
     //Awake is always called before any Start functions
     protected override void Awake()
     {
@@ -48,17 +46,13 @@ public class PlayerController : EntityController
         return slowdown;
     }
 
-    public override bool IsCrossingACrossWalk() {
-        return isCrossingACrossWalk;
-    }
-
     public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Entered crosswalk");
-        isCrossingACrossWalk = true;
+        _crossWalk.OnStartedCrossing(this);
     }
 
     public override void OnCrossWalkExited(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Exited crosswalk");
-        isCrossingACrossWalk = false;
+        base.OnCrossWalkExited(_crossWalk);
     }
 }

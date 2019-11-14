@@ -41,8 +41,18 @@ public class FollowPath : MonoBehaviour
     /// </summary>
     /// <param name="t">t parameter of the Bezier curve. B(t), must be clamped to 0 and 1. Being 0 the start and 1 the end.</param>
     /// <returns></returns>
-    public Vector3 GetDirection(float time) {
-        return pathToFollow.GetDirection(time);
+    public Vector3 GetDirection(float time) 
+    {
+        Vector3 directionToReturn = Vector3.zero;
+        if (pathToFollow) 
+        {
+            directionToReturn = pathToFollow.GetDirection(time);
+        }
+        else
+        {
+            DebugController.LogErrorMessage("There is no path to follow reference");
+        }
+        return directionToReturn;
     }
 
     /// <summary>

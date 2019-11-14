@@ -49,7 +49,7 @@ public class AIController : EntityController {
     }
 
     protected override void Update() {
-        transitionController.CheckTransitions();
+        transitionController?.CheckTransitions();
         base.Update();
     }
 
@@ -59,7 +59,7 @@ public class AIController : EntityController {
     }
 
     public void SwitchToState(AIState _newState) {
-        stateMachine.SwitchToState(_newState);
+        stateMachine?.SwitchToState(_newState);
     }
 
     protected override bool ShouldStop() {
@@ -82,23 +82,24 @@ public class AIController : EntityController {
     public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Entered crosswalk");
         currentCrossingZone = _crossWalk;
-        transitionController.OnCrossWalkEntered();
+        transitionController?.OnCrossWalkEntered();
     }
 
     public override void OnCrossWalkExited(Crosswalk _crossWalk) {
+        base.OnCrossWalkExited(_crossWalk);
         // DebugController.LogMessage("Exited crosswalk");
-        if (currentCrossingZone.Equals(_crossWalk)) {
-            currentCrossingZone = null;
-            SwitchToState(AIState.Moving);
+        if (currentCrossingZone)
+        {
+            if (currentCrossingZone.Equals(_crossWalk)) 
+            {
+                currentCrossingZone = null;
+            }
         }
+        SwitchToState(AIState.Moving);
     }
 
     public void CheckIfIsBreakingTheLaw() {
         if(currentCrossingZone != null)
         behaviourController?.CheckAllInfractions(currentCrossingZone);
-    }
-
-    public override bool IsCrossingACrossWalk() {
-        return (GetCurrentCrossingZone != null && GetCurrentState.Equals(AIState.CrossingCrossWalk));
     }
 }

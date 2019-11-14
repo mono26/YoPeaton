@@ -43,7 +43,7 @@ public class AITransitionsController : MonoBehaviour
             if (alreadyAskedForCross && aiEntity.GetCurrentCrossingZone) {
                 if (!ShouldWaitForClearCross() || CanCrossCurrentCrossingZone()) {
                     aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
-                    aiEntity.SwitchToState(AIState.CrossingCrossWalk);
+                    aiEntity.SwitchToState(AIState.Moving);
                     alreadyAskedForCross = false;
                     //aiEntity.CheckIfIsBreakingTheLaw();
                 }
@@ -61,10 +61,10 @@ public class AITransitionsController : MonoBehaviour
                 // TODO: Run probability for letting an entity asking for pass cross?!
                 EntityType oherEntity = (aiEntity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
                 bool giveCross = ShouldGiveCross();
-                bool someoneIsWaiting = aiEntity.GetCurrentCrossingZone.IsThereAEntityAskingForCross(oherEntity);
-                if (alreadyGaveCross || !giveCross || !someoneIsWaiting) {
+                bool someoneIsAkingForCross = aiEntity.GetCurrentCrossingZone.IsThereAEntityAskingForCross(oherEntity);
+                if (alreadyGaveCross || !giveCross || !someoneIsAkingForCross) {
                     aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
-                    aiEntity.SwitchToState(AIState.CrossingCrossWalk);
+                    aiEntity.SwitchToState(AIState.Moving);
                     alreadyGaveCross = false;
                     //aiEntity.CheckIfIsBreakingTheLaw();
                 }
@@ -74,8 +74,8 @@ public class AITransitionsController : MonoBehaviour
                 }
             }
         }
-        else if (!aiEntity.IsCrossingACrossWalk()) {
-            if (aiEntity.IsThereAObstacleUpFront()) {
+        else {
+            if (aiEntity.GetEntityType.Equals(EntityType.Car) && aiEntity.IsThereAObstacleUpFront()) {
                 aiEntity.SwitchToState(AIState.SlowDown);
             }
             else {
@@ -93,20 +93,9 @@ public class AITransitionsController : MonoBehaviour
         return canCross;
     }
 
-    public void OnCrossWalkEntered() {
-        if (!aiEntity.GetCurrentState.Equals(AIState.CrossingCrossWalk)) {
-            // float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
-            // bool canCross = CanCrossCurrentCrossingZone();
-            // if (randomNumber >= 100 - stopProbability && !canCross) {
-            //     aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
-            // }
-            // else {
-            //     aiEntity.SwitchToState(AIState.CrossingCrossWalk);
-            //     aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
-            //     // aiEntity.CheckIfIsBreakingTheLaw();
-            // }
-            aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
-        }
+    public void OnCrossWalkEntered() 
+    {
+        aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
     }
 
     /// <summary>
