@@ -24,20 +24,28 @@ public class SignalIdentification : MonoBehaviour
     [SerializeField]
     private string selectedName;
 
+    [SerializeField]
+    private bool canAnswer = true;
 
+    private void Start()
+    {
+        canAnswer = true;
+    }
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
     {
 
         //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
         //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-        if (collision.tag == "CrossWalk")
+        if (collision.tag == "CrossWalk" && canAnswer == true)
         {
             Time.timeScale = 0.5f;
             Debug.Log("Time Scale: " + Time.timeScale);
             //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
             CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
             correctAnswer = collision.transform.GetComponentInParentRecursive<Crosswalk>().GetCrossWalkType.ToString();
+            StartCoroutine(ChangeCanAnswerValueCR());
+            canAnswer = false;
             return correctAnswer;
         }
         else
@@ -46,6 +54,11 @@ public class SignalIdentification : MonoBehaviour
         }
     }
 
+    IEnumerator ChangeCanAnswerValueCR()
+    {
+        yield return new WaitForSeconds(3);
+        canAnswer = true;
+    }
     private void OnTriggerExit2D(Collider2D collision)
     {
         Time.timeScale =1f;
