@@ -11,12 +11,12 @@ public struct WaitTicket
     public System.DateTime gaveCrossTime;
     public static readonly WaitTicket invalidTicket = new WaitTicket() { waitingEntity = null, waitStartTime = System.DateTime.MinValue, gaveCrossTime = System.DateTime.MinValue };
 
-    public const float maxWaitTimeInMinutes = 3.0f;
+    public const float maxWaitTimeInSeconds = 30.0f;
 
     public WaitTicket(EntityController _entity) {
         waitingEntity = _entity;
         waitStartTime = System.DateTime.UtcNow;
         gaveCross = false;
-        gaveCrossTime = waitStartTime.AddMinutes(maxWaitTimeInMinutes);
+        gaveCrossTime = waitStartTime.AddSeconds(maxWaitTimeInSeconds);
     }
 }
