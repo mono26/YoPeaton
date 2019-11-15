@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
-public class AIController : EntityController {
+public class AIController : EntityController
+{
     [SerializeField]
     private AIStateMachine stateMachine = null;
     [SerializeField]
@@ -29,35 +30,43 @@ public class AIController : EntityController {
         }
     }
 
-    protected override void Awake() {
+    protected override void Awake() 
+    {
         base.Awake();
         // Catching the transitions controller.
-        if (!transitionController) {
+        if (!transitionController)
+        {
             transitionController = GetComponent<AITransitionsController>();
-            if (!transitionController) {
+            if (!transitionController)
+            {
                 transitionController = gameObject.AddComponent<AITransitionsController>();
             }
         }
         transitionController.SetController = this;
         // Catching the state machine.
-        if (!stateMachine) {
+        if (!stateMachine)
+        {
             stateMachine = GetComponent<AIStateMachine>();
-            if (!stateMachine) {
+            if (!stateMachine)
+            {
                 stateMachine = gameObject.AddComponent<AIStateMachine>();
             }
         }
     }
 
-    protected override void Update() {
+    protected override void Update()
+    {
         transitionController?.CheckTransitions();
         base.Update();
     }
 
-    public void SwitchToState(AIState _newState) {
+    public void SwitchToState(AIState _newState)
+    {
         stateMachine?.SwitchToState(_newState);
     }
 
-    protected override bool ShouldStop() {
+    protected override bool ShouldStop()
+    {
         // Si esta esperando en un crosswalk
         bool stop = false;
         if (GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
@@ -69,18 +78,21 @@ public class AIController : EntityController {
         return stop;
     }
 
-    protected override bool ShouldSlowDown() {
+    protected override bool ShouldSlowDown()
+    {
         // Si esta por collisionar
         return GetCurrentState.Equals(AIState.SlowDown);
     }
     
-    public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
+    public override void OnCrossWalkEntered(Crosswalk _crossWalk)
+    {
         // DebugController.LogMessage("Entered crosswalk");
         currentCrossingZone = _crossWalk;
         transitionController?.OnCrossWalkEntered();
     }
 
-    public override void OnCrossWalkExited(Crosswalk _crossWalk) {
+    public override void OnCrossWalkExited(Crosswalk _crossWalk)
+    {
         base.OnCrossWalkExited(_crossWalk);
         // DebugController.LogMessage("Exited crosswalk");
         if (currentCrossingZone)
@@ -93,7 +105,8 @@ public class AIController : EntityController {
         SwitchToState(AIState.Moving);
     }
 
-    public void CheckIfIsBreakingTheLaw() {
+    public void CheckIfIsBreakingTheLaw()
+    {
         if(currentCrossingZone != null)
         behaviourController?.CheckAllInfractions(currentCrossingZone);
     }

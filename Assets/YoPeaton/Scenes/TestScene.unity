@@ -925,6 +925,11 @@ PrefabInstance:
       propertyPath: giveCrossProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: askForCrossProbability
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 270182541731555045, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: maxSpeed
@@ -4187,7 +4192,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: askForCrossProbability
-      value: 0
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555045, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -7879,6 +7884,11 @@ PrefabInstance:
       propertyPath: giveCrossProbability
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: askForCrossProbability
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 270182541731555045, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: maxSpeed
@@ -8447,6 +8457,11 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: giveCrossProbability
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: askForCrossProbability
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555045, guid: a11e7f7a749037d45b2b9fe55ceab514,
@@ -12829,6 +12844,11 @@ PrefabInstance:
     - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: giveCrossProbability
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555043, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: askForCrossProbability
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555045, guid: a11e7f7a749037d45b2b9fe55ceab514,
