@@ -73,6 +73,7 @@ public class AITransitionsController : MonoBehaviour
                 onStartedAskingForCross?.Invoke();
                 DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
             }
+
             else if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone())
             {
                 // TODO: Run probability for letting an entity asking for pass cross?!
