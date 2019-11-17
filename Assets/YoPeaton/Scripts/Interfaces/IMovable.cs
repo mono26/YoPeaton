@@ -18,4 +18,8 @@ public interface IMovable {
 
     void AddOnMovement(System.Action<Vector3> _onMovementAction);
     void RemoveOnMovement(System.Action<Vector3> _onMovementAction);
+
+    // TODO refactor!!! Extraer a IEntityMovable
+    void AddOnMovementEntity(System.Action<EntityController> _onMovementAction);
+    void RemoveOnMovementEntity(System.Action<EntityController> _onMovementAction);
 }

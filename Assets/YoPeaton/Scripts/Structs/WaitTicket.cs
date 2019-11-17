@@ -1,22 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 [System.Serializable]
 public struct WaitTicket
 {
-    public EntityController waitingEntity;
     public System.DateTime waitStartTime;
     public bool gaveCross;
     public System.DateTime gaveCrossTime;
-    public static readonly WaitTicket invalidTicket = new WaitTicket() { waitingEntity = null, waitStartTime = System.DateTime.MinValue, gaveCrossTime = System.DateTime.MinValue };
+    public static readonly WaitTicket invalidTicket = new WaitTicket() { waitStartTime = System.DateTime.MinValue, gaveCrossTime = System.DateTime.MinValue };
 
     public const float maxWaitTimeInSeconds = 30.0f;
-
-    public WaitTicket(EntityController _entity) {
-        waitingEntity = _entity;
-        waitStartTime = System.DateTime.UtcNow;
-        gaveCross = false;
-        gaveCrossTime = waitStartTime.AddSeconds(maxWaitTimeInSeconds);
-    }
 }

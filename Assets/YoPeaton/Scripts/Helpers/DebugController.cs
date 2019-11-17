@@ -24,7 +24,7 @@ public static class DebugController
     /// <param name="message"> Raw message to log (Must come already in format).</param>
     public static void LogErrorMessage(string message) {
         if (debugActive) {
-            Debug.Log(string.Format("<color=red>{0}</color>",message));
+            Debug.Log(string.Format("<color=red>ERROR: {0}</color>",message));
         }
     }
 

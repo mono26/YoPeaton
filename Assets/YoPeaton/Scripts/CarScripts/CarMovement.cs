@@ -4,6 +4,7 @@ using UnityEngine;
 public class CarMovement : MonoBehaviour, IMovable
 {
     private System.Action<Vector3> onMovement;
+    private System.Action<EntityController> onEntityMovement;
 
     [SerializeField]
     private EntityController movingEntity;
@@ -157,5 +158,15 @@ public class CarMovement : MonoBehaviour, IMovable
 
     public void RemoveOnMovement(Action<Vector3> _onMovementAction) {
         onMovement -= _onMovementAction;
+    }
+
+    public void AddOnMovementEntity(Action<EntityController> _onMovementAction)
+    {
+        onEntityMovement += _onMovementAction;
+    }
+
+    public void RemoveOnMovementEntity(Action<EntityController> _onMovementAction)
+    {
+        onEntityMovement -= _onMovementAction;
     }
 }

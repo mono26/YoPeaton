@@ -50,7 +50,8 @@ public class AITransitionsController : MonoBehaviour
 
     public void CheckTransitions() 
     {
-        if (aiEntity.GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass))
+        AIState currentState = aiEntity.GetCurrentState;
+        if (currentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass))
         {
             // TODO: Run probability of wait for clear pass?!
             if (canCrossAfterWait && aiEntity.GetCurrentCrossingZone)
@@ -63,7 +64,7 @@ public class AITransitionsController : MonoBehaviour
                 }
             }
         }
-        else if (aiEntity.GetCurrentState.Equals(AIState.WaitingAtCrossWalk))
+        else if (currentState.Equals(AIState.WaitingAtCrossWalk))
         {
             if (ShouldAskForCross())
             {
