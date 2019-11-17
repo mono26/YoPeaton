@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2571560869816294520}
   - component: {fileID: 6752707433719172154}
   m_Layer: 11
-  m_Name: Bound
+  m_Name: WalkingSection
   m_TagString: CrossWalk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.04, y: -0.75}
+  m_Offset: {x: 0.04, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -55,7 +55,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.34, y: 1.2}
+  m_Size: {x: 2.5, y: 2.9}
   m_EdgeRadius: 0
 --- !u!1 &1282674311786898720
 GameObject:
@@ -193,11 +193,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa5833c96d8d99a41a0bc4ca9b25e336, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitingPedestrians: []
-  waitingCars: []
-  crossingPedestrians: []
-  crossingCars: []
   type: 0
+  crossAreaBounds: {fileID: 6752707433719172154}
+  crossingCars: []
 --- !u!50 &8574809909142508040
 Rigidbody2D:
   serializedVersion: 4
