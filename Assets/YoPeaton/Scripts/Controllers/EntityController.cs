@@ -39,6 +39,7 @@ public abstract class EntityController : MonoBehaviour
     private bool isChangingDirection = false;
     private Crosswalk exitedCrosswalk;
     private WaitForSeconds exitedCrosswalkClearWait;
+    protected bool entityIsPlayer = true;
 
 #region Properties
 
@@ -119,15 +120,22 @@ public abstract class EntityController : MonoBehaviour
             }
         }
 
-        if (gameObject.tag == "Car")
+        if (gameObject.tag == "Car" && !entityIsPlayer)
         {
-            if(probability < 0.65f)
+            if(probability < 0.4f)
             {
-                entitySubType = EntitySubType.BlueCar;
-            } else
+                entitySubType = EntitySubType.RedCar;
+            } else if (probability < 0.65f)
+            {
+                entitySubType = EntitySubType.GreenCar;
+            }
+            else
             {
                 entitySubType = EntitySubType.YellowCar;
             }
+        } else if (entityIsPlayer)
+        {
+            entitySubType = EntitySubType.BlueCar;
         }
     }
 

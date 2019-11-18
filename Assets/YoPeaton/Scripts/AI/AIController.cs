@@ -32,7 +32,9 @@ public class AIController : EntityController
 
     protected override void Awake() 
     {
+        entityIsPlayer = false;
         base.Awake();
+       
         // Catching the transitions controller.
         if (!transitionController)
         {

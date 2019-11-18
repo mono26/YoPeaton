@@ -50,7 +50,7 @@ public class CarMovement : MonoBehaviour, IMovable
 
     private void Start()
     {
-        
+        this.transform.localRotation = new Quaternion(0, 0, 0, 0);
             //ToggleBrakeLights(false);
     }
 
@@ -93,7 +93,7 @@ public class CarMovement : MonoBehaviour, IMovable
         // }
         // Vector2 lerpedRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
         // transform.right = lerpedRotation;
-        transform.right = directionTowardsPosition;
+        //transform.right = directionTowardsPosition;
     }
 
     public void ApplyBrakes(float _deltaTime) {
