@@ -139,16 +139,17 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void Update() 
     {
+        float deltaTime = Time.deltaTime;
         if (ShouldStop()) {
             // DebugController.LogMessage("STOP!");
-            GetMovableComponent?.SlowDown();
+            GetMovableComponent?.SlowDownByPercent(100.0f);
         }
         else if (ShouldSlowDown()) {
             // DebugController.LogMessage("Slowing down");
-            GetMovableComponent?.SlowDown();
+            GetMovableComponent?.SlowDown(deltaTime);
         }
         else {
-            GetMovableComponent?.SpeedUp();
+            GetMovableComponent?.SpeedUp(deltaTime);
         }
     }
 
@@ -191,25 +192,37 @@ public abstract class EntityController : MonoBehaviour
 
     protected abstract bool ShouldSlowDown();
 
-    protected virtual void OnTriggerEnter2D(Collider2D _other) {
-        if (_other.CompareTag("ChangeOfDirection")) {
+    protected virtual void OnTriggerEnter2D(Collider2D _other) 
+    {
+        if (_other.CompareTag("ChangeOfDirection")) 
+        {
             float chanceOfChangingDirection = 100.0f;
-            if (!followComponent.IsTheEndOfPath(_other.transform.position)) {
+            if (!followComponent.IsTheEndOfPath(_other.transform.position)) 
+            {
                 chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
             }
-            if (chanceOfChangingDirection >= 100 - changeDirectionProbability) {
+            if (chanceOfChangingDirection >= 100 - changeDirectionProbability) 
+            {
                 //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                 DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
                 nextPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
-                if (nextPath) {
+                if (nextPath) 
+                {
                     nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
                     currentPathConnected_t_ParameterToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
                     isChangingDirection = true;
                 }
             }
         }
-        else if (_other.CompareTag("StreetBounds")) {
+        else if (_other.CompareTag("StreetBounds"))
+        {
             isOnTheStreet = true;
+        }
+        else if (_other.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian"))
+        {
+            EntityController otherEntity = _other.GetComponent<EntityController>();
+            DebugController.LogErrorMessage(string.Format("Collided with other entity {0}", otherEntity.gameObject.name));
+            // Collision with entity.
         }
     }
 
@@ -239,7 +252,8 @@ public abstract class EntityController : MonoBehaviour
     /// Checks for a obstacle ahead.true If it's a pedestrian or car stops.
     /// </summary>
     /// <returns>True if there is a obstacle ahead. False if not.</returns>
-    public bool IsThereAObstacleUpFront() {
+    public bool IsThereAObstacleUpFront() 
+    {
         bool stop = false;
         Vector3 direction = (GetFollowPathComponent.GetPosition(lastTParameter + 0.1f) - GetFollowPathComponent.GetPosition(lastTParameter)).normalized;
         Vector3 startPosition = transform.position + colliderOffset + (direction * (float)(((colliderRadius) * transform.localScale.x) + 0.1f));
@@ -248,10 +262,13 @@ public abstract class EntityController : MonoBehaviour
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
         GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
         if (obstacle) {
-            if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) {
-                if (obstacle.GetComponent<EntityController>().IsOnTheStreet) {
-                    stop = true;
-                }
+            if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) 
+            {
+                //if (obstacle.GetComponent<EntityController>().IsOnTheStreet) 
+                //{
+                //    stop = true;
+                //}
+                stop = true;
             }
         }
         return stop;

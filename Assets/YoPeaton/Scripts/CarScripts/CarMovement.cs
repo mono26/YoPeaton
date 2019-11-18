@@ -54,9 +54,9 @@ public class CarMovement : MonoBehaviour, IMovable
             //ToggleBrakeLights(false);
     }
 
-    private void Accelerate() {
+    private void Accelerate(float _deltaTime) {
         if (currentSpeed < maxSpeed) {
-            currentSpeed += acceleration * Time.fixedDeltaTime;
+            currentSpeed += acceleration * _deltaTime;
         }
         else if (currentSpeed >  maxSpeed) {
             currentSpeed = maxSpeed;
@@ -64,9 +64,9 @@ public class CarMovement : MonoBehaviour, IMovable
         //ToggleBrakeLights(false);
     }
 
-    private void MoveWithDirection(Vector3 _direction) {
+    private void MoveWithDirection(float _detltaTime, Vector3 _direction) {
         Vector3 currentPosition = carBody.position;
-        Vector3 nextPosition = currentPosition + (_direction.normalized * currentSpeed * Time.fixedDeltaTime);
+        Vector3 nextPosition = currentPosition + (_direction.normalized * currentSpeed * _detltaTime);
         MoveToNextPosition(nextPosition);
     }
 
@@ -81,6 +81,7 @@ public class CarMovement : MonoBehaviour, IMovable
         // onMovement?.Invoke(currentDirection);
         currentDirection = (_position - transform.position).normalized;
         onMovement?.Invoke(currentDirection);
+        onEntityMovement?.Invoke(movingEntity);
     }
 
     private void RotateInDirectionOfPosition(Vector3 _position) {
@@ -95,9 +96,9 @@ public class CarMovement : MonoBehaviour, IMovable
         transform.right = directionTowardsPosition;
     }
 
-    public void ApplyBrakes() {
+    public void ApplyBrakes(float _deltaTime) {
         if (currentSpeed > 0.0f) {
-            currentSpeed -= brakeSpeed * Time.fixedDeltaTime;
+            currentSpeed -= brakeSpeed * _deltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0.0f, maxSpeed);
         }
         //ToggleBrakeLights(true);
@@ -112,13 +113,13 @@ public class CarMovement : MonoBehaviour, IMovable
     {
         ApplyInmediateStop();
     }
-    public void SpeedUp() {
-        Accelerate();
+    public void SpeedUp(float _deltaTime) {
+        Accelerate(_deltaTime);
     }
 
-    public void SlowDown() {
+    public void SlowDown(float _deltaTime) {
         // Clamp to a min value.
-        ApplyBrakes();
+        ApplyBrakes(_deltaTime);
         
     }
 
@@ -138,14 +139,9 @@ public class CarMovement : MonoBehaviour, IMovable
             
     }*/
 
-    public void SlowDown(float _slowPercent) {
-        currentSpeed = currentSpeed * (_slowPercent / 100);
+    public void SlowDownByPercent(float _slowPercent) {
+        currentSpeed = currentSpeed * ((100 - _slowPercent) / 100);
         //ToggleBrakeLights(true);
-    }
-
-    public void SlowToStop() {
-        // Clamp to zero.
-        ApplyBrakes();
     }
 
     public void MoveToPosition(Vector3 position) {

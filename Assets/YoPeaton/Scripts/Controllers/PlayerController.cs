@@ -17,58 +17,34 @@ public class PlayerController : EntityController
         }
     }
 
-    //MACHETAZO PARA EL PUNTAJE//
-    /*protected override void FixedUpdate()
+    //protected override void Update()
+    //{
+    //    float deltaTime = Time.deltaTime;
+    //    if (ShouldStop())
+    //    {
+    //        // DebugController.LogMessage("STOP!");
+    //        GetMovableComponent?.SlowDownByPercent(100.0f);
+    //    }
+    //    else if (ShouldSlowDown())
+    //    {
+    //        // DebugController.LogMessage("Slowing down");
+    //        GetMovableComponent?.SlowDown(deltaTime);
+    //    }
+    //    else
+    //    {
+    //        GetMovableComponent?.SpeedUp(deltaTime);
+    //    }
+    //}
+
+    protected override bool ShouldStop() 
     {
-       if (ShouldStop()) {
-            // DebugController.LogMessage("STOP!");
-            GetMovableComponent?.SlowDown();
-        }
-        else if (ShouldSlowDown()) {
-            // DebugController.LogMessage("Slowing down");
-            GetMovableComponent?.SlowDown();
-        }
-        else {
-            GetMovableComponent?.SpeedUp();
-        }
-         lifeTime--;
-    }*/
-
-    protected override void Update()
-    {
-        if (ShouldStop())
+        bool stop = IsThereAObstacleUpFront();
+        if (stop)
         {
-            // DebugController.LogMessage("STOP!");
-            GetMovableComponent?.SlowDown();
+            DebugController.LogErrorMessage("Player should stop!");
         }
-        else if (ShouldSlowDown())
-        {
-            // DebugController.LogMessage("Slowing down");
-            GetMovableComponent?.SlowDown();
-        }
-        else if (ShouldStopInmediatly())
-        {
-            //DebugController.LogMessage("¡Colision!");
-            GetMovableComponent?.ShouldInmediatlyStop();
-        }
-        else
-        {
-            GetMovableComponent?.SpeedUp();
-        }
-    }
-
-    protected override bool ShouldStop() {
-
-        return false;
+        return stop;
         // return input.IsBraking;
-    }
-
-    public bool ShouldStopInmediatly()
-    {
-        if (IsThereAObstacleUpFront())
-            return true;
-        else
-            return false;
     }
 
     protected override bool ShouldSlowDown() {
@@ -81,7 +57,7 @@ public class PlayerController : EntityController
 
     public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Entered crosswalk");
-        _crossWalk.OnStartedCrossing(this);
+        // _crossWalk.OnStartedCrossing(this);
     }
 
     public override void OnCrossWalkExited(Crosswalk _crossWalk) {

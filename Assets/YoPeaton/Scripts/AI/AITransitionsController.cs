@@ -74,13 +74,12 @@ public class AITransitionsController : MonoBehaviour
                 onStartedAskingForCross?.Invoke();
                 DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
             }
-
             else if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone())
             {
                 // TODO: Run probability for letting an entity asking for pass cross?!
-                EntityType oherEntity = (aiEntity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
+                EntityType otherEntity = (aiEntity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
                 bool giveCross = ShouldGiveCross();
-                bool isSomeoneAkingForCross = aiEntity.GetCurrentCrossingZone.IsThereAEntityAskingForCross(oherEntity);
+                bool isSomeoneAkingForCross = aiEntity.GetCurrentCrossingZone.IsThereAEntityAskingForCross(otherEntity);
                 if (!alreadyGaveCross && isSomeoneAkingForCross && giveCross)
                 {
                     aiEntity.GetCurrentCrossingZone.OnEntityGivingCross(aiEntity);

@@ -5,15 +5,14 @@ using UnityEngine;
 public interface IMovable {
     float GetCurrentSpeed { get; }
     EntityController GetEntity { get; }
-    void SpeedUp();
+    void SpeedUp(float _deltaTime);
     void MoveToPosition(Vector3 nextPosition);
-    void SlowDown();
+    void SlowDown(float _deltaTime);
     /// <summary>
     /// Lower the current speed to a percentage.
     /// </summary>
     /// <param name="_slowPercent">Percentage to reduce speed to.</param>
-    void SlowDown(float _slowPercent);
-    void SlowToStop();
+    void SlowDownByPercent(float _slowPercent);
     void ShouldInmediatlyStop();
 
     void AddOnMovement(System.Action<Vector3> _onMovementAction);

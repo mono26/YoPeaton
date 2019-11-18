@@ -87,8 +87,12 @@ public class AIController : EntityController
     public override void OnCrossWalkEntered(Crosswalk _crossWalk)
     {
         // DebugController.LogMessage("Entered crosswalk");
-        currentCrossingZone = _crossWalk;
-        transitionController?.OnCrossWalkEntered();
+        if (!currentCrossingZone || !currentCrossingZone.Equals(_crossWalk))
+        {
+            currentCrossingZone?.OnFinishedCrossing(this);
+            currentCrossingZone = _crossWalk;
+            transitionController?.OnCrossWalkEntered();
+        }
     }
 
     public override void OnCrossWalkExited(Crosswalk _crossWalk)

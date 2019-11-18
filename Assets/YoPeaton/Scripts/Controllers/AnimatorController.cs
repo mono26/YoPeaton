@@ -23,7 +23,10 @@ public class AnimatorController : MonoBehaviour
 
     void OnEnable()
     {
-        movableComponent.AddOnMovement(SetCurrentAnimation);
+        if (movableComponent != null)
+        {
+            movableComponent.AddOnMovement(SetCurrentAnimation);
+        }
         if(transitionsController != null)
             transitionsController.onStartedAskingForCross += OnStartedToAskForPass;
     }
