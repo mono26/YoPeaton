@@ -114,7 +114,8 @@ public class CanvasManager : MonoBehaviour
             fillPercent = (playerGO.GetComponent<CarMovement>().GetCurrentSpeed / playerGO.GetComponent<CarMovement>().GetMaxSpeed);
             //Debug.Log("Fill Percent: "  + fillPercent);
             speedImage.fillAmount = fillPercent;
-            timeLeftText.text = ScoreManager.lifeTime.ToString();
+            var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);
+            timeLeftText.text = lifeTimeInt.ToString();
         }
     }
     #region Manejo De Canvas

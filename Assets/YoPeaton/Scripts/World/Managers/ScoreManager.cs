@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
     public static int finalScore;
     public float countDuration = 2f;
 
-    public static int lifeTime = 5000;
+    public static float lifeTime = 60;
 
     public static int correctAnswers = 0;
     public static int wrongAnswers = 0;
@@ -62,8 +62,10 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        if(Time.timeScale ==1)
-        lifeTime--;
+        if (Time.timeScale == 1)
+        {
+            lifeTime -= Time.deltaTime;
+        }
         if(lifeTime <= 0 && SceneManagerTest.GetCurrentScene() != "VictoryScreenScene")
         {
             lifeTime = 0;
@@ -80,7 +82,7 @@ public class ScoreManager : MonoBehaviour
     }
     public static int CalculateFinalScore()
     {
-        timeScore = lifeTime;
+        timeScore = Mathf.RoundToInt(lifeTime);
         Debug.LogWarning("Going to calculate Final Scores");
 
         correctReportScore = (correctReports * scoreForCorrectInputs)/ 2;

@@ -27,6 +27,9 @@ public class SignalIdentification : MonoBehaviour
     [SerializeField]
     private bool canAnswer = true;
 
+    [SerializeField]
+    private int correctAnswersQt = 0;
+
     private void Start()
     {
         canAnswer = true;
@@ -37,9 +40,9 @@ public class SignalIdentification : MonoBehaviour
 
         //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
         //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-        if (collision.tag == "CrossWalk" && canAnswer == true)
+        if (collision.tag == "CrossWalk" && canAnswer == true && correctAnswersQt < 3)
         {
-            Time.timeScale = 0.5f;
+            Time.timeScale = 0f;
             Debug.Log("Time Scale: " + Time.timeScale);
             //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
             CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
@@ -72,7 +75,7 @@ public class SignalIdentification : MonoBehaviour
     public void AcceptSignalIdentification()
     {
         //El tiempo se pone lento//
-        Time.timeScale = 0.5f;
+        Time.timeScale = 0f;
         //Debug.LogWarning("Accepted");
         CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
     }
@@ -98,7 +101,7 @@ public class SignalIdentification : MonoBehaviour
         if (correctAnswer == selectedAnswer)
         {
             CanvasManager._instance.GenerateFeedback("CorrectAnswer");
-
+            correctAnswersQt++;
             ScoreManager.instance.AddAnswer(true);
             CanvasManager._instance.ActivateCheckOrCross(true);
         }
