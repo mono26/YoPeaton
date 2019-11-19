@@ -111,12 +111,36 @@ public abstract class EntityController : MonoBehaviour
 
         if(gameObject.tag == "Pedestrian")
         {
-            if (probability < 0.5f)
+            if (probability < 0.3f)
             {
                 entitySubType = EntitySubType.Male;
-            } else if (probability < 1f)
+            } else if (probability < 0.6f)
             {
                 entitySubType = EntitySubType.Female;
+            }
+            else if (probability < 0.67f)
+            {
+                entitySubType = EntitySubType.MaleWithBaby;
+            }
+            else if (probability < 0.74f)
+            {
+                entitySubType = EntitySubType.FemaleWithBaby;
+            }
+            else if (probability < 0.84f)
+            {
+                entitySubType = EntitySubType.MaleWithDog;
+            }
+            else if (probability < 0.94f)
+            {
+                entitySubType = EntitySubType.FemaleWithDog;
+            }
+            else if (probability < 0.97f)
+            {
+                entitySubType = EntitySubType.MaleWithWalker;
+            }
+            else if (probability < 1f)
+            {
+                entitySubType = EntitySubType.FemaleWithWalker;
             }
         }
 
