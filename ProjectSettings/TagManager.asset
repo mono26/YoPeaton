@@ -48,9 +48,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Top
-    uniqueID: 4140713813
-    locked: 0
   - name: UI
     uniqueID: 3959357785
+    locked: 0
+  - name: Street
+    uniqueID: 3316684469
+    locked: 0
+  - name: Cars
+    uniqueID: 597400935
+    locked: 0
+  - name: Trees
+    uniqueID: 3416086699
+    locked: 0
+  - name: BuildingsBot
+    uniqueID: 1234901649
+    locked: 0
+  - name: BuildingsMid
+    uniqueID: 3424676897
+    locked: 0
+  - name: BuildingsTop
+    uniqueID: 4140713813
     locked: 0
