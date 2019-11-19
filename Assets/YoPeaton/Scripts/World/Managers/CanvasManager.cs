@@ -22,9 +22,9 @@ public class CanvasManager : MonoBehaviour
     public Text[] textsForScores = new Text[7];
 
     [SerializeField]
-    private Canvas baseCanvas;
+    private GameObject hudPanel;
     [SerializeField]
-    private Canvas pausaCanvas;
+    private GameObject pausePanel;
     [SerializeField]
     public GameObject crosswalkGuessHUD;
     [SerializeField]
@@ -95,12 +95,12 @@ public class CanvasManager : MonoBehaviour
         currentScore = 0;
 
         //Activar unicamente el base
-        baseCanvas.enabled = true;
-        currentActiveCanvas = baseCanvas.name;
+        hudPanel.SetActive(true);
+        currentActiveCanvas = hudPanel.name;
 
         //scoresToCountTo = new int[7];
         //Desastivar todos los otros canvas
-        pausaCanvas.enabled = false;
+        pausePanel.SetActive(false);
         crosswalkGuessHUD.SetActive(false);
         crosswalkTypesButtons.SetActive(false);
         //crosswalkQuestionButtons.SetActive(false);
@@ -124,13 +124,13 @@ public class CanvasManager : MonoBehaviour
     {
         if (!GameManager.isPaused)
         {
-            baseCanvas.enabled = true;
-            pausaCanvas.enabled = false;
+            hudPanel.SetActive(true);
+            pausePanel.SetActive(false);
         }
         else
         {
-            baseCanvas.enabled = false;
-            pausaCanvas.enabled = true;
+            hudPanel.SetActive(false);
+            pausePanel.SetActive(true);
         }
     }
 
@@ -149,7 +149,7 @@ public class CanvasManager : MonoBehaviour
 
     public void BackToBaseCanvas()
     {
-        baseCanvas.enabled = true;
+        hudPanel.SetActive(true);
         crosswalkTypesButtons.SetActive(false);
         crosswalkQuestionButtons.SetActive(true);
         crosswalkGuessHUD.SetActive(false);
