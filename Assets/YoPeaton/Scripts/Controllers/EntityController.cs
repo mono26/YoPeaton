@@ -227,11 +227,6 @@ public abstract class EntityController : MonoBehaviour
         {
             if (!isOnTheStreet)
             {
-                DebugController.LogMessage("Player entered the street");
-                if (gameObject.name.Equals("PlayerCar_PFB"))
-                {
-                    DebugController.LogMessage("Player entered the street");
-                }
                 isOnTheStreet = true;
             }
         }
@@ -249,11 +244,6 @@ public abstract class EntityController : MonoBehaviour
         {
             if (isOnTheStreet)
             {
-                DebugController.LogMessage("Player exited the street");
-                if (gameObject.name.Equals("PlayerCar_PFB"))
-                {
-                    DebugController.LogMessage("Player exited the street");
-                }
                 isOnTheStreet = false;
             }
         }
@@ -265,11 +255,6 @@ public abstract class EntityController : MonoBehaviour
        {
            if (!isOnTheStreet)
            {
-               DebugController.LogMessage("Player stay on the street");
-               if (gameObject.name.Equals("PlayerCar_PFB"))
-               {
-                   DebugController.LogMessage("Player stay on the street");
-               }
                isOnTheStreet = true;
            }
        }
