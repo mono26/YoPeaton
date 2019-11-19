@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AITransitionsController : MonoBehaviour
 {
-    public Action onStartedAskingForCross;
+    public Action<Vector3> onStartedAskingForCross;
 
     [SerializeField]
     private float stopProbability = 100.0f;
@@ -71,7 +71,7 @@ public class AITransitionsController : MonoBehaviour
                 aiEntity.SwitchToState(AIState.WaitingAtCrossWalkAndAskingForPass);
                 canCrossAfterWait = false;
                 StartCoroutine(AskedForCrossWait());
-                onStartedAskingForCross?.Invoke();
+                onStartedAskingForCross?.Invoke(aiEntity.GetCurrentDirection);
                 DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
             }
             else if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone())
