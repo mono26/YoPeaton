@@ -188,7 +188,8 @@ public class AnimatorController : MonoBehaviour
         //}
     }
 
-    public void OnStartedToAskForPass() {
-
+    public void OnStartedToAskForPass() 
+    {
+        DebugController.LogMessage("Aqui debe ir la animacion de pedir via.");
     }
 }

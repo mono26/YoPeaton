@@ -30,6 +30,7 @@ public abstract class EntityController : MonoBehaviour
     private float distanceTravelled = 0.0f;
     private float lastTParameter = 0.0f;
     private bool move = true;
+    [SerializeField]
     private bool isOnTheStreet = false;
     private float colliderRadius;
     private Vector3 colliderOffset;
@@ -248,28 +249,39 @@ public abstract class EntityController : MonoBehaviour
         }
         else if (_other.CompareTag("StreetBounds"))
         {
-            isOnTheStreet = true;
-        }
-        else if (_other.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian"))
-        {
-            EntityController otherEntity = _other.GetComponent<EntityController>();
-            DebugController.LogErrorMessage(string.Format("Collided with other entity {0}", otherEntity.gameObject.name));
-            // Collision with entity.
-        }
-    }
-
-    protected virtual void OnTriggerExit2D(Collider2D _other) {
-        if (_other.CompareTag("StreetBounds")) {
-            isOnTheStreet = false;
-        }
-    }
-
-    protected virtual void OnTriggerStay2D(Collider2D _other) {
-        if (!isOnTheStreet) {
-            if (_other.CompareTag("StreetBounds")) {
+            if (!isOnTheStreet)
+            {
                 isOnTheStreet = true;
             }
         }
+        //else if (_other.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian"))
+        //{
+        //    EntityController otherEntity = _other.GetComponent<EntityController>();
+        //    DebugController.LogErrorMessage(string.Format("Collided with other entity {0}", otherEntity.gameObject.name));
+        //    // Collision with entity.
+        //}
+    }
+
+    protected virtual void OnTriggerExit2D(Collider2D _other) 
+    {
+        if (_other.CompareTag("StreetBounds"))
+        {
+            if (isOnTheStreet)
+            {
+                isOnTheStreet = false;
+            }
+        }
+    }
+
+    protected virtual void OnTriggerStay2D(Collider2D _other) 
+    {
+       if (_other.CompareTag("StreetBounds")) 
+       {
+           if (!isOnTheStreet)
+           {
+               isOnTheStreet = true;
+           }
+       }
     }
 
     public abstract void OnCrossWalkEntered(Crosswalk _crossWalk);
@@ -296,11 +308,11 @@ public abstract class EntityController : MonoBehaviour
         if (obstacle) {
             if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) 
             {
-                //if (obstacle.GetComponent<EntityController>().IsOnTheStreet) 
-                //{
-                //    stop = true;
-                //}
-                stop = true;
+                bool onTheStreet = obstacle.GetComponent<EntityController>().IsOnTheStreet;
+                if (onTheStreet)
+                {
+                    stop = true;
+                }
             }
         }
         return stop;
