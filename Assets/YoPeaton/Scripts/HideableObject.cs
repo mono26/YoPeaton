@@ -9,19 +9,22 @@ public class HideableObject : MonoBehaviour
     [SerializeField]
     private Color visibleColor;
     [SerializeField]
-    private Color hidedColor;
+    private Color hiddenColor;
     // Start is called before the first frame update
     void Start()
     {
+        visibleColor = new Color(1, 1, 1, 1);
+        hiddenColor = new Color(1, 1, 1, 0.25f);
         renderer = this.GetComponent<SpriteRenderer>();
         renderer.color = visibleColor;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("COLISION CON: " + collision.name);
         if (collision.CompareTag("PlayerCar"))
         {
-            renderer.color = hidedColor;
+            renderer.color = hiddenColor;
         }
     }
 

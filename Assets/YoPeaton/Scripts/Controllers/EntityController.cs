@@ -309,7 +309,7 @@ public abstract class EntityController : MonoBehaviour
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
         GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
         if (obstacle) {
-            if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car")) 
+            if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car") || obstacle.CompareTag("PlayerCar"))
             {
                 bool onTheStreet = obstacle.GetComponent<EntityController>().IsOnTheStreet;
                 if (onTheStreet)

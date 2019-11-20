@@ -43,7 +43,7 @@ public class SignalIdentification : MonoBehaviour
         if (collision.tag == "CrossWalk" && canAnswer == true && correctAnswersQt < 3)
         {
             Time.timeScale = 0f;
-            Debug.Log("Time Scale: " + Time.timeScale);
+            //Debug.Log("Time Scale: " + Time.timeScale);
             //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
             CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
             correctAnswer = collision.GetComponent<Crosswalk>().GetCrossWalkType.ToString();

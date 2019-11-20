@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 5162524990170631424}
   - component: {fileID: 3301391610185832270}
   - component: {fileID: 4214992716920068867}
+  - component: {fileID: 6610728040275199548}
   - component: {fileID: 5162524990170631430}
   - component: {fileID: 5162524990170631431}
   - component: {fileID: 5162524990170631429}
@@ -540,6 +541,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
   controller: {fileID: 0}
+--- !u!114 &6610728040275199548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162524990170631428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d98539614c8ef5b4ba0c25084afe6b94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visibleColor: {r: 0, g: 0, b: 0, a: 0}
+  hiddenColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &5162524990170631430
 Rigidbody2D:
   serializedVersion: 4

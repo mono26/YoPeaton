@@ -11,6 +11,8 @@ TagManager:
   - ChangeOfDirection
   - StreetBounds
   - Goal
+  - Building
+  - PlayerCar
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - DirectionChange
   - CrossWalk
   - StreetBounds
-  - 
+  - Buildings
   - 
   - 
   - 

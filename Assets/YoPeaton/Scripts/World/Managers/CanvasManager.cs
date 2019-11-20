@@ -109,7 +109,7 @@ public class CanvasManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManagerTest.GetCurrentScene() == "TestScene")
+        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() != "VictoryScreenScene")
         {
             fillPercent = (playerGO.GetComponent<CarMovement>().GetCurrentSpeed / playerGO.GetComponent<CarMovement>().GetMaxSpeed);
             //Debug.Log("Fill Percent: "  + fillPercent);
