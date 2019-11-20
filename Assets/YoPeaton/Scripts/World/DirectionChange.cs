@@ -5,26 +5,26 @@ using UnityEngine;
 public class DirectionChange : MonoBehaviour
 {
     [SerializeField]
-    private PathConnectionPair[] connections = null;
+    private PathConnectionPair[] connection = null;
 
     private void OnDrawGizmos() {
-        if (connections.Length > 0) {
-            for (int i = 0; i < connections.Length; i++) {
-                float t = connections[i].path1.GetTParameter(transform.position);
+        if (connection.Length > 0) {
+            for (int i = 0; i < connection.Length; i++) {
+                float t = connection[i].from.GetTParameter(transform.position);
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(connections[i].path1.GetPoint(t), transform.position);
-                float t2 = connections[i].path2.GetTParameter(transform.position);
+                Gizmos.DrawLine(connection[i].from.GetPoint(t), transform.position);
+                float t2 = connection[i].to.GetTParameter(transform.position);
                 Gizmos.color = Color.green;
-                Gizmos.DrawLine(connections[i].path2.GetPoint(t2), transform.position);
+                Gizmos.DrawLine(connection[i].to.GetPoint(t2), transform.position);
             }
         }
     }
 
     public BezierSpline GetConnectionFrom(BezierSpline _pathToGetNexTConnection) {
         List<BezierSpline> posibleConnections = new List<BezierSpline>();
-        for (int i = 0; i < connections.Length; i++) {
-            if (connections[i].HasAMatchingPath(_pathToGetNexTConnection)) {
-                posibleConnections.Add(connections[i].GetConnection(_pathToGetNexTConnection));
+        for (int i = 0; i < connection.Length; i++) {
+            if (connection[i].IsConnectionForPath(_pathToGetNexTConnection)) {
+                posibleConnections.Add(connection[i].GetConnection(_pathToGetNexTConnection));
             }
         }
         BezierSpline connectionToReturn = null;
@@ -32,5 +32,17 @@ public class DirectionChange : MonoBehaviour
             connectionToReturn = posibleConnections[Random.Range(0, posibleConnections.Count)];
         }
         return connectionToReturn;
+    }
+
+    public bool  HasConnection(BezierSpline _pathToCheckForConnection)
+    {
+        bool hasConnection = false;
+        foreach (PathConnectionPair connectionPair in connection) {
+            if (connectionPair.IsConnectionForPath(_pathToCheckForConnection)) {
+                hasConnection = true;
+                break;
+            }
+        }
+        return hasConnection;
     }
 }

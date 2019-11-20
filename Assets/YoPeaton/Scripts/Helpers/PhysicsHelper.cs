@@ -76,4 +76,20 @@ public static class PhysicsHelper
         }
         return goToReturn;
     }
+
+    public static GameObject RayCastForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision) {
+        goToReturn = null;
+        objectHit = null;
+        castHit = Physics2D.Raycast(_startPosition, _direction, _distance, _layersToCheckCollision);
+        DebugController.DrawDebugRay(_startPosition, _direction, _distance, Color.magenta);
+        DebugController.DrawDebugRay(_startPosition, _direction, _distance, Color.magenta);
+        if (castHit.collider) {
+            objectHit = castHit.collider.gameObject;
+            if (objectHit && !objectHit.Equals(_castingGO)) {
+                DebugController.DrawDebugLine(_startPosition, castHit.point, Color.magenta);
+                goToReturn = objectHit;
+            }
+        }
+        return goToReturn;
+    }
 }

@@ -35,7 +35,7 @@ public class Crosswalk : MonoBehaviour
     {
         if (crossAreaBounds)
         {
-            crossWalkLenght = crossAreaBounds.bounds.size.x;
+            crossWalkLenght = crossAreaBounds.bounds.size.x * transform.localScale.x;
         }
         else
         {
@@ -217,10 +217,6 @@ public class Crosswalk : MonoBehaviour
                     break;
                 }
             }
-        }
-        if (gameObject.name.Equals("CrossWalk_PFB (1)"))
-        {
-            DebugController.LogMessage(cross.ToString());
         }
         return cross;
     }

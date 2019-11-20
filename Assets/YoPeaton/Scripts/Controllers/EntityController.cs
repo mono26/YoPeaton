@@ -229,21 +229,24 @@ public abstract class EntityController : MonoBehaviour
     {
         if (_other.CompareTag("ChangeOfDirection")) 
         {
-            float chanceOfChangingDirection = 100.0f;
-            if (!followComponent.IsTheEndOfPath(_other.transform.position)) 
+            DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
+            if (directionChanger.HasConnection(followComponent.GetPath))
             {
-                chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
-            }
-            if (chanceOfChangingDirection >= 100 - changeDirectionProbability) 
-            {
-                //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
-                DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
-                nextPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
-                if (nextPath) 
+                float chanceOfChangingDirection = 100.0f;
+                if (!followComponent.IsTheEndOfPath(_other.transform.position) && followComponent.IsThereOtherChangeOfDirection()) 
                 {
-                    nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
-                    currentPathConnected_t_ParameterToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
-                    isChangingDirection = true;
+                    chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
+                }
+                if (chanceOfChangingDirection >= 100 - changeDirectionProbability) 
+                {
+                    //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
+                    nextPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
+                    if (nextPath) 
+                    {
+                        nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
+                        currentPathConnected_t_ParameterToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
+                        isChangingDirection = true;
+                    }
                 }
             }
         }

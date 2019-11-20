@@ -9,6 +9,8 @@ public class FollowPath : MonoBehaviour
 
     [SerializeField]
     private BezierSpline pathToFollow = null;
+    [SerializeField]
+    private LayerMask directionChangeLayer;
 
     private bool moveComponent = true;
     private float pathLength;
@@ -98,5 +100,13 @@ public class FollowPath : MonoBehaviour
 
     public bool IsTheEndOfPath(Vector3 _pointToCheck) {
         return !(pathToFollow.GetTParameter(_pointToCheck) < 0.95f);
+    }
+
+    public bool IsThereOtherChangeOfDirection()
+    {
+        Vector3 endOfPath = pathToFollow.GetPoint(1.0f);
+        Vector3 directionVector = endOfPath - transform.position;
+        GameObject directionChange = PhysicsHelper.RayCastForFirstGameObject(gameObject, transform.position, directionVector.normalized, directionVector.magnitude, directionChangeLayer);
+        return directionChange != null;
     }
 }

@@ -48,9 +48,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: UI
-    uniqueID: 3959357785
-    locked: 0
   - name: Street
     uniqueID: 3316684469
     locked: 0
@@ -68,4 +65,7 @@ TagManager:
     locked: 0
   - name: BuildingsTop
     uniqueID: 4140713813
+    locked: 0
+  - name: UI
+    uniqueID: 3959357785
     locked: 0
