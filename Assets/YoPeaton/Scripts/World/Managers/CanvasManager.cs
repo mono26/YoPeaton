@@ -161,6 +161,7 @@ public class CanvasManager : MonoBehaviour
     { 
         if(isCorrect)
         {
+            Debug.Log("ACTIVE EL CHECK");
             checkAndCrossImg.enabled = true;
             checkAndCrossImg.sprite = checkSprite;
             checkAndCrossAnimator.enabled = true;
@@ -241,14 +242,15 @@ public class CanvasManager : MonoBehaviour
     IEnumerator DisapearFeedbackText()
     {
         yield return new WaitForSecondsRealtime(2);
-        if (SceneManagerTest.GetCurrentScene() == "TestScene")
+        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             FeedBackText.enabled = false;
     }
 
     IEnumerator DisapearCheckOrCross()
     {
+        Debug.Log("TENGO QUE APAGAR EL CHECK");
         yield return new WaitForSecondsRealtime(2);
-        if (SceneManagerTest.GetCurrentScene() == "TestScene")
+        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             checkAndCrossImg.enabled = false;
     }
 
