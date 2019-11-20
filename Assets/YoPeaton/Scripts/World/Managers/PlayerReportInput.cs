@@ -46,13 +46,17 @@ public class PlayerReportInput : MonoBehaviour
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = 10;
             LayerMask mask = LayerMask.GetMask("Car");
+            //Debug.LogError("Position: " + mousePos);
             Vector3 screenPos = cam.ScreenToWorldPoint(mousePos);
 
             RaycastHit2D hit = Physics2D.Raycast(screenPos, Vector2.zero, Mathf.Infinity, mask);
 
             //print(hit.collider);
+
+
             if (hit)
             {
+                Debug.LogError("Collider: " + hit.collider.name);
                 if (hit.collider.tag == "Car" && hit.collider.name != "PlayerCar_PFB")
                 {
 
