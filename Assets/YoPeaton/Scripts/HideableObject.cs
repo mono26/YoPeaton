@@ -21,7 +21,7 @@ public class HideableObject : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("COLISION CON: " + collision.name);
+        //Debug.Log("COLISION DE: "+ this.gameObject.name + ", CON: " + collision.name);
         if (collision.CompareTag("PlayerCar"))
         {
             renderer.color = hiddenColor;

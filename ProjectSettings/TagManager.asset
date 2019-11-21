@@ -56,8 +56,11 @@ TagManager:
   - name: Cars
     uniqueID: 597400935
     locked: 0
-  - name: Trees
+  - name: TreesBot
     uniqueID: 3416086699
+    locked: 0
+  - name: PropsBot
+    uniqueID: 1660711181
     locked: 0
   - name: BuildingsBot
     uniqueID: 1234901649
@@ -70,4 +73,10 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 3959357785
+    locked: 0
+  - name: PropsTop
+    uniqueID: 3701416279
+    locked: 0
+  - name: TreesTop
+    uniqueID: 4075563495
     locked: 0

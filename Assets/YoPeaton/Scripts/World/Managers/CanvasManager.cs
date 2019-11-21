@@ -248,7 +248,7 @@ public class CanvasManager : MonoBehaviour
 
     IEnumerator DisapearCheckOrCross()
     {
-        Debug.Log("TENGO QUE APAGAR EL CHECK");
+        //Debug.Log("TENGO QUE APAGAR EL CHECK");
         yield return new WaitForSecondsRealtime(2);
         if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             checkAndCrossImg.enabled = false;

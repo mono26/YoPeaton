@@ -113,7 +113,7 @@ public class AIController : EntityController
 
     public void CheckIfIsBreakingTheLaw()
     {
-        if(currentCrossingZone != null)
+        //if(currentCrossingZone != null)
         behaviourController?.CheckAllInfractions(currentCrossingZone);
     }
 }

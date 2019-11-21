@@ -40,7 +40,7 @@ public class SignalIdentification : MonoBehaviour
 
         //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
         //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-        if (collision.tag == "CrossWalk" && canAnswer == true && correctAnswersQt < 3)
+        if (collision.tag == "CrossWalk" && canAnswer == true && correctAnswersQt < 1)
         {
             Time.timeScale = 0f;
             //Debug.Log("Time Scale: " + Time.timeScale);

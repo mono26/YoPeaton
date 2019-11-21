@@ -56,12 +56,11 @@ public class PlayerReportInput : MonoBehaviour
 
             if (hit)
             {
-                Debug.LogError("Collider: " + hit.collider.name);
                 if (hit.collider.tag == "Car" && hit.collider.name != "PlayerCar_PFB")
                 {
-
+                    Debug.LogError("Collider: " + hit.collider.name);
                     controller = hit.collider.gameObject.GetComponent<AIController>();
-                    print(hit.collider.name);
+                    //print(hit.collider.name);
                     controller.CheckIfIsBreakingTheLaw();
 
                 }
