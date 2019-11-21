@@ -42,7 +42,7 @@ public class SceneManagerTest : MonoBehaviour
                 //ScoreManager.instance.TestFillScoreArray();
                 //CanvasManager._instance.CountToScore();
                 CanvasManager._instance.StartCountSequence();
-                StartCoroutine(BackToMenuCR());
+                //StartCoroutine(BackToMenuCR());
                 break;
         }
     }

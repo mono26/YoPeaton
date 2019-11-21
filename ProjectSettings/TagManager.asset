@@ -65,6 +65,12 @@ TagManager:
   - name: BuildingsBot
     uniqueID: 1234901649
     locked: 0
+  - name: TreesMid
+    uniqueID: 444801355
+    locked: 0
+  - name: PropsMid
+    uniqueID: 573464229
+    locked: 0
   - name: BuildingsMid
     uniqueID: 3424676897
     locked: 0
