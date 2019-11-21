@@ -57,6 +57,8 @@ public class CanvasManager : MonoBehaviour
 
     public Text timeLeftText;
 
+    private Button botonVolver;
+
 
     private string currentActiveCanvas;
 
@@ -109,13 +111,18 @@ public class CanvasManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() != "VictoryScreenScene")
+        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
         {
             fillPercent = (playerGO.GetComponent<CarMovement>().GetCurrentSpeed / playerGO.GetComponent<CarMovement>().GetMaxSpeed);
             //Debug.Log("Fill Percent: "  + fillPercent);
             speedImage.fillAmount = fillPercent;
             var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);
             timeLeftText.text = lifeTimeInt.ToString();
+        }
+        if (SceneManagerTest.GetCurrentScene() == "VictoryScreenScene")
+        {
+            //PONER A QUE BUSQUE EL BOTON CUANDO SEA LA ESCENA DE VICTORIA Y ASIGNARLE EL METODO QUE TIENE QUE LLAMAR POR CODIGO//
+            botonVolver = GameObject.Find("BotonVolver").GetComponent<Button>();
         }
     }
     #region Manejo De Canvas

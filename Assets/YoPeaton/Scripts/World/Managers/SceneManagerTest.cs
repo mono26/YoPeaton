@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;        //Allows us to use Lists. 
+using System;
 
 public class SceneManagerTest : MonoBehaviour
 {
@@ -41,9 +42,17 @@ public class SceneManagerTest : MonoBehaviour
                 //ScoreManager.instance.TestFillScoreArray();
                 //CanvasManager._instance.CountToScore();
                 CanvasManager._instance.StartCountSequence();
+                StartCoroutine(BackToMenuCR());
                 break;
         }
     }
+
+    IEnumerator BackToMenuCR()
+    {
+        yield return new WaitForSeconds(15);
+        LoadScene("MainMenu");
+    }
+
     public static void LoadNextScene(string sceneToLoad)
     {
         SceneManager.LoadScene(sceneToLoad);
