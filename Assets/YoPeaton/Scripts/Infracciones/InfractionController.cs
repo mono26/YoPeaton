@@ -16,6 +16,9 @@ public class InfractionController : MonoBehaviour
     [SerializeField]
     private int ActivePedestrianCount;
 
+    [SerializeField]
+    private bool isAlreadyReported = false;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -25,58 +28,53 @@ public class InfractionController : MonoBehaviour
 
     public void CheckAllInfractions(Crosswalk _crosswalk)
     {
-        if (_crosswalk != null)
+        if (!isAlreadyReported)
         {
-            ActivePedestrianCount = _crosswalk.GetNumberOfCrossingPedestrians;
-            DebugController.LogWarningMessage("Active Pedestrian Count: " + ActivePedestrianCount);
-            DebugController.LogErrorMessage("Checking infractions");
-            for (int i = 0; i < infractionsArray.Length; i++)
+            isAlreadyReported = true;
+            if (_crosswalk != null)
             {
-                if (ActivePedestrianCount > 0)
+                ActivePedestrianCount = _crosswalk.GetNumberOfCrossingPedestrians;
+                DebugController.LogWarningMessage("Active Pedestrian Count: " + ActivePedestrianCount);
+                DebugController.LogErrorMessage("Checking infractions");
+                for (int i = 0; i < infractionsArray.Length; i++)
                 {
-                    infractionsArray[i].AreThereCrossingPedestrians = true;
-                }
-                else
-                {
-                    infractionsArray[i].AreThereCrossingPedestrians = false;
-                }
+                    if (ActivePedestrianCount > 0)
+                    {
+                        infractionsArray[i].AreThereCrossingPedestrians = true;
+                    }
+                    else
+                    {
+                        infractionsArray[i].AreThereCrossingPedestrians = false;
+                    }
 
-                Debug.LogWarning("1) CheckAllInfractions Running (Evaluando el array de infracciones)");
-                infractionsArray[i].evaluatedObject = controlledObject;
-                infractionsArray[i].CheckForRuleViolation();
-                if (infractionsArray[i].CheckForRuleViolation() == true)
+                    Debug.LogWarning("1) CheckAllInfractions Running (Evaluando el array de infracciones)");
+                    infractionsArray[i].evaluatedObject = controlledObject;
+                    infractionsArray[i].CheckForRuleViolation();
+                    if (infractionsArray[i].CheckForRuleViolation() == true)
+                    {
+                        ScoreManager.instance.AddInfraction();
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < infractionsArray.Length; i++)
                 {
-                    ScoreManager.instance.AddInfraction();
+                    Debug.LogError("ESTOY EVALUANDO UNA INFRACCION SIN TENER CROSSWALK CERQUITA");
+                    infractionsArray[i].AreThereCrossingPedestrians = false;
+                    Debug.LogWarning("1) CheckAllInfractions Running (Evaluando el array de infracciones)");
+                    infractionsArray[i].evaluatedObject = controlledObject;
+                    infractionsArray[i].CheckForRuleViolation();
+                    if (infractionsArray[i].CheckForRuleViolation() == true)
+                    {
+                        ScoreManager.instance.AddInfraction();
+                    }
                 }
             }
         }
         else
         {
-            for (int i = 0; i < infractionsArray.Length; i++)
-            {
-                Debug.LogError("ESTOY EVALUANDO UNA INFRACCION SIN TENER CROSSWALK CERQUITA");
-                infractionsArray[i].AreThereCrossingPedestrians = false;
-                Debug.LogWarning("1) CheckAllInfractions Running (Evaluando el array de infracciones)");
-                infractionsArray[i].evaluatedObject = controlledObject;
-                infractionsArray[i].CheckForRuleViolation();
-                if (infractionsArray[i].CheckForRuleViolation() == true)
-                {
-                    ScoreManager.instance.AddInfraction();
-                }
-            }
-
-
-            /*for (int i = 0; i < infractionsArray.Length; i++)
-            {
-
-            }*/
+            Debug.LogError("YA ESTA REPORTADO");
         }
-
-        // private void OnTriggerEnter2D(Collider2D _other) {
-        //     if (_other.CompareTag("CrossWalk")) {
-        //         CheckAllInfractions(_other.GetComponent<Crosswalk>());
-        //     }
-
-        // }
     }
 }

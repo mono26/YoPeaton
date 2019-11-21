@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InfractionName: Blocking Crossing
   evaluatedObject: {fileID: 0}
+  AreThereCrossingPedestrians: 0
   boxCastSize: {x: 1, y: 1}
