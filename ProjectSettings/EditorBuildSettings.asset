@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/YoPeaton/Scenes/VictoryScreenScene.unity
     guid: 7dffd46cb84abc942968338e960b37b1
+  - enabled: 1
+    path: Assets/YoPeaton/Scenes/TestScene 2.unity
+    guid: 074e060d36aca8c4db338f6758dc22b4
   m_configObjects: {}

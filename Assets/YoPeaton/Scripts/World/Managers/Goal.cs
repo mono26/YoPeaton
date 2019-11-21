@@ -6,7 +6,8 @@ public class Goal : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag =="Goal" && collision.name == "PlayerCar_PFB")
+        Debug.LogError("Colision de: " + this.name + ", con: " + collision.name);
+        if(collision.tag =="PlayerCar")
         {
             SceneManagerTest.instance.LoadVictory();
         }
