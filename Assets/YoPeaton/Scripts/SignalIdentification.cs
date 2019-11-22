@@ -28,7 +28,10 @@ public class SignalIdentification : MonoBehaviour
     private bool canAnswer = true;
 
     [SerializeField]
-    private int correctAnswersQt = 0;
+    private int correctCebraQt = 0;
+
+    [SerializeField]
+    private int correctPasacallesQt = 0;
 
     private void Start()
     {
@@ -37,24 +40,40 @@ public class SignalIdentification : MonoBehaviour
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
     {
-
-        //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
-        //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-        if (collision.tag == "CrossWalk" && canAnswer == true && correctAnswersQt < 1)
+        if (collision.tag == "CrossWalk")
         {
-            Time.timeScale = 0f;
-            //Debug.Log("Time Scale: " + Time.timeScale);
-            //CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
-            CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
             correctAnswer = collision.GetComponent<Crosswalk>().GetCrossWalkType.ToString();
-            StartCoroutine(ChangeCanAnswerValueCR());
-            canAnswer = false;
-            return correctAnswer;
+            //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
+            //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
+            if (correctAnswer == "Cebra" && canAnswer == true && correctCebraQt < 1)
+            {
+
+                Time.timeScale = 0f;
+                Debug.LogError("cebra" + "cebra correctas: " + correctCebraQt);
+                CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
+                StartCoroutine(ChangeCanAnswerValueCR());
+                canAnswer = false;
+                return correctAnswer;
+            }
+            if (correctAnswer == "Bocacalle" && canAnswer == true && correctPasacallesQt < 1)
+            {
+                Time.timeScale = 0f;
+                Debug.LogError("Bocacalle" + "bocacalles correctas: " + correctPasacallesQt);
+                CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
+                StartCoroutine(ChangeCanAnswerValueCR());
+                canAnswer = false;
+                return correctAnswer;
+            }
+            else
+            {
+                return null;
+            }
         }
         else
         {
             return null;
         }
+
     }
 
     IEnumerator ChangeCanAnswerValueCR()
@@ -100,8 +119,15 @@ public class SignalIdentification : MonoBehaviour
         selectedName = selectedAnswer;
         if (correctAnswer == selectedAnswer)
         {
+            if (correctAnswer == "Cebra")
+            {
+                correctCebraQt++;
+            }
+            if (correctAnswer == "Bocacalle")
+            {
+                correctPasacallesQt++;
+            }
             CanvasManager._instance.GenerateFeedback("CorrectAnswer");
-            correctAnswersQt++;
             ScoreManager.instance.AddAnswer(true);
             CanvasManager._instance.ActivateCheckOrCross(true);
         }
