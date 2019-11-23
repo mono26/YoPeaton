@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class EntityController : MonoBehaviour
 {
+    public Action<Vector3> OnDirectionalStart;
+    public Action OnDirectionalStop;
+
 #region Dependencies
     [SerializeField]
     private IMovable movableComponent;
@@ -105,7 +109,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void SetEntityType()
     {
-        float probability = Random.Range(0f, 1f);
+        float probability = UnityEngine.Random.Range(0f, 1f);
 
         if(gameObject.tag == "Pedestrian")
         {
@@ -258,7 +262,7 @@ public abstract class EntityController : MonoBehaviour
                 float chanceOfChangingDirection = 100.0f;
                 if (!followComponent.IsTheEndOfPath(_other.transform.position) && followComponent.IsThereOtherChangeOfDirection()) 
                 {
-                    chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
+                    chanceOfChangingDirection = UnityEngine.Random.Range(0, 1.0f) * 100.0f;
                 }
                 if (chanceOfChangingDirection >= 100 - changeDirectionProbability) 
                 {
@@ -268,6 +272,7 @@ public abstract class EntityController : MonoBehaviour
                     {
                         nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
                         connected_t_Parameter_ToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
+                        CheckDirectional();
                         isChangingDirection = true;
                     }
                 }
@@ -397,5 +402,32 @@ public abstract class EntityController : MonoBehaviour
     {
         move = false;
         collisionCheckResult.otherEntity.OnEntityCollision();
+    }
+
+    private void CheckDirectional()
+    {
+        Vector3 currentDirection = followComponent.GetDirection(lastTParameter);
+        Vector3 nextDirection = nextPath.GetDirection(nextPathStarting_t_Parameter);
+        Vector3 directional = Vector3.zero;
+        float dot = Vector3.Dot(currentDirection, nextDirection);
+        if(dot > 0)
+        {
+            directional = Vector3.right;
+        }
+        else if(dot < 0)
+        {
+            directional = -Vector3.right;
+        }
+        StartDirectional(directional);
+    }
+
+    private void StartDirectional(Vector3 _nextDirection)
+    {
+        OnDirectionalStart?.Invoke(_nextDirection);
+    }
+
+    private void StopDirectional()
+    {
+        OnDirectionalStop?.Invoke();
     }
 }
