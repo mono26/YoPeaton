@@ -8,6 +8,7 @@ public class AnimatorController : MonoBehaviour
     private Animator directionalsAnimator;
     private IMovable movableComponent;
     private AITransitionsController transitionsController;
+    [SerializeField]
     private EntityController entity;
 
     #region Unity calls
@@ -34,7 +35,8 @@ public class AnimatorController : MonoBehaviour
             transitionsController.onStartedAskingForCross += OnStartedToAskForPass;
         if (entity)
         {
-            
+            entity.OnDirectionalStart += OnDirectionalStart;
+            entity.OnDirectionalStop += OnDirectionalStop;
         }
     }
 
@@ -48,7 +50,8 @@ public class AnimatorController : MonoBehaviour
             transitionsController.onStartedAskingForCross -= OnStartedToAskForPass;
         if (entity)
         {
-
+            entity.OnDirectionalStart -= OnDirectionalStart;
+            entity.OnDirectionalStop -= OnDirectionalStop;
         }
     }
     #endregion
@@ -343,7 +346,7 @@ public class AnimatorController : MonoBehaviour
         }
     }
 
-    private void OnDirectionalStop(Vector3 _directional)
+    private void OnDirectionalStop()
     {
         if (directionalsAnimator)
         {

@@ -1185,6 +1185,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   directionalsAnimator: {fileID: 4159118589642941165}
+  entity: {fileID: 7486950390623095039}
 --- !u!1 &6443305038234449307
 GameObject:
   m_ObjectHideFlags: 0
