@@ -11,7 +11,7 @@ public struct PathConnectionPair
     public BezierSpline to;
 
     public bool IsConnectionForPath(BezierSpline _pathToCheck) {
-        return (_pathToCheck.Equals(from));
+        return (_pathToCheck == from);
     }
 
     public BezierSpline GetConnection(BezierSpline _pathToCheck) {
