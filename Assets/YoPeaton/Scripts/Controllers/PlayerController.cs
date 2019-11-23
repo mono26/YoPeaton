@@ -40,7 +40,7 @@ public class PlayerController : EntityController
     {
         bool stop = false;
         collisionCheckResult = CheckForCollision();
-        if (IsOnTheStreet && result.collided && result.otherEntity.IsOnTheStreet)
+        if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet)
         {
             stop = true;
             DebugController.LogErrorMessage("Player should stop!");
