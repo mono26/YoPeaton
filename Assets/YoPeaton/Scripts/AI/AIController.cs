@@ -116,4 +116,10 @@ public class AIController : EntityController
         //if(currentCrossingZone != null)
         behaviourController?.CheckAllInfractions(currentCrossingZone);
     }
+
+    public override void OnEntityCollision()
+    {
+        base.OnEntityCollision();
+        // Generar reporte de collision.
+    }
 }

@@ -38,9 +38,11 @@ public class PlayerController : EntityController
 
     protected override bool ShouldStop() 
     {
-        bool stop = IsThereAObstacleUpFront();
-        if (stop)
+        bool stop = false;
+        collisionCheckResult = CheckForCollision();
+        if (IsOnTheStreet && result.collided && result.otherEntity.IsOnTheStreet)
         {
+            stop = true;
             DebugController.LogErrorMessage("Player should stop!");
         }
         return stop;
@@ -63,5 +65,11 @@ public class PlayerController : EntityController
     public override void OnCrossWalkExited(Crosswalk _crossWalk) {
         // DebugController.LogMessage("Exited crosswalk");
         base.OnCrossWalkExited(_crossWalk);
+    }
+
+    public override void OnEntityCollision()
+    {
+        base.OnEntityCollision();
+        // Game over.
     }
 }

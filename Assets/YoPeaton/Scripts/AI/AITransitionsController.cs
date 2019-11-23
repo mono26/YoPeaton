@@ -7,15 +7,17 @@ public class AITransitionsController : MonoBehaviour
     public Action<Vector3> onStartedAskingForCross;
 
     [SerializeField]
-    private float stopProbability = 100.0f;
-    [SerializeField]
     private float askForCrossProbability = 0.0f;
+    [SerializeField]
+    private float askedForCrossWaitTime = 3.0f;
+    [SerializeField]
+    private float avoidCollisionProbability = 100.0f;
     [SerializeField]
     private float giveCrossProbability = 0.0f;
     [SerializeField]
-    private float waitForClearCrossProbability = 100.0f;
+    private float stopProbability = 100.0f;
     [SerializeField]
-    private float askedForCrossWaitTime = 3.0f;
+    private float waitForClearCrossProbability = 100.0f;
 
 #region Dependencies
     [SerializeField]
@@ -24,6 +26,7 @@ public class AITransitionsController : MonoBehaviour
 
     private bool alreadyGaveCross = false;
     private bool canCrossAfterWait = true;
+    private RaycastCheckResult obstacleCheckResult;
     private WaitForSeconds askedForCrossWait;
 
     public AIController SetController 
@@ -34,15 +37,6 @@ public class AITransitionsController : MonoBehaviour
         }
     }
 
-    // private void Start() {
-    //     if (gameObject.CompareTag("Car")) {
-    //         layersToCheckCollision = (1 << LayerMask.NameToLayer("Car")) | (1 << LayerMask.NameToLayer("Pedestrian"));
-    //     }
-    //     else {
-    //         layersToCheckCollision = (1 << LayerMask.NameToLayer("Car"));
-    //     }
-    // }
-
     private void Start()
     {
         askedForCrossWait = new WaitForSeconds(askedForCrossWaitTime);
@@ -50,6 +44,7 @@ public class AITransitionsController : MonoBehaviour
 
     public void CheckTransitions() 
     {
+        // Waiting to cross and asking for cross.
         AIState currentState = aiEntity.GetCurrentState;
         if (currentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass))
         {
@@ -64,6 +59,7 @@ public class AITransitionsController : MonoBehaviour
                 }
             }
         }
+        // Waiting to cross a crosswalk.
         else if (currentState.Equals(AIState.WaitingAtCrossWalk))
         {
             if (ShouldAskForCross())
@@ -94,9 +90,10 @@ public class AITransitionsController : MonoBehaviour
                 }
             }
         }
+        // Is moving on the street or on the sidewalks.
         else
         {
-            if (aiEntity.GetEntityType.Equals(EntityType.Car) && aiEntity.IsThereAObstacleUpFront())
+            if (IsThereAObstacle() && ShouldAvoidCollision())
             {
                 aiEntity.SwitchToState(AIState.SlowDown);
             }
@@ -105,7 +102,34 @@ public class AITransitionsController : MonoBehaviour
                 aiEntity.SwitchToState(AIState.Moving);
             }
         }
-        // Check all the posible conditions for a transition in the state machine
+    }
+
+    private bool IsThereAObstacle()
+    {
+        bool isThereAObstacle = false;
+        obstacleCheckResult = aiEntity.CheckForObstacles();
+        if (aiEntity.IsOnTheStreet && obstacleCheckResult.collided)
+        {
+            if (obstacleCheckResult.otherEntity.IsOnTheStreet)
+            {
+                isThereAObstacle = true;
+            }
+        }
+        return isThereAObstacle;
+    }
+
+    private bool ShouldAvoidCollision()
+    {
+        bool avoid = false;
+        float chanceForAvoidingCollision = UnityEngine.Random.Range(0, 1.0f) * 100.0f;
+        if (aiEntity.GetEntityType.Equals(EntityType.Car) && obstacleCheckResult.otherEntity.GetEntityType.Equals(EntityType.Pedestrian))
+        {
+            if (chanceForAvoidingCollision >= 100 - avoidCollisionProbability) 
+            {
+                avoid = true;
+            }
+        }
+        return avoid;
     }
 
     private bool CanCrossCurrentCrossingZone()
