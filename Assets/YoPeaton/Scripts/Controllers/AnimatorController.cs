@@ -35,8 +35,8 @@ public class AnimatorController : MonoBehaviour
             transitionsController.onStartedAskingForCross += OnStartedToAskForPass;
         if (entity)
         {
-            entity.OnDirectionalStart += OnDirectionalStart;
-            entity.OnDirectionalStop += OnDirectionalStop;
+            entity.onStartChangingDirection += OnDirectionalStart;
+            entity.onStopChangingDirection += OnDirectionalStop;
         }
     }
 
@@ -50,8 +50,8 @@ public class AnimatorController : MonoBehaviour
             transitionsController.onStartedAskingForCross -= OnStartedToAskForPass;
         if (entity)
         {
-            entity.OnDirectionalStart -= OnDirectionalStart;
-            entity.OnDirectionalStop -= OnDirectionalStop;
+            entity.onStartChangingDirection -= OnDirectionalStart;
+            entity.onStopChangingDirection -= OnDirectionalStop;
         }
     }
     #endregion
