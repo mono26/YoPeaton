@@ -263,6 +263,10 @@ public abstract class EntityController : MonoBehaviour
                 {
                     //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                     TryChangeDirection(directionChanger);
+                    if (entityType.Equals(EntityType.Car))
+                    {
+                        movableComponent.SlowDown(30.0f);
+                    }
                 }
             }
         }
