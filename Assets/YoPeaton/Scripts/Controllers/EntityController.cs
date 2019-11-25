@@ -1,8 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public abstract class EntityController : MonoBehaviour
 {
+    public Action<Vector3> onStartChangingDirection;
+    public Action onStopChangingDirection;
+
 #region Dependencies
     [SerializeField]
     private IMovable movableComponent;
@@ -105,7 +109,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void SetEntityType()
     {
-        float probability = Random.Range(0f, 1f);
+        float probability = UnityEngine.Random.Range(0f, 1f);
 
         if(gameObject.tag == "Pedestrian")
         {
@@ -255,20 +259,13 @@ public abstract class EntityController : MonoBehaviour
             DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
             if (directionChanger.HasConnection(followComponent.GetPath))
             {
-                float chanceOfChangingDirection = 100.0f;
-                if (!followComponent.IsTheEndOfPath(_other.transform.position) && followComponent.IsThereOtherChangeOfDirection()) 
-                {
-                    chanceOfChangingDirection = Random.Range(0, 1.0f) * 100.0f;
-                }
-                if (chanceOfChangingDirection >= 100 - changeDirectionProbability) 
+                if (ShouldChangeDirection()) 
                 {
                     //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
-                    nextPath = directionChanger.GetConnectionFrom(followComponent.GetPath);
-                    if (nextPath) 
+                    TryChangeDirection(directionChanger);
+                    if (entityType.Equals(EntityType.Car))
                     {
-                        nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
-                        connected_t_Parameter_ToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
-                        isChangingDirection = true;
+                        movableComponent.SlowDown(30.0f);
                     }
                 }
             }
@@ -286,6 +283,33 @@ public abstract class EntityController : MonoBehaviour
         //    DebugController.LogErrorMessage(string.Format("Collided with other entity {0}", otherEntity.gameObject.name));
         //    // Collision with entity.
         //}
+    }
+
+    private bool ShouldChangeDirection()
+    {
+        float chanceOfChangingDirection = 100.0f;
+        bool changeDirection = false;
+        if (!followComponent.IsTheEndOfPath(transform.position) && followComponent.IsThereOtherChangeOfDirection()) 
+        {
+            chanceOfChangingDirection = UnityEngine.Random.Range(0, 1.0f) * 100.0f;
+        }
+        if (chanceOfChangingDirection >= 100 - changeDirectionProbability)
+        {
+            changeDirection =  true;
+        }
+        return changeDirection; 
+    }
+
+    private void TryChangeDirection(DirectionChange _directionChanger)
+    {
+        nextPath = _directionChanger.GetConnectionFrom(followComponent.GetPath);
+        if (nextPath) 
+        {
+            nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
+            connected_t_Parameter_ToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
+            CheckDirectional();
+            isChangingDirection = true;
+        }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D _other) 
@@ -397,5 +421,34 @@ public abstract class EntityController : MonoBehaviour
     {
         move = false;
         collisionCheckResult.otherEntity.OnEntityCollision();
+    }
+
+    private void CheckDirectional()
+    {
+        Vector3 currentDirection = followComponent.GetDirection(lastTParameter) + transform.position;
+        Vector3 nextDirection = nextPath.GetDirection(nextPathStarting_t_Parameter) + transform.position;
+        Vector3 directional = Vector3.zero;
+        float dot = 0.0f;
+        // https://math.stackexchange.com/questions/274712/calculate-on-which-side-of-a-straight-line-is-a-given-point-located
+        dot = (nextDirection.x - 0.0f)*(currentDirection.y - 0.0f) - (nextDirection.y - 0.0f)*(currentDirection.x - 0.0f);
+        if(dot > 0)
+        {
+            directional = Vector3.right;
+        }
+        else if(dot < 0)
+        {
+            directional = -Vector3.right;
+        }
+        StartDirectional(directional);
+    }
+
+    private void StartDirectional(Vector3 _nextDirection)
+    {
+        onStartChangingDirection?.Invoke(_nextDirection);
+    }
+
+    private void StopDirectional()
+    {
+        onStopChangingDirection?.Invoke();
     }
 }

@@ -68,7 +68,7 @@ public class AITransitionsController : MonoBehaviour
                 canCrossAfterWait = false;
                 StartCoroutine(AskedForCrossWait());
                 onStartedAskingForCross?.Invoke(aiEntity.GetCurrentDirection);
-                DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
+                // DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
             }
             else if (aiEntity.GetCurrentCrossingZone && CanCrossCurrentCrossingZone())
             {

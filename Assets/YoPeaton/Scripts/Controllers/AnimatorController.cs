@@ -4,8 +4,12 @@ using System.Text.RegularExpressions;
 public class AnimatorController : MonoBehaviour
 {
     private Animator animator;
+    [SerializeField]
+    private Animator directionalsAnimator;
     private IMovable movableComponent;
     private AITransitionsController transitionsController;
+    [SerializeField]
+    private EntityController entity;
 
     #region Unity calls
     private void Awake()
@@ -29,13 +33,26 @@ public class AnimatorController : MonoBehaviour
         }
         if(transitionsController != null)
             transitionsController.onStartedAskingForCross += OnStartedToAskForPass;
+        if (entity)
+        {
+            entity.onStartChangingDirection += OnDirectionalStart;
+            entity.onStopChangingDirection += OnDirectionalStop;
+        }
     }
 
     void OnDisable()
     {
-        movableComponent.RemoveOnMovement(SetCurrentAnimation);
+        if (movableComponent != null)
+        {
+            movableComponent.RemoveOnMovement(SetCurrentAnimation);
+        }
         if (transitionsController != null)
             transitionsController.onStartedAskingForCross -= OnStartedToAskForPass;
+        if (entity)
+        {
+            entity.onStartChangingDirection -= OnDirectionalStart;
+            entity.onStopChangingDirection -= OnDirectionalStop;
+        }
     }
     #endregion
 
@@ -308,5 +325,33 @@ public class AnimatorController : MonoBehaviour
 
 
 
+    }
+
+    private void OnDirectionalStart(Vector3 _directional)
+    {
+        if (directionalsAnimator)
+        {
+            //Right
+            if (_directional.Equals(Vector3.right))
+            {
+                directionalsAnimator.SetBool("Left", false);
+                directionalsAnimator.SetBool("Right", true);
+            }
+            //Left
+            else if (_directional.Equals(-Vector3.right))
+            {
+                directionalsAnimator.SetBool("Left", true);
+                directionalsAnimator.SetBool("Right", false);
+            }
+        }
+    }
+
+    private void OnDirectionalStop()
+    {
+        if (directionalsAnimator)
+        {
+            directionalsAnimator.SetBool("Left", false);
+            directionalsAnimator.SetBool("Right", false);
+        }
     }
 }
