@@ -70,6 +70,8 @@ public class PlayerController : EntityController
     public override void OnEntityCollision()
     {
         base.OnEntityCollision();
+        GameManager.didPlayerLose = true;
+        SceneManagerTest.LoadNextScene("VictoryScreenScene");
         // Game over.
     }
 }

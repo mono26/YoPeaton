@@ -35,14 +35,28 @@ public class SceneManagerTest : MonoBehaviour
         switch (scene.name.ToLower())
         {
             case "victoryscreenscene":
-                Debug.LogWarning("Cargue la scena de victoria");
-                ScoreManager.CalculateFinalScore();
-                CanvasManager._instance.FillTextArray();
-                //CanvasManager._instance.CountToWhileWaiting();
-                //ScoreManager.instance.TestFillScoreArray();
-                //CanvasManager._instance.CountToScore();
-                CanvasManager._instance.StartCountSequence();
-                //StartCoroutine(BackToMenuCR());
+                if (GameManager.didPlayerLose == false)
+                {
+                    Debug.LogWarning("Cargue la scena de victoria");
+                    ScoreManager.CalculateFinalScore();
+                    CanvasManager._instance.FillTextArray();
+                    //CanvasManager._instance.CountToWhileWaiting();
+                    //ScoreManager.instance.TestFillScoreArray();
+                    //CanvasManager._instance.CountToScore();
+                    CanvasManager._instance.StartCountSequence();
+                    StartCoroutine(BackToMenuCR());
+                }
+                else
+                {
+                    Debug.LogWarning("Cargue la scena de perder");
+                    ScoreManager.CalculateLooserScore();
+                    CanvasManager._instance.FillTextArray();
+                    //CanvasManager._instance.CountToWhileWaiting();
+                    //ScoreManager.instance.TestFillScoreArray();
+                    //CanvasManager._instance.CountToScore();
+                    CanvasManager._instance.StartCountSequence();
+                    StartCoroutine(BackToMenuCR());
+                }
                 break;
         }
     }

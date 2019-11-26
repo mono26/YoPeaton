@@ -21,6 +21,13 @@ public class CanvasManager : MonoBehaviour
     public int[] scoresToCountTo = new int[7];
     public Text[] textsForScores = new Text[7];
 
+    [Header("Menu Buttons")]
+    public Button playBtn;
+    public Button quitBtn;
+    public Button optionsBtn;
+
+
+    [Header("Main Game Panels")]
     [SerializeField]
     private GameObject hudPanel;
     [SerializeField]
@@ -108,6 +115,7 @@ public class CanvasManager : MonoBehaviour
         //crosswalkQuestionButtons.SetActive(false);
 
     }
+
 
     private void Update()
     {
