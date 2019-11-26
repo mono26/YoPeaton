@@ -44,6 +44,7 @@ public class SceneManagerTest : MonoBehaviour
                     //ScoreManager.instance.TestFillScoreArray();
                     //CanvasManager._instance.CountToScore();
                     CanvasManager._instance.StartCountSequence();
+                    CanvasManager._instance.TurnOffHUD();
                     StartCoroutine(BackToMenuCR());
                 }
                 else
@@ -55,14 +56,23 @@ public class SceneManagerTest : MonoBehaviour
                     //ScoreManager.instance.TestFillScoreArray();
                     //CanvasManager._instance.CountToScore();
                     CanvasManager._instance.StartCountSequence();
+                    CanvasManager._instance.TurnOffHUD();
                     StartCoroutine(BackToMenuCR());
                 }
                 break;
 
             case "testscene 2":
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TEST 2");
+                ScoreManager.lifeTime = 200;
                 CanvasManager._instance.FillReferences();
+                CanvasManager._instance.TurnOnHUD();
                 CanvasManager._instance.StartReplacementMethod();
+                break;
+
+            case "mainmenu":
+                CanvasManager._instance.FillMenuBtns();
+                CanvasManager._instance.TurnOffHUD();
+                CanvasManager._instance.FillMenuBtnsMethods();
                 break;
         }
     }

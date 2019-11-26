@@ -70,8 +70,18 @@ public class PlayerController : EntityController
     public override void OnEntityCollision()
     {
         base.OnEntityCollision();
+        ShouldStop();
         GameManager.didPlayerLose = true;
-        SceneManagerTest.LoadNextScene("VictoryScreenScene");
+        CanvasManager._instance.GenerateFeedback("Crash");
+        CanvasManager._instance.ActivateCheckOrCross(false);
+        StartCoroutine(CrashCR());
+
         // Game over.
+    }
+
+    IEnumerator CrashCR()
+    {
+        yield return CanvasManager._instance.DisapearFeedbackText();
+        SceneManagerTest.LoadNextScene("VictoryScreenScene");
     }
 }

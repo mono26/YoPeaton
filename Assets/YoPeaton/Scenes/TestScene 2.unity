@@ -237,26 +237,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7626467793138209917, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1847260884}
-    - target: {fileID: 7626467793138209917, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressDeclineBtn
-      objectReference: {fileID: 0}
-    - target: {fileID: 7626467793809824535, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1847260884}
-    - target: {fileID: 7626467793809824535, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressAcceptBtn
-      objectReference: {fileID: 0}
     - target: {fileID: 1588720005902235789, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -281,7 +261,12 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 377220976}
+      objectReference: {fileID: 1847260884}
+    - target: {fileID: 1064822607864157731, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PressPauseBtn
+      objectReference: {fileID: 0}
     - target: {fileID: 1707608216943310248, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -301,6 +286,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PressAnswerBtn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626467793138209917, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1847260884}
+    - target: {fileID: 7626467793138209917, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PressDeclineBtn
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626467793809824535, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1847260884}
+    - target: {fileID: 7626467793809824535, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PressAcceptBtn
       objectReference: {fileID: 0}
     - target: {fileID: 590121617, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -311,8 +316,48 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 377220976}
+    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+      propertyPath: scoreContainer
+      value: 
+      objectReference: {fileID: 2304014}
+    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+      propertyPath: speedMeter
+      value: 
+      objectReference: {fileID: 2304013}
+    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+      propertyPath: brakeBtn
+      value: 
+      objectReference: {fileID: 2304012}
+    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+      propertyPath: pauseBtn
+      value: 
+      objectReference: {fileID: 2304011}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+--- !u!1 &2304011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1684414832880559125, guid: 99b488569796fa9458cab172179bbe8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2304010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2304012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1026663267, guid: 99b488569796fa9458cab172179bbe8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2304010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2304013 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7626467793369409779, guid: 99b488569796fa9458cab172179bbe8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2304010}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2304014 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4613372596222812337, guid: 99b488569796fa9458cab172179bbe8c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2304010}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7918826
 GameObject:
   m_ObjectHideFlags: 0
@@ -47472,7 +47517,7 @@ PrefabInstance:
     - target: {fileID: 9124943525442605884, guid: 26d6a7f324f079f4e89709766ce95914,
         type: 3}
       propertyPath: brakeSpeed
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9124943525442605880, guid: 26d6a7f324f079f4e89709766ce95914,
         type: 3}
@@ -56836,7 +56881,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1663842419
 Transform:
   m_ObjectHideFlags: 0
@@ -60626,7 +60671,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1759365753
 MonoBehaviour:

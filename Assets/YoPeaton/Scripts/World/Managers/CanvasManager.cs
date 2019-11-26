@@ -1,6 +1,7 @@
 ﻿using UnityEngine.UI;
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class CanvasManager : MonoBehaviour
 {
@@ -21,8 +22,29 @@ public class CanvasManager : MonoBehaviour
     public int[] scoresToCountTo = new int[7];
     public Text[] textsForScores = new Text[7];
 
+
+
+    /*
+    public Text testReportText;
+    public Text testAnswerText;
+    */
+
+    [Header("Botones Menu: ")]
+    public Button playBtn;
+    public Button quitBtn;
+    public Button optionsBtn;
+
+    [Header("Objetos Escena: ")]
     [SerializeField]
     private GameObject hudPanel;
+    [SerializeField]
+    private GameObject scoreContainer;
+    [SerializeField]
+    private GameObject speedMeter;
+    [SerializeField]
+    private GameObject brakeBtn;
+    [SerializeField]
+    private GameObject pauseBtn;
     [SerializeField]
     private GameObject pausePanel;
     [SerializeField]
@@ -31,12 +53,6 @@ public class CanvasManager : MonoBehaviour
     public GameObject crosswalkTypesButtons;
     [SerializeField]
     public GameObject crosswalkQuestionButtons;
-
-    /*
-    public Text testReportText;
-    public Text testAnswerText;
-    */
-
     [SerializeField]
     public Image checkAndCrossImg;
 
@@ -114,6 +130,21 @@ public class CanvasManager : MonoBehaviour
 
     }
 
+    public void TurnOffHUD()
+    {
+        scoreContainer.SetActive(false);
+        speedMeter.SetActive(false);
+        brakeBtn.SetActive(false);
+        pauseBtn.SetActive(false);
+    }
+
+    public void TurnOnHUD()
+    {
+        scoreContainer.SetActive(true);
+        speedMeter.SetActive(true);
+        brakeBtn.SetActive(true);
+        pauseBtn.SetActive(true);
+    }
     public void StartReplacementMethod()
     {
         checkAndCrossImg.enabled = false;
@@ -130,6 +161,41 @@ public class CanvasManager : MonoBehaviour
         crosswalkTypesButtons.SetActive(false);
         //crosswalkQuestionButtons.SetActive(false);
     }
+
+    public void FillMenuBtns()
+    {
+        Debug.LogError("VOY A LLENAR LOS BOTONES DEL MENU");
+        playBtn = GameObject.Find("Button_Play").GetComponent<Button>();
+        quitBtn = GameObject.Find("Button_Quit").GetComponent<Button>();
+        optionsBtn = GameObject.Find("Button_Options").GetComponent<Button>();
+    }
+
+    public void FillMenuBtnsMethods()
+    {
+        Debug.LogError("VOY A LLENAR LOS METODOS DE LOS BOTONES");
+
+        playBtn.onClick.AddListener(delegate { playBtnClicked(); });
+        quitBtn.onClick.AddListener(delegate { quitBtnClicked(); });
+        optionsBtn.onClick.AddListener(delegate { optionsBtnClicked(); });
+    }
+
+    private void optionsBtnClicked()
+    {
+        Debug.LogError("Hundi opciones");
+    }
+
+    private void quitBtnClicked()
+    {
+        Application.Quit();
+        Debug.LogError("Hundi quit");
+    }
+
+    private void playBtnClicked()
+    {
+        SceneManagerTest.LoadNextScene("TestScene 2");
+        Debug.LogError("Hundi play");
+    }
+
     public void FillReferences()
     {
         Debug.Log("VOY A LLENAR LAS REFERENCIAS");
@@ -159,7 +225,7 @@ public class CanvasManager : MonoBehaviour
         //if (checkAndCrossAnimator == null)
             checkAndCrossAnimator = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Animator>();
         //if (timeLeftText == null)
-            timeLeftText = GameObject.Find("TimeLeftText").GetComponent<Text>();
+            timeLeftText = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
     }
 
     private void Update()
@@ -296,11 +362,17 @@ public class CanvasManager : MonoBehaviour
                 FeedBackText.text = "Conduciendo correctamente.";
                 StartCoroutine(DisapearFeedbackText());
                 break;
+            case "Crash":
+                FeedBackText.enabled = true;
+                FeedBackText.color = Color.red;
+                FeedBackText.text = "¡Tienes que manejar con cuidado!";
+                StartCoroutine(DisapearFeedbackText());
+                break;
         }
     }
 
 
-    IEnumerator DisapearFeedbackText()
+    public IEnumerator DisapearFeedbackText()
     {
         yield return new WaitForSecondsRealtime(2);
         if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
