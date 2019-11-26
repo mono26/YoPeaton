@@ -15,8 +15,6 @@ public class AITransitionsController : MonoBehaviour
     [SerializeField]
     private float giveCrossProbability = 0.0f;
     [SerializeField]
-    private float stopProbability = 100.0f;
-    [SerializeField]
     private float waitForClearCrossProbability = 100.0f;
 
 #region Dependencies
@@ -113,6 +111,10 @@ public class AITransitionsController : MonoBehaviour
             if (obstacleCheckResult.otherEntity.IsOnTheStreet)
             {
                 isThereAObstacle = true;
+                if (gameObject.name.Equals("AICar_PFB (5)"))
+                {
+                    DebugController.LogMessage("Should Stop!");
+                }
             }
         }
         return isThereAObstacle;
@@ -120,13 +122,13 @@ public class AITransitionsController : MonoBehaviour
 
     private bool ShouldAvoidCollision()
     {
-        bool avoid = false;
+        bool avoid = true;
         float chanceForAvoidingCollision = UnityEngine.Random.Range(0, 1.0f) * 100.0f;
         if (aiEntity.GetEntityType.Equals(EntityType.Car) && obstacleCheckResult.otherEntity.GetEntityType.Equals(EntityType.Pedestrian))
         {
-            if (chanceForAvoidingCollision >= 100 - avoidCollisionProbability) 
+            if (chanceForAvoidingCollision < 100 - avoidCollisionProbability) 
             {
-                avoid = true;
+                avoid = false;
             }
         }
         return avoid;

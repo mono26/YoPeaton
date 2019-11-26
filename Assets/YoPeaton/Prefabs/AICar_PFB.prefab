@@ -457,7 +457,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 597400935
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0.89685977, b: 0, a: 1}
@@ -692,7 +692,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 597400935
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0.89685977, b: 0, a: 1}
@@ -1077,7 +1077,7 @@ MonoBehaviour:
   pathToFollow: {fileID: 0}
   directionChangeLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &7486950390623095037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1093,8 +1093,7 @@ MonoBehaviour:
   askForCrossProbability: 0
   askedForCrossWaitTime: 3
   avoidCollisionProbability: 100
-  giveCrossProbability: 0
-  stopProbability: 50
+  giveCrossProbability: 100
   waitForClearCrossProbability: 100
   aiEntity: {fileID: 7486950390623095039}
 --- !u!114 &7486950390623095039
@@ -1115,7 +1114,7 @@ MonoBehaviour:
   distanceToCheckForStop: 3
   exitedCrosswalkClearTime: 3
   entityType: 0
-  entitySubType: 0
+  entitySubType: 8
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 768

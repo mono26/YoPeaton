@@ -224,7 +224,7 @@ public abstract class EntityController : MonoBehaviour
                             GetInitialValuesToStartPath();
                             if (entityType.Equals(EntityType.Car))
                             {
-                                movableComponent.SlowDown(50.0f);
+                                movableComponent.SlowDownByPercent(50.0f);
                             }
                             isChangingDirection = false;
                             nextPath = null;
@@ -263,10 +263,10 @@ public abstract class EntityController : MonoBehaviour
                 {
                     //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                     TryChangeDirection(directionChanger);
-                    if (entityType.Equals(EntityType.Car))
-                    {
-                        movableComponent.SlowDown(30.0f);
-                    }
+                    // if (entityType.Equals(EntityType.Car))
+                    // {
+                    //     movableComponent.SlowDown(30.0f);
+                    // }
                 }
             }
         }
@@ -419,8 +419,8 @@ public abstract class EntityController : MonoBehaviour
 
     public virtual void OnEntityCollision()
     {
-        move = false;
-        collisionCheckResult.otherEntity.OnEntityCollision();
+        // move = false;
+        // collisionCheckResult.otherEntity?.OnEntityCollision();
     }
 
     private void CheckDirectional()
