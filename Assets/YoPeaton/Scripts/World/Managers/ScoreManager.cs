@@ -80,6 +80,17 @@ public class ScoreManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         GameManager.FinishLevel();
     }
+
+    public static void CalculateLooserScore()
+    {
+        timeScore = 0;
+        correctReportScore = 0;
+        correctAnswerScore = 0;
+        wrongReportScore = 0;
+        wrongAnswerScore = 0;
+        InfractionScore = 0;
+        finalScore = 0;
+    }
     public static int CalculateFinalScore()
     {
         timeScore = Mathf.RoundToInt(lifeTime);

@@ -6,6 +6,7 @@ public static class GameManager
 {
     public static bool isPaused = false;
     public static float timeLeft;
+    public static bool didPlayerLose = false;
 
    
 
