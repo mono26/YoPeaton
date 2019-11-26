@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &990680904669492157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990680904669492131}
+  - component: {fileID: 990680904669492130}
+  m_Layer: 0
+  m_Name: CanvasManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &990680904669492131
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990680904669492157}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &990680904669492130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990680904669492157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06821d2600697444bbe1c34c6e85a1f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 1
+  FeedBackTextGO: {fileID: 448960732977166603, guid: 4b5732dd802e4fd4da16bb5790ff288e,
+    type: 3}
+  FeedBackText: {fileID: 1692632199145042084, guid: 4b5732dd802e4fd4da16bb5790ff288e,
+    type: 3}
+  countDuration: 1
+  scoresToCountTo: 00000000000000000000000000000000000000000000000000000000
+  textsForScores:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  hudPanel: {fileID: 7626467794291610297, guid: 99b488569796fa9458cab172179bbe8c,
+    type: 3}
+  pausePanel: {fileID: 3989906394238768657, guid: c4c51bd6270a4974e8e33b5cab98c121,
+    type: 3}
+  crosswalkGuessHUD: {fileID: 301557457274800593, guid: 2f2fd22ed2932554faf8e861f560af1c,
+    type: 3}
+  crosswalkTypesButtons: {fileID: 3680557428346702177, guid: e32c246b270771c45aa02937ea596408,
+    type: 3}
+  crosswalkQuestionButtons: {fileID: 4608100910323664703, guid: f206830c13e49b14098216fc0e6dc813,
+    type: 3}
+  checkAndCrossImg: {fileID: 3531399582676418030, guid: b86611c362dfbaa45bb5bef4b418ae42,
+    type: 3}
+  checkAndCrossGO: {fileID: 3531399582676418019, guid: b86611c362dfbaa45bb5bef4b418ae42,
+    type: 3}
+  checkAndCrossAnimator: {fileID: 3531399582676418029, guid: b86611c362dfbaa45bb5bef4b418ae42,
+    type: 3}
+  checkSprite: {fileID: 1026208054400958528, guid: 9e4ddd27ce8822c48972e361e0121585,
+    type: 3}
+  crossSprite: {fileID: 283227515313819676, guid: 9e4ddd27ce8822c48972e361e0121585,
+    type: 3}
+  speedImage: {fileID: 7599904748553379743, guid: f31cbc3e4c9a6dc4aa754f307402da00,
+    type: 3}
+  playerGO: {fileID: 9124943525442605885, guid: 26d6a7f324f079f4e89709766ce95914,
+    type: 3}
+  timeLeftText: {fileID: 9194960832562318384, guid: b50fdc05c28bf0648a1f992305016ed5,
+    type: 3}

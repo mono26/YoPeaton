@@ -44,6 +44,12 @@ public class SceneManagerTest : MonoBehaviour
                 CanvasManager._instance.StartCountSequence();
                 //StartCoroutine(BackToMenuCR());
                 break;
+
+            case "testscene 2":
+                Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TEST 2");
+                CanvasManager._instance.FillReferences();
+                CanvasManager._instance.StartReplacementMethod();
+                break;
         }
     }
 

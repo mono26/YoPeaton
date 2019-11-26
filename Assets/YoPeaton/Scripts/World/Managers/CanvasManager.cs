@@ -31,10 +31,11 @@ public class CanvasManager : MonoBehaviour
     public GameObject crosswalkTypesButtons;
     [SerializeField]
     public GameObject crosswalkQuestionButtons;
-    [SerializeField]
+
+    /*
     public Text testReportText;
-    [SerializeField]
     public Text testAnswerText;
+    */
 
     [SerializeField]
     public Image checkAndCrossImg;
@@ -87,12 +88,16 @@ public class CanvasManager : MonoBehaviour
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
+
     }
 
     #endregion
     // Start is called before the first frame update
     void Start()
     {
+
+        FillReferences();
+        //playerGO = GameObject.Find("PlayerCar_PFB Variant");
         checkAndCrossImg.enabled = false;
         currentScore = 0;
 
@@ -107,6 +112,54 @@ public class CanvasManager : MonoBehaviour
         crosswalkTypesButtons.SetActive(false);
         //crosswalkQuestionButtons.SetActive(false);
 
+    }
+
+    public void StartReplacementMethod()
+    {
+        checkAndCrossImg.enabled = false;
+        currentScore = 0;
+
+        //Activar unicamente el base
+        hudPanel.SetActive(true);
+        currentActiveCanvas = hudPanel.name;
+
+        //scoresToCountTo = new int[7];
+        //Desastivar todos los otros canvas
+        pausePanel.SetActive(false);
+        crosswalkGuessHUD.SetActive(false);
+        crosswalkTypesButtons.SetActive(false);
+        //crosswalkQuestionButtons.SetActive(false);
+    }
+    public void FillReferences()
+    {
+        Debug.Log("VOY A LLENAR LAS REFERENCIAS");
+        //if (playerGO == null)
+            playerGO = GameObject.Find("PlayerCar_PFB Variant");
+        //if (FeedBackTextGO == null)
+            FeedBackTextGO = GameObject.Find("FeedbackTest");
+        //if (FeedBackText == null)
+            FeedBackText = GameObject.Find("FeedbackTest").GetComponent<Text>();
+        //if (hudPanel == null)
+            hudPanel = GameObject.Find("Canvas_HUD");
+        //if (pausePanel == null)
+            //pausePanel = GameObject.Find("PauseCanvas");
+            pausePanel = this.transform.GetChild(7).gameObject;
+        //if (crosswalkGuessHUD == null)
+            crosswalkGuessHUD = this.transform.GetChild(2).gameObject;
+        //if (crosswalkTypesButtons == null)
+            //crosswalkTypesButtons = GameObject.Find("CrossWalkTypesButtons");
+            crosswalkTypesButtons = this.transform.GetChild(2).GetChild(1).gameObject;
+        //if (crosswalkQuestionButtons == null)
+            //crosswalkQuestionButtons = GameObject.Find("QuestionButtons");
+            crosswalkQuestionButtons = this.transform.GetChild(2).GetChild(2).gameObject;
+        //if (checkAndCrossImg == null)
+        checkAndCrossImg = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Image>();
+        //if (checkAndCrossGO == null)
+            checkAndCrossGO = GameObject.Find("CheckAndCrossCanvasIMG");
+        //if (checkAndCrossAnimator == null)
+            checkAndCrossAnimator = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Animator>();
+        //if (timeLeftText == null)
+            timeLeftText = GameObject.Find("TimeLeftText").GetComponent<Text>();
     }
 
     private void Update()
@@ -246,6 +299,7 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
+
     IEnumerator DisapearFeedbackText()
     {
         yield return new WaitForSecondsRealtime(2);
@@ -264,6 +318,31 @@ public class CanvasManager : MonoBehaviour
     #region Manejo de Botones
 
     //BOTONES//
+
+    public void PressAcceptBtn()
+    {
+        playerGO.GetComponent<SignalIdentification>().AcceptSignalIdentification();
+    }
+
+    public void PressDeclineBtn()
+    {
+        playerGO.GetComponent<SignalIdentification>().DeclineSignalIdentification();
+    }
+
+    public void PressAnswerBtn(string selectedAnswer)
+    {
+        playerGO.GetComponent<SignalIdentification>().CheckAnswer(selectedAnswer);
+    }
+    public void PressBrakeBtn()
+    {
+        playerGO.GetComponent<PlayerCarInput>().Brake();
+    }
+
+    public void ReleaseBrakeBtn()
+    {
+        playerGO.GetComponent<PlayerCarInput>().StopBrake();
+    }
+
     public void PressPauseBtn()
     {
         Debug.LogWarning("Press Pause Button");
@@ -405,8 +484,8 @@ public class CanvasManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         //Machetazo para testeo, se deben resetear a tiempos diferentes//
-        testAnswerText.text = "Report: null";
-        testReportText.text = "Report: null";
+        //testAnswerText.text = "Report: null";
+        //testReportText.text = "Report: null";
     }
     #endregion
 
