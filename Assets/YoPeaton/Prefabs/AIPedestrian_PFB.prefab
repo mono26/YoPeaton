@@ -73,9 +73,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -1.24}
+  m_Offset: {x: 0.0000005960464, y: 1.3099598}
   serializedVersion: 2
-  m_Radius: 0.89
+  m_Radius: 0.70481056
 --- !u!212 &270182541731555047
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -111,10 +111,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 567507197
+  m_SortingLayer: 2
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d93cfb85e0e393b418d0fa9761ee36e7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d5eb3624715fd6f49a2dee79c3951027, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -124,7 +124,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!50 &270182541731555046
 Rigidbody2D:
   serializedVersion: 4
@@ -179,6 +179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pathToFollow: {fileID: 0}
+  directionChangeLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &270182541731555041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,13 +210,13 @@ MonoBehaviour:
   followComponent: {fileID: 270182541731555040}
   animationComponent: {fileID: 0}
   changeDirectionProbability: 100
+  distanceToCheckForStop: 3
+  exitedCrosswalkClearTime: 3
+  entityType: 0
   entitySubType: 0
-  maxDistanceToCheckForStop: 2.5
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 768
-  entityType: 0
-  exitedCrosswalkClearTime: 3
   stateMachine: {fileID: 270182541731555041}
   transitionController: {fileID: 270182541731555043}
   currentCrossingZone: {fileID: 0}
@@ -230,11 +233,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcb4b6f04f4a774dae5ebe75c95099d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopProbability: 100
   askForCrossProbability: 0
+  askedForCrossWaitTime: 3
+  avoidCollisionProbability: 100
   giveCrossProbability: 0
   waitForClearCrossProbability: 100
-  askedForCrossWaitTime: 3
   aiEntity: {fileID: 270182541731555042}
 --- !u!114 &252315252
 MonoBehaviour:
@@ -248,6 +251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b796aa581aa47f645bb223630ff9613c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  directionalsAnimator: {fileID: 0}
+  entity: {fileID: 0}
 --- !u!1 &1363044618323740226
 GameObject:
   m_ObjectHideFlags: 0

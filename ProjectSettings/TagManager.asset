@@ -53,12 +53,6 @@ TagManager:
   - name: Street
     uniqueID: 3316684469
     locked: 0
-  - name: Pedestrians
-    uniqueID: 567507197
-    locked: 0
-  - name: Cars
-    uniqueID: 597400935
-    locked: 0
   - name: Direccionales
     uniqueID: 162866693
     locked: 0
@@ -91,4 +85,10 @@ TagManager:
     locked: 0
   - name: TreesTop
     uniqueID: 4075563495
+    locked: 0
+  - name: Pedestrians
+    uniqueID: 567507197
+    locked: 0
+  - name: Cars
+    uniqueID: 597400935
     locked: 0
