@@ -243,6 +243,8 @@ public abstract class EntityController : MonoBehaviour
         collisionCheckResult = CheckForCollision();
         if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet)
         {
+            print("Llamar metodo para cambiar a animacion de atropellado, " + "Atropelle a:" + collisionCheckResult.otherEntity.name);
+            collisionCheckResult.otherEntity.GetComponent<AnimatorController>().OnPedestrianRunOver();
             collided = true;
         }
         return collided;

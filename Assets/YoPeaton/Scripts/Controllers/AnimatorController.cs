@@ -189,8 +189,23 @@ public class AnimatorController : MonoBehaviour
         //        break;
         //}
     }
-    
+    public void OnPedestrianRunOver()
+    {
 
+        if (movableComponent.GetEntity.GetEntityType == EntityType.Pedestrian)
+        {
+            animator.SetBool("Front", false);
+            animator.SetBool("Back", false);
+            animator.SetBool("Right", false);
+            animator.SetBool("Left", false);
+            animator.SetBool("WavingFront", false);
+            animator.SetBool("WavingBack", false);
+            animator.SetBool("WavingRight", false);
+            animator.SetBool("WavingLeft", false);
+            animator.SetBool("GetRunOver", true);
+            return;
+        }
+    }
     public void SetCurrentAnimation2D(Vector2 direction)
     {
         //Debug.LogError(direction);
