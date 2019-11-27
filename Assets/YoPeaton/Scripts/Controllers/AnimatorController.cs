@@ -202,7 +202,7 @@ public class AnimatorController : MonoBehaviour
             animator.SetBool("WavingBack", false);
             animator.SetBool("WavingRight", false);
             animator.SetBool("WavingLeft", false);
-            animator.SetBool("GetRunOver", true);
+            animator.SetBool("RunOver", true);
             return;
         }
     }

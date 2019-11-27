@@ -7421,6 +7421,11 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8048836051236028578, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a11e7f7a749037d45b2b9fe55ceab514, type: 3}
 --- !u!4 &199145317 stripped
@@ -40205,6 +40210,10 @@ PrefabInstance:
       propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 252315251, guid: a11e7f7a749037d45b2b9fe55ceab514, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 3d468fcc738b2d84f84fd1893c74fb61, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a11e7f7a749037d45b2b9fe55ceab514, type: 3}
 --- !u!4 &1154273668 stripped
@@ -51681,7 +51690,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1428500001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -18.54, y: -7.5, z: 0}
+  m_LocalPosition: {x: -18.54, y: -7.509, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 512121015}
@@ -51700,12 +51709,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connection:
-  - from: {fileID: 548017275}
-    to: {fileID: 2075539959}
-  - from: {fileID: 89911611}
+  - from: {fileID: 1759365753}
     to: {fileID: 1906148792}
-  - from: {fileID: 89911611}
+  - from: {fileID: 548017275}
+    to: {fileID: 1694286391}
+  - from: {fileID: 1759365753}
     to: {fileID: 548017275}
+  - from: {fileID: 1906148792}
+    to: {fileID: 1694286391}
 --- !u!58 &1428500004
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -65187,7 +65198,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1817947162}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6.407, y: -20.53, z: 0}
+  m_LocalPosition: {x: 6.419, y: -20.53, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 512121015}
@@ -65207,7 +65218,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   connection:
   - from: {fileID: 1155221258}
-    to: {fileID: 1172936659}
+    to: {fileID: 1987819071}
   - from: {fileID: 215922842}
     to: {fileID: 791915242}
 --- !u!58 &1817947165
@@ -72557,6 +72568,12 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 270182541731555047, guid: a11e7f7a749037d45b2b9fe55ceab514,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 81b1694d30609854ebb2e47176335124,
+        type: 3}
     - target: {fileID: 4318198734098785471, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -78959,6 +78976,11 @@ PrefabInstance:
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 252315251, guid: a11e7f7a749037d45b2b9fe55ceab514, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 06a8de80bca8bbf42978bcc449f0e4ab,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a11e7f7a749037d45b2b9fe55ceab514, type: 3}
 --- !u!1001 &990680904507432146
