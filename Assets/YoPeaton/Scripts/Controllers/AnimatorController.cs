@@ -56,14 +56,12 @@ public class AnimatorController : MonoBehaviour
     }
     #endregion
 
-    public void SetCurrentAnimation(Vector3 direction)
+    public void SetCurrentAnimation(Vector3 _direction)
     {
-        //Debug.LogError(direction);
-        //Debug.LogError(direction.x);
-        //Debug.LogError(direction.y);
+        MovementDirection direction = GetMovementDirection(_direction);
         if(movableComponent.GetEntity.GetEntityType == EntityType.Pedestrian)
         {
-            if (direction == new Vector3(1.0f, 0f, 0f))
+            if (direction.Equals(MovementDirection.Right))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", false);
@@ -76,7 +74,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            else if (direction == new Vector3(-1.0f, 0f, 0f))
+            else if (direction.Equals(MovementDirection.Left))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", false);
@@ -89,7 +87,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            if (direction == new Vector3(0f, 1f, 0f))
+            if (direction.Equals(MovementDirection.Up))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", true);
@@ -102,7 +100,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            else if (direction == new Vector3(0f, -1f, 0f))
+            else if (direction.Equals(MovementDirection.Down))
             {
                 animator.SetBool("Front", true);
                 animator.SetBool("Back", false);
@@ -114,11 +112,62 @@ public class AnimatorController : MonoBehaviour
                 animator.SetBool("WavingLeft", false);
                 return;
             }
+            // if (_direction.Equals(Vector3.right))
+            // {
+            //     animator.SetBool("Front", false);
+            //     animator.SetBool("Back", false);
+            //     animator.SetBool("Right", true);
+            //     animator.SetBool("Left", false);
+            //     animator.SetBool("WavingFront", false);
+            //     animator.SetBool("WavingBack", false);
+            //     animator.SetBool("WavingRight", false);
+            //     animator.SetBool("WavingLeft", false);
+            //     return;
+            // }
+
+            // else if (_direction.Equals(-Vector3.right))
+            // {
+            //     animator.SetBool("Front", false);
+            //     animator.SetBool("Back", false);
+            //     animator.SetBool("Right", false);
+            //     animator.SetBool("Left", true);
+            //     animator.SetBool("WavingFront", false);
+            //     animator.SetBool("WavingBack", false);
+            //     animator.SetBool("WavingRight", false);
+            //     animator.SetBool("WavingLeft", false);
+            //     return;
+            // }
+
+            // if (_direction.Equals(Vector3.up))
+            // {
+            //     animator.SetBool("Front", false);
+            //     animator.SetBool("Back", true);
+            //     animator.SetBool("Right", false);
+            //     animator.SetBool("Left", false);
+            //     animator.SetBool("WavingFront", false);
+            //     animator.SetBool("WavingBack", false);
+            //     animator.SetBool("WavingRight", false);
+            //     animator.SetBool("WavingLeft", false);
+            //     return;
+            // }
+
+            // else if (_direction.Equals(-Vector3.up))
+            // {
+            //     animator.SetBool("Front", true);
+            //     animator.SetBool("Back", false);
+            //     animator.SetBool("Right", false);
+            //     animator.SetBool("Left", false);
+            //     animator.SetBool("WavingFront", false);
+            //     animator.SetBool("WavingBack", false);
+            //     animator.SetBool("WavingRight", false);
+            //     animator.SetBool("WavingLeft", false);
+            //     return;
+            // }
         }
 
         if (movableComponent.GetEntity.GetEntityType == EntityType.Car)
         {
-            if (direction == new Vector3(1.0f, 0f, 0f))
+            if (_direction.Equals(Vector3.right))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", false);
@@ -127,7 +176,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            else if (direction == new Vector3(-1.0f, 0f, 0f))
+            else if (_direction.Equals(-Vector3.right))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", false);
@@ -136,7 +185,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            if (direction == new Vector3(0f, 1f, 0f))
+            if (_direction.Equals(Vector3.up))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", true);
@@ -145,7 +194,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            else if (direction == new Vector3(0f, -1f, 0f))
+            else if (_direction.Equals(-Vector3.up))
             {
                 animator.SetBool("Front", true);
                 animator.SetBool("Back", false);
@@ -189,6 +238,7 @@ public class AnimatorController : MonoBehaviour
         //        break;
         //}
     }
+
     public void OnPedestrianRunOver()
     {
 
@@ -280,6 +330,34 @@ public class AnimatorController : MonoBehaviour
         //}
     }
 
+    private MovementDirection GetMovementDirection(Vector3 _direction)
+    {
+        MovementDirection direction = MovementDirection.Down;
+        if (_direction.x >  _direction.y)
+        {
+            if (_direction.x < 0)
+            {
+                direction = MovementDirection.Left;
+            }
+            else
+            {
+                direction = MovementDirection.Right;
+            }
+        }
+        else
+        {
+            if (_direction.y < 0)
+            {
+                direction = MovementDirection.Down;
+            }
+            else
+            {
+                direction = MovementDirection.Up;
+            }
+        }
+        return direction;
+    }
+
     public void OnStartedToAskForPass(Vector3 direction) 
     {
         if(movableComponent.GetEntity.GetEntityType == EntityType.Pedestrian)
@@ -369,4 +447,9 @@ public class AnimatorController : MonoBehaviour
             directionalsAnimator.SetBool("Right", false);
         }
     }
+}
+
+public enum MovementDirection
+{
+    Right, Left, Up, Down
 }

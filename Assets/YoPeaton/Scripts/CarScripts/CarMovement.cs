@@ -23,7 +23,7 @@ public class CarMovement : MonoBehaviour, IMovable
     private float currentSpeed = 0.0f;
     private bool isBraking = false;
     private bool move = true;
-    public Vector3 currentDirection;
+    public Vector3 direction;
 
     [SerializeField]
     private GameObject carLightsVFX;
@@ -74,13 +74,14 @@ public class CarMovement : MonoBehaviour, IMovable
         // Vector3 lerpedPosition = Vector2.Lerp(transform.position, _position, Time.fixedDeltaTime);
         // carBody.MovePosition(lerpedPosition);
         // RotateInDirectionOfPosition(lerpedPosition);
-        currentDirection = (_position - transform.position).normalized;
+        _position.z = 0;
+        direction = (_position - transform.position).normalized;
         carBody.MovePosition(_position);
         //RotateInDirectionOfPosition(_position);
         // currentDirection = (lerpedPosition - transform.position).normalized;
         // onMovement?.Invoke(currentDirection);
         // currentDirection = (_position - transform.position).normalized;
-        onMovement?.Invoke(currentDirection);
+        onMovement?.Invoke(direction);
         onEntityMovement?.Invoke(movingEntity);
     }
 

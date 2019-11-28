@@ -217,7 +217,7 @@ public abstract class EntityController : MonoBehaviour
                     {
                         if (t >= connected_t_Parameter_ToNextPath) 
                         {
-                            transform.position = nextPath.GetPoint(nextPathStarting_t_Parameter);
+                            // transform.position = nextPath.GetPoint(nextPathStarting_t_Parameter);
                             // transform.right = nextPath.GetDirection(nextPathStarting_t_Parameter);
                             followComponent.SetPath = nextPath;
                             t = nextPathStarting_t_Parameter;
@@ -243,7 +243,7 @@ public abstract class EntityController : MonoBehaviour
         collisionCheckResult = CheckForCollision();
         if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet)
         {
-            print("Llamar metodo para cambiar a animacion de atropellado, " + "Atropelle a:" + collisionCheckResult.otherEntity.name);
+            DebugController.LogMessage($"Llamar metodo para cambiar a animacion de atropellado, { gameObject.name } Atropello a: { collisionCheckResult.otherEntity.name }");
             collisionCheckResult.otherEntity.GetComponent<AnimatorController>().OnPedestrianRunOver();
             collided = true;
         }
@@ -421,8 +421,8 @@ public abstract class EntityController : MonoBehaviour
 
     public virtual void OnEntityCollision()
     {
-        // move = false;
-        // collisionCheckResult.otherEntity?.OnEntityCollision();
+        move = false;
+        collisionCheckResult.otherEntity?.OnEntityCollision();
     }
 
     private void CheckDirectional()
