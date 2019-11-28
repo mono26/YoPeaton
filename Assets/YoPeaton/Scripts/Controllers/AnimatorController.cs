@@ -61,7 +61,7 @@ public class AnimatorController : MonoBehaviour
         MovementDirection direction = GetMovementDirection(_direction);
         if(movableComponent.GetEntity.GetEntityType == EntityType.Pedestrian)
         {
-            if (direction.Equals(MovementDirection.Right))
+            if (_direction.Equals(Vector3.right))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", false);
@@ -74,7 +74,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            else if (direction.Equals(MovementDirection.Left))
+            else if (_direction.Equals(-Vector3.right))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", false);
@@ -87,7 +87,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            if (direction.Equals(MovementDirection.Up))
+            if (_direction.Equals(Vector3.up))
             {
                 animator.SetBool("Front", false);
                 animator.SetBool("Back", true);
@@ -100,7 +100,7 @@ public class AnimatorController : MonoBehaviour
                 return;
             }
 
-            else if (direction.Equals(MovementDirection.Down))
+            else if (_direction.Equals(-Vector3.up))
             {
                 animator.SetBool("Front", true);
                 animator.SetBool("Back", false);
