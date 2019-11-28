@@ -230,6 +230,7 @@ public class CanvasManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.LogError("Pause canvas esta activado? " + pausePanel.activeInHierarchy);
         if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
         {
             fillPercent = (playerGO.GetComponent<CarMovement>().GetCurrentSpeed / playerGO.GetComponent<CarMovement>().GetMaxSpeed);
@@ -248,6 +249,9 @@ public class CanvasManager : MonoBehaviour
     //MANEJO DE CANVAS//
     public void ActivatePauseCanvas()
     {
+        hudPanel.SetActive(!hudPanel.activeInHierarchy);
+        pausePanel.SetActive(!pausePanel.activeInHierarchy);
+        /*
         if (!GameManager.isPaused)
         {
             hudPanel.SetActive(true);
@@ -257,7 +261,7 @@ public class CanvasManager : MonoBehaviour
         {
             hudPanel.SetActive(false);
             pausePanel.SetActive(true);
-        }
+        }*/
     }
 
     public void ActivateSpecificCanvas(string canvasToActivate)
@@ -417,9 +421,10 @@ public class CanvasManager : MonoBehaviour
 
     public void PressPauseBtn()
     {
+        ActivatePauseCanvas();
         Debug.LogWarning("Press Pause Button");
         GameManager.PauseGame();
-        ActivatePauseCanvas();
+
     }
 
     public void PressLoadBtn()

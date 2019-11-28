@@ -29,8 +29,9 @@ public abstract class EntityController : MonoBehaviour
     private EntitySubType entitySubType;
     [SerializeField]
     private LayerMask layersToCheckCollision;
-#endregion
+    #endregion
 
+    private bool canTurn = false;
     private BezierSpline nextPath;
     private Crosswalk exitedCrosswalk;
     private float colliderRadius;
@@ -256,8 +257,10 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D _other) 
     {
-        if (_other.CompareTag("ChangeOfDirection")) 
+        if (_other.CompareTag("ChangeOfDirection") && canTurn == true) 
         {
+            canTurn = false;
+            StartCoroutine(ChaneCanTurnValueCR());
             DirectionChange directionChanger = _other.GetComponent<DirectionChange>();
             if (directionChanger.HasConnection(followComponent.GetPath))
             {
@@ -285,6 +288,12 @@ public abstract class EntityController : MonoBehaviour
         //    DebugController.LogErrorMessage(string.Format("Collided with other entity {0}", otherEntity.gameObject.name));
         //    // Collision with entity.
         //}
+    }
+
+    IEnumerator ChaneCanTurnValueCR()
+    {
+        yield return new WaitForSeconds(2f);
+        canTurn = true;
     }
 
     private bool ShouldChangeDirection()

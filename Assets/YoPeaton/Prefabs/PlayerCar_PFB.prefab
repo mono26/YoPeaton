@@ -696,7 +696,7 @@ MonoBehaviour:
   brakeSpeed: 0.25
   acceleration: 0.25
   currentSpeed: 0
-  currentDirection: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
   carLightsVFX: {fileID: 8572874119321010628}
 --- !u!114 &5162524990170631425
 MonoBehaviour:
