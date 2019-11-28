@@ -242,7 +242,7 @@ public abstract class EntityController : MonoBehaviour
     {
         bool collided = false;
         collisionCheckResult = CheckForCollision();
-        if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet)
+        if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet && GetMovableComponent.GetCurrentSpeed != 0)
         {
             DebugController.LogMessage($"Llamar metodo para cambiar a animacion de atropellado, { gameObject.name } Atropello a: { collisionCheckResult.otherEntity.name }");
             collisionCheckResult.otherEntity.GetComponent<AnimatorController>().OnPedestrianRunOver();
