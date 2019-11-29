@@ -6,6 +6,7 @@ public abstract class EntityController : MonoBehaviour
 {
     public Action<Vector3> onStartChangingDirection;
     public Action onStopChangingDirection;
+    public Action onEntityCollision;
 
 #region Dependencies
     [SerializeField]
@@ -120,7 +121,7 @@ public abstract class EntityController : MonoBehaviour
         IsOnTheStreet = false;
         GetInitialValuesToStartPath();
         if (animationComponent) {
-            animationComponent.SetCurrentAnimation(followComponent.GetDirection(lastTParameter));
+            animationComponent.OnMovement(followComponent.GetDirection(lastTParameter));
         }
     }
 
@@ -261,7 +262,7 @@ public abstract class EntityController : MonoBehaviour
         if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet && GetMovableComponent.GetCurrentSpeed != 0)
         {
             DebugController.LogMessage($"Llamar metodo para cambiar a animacion de atropellado, { gameObject.name } Atropello a: { collisionCheckResult.otherEntity.name }");
-            collisionCheckResult.otherEntity.GetComponent<AnimatorController>().OnPedestrianRunOver();
+            onEntityCollision?.Invoke();
             collided = true;
         }
         return collided;

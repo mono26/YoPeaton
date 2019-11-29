@@ -17,7 +17,7 @@ public class InfractionBlockCrossing : InfractionSO
         Debug.LogError("VOY A INTENTAR CHECKAR SI ESTA TAPANDO UNA CEBRA");
         RaycastHit2D hit;
         LayerMask mask = LayerMask.GetMask("CrossWalk");
-        var rbObject = evaluatedObject.GetComponent<CarMovement>();
+        var rbObject = evaluatedObject.GetComponent<EntityMovement>();
 
         hit = Physics2D.BoxCast(evaluatedObject.transform.position, boxCastSize, 0, Vector2.up, 1, mask);
 

@@ -233,7 +233,7 @@ public class CanvasManager : MonoBehaviour
         Debug.LogError("Pause canvas esta activado? " + pausePanel.activeInHierarchy);
         if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
         {
-            fillPercent = (playerGO.GetComponent<CarMovement>().GetCurrentSpeed / playerGO.GetComponent<CarMovement>().GetMaxSpeed);
+            fillPercent = (playerGO.GetComponent<EntityMovement>().GetCurrentSpeed / playerGO.GetComponent<EntityMovement>().GetMaxSpeed);
             //Debug.Log("Fill Percent: "  + fillPercent);
             speedImage.fillAmount = fillPercent;
             var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);

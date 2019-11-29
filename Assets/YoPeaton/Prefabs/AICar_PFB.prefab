@@ -457,7 +457,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 597400935
-  m_SortingLayer: 3
+  m_SortingLayer: 10
   m_SortingOrder: 2
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0.89685977, b: 0, a: 1}
@@ -692,7 +692,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 597400935
-  m_SortingLayer: 3
+  m_SortingLayer: 10
   m_SortingOrder: 2
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0.89685977, b: 0, a: 1}
@@ -921,6 +921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6354327461028499319}
+  - component: {fileID: 2505128340343419820}
   - component: {fileID: 6354327461028499313}
   - component: {fileID: 2352004953768726922}
   - component: {fileID: 6354327461028499312}
@@ -930,8 +931,7 @@ GameObject:
   - component: {fileID: 7486950390623095039}
   - component: {fileID: 7486950390623095033}
   - component: {fileID: 4170307743252493958}
-  - component: {fileID: 2505128340343419820}
-  - component: {fileID: 9088357795478334295}
+  - component: {fileID: 2094912326498077274}
   m_Layer: 8
   m_Name: AICar_PFB
   m_TagString: Car
@@ -956,6 +956,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &2505128340343419820
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6354327461028499315}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!50 &6354327461028499313
 Rigidbody2D:
   serializedVersion: 4
@@ -1060,7 +1079,7 @@ MonoBehaviour:
   brakeSpeed: 10
   acceleration: 0.25
   currentSpeed: 0
-  currentDirection: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
   carLightsVFX: {fileID: 2208693977876441183}
 --- !u!114 &6354327461028499318
 MonoBehaviour:
@@ -1152,26 +1171,7 @@ MonoBehaviour:
   controlledObject: {fileID: 0}
   ActivePedestrianCount: 0
   isAlreadyReported: 0
---- !u!95 &2505128340343419820
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6354327461028499315}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &9088357795478334295
+--- !u!114 &2094912326498077274
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1180,11 +1180,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6354327461028499315}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b796aa581aa47f645bb223630ff9613c, type: 3}
+  m_Script: {fileID: 11500000, guid: f918b9aeda299a142b8e5b6f2f7e29d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalsAnimator: {fileID: 4159118589642941165}
   entity: {fileID: 7486950390623095039}
+  directionalsAnimator: {fileID: 4159118589642941165}
 --- !u!1 &6443305038234449307
 GameObject:
   m_ObjectHideFlags: 0

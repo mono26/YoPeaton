@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 270182541731555041}
   - component: {fileID: 270182541731555042}
   - component: {fileID: 270182541731555043}
-  - component: {fileID: 252315252}
+  - component: {fileID: 4090319706780739683}
   m_Layer: 9
   m_Name: AIPedestrian_PFB
   m_TagString: Pedestrian
@@ -51,7 +51,7 @@ Animator:
   m_GameObject: {fileID: 270182541731555055}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 58832dd201ed9be4282fd0dbb9ef5609, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -112,7 +112,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 567507197
-  m_SortingLayer: 13
+  m_SortingLayer: 11
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: d5eb3624715fd6f49a2dee79c3951027, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -164,7 +164,7 @@ MonoBehaviour:
   brakeSpeed: 0.2
   acceleration: 0.1
   currentSpeed: 0
-  currentDirection: {x: 0, y: 0, z: 0}
+  direction: {x: 0, y: 0, z: 0}
   carLightsVFX: {fileID: 0}
 --- !u!114 &270182541731555040
 MonoBehaviour:
@@ -239,7 +239,7 @@ MonoBehaviour:
   giveCrossProbability: 0
   waitForClearCrossProbability: 100
   aiEntity: {fileID: 270182541731555042}
---- !u!114 &252315252
+--- !u!114 &4090319706780739683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -248,11 +248,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 270182541731555055}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b796aa581aa47f645bb223630ff9613c, type: 3}
+  m_Script: {fileID: 11500000, guid: a03c2d7627cf64d4e93c3e4bab44da05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  directionalsAnimator: {fileID: 0}
-  entity: {fileID: 0}
+  entity: {fileID: 270182541731555042}
 --- !u!1 &1363044618323740226
 GameObject:
   m_ObjectHideFlags: 0

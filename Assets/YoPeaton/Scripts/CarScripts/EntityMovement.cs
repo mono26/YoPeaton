@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class CarMovement : MonoBehaviour, IMovable
+public class EntityMovement : MonoBehaviour, IMovable
 {
     private System.Action<Vector3> onMovement;
     private System.Action<EntityController> onEntityMovement;
