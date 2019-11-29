@@ -56,12 +56,6 @@ TagManager:
   - name: UI
     uniqueID: 3959357785
     locked: 0
-  - name: Pedestrians
-    uniqueID: 567507197
-    locked: 0
-  - name: Cars
-    uniqueID: 597400935
-    locked: 0
   - name: Direccionales
     uniqueID: 162866693
     locked: 0
@@ -82,6 +76,12 @@ TagManager:
     locked: 0
   - name: BuildingsMid
     uniqueID: 3424676897
+    locked: 0
+  - name: Cars
+    uniqueID: 597400935
+    locked: 0
+  - name: Pedestrians
+    uniqueID: 567507197
     locked: 0
   - name: BuildingsTop
     uniqueID: 4140713813
