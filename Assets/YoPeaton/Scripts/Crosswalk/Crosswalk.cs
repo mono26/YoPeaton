@@ -10,6 +10,8 @@ public class Crosswalk : MonoBehaviour
     private CrossWalkTypes type = CrossWalkTypes.Bocacalle;
     [SerializeField]
     private Collider2D crossAreaBounds = null;
+    [SerializeField]
+    private BezierSpline[] connectedPaths;
 #endregion
 
     private Dictionary<EntityController, WaitTicket> waitingPedestrians = new Dictionary<EntityController, WaitTicket>();
@@ -327,11 +329,27 @@ public class Crosswalk : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D _other) {
         if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) {
             EntityController entity = _other.transform.GetComponent<EntityController>();
-            if (entity  && !entity.JustExitedCrossWalk(this)) {
+            if (IsAValidEntity(entity)) {
                 OnEntering(entity);
                 entity.OnCrossWalkEntered(this);
             }
         }
+    }
+
+    private bool IsAValidEntity(EntityController _entity)
+    {
+        bool valid = false;
+        if (_entity && !_entity.JustExitedCrossWalk(this))
+        {
+            foreach (BezierSpline path in connectedPaths)
+            {
+                if (path != _entity.GetCurrentPath)
+                {
+                    valid = true;
+                }
+            }
+        }
+        return valid;
     }
 
     private void OnTriggerExit2D(Collider2D _other) {

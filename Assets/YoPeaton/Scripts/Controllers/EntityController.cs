@@ -31,7 +31,7 @@ public abstract class EntityController : MonoBehaviour
     private LayerMask layersToCheckCollision;
     #endregion
 
-    private bool canTurn = false;
+    private bool canTurn = true;
     private BezierSpline nextPath;
     private Crosswalk exitedCrosswalk;
     private float colliderRadius;
@@ -71,6 +71,22 @@ public abstract class EntityController : MonoBehaviour
                 }
             }
             return followComponent;
+        }
+    }
+
+    public BezierSpline GetCurrentPath
+    {
+        get
+        {
+            return followComponent.GetPath;
+        }
+    }
+
+    public BezierSpline GetNextPath
+    {
+        get
+        {
+            return nextPath;
         }
     }
 
