@@ -83,6 +83,9 @@ TagManager:
   - name: Pedestrians
     uniqueID: 567507197
     locked: 0
+  - name: TreesSemiTop
+    uniqueID: 2179242645
+    locked: 0
   - name: BuildingsTop
     uniqueID: 4140713813
     locked: 0
@@ -91,4 +94,7 @@ TagManager:
     locked: 0
   - name: TreesTop
     uniqueID: 4075563495
+    locked: 0
+  - name: BuildingSuperTop
+    uniqueID: 3955346375
     locked: 0
