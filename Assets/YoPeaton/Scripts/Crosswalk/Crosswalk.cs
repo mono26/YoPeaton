@@ -123,7 +123,7 @@ public class Crosswalk : MonoBehaviour
         // DebugController.LogMessage("Entity started crossing");
         if (_entity.GetEntityType.Equals(EntityType.Pedestrian)) {
             if (!crossingPedestrians.ContainsKey(_entity)) {
-                _entity.GetMovableComponent.AddOnMovementEntity(OnEntityMoved);
+                _entity.GetMovableComponent.AddOnMovement(OnEntityMoved);
                 CrossingInfo newInfo = new CrossingInfo();
                 newInfo.lastPosition =  _entity.transform.position;
                 crossingPedestrians.Add(_entity, newInfo);
@@ -136,7 +136,7 @@ public class Crosswalk : MonoBehaviour
                     DebugController.LogMessage("This car is crossing with pedestrians doing it at the same time: " + _entity.gameObject.name);
                 }
                 // DebugController.LogMessage("Adding car to crossing cars.");
-                _entity.GetMovableComponent.AddOnMovementEntity(OnEntityMoved);
+                _entity.GetMovableComponent.AddOnMovement(OnEntityMoved);
                 CrossingInfo newInfo = new CrossingInfo();
                 newInfo.lastPosition = _entity.transform.position;
                 crossingCars.Add(_entity, newInfo);
@@ -153,7 +153,7 @@ public class Crosswalk : MonoBehaviour
         {
             if (crossingPedestrians.ContainsKey(_entity)) 
             {
-                _entity.GetMovableComponent.RemoveOnMovementEntity(OnEntityMoved);
+                _entity.GetMovableComponent.RemoveOnMovement(OnEntityMoved);
                 crossingPedestrians.Remove(_entity);
             }
         }
@@ -161,7 +161,7 @@ public class Crosswalk : MonoBehaviour
         {
             if (crossingCars.ContainsKey(_entity)) 
             {
-                _entity.GetMovableComponent.RemoveOnMovementEntity(OnEntityMoved);
+                _entity.GetMovableComponent.RemoveOnMovement(OnEntityMoved);
                 crossingCars.Remove(_entity);
             }
         }
@@ -363,40 +363,40 @@ public class Crosswalk : MonoBehaviour
         }
     }
 
-    private void OnEntityMoved(EntityController _entity)
+    private void OnEntityMoved(OnEntityMovementEventArgs _args)
     {
-        if (_entity.GetEntityType.Equals(EntityType.Pedestrian))
+        if (_args.Entity.GetEntityType.Equals(EntityType.Pedestrian))
         {
-            if (crossingPedestrians.ContainsKey(_entity))
+            if (crossingPedestrians.ContainsKey(_args.Entity))
             {
-                CrossingInfo info = crossingPedestrians[_entity];
+                CrossingInfo info = crossingPedestrians[_args.Entity];
                 // First calculate the distance travelled since last frame.
-                float distance = (_entity.transform.position - info.lastPosition).magnitude;
+                float distance = (_args.Entity.transform.position - info.lastPosition).magnitude;
                 // Add to the calculated distance the sotored distance to get the total.
                 distance += info.distanceTravelled;
                 info.distanceTravelled = distance;
-                crossingPedestrians[_entity] = info;
+                crossingPedestrians[_args.Entity] = info;
             }
             else
             {
-                DebugController.LogErrorMessage(string.Format("{0} moved but it has no crossing info stored.", _entity.gameObject.name));
+                DebugController.LogErrorMessage(string.Format("{0} moved but it has no crossing info stored.", _args.Entity.gameObject.name));
             }
         }
-        else if (_entity.GetEntityType.Equals(EntityType.Car))
+        else if (_args.Entity.GetEntityType.Equals(EntityType.Car))
         {
-            if (crossingCars.ContainsKey(_entity))
+            if (crossingCars.ContainsKey(_args.Entity))
             {
-                CrossingInfo info = crossingCars[_entity];
+                CrossingInfo info = crossingCars[_args.Entity];
                 // First calculate the distance travelled since last frame.
-                float distance = (_entity.transform.position - info.lastPosition).magnitude;
+                float distance = (_args.Entity.transform.position - info.lastPosition).magnitude;
                 // Add to the calculated distance the sotored distance to get the total.
                 distance += info.distanceTravelled;
                 info.distanceTravelled = distance;
-                crossingCars[_entity] = info;
+                crossingCars[_args.Entity] = info;
             }
             else
             {
-                DebugController.LogErrorMessage(string.Format("{0} moved but it has no crossing info stored.", _entity.gameObject.name));
+                DebugController.LogErrorMessage(string.Format("{0} moved but it has no crossing info stored.", _args.Entity.gameObject.name));
             }
         }
     }

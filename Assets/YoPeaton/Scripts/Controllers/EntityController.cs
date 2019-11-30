@@ -10,7 +10,7 @@ public abstract class EntityController : MonoBehaviour
 
 #region Dependencies
     [SerializeField]
-    private IMovable movableComponent;
+    private EntityMovement movementComponent;
     [SerializeField]
     private FollowPath followComponent;
     [SerializeField]
@@ -51,15 +51,15 @@ public abstract class EntityController : MonoBehaviour
 
 #region Properties
 
-    public IMovable GetMovableComponent {
+    public EntityMovement GetMovableComponent {
         get {
-            if (movableComponent == null) {
-                movableComponent = GetComponent<IMovable>();
-                if (movableComponent == null) {
+            if (movementComponent == null) {
+                movementComponent = GetComponent<EntityMovement>();
+                if (movementComponent == null) {
                     DebugController.LogMessage(string.Format("Gameobject {0} doesn't have IMovable component", gameObject.name));
                 }
             }
-            return movableComponent;
+            return movementComponent;
         }
     }
 
@@ -121,7 +121,10 @@ public abstract class EntityController : MonoBehaviour
         IsOnTheStreet = false;
         GetInitialValuesToStartPath();
         if (animationComponent) {
-            animationComponent.OnMovement(followComponent.GetDirection(lastTParameter));
+            OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
+            eventArgs.Entity = this;
+            eventArgs.MovementDirection = followComponent.GetDirection(lastTParameter);
+            animationComponent.OnMovement(eventArgs);
         }
     }
 
@@ -242,7 +245,7 @@ public abstract class EntityController : MonoBehaviour
                             GetInitialValuesToStartPath();
                             if (entityType.Equals(EntityType.Car))
                             {
-                                movableComponent.SlowDownByPercent(50.0f);
+                                movementComponent.SlowDownByPercent(50.0f);
                             }
                             isChangingDirection = false;
                             nextPath = null;

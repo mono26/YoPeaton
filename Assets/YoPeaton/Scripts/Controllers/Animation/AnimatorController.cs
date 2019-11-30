@@ -40,7 +40,7 @@ public class AnimatorController : MonoBehaviour
     }
     #endregion
 
-    public virtual void OnMovement(Vector3 _direction)
+    public virtual void OnMovement(OnEntityMovementEventArgs _args)
     {
         
     }

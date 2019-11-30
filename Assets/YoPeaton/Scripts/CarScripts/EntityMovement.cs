@@ -1,10 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-public class EntityMovement : MonoBehaviour, IMovable
+public class EntityMovement : MonoBehaviour, IMovable, ISlowable
 {
-    private System.Action<Vector3> onMovement;
-    private System.Action<EntityController> onEntityMovement;
+    private System.Action<OnEntityMovementEventArgs> onMovement;
 
     [SerializeField]
     private EntityController movingEntity;
@@ -81,8 +80,10 @@ public class EntityMovement : MonoBehaviour, IMovable
         // currentDirection = (lerpedPosition - transform.position).normalized;
         // onMovement?.Invoke(currentDirection);
         // currentDirection = (_position - transform.position).normalized;
-        onMovement?.Invoke(direction);
-        onEntityMovement?.Invoke(movingEntity);
+        OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
+        eventArgs.Entity = movingEntity;
+        eventArgs.MovementDirection = direction;
+        onMovement?.Invoke(eventArgs);
     }
 
     private void RotateInDirectionOfPosition(Vector3 _position) {
@@ -149,21 +150,11 @@ public class EntityMovement : MonoBehaviour, IMovable
         MoveToNextPosition(position);
     }
 
-    public void AddOnMovement(Action<Vector3> _onMovementAction) {
+    public void AddOnMovement(Action<OnEntityMovementEventArgs> _onMovementAction) {
         onMovement += _onMovementAction;
     }
 
-    public void RemoveOnMovement(Action<Vector3> _onMovementAction) {
+    public void RemoveOnMovement(Action<OnEntityMovementEventArgs> _onMovementAction) {
         onMovement -= _onMovementAction;
-    }
-
-    public void AddOnMovementEntity(Action<EntityController> _onMovementAction)
-    {
-        onEntityMovement += _onMovementAction;
-    }
-
-    public void RemoveOnMovementEntity(Action<EntityController> _onMovementAction)
-    {
-        onEntityMovement -= _onMovementAction;
     }
 }
