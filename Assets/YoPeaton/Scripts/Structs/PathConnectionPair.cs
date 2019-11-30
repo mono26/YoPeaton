@@ -6,15 +6,15 @@ using UnityEngine;
 public struct PathConnectionPair
 {
     [SerializeField]
-    public BezierSpline from;
+    public Path from;
     [SerializeField]
-    public BezierSpline to;
+    public Path to;
 
-    public bool IsConnectionForPath(BezierSpline _pathToCheck) {
+    public bool IsConnectionForPath(Path _pathToCheck) {
         return (_pathToCheck == from);
     }
 
-    public BezierSpline GetConnection(BezierSpline _pathToCheck) {
+    public Path GetConnection(Path _pathToCheck) {
         return to;
     }
 }

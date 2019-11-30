@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EntityController : MonoBehaviour
 {
-    public Action<Vector3> onStartChangingDirection;
+    public Action<OnStartDirectionChangeArgs> onStartDirectionChange;
     public Action onStopChangingDirection;
     public Action onEntityCollision;
 
@@ -33,7 +33,7 @@ public abstract class EntityController : MonoBehaviour
     #endregion
 
     private bool canTurn = true;
-    private BezierSpline nextPath;
+    private Path nextPath;
     private Crosswalk exitedCrosswalk;
     private float colliderRadius;
     private float connected_t_Parameter_ToNextPath;
@@ -75,7 +75,7 @@ public abstract class EntityController : MonoBehaviour
         }
     }
 
-    public BezierSpline GetCurrentPath
+    public Path GetCurrentPath
     {
         get
         {
@@ -83,7 +83,7 @@ public abstract class EntityController : MonoBehaviour
         }
     }
 
-    public BezierSpline GetNextPath
+    public Path GetNextPath
     {
         get
         {
@@ -125,6 +125,22 @@ public abstract class EntityController : MonoBehaviour
             eventArgs.Entity = this;
             eventArgs.MovementDirection = followComponent.GetDirection(lastTParameter);
             animationComponent.OnMovement(eventArgs);
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (followComponent)
+        {
+            followComponent.onPathChanged += OnPathChanged;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (followComponent)
+        {
+            followComponent.onPathChanged -= OnPathChanged;
         }
     }
 
@@ -242,13 +258,13 @@ public abstract class EntityController : MonoBehaviour
                             // transform.right = nextPath.GetDirection(nextPathStarting_t_Parameter);
                             followComponent.SetPath = nextPath;
                             t = nextPathStarting_t_Parameter;
-                            GetInitialValuesToStartPath();
-                            if (entityType.Equals(EntityType.Car))
-                            {
-                                movementComponent.SlowDownByPercent(50.0f);
-                            }
-                            isChangingDirection = false;
-                            nextPath = null;
+                            //GetInitialValuesToStartPath();
+                            //if (entityType.Equals(EntityType.Car))
+                            //{
+                            //    movementComponent.SlowDownByPercent(50.0f);
+                            //}
+                            //isChangingDirection = false;
+                            //nextPath = null;
                         }
                     }
                     GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
@@ -256,6 +272,17 @@ public abstract class EntityController : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void OnPathChanged()
+    {
+        GetInitialValuesToStartPath();
+        if (entityType.Equals(EntityType.Car))
+        {
+            movementComponent.SlowDownByPercent(50.0f);
+        }
+        isChangingDirection = false;
+        nextPath = null;
     }
 
     public bool HasCollided()
@@ -337,7 +364,7 @@ public abstract class EntityController : MonoBehaviour
         if (nextPath) 
         {
             nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
-            connected_t_Parameter_ToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPoint(nextPathStarting_t_Parameter));
+            connected_t_Parameter_ToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPointAt(nextPathStarting_t_Parameter));
             CheckDirectional();
             isChangingDirection = true;
         }
@@ -457,7 +484,7 @@ public abstract class EntityController : MonoBehaviour
     private void CheckDirectional()
     {
         Vector3 currentDirection = followComponent.GetDirection(lastTParameter) + transform.position;
-        Vector3 nextDirection = nextPath.GetDirection(nextPathStarting_t_Parameter) + transform.position;
+        Vector3 nextDirection = nextPath.GetDirectionAt(nextPathStarting_t_Parameter) + transform.position;
         Vector3 directional = Vector3.zero;
         float dot = 0.0f;
         // https://math.stackexchange.com/questions/274712/calculate-on-which-side-of-a-straight-line-is-a-given-point-located
@@ -475,7 +502,9 @@ public abstract class EntityController : MonoBehaviour
 
     private void StartDirectional(Vector3 _nextDirection)
     {
-        onStartChangingDirection?.Invoke(_nextDirection);
+        OnStartDirectionChangeArgs eventArgs = new OnStartDirectionChangeArgs();
+        eventArgs.Direction = _nextDirection;
+        onStartDirectionChange?.Invoke(eventArgs);
     }
 
     private void StopDirectional()

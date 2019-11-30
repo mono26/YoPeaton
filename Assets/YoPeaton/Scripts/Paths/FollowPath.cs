@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class FollowPath : MonoBehaviour
 {
-    private Action OnPathChanged;
+    public Action onPathChanged;
 
     [SerializeField]
-    private BezierSpline pathToFollow = null;
+    private Path pathToFollow = null;
     [SerializeField]
     private LayerMask directionChangeLayer;
 
@@ -21,14 +21,14 @@ public class FollowPath : MonoBehaviour
         }
     }
 
-    public BezierSpline SetPath {
+    public Path SetPath {
         set {
             pathToFollow = value;
             pathLength = GetLength();
         }
     }
 
-    public BezierSpline GetPath {
+    public Path GetPath {
         get {
             return pathToFollow;
         }
@@ -48,7 +48,7 @@ public class FollowPath : MonoBehaviour
         Vector3 directionToReturn = Vector3.zero;
         if (pathToFollow) 
         {
-            directionToReturn = pathToFollow.GetDirection(time);
+            directionToReturn = pathToFollow.GetDirectionAt(time);
         }
         else
         {
@@ -62,20 +62,8 @@ public class FollowPath : MonoBehaviour
     /// </summary>
     /// <param name="t">t parameter of the Bezier curve. B(t), must be clamped to 0 and 1. Being 0 the start and 1 the end.</param>
     /// <returns></returns>
-    public Vector3 GetPosition(float time) {
-        return pathToFollow.GetPoint(time);
-    }
-
-    private void OnDirectionChanged(BezierSpline _nextPath) {
-        Debug.LogWarning("Object: " + this.gameObject.name + ", acabo de cambiar de dirección");
-        pathToFollow = _nextPath;
-        if (_nextPath) {
-            pathLength = GetLength();
-        }
-        else {
-            pathLength = 0.0f;
-        }
-        OnPathChanged?.Invoke();
+    public Vector3 GetPosition(float _time) {
+        return pathToFollow.GetPointAt(_time);
     }
 
     public float GetLength() {
@@ -104,7 +92,7 @@ public class FollowPath : MonoBehaviour
 
     public bool IsThereOtherChangeOfDirection()
     {
-        Vector3 endOfPath = pathToFollow.GetPoint(1.0f);
+        Vector3 endOfPath = pathToFollow.GetPointAt(1.0f);
         Vector3 directionVector = endOfPath - transform.position;
         GameObject directionChange = PhysicsHelper.RayCastForFirstGameObject(gameObject, transform.position, directionVector.normalized, directionVector.magnitude, directionChangeLayer);
         return directionChange != null;

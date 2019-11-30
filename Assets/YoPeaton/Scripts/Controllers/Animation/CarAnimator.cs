@@ -9,7 +9,7 @@ public class CarAnimator : AnimatorController
     {
         if (entity)
         {
-            entity.onStartChangingDirection += OnDirectionalStart;
+            entity.onStartDirectionChange += OnStartDirectionChange;
             entity.onStopChangingDirection += OnDirectionalStop;
         }
     }
@@ -18,7 +18,7 @@ public class CarAnimator : AnimatorController
     {
         if (entity)
         {
-            entity.onStartChangingDirection -= OnDirectionalStart;
+            entity.onStartDirectionChange -= OnStartDirectionChange;
             entity.onStopChangingDirection -= OnDirectionalStop;
         }
     }
@@ -62,7 +62,12 @@ public class CarAnimator : AnimatorController
         }
     }
 
-    private void OnDirectionalStart(Vector3 _directional)
+    private void OnStartDirectionChange(OnStartDirectionChangeArgs _args)
+    {
+        StartDirectional(_args.Direction);
+    }
+
+    private void StartDirectional(Vector3 _directional)
     {
         if (directionalsAnimator)
         {
