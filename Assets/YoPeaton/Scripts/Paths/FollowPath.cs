@@ -13,18 +13,18 @@ public class FollowPath : MonoBehaviour
     private LayerMask directionChangeLayer;
 
     private bool moveComponent = true;
-    private float pathLength;
+    private bool isChangingDirection = false;
+    private float connected_t_Parameter_ToNextPath;
+    private float nextPathStarting_t_Parameter;
+    private Path nextPath;
 
-    public float GetPathLeght {
-        get {
-            return pathLength;
-        }
-    }
+    public float PathLength { get; private set; }
 
     public Path SetPath {
         set {
             pathToFollow = value;
-            pathLength = GetLength();
+            PathLength = GetLength();
+            onPathChanged?.Invoke();
         }
     }
 
@@ -35,7 +35,24 @@ public class FollowPath : MonoBehaviour
     }
 
     void Start() {
-        pathLength = GetLength();
+        PathLength = GetLength();
+    }
+
+    private void OnEnable()
+    {
+        GetComponent<EntityController>().onStartDirectionChange  += OnStartDirectionChange;
+    }
+
+    private void OnDisable()
+    {
+        GetComponent<EntityController>().onStartDirectionChange -= OnStartDirectionChange;
+    }
+
+    private void OnStartDirectionChange(OnEntityStartDirectionChangeArgs _args)
+    {
+        connected_t_Parameter_ToNextPath = _args.NextPath.GetTParameter(_args.Entity.transform.position);
+        nextPathStarting_t_Parameter = GetPath.GetTParameter(nextPath.GetPointAt(nextPathStarting_t_Parameter));
+        isChangingDirection = true;
     }
 
     /// <summary>
@@ -63,7 +80,26 @@ public class FollowPath : MonoBehaviour
     /// <param name="t">t parameter of the Bezier curve. B(t), must be clamped to 0 and 1. Being 0 the start and 1 the end.</param>
     /// <returns></returns>
     public Vector3 GetPosition(float _time) {
-        return pathToFollow.GetPointAt(_time);
+        Vector3 pointToReturn = Vector3.zero;
+        if (isChangingDirection && nextPath)
+        {
+            if (_time >= connected_t_Parameter_ToNextPath)
+            {
+                // transform.position = nextPath.GetPoint(nextPathStarting_t_Parameter);
+                // transform.right = nextPath.GetDirection(nextPathStarting_t_Parameter);
+                SetPath = nextPath;
+                _time = nextPathStarting_t_Parameter;
+                //GetInitialValuesToStartPath();
+                //if (entityType.Equals(EntityType.Car))
+                //{
+                //    movementComponent.SlowDownByPercent(50.0f);
+                //}
+                //isChangingDirection = false;
+                //nextPath = null;
+            }
+        }
+        pointToReturn = pathToFollow.GetPointAt(_time);
+        return pointToReturn;
     }
 
     public float GetLength() {

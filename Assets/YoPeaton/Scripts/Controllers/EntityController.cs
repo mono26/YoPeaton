@@ -4,8 +4,9 @@ using UnityEngine;
 
 public abstract class EntityController : MonoBehaviour
 {
-    public Action<OnStartDirectionChangeArgs> onStartDirectionChange;
+    public Action<OnEntityStartDirectionChangeArgs> onStartDirectionChange;
     public Action onStopChangingDirection;
+    public Action<Vector3> onStartDirectional;
     public Action onEntityCollision;
 
 #region Dependencies
@@ -33,17 +34,13 @@ public abstract class EntityController : MonoBehaviour
     #endregion
 
     private bool canTurn = true;
-    private Path nextPath;
     private Crosswalk exitedCrosswalk;
     private float colliderRadius;
-    private float connected_t_Parameter_ToNextPath;
     private float distanceTravelled = 0.0f;
     private float distanceToCheckForCollision = 0.1f;
     private float lastTParameter = 0.0f;
-    private float nextPathStarting_t_Parameter;
     public bool IsOnTheStreet { get; private set; }
     private bool move = true;
-    private bool isChangingDirection = false;
     protected bool entityIsPlayer = true;
     protected RaycastCheckResult collisionCheckResult;
     private Vector3 colliderOffset;
@@ -80,14 +77,6 @@ public abstract class EntityController : MonoBehaviour
         get
         {
             return followComponent.GetPath;
-        }
-    }
-
-    public Path GetNextPath
-    {
-        get
-        {
-            return nextPath;
         }
     }
 
@@ -239,34 +228,16 @@ public abstract class EntityController : MonoBehaviour
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
                 float t;
-                if (distanceTravelled / GetFollowPathComponent.GetPathLeght < lastTParameter) 
+                if (distanceTravelled / GetFollowPathComponent.PathLength < lastTParameter) 
                 {
                     t = lastTParameter;
                 }
                 else 
                 {
-                    t = distanceTravelled / GetFollowPathComponent.GetPathLeght;
+                    t = distanceTravelled / GetFollowPathComponent.PathLength;
                 }
                 if (!t.Equals(lastTParameter)) 
                 {
-
-                    if (isChangingDirection && nextPath) 
-                    {
-                        if (t >= connected_t_Parameter_ToNextPath) 
-                        {
-                            // transform.position = nextPath.GetPoint(nextPathStarting_t_Parameter);
-                            // transform.right = nextPath.GetDirection(nextPathStarting_t_Parameter);
-                            followComponent.SetPath = nextPath;
-                            t = nextPathStarting_t_Parameter;
-                            //GetInitialValuesToStartPath();
-                            //if (entityType.Equals(EntityType.Car))
-                            //{
-                            //    movementComponent.SlowDownByPercent(50.0f);
-                            //}
-                            //isChangingDirection = false;
-                            //nextPath = null;
-                        }
-                    }
                     GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
                     lastTParameter = t;
                 }
@@ -280,9 +251,8 @@ public abstract class EntityController : MonoBehaviour
         if (entityType.Equals(EntityType.Car))
         {
             movementComponent.SlowDownByPercent(50.0f);
+            StopDirectional();
         }
-        isChangingDirection = false;
-        nextPath = null;
     }
 
     public bool HasCollided()
@@ -315,10 +285,6 @@ public abstract class EntityController : MonoBehaviour
                 {
                     //Debug.LogError("Nombre: " + this.gameObject.name + ", Changed Direction.");
                     TryChangeDirection(directionChanger);
-                    // if (entityType.Equals(EntityType.Car))
-                    // {
-                    //     movableComponent.SlowDown(30.0f);
-                    // }
                 }
             }
         }
@@ -329,12 +295,6 @@ public abstract class EntityController : MonoBehaviour
                 IsOnTheStreet = true;
             }
         }
-        //else if (_other.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian"))
-        //{
-        //    EntityController otherEntity = _other.GetComponent<EntityController>();
-        //    DebugController.LogErrorMessage(string.Format("Collided with other entity {0}", otherEntity.gameObject.name));
-        //    // Collision with entity.
-        //}
     }
 
     IEnumerator ChaneCanTurnValueCR()
@@ -360,13 +320,16 @@ public abstract class EntityController : MonoBehaviour
 
     private void TryChangeDirection(DirectionChange _directionChanger)
     {
-        nextPath = _directionChanger.GetConnectionFrom(followComponent.GetPath);
+        Path nextPath = _directionChanger.GetConnectionFrom(followComponent.GetPath);
         if (nextPath) 
         {
-            nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
-            connected_t_Parameter_ToNextPath = followComponent.GetPath.GetTParameter(nextPath.GetPointAt(nextPathStarting_t_Parameter));
-            CheckDirectional();
-            isChangingDirection = true;
+            Vector3 currentDirection = followComponent.GetDirection(lastTParameter) + transform.position;
+            Vector3 nextDirection = nextPath.GetDirectionAt(nextPath.GetTParameter(transform.position)) + transform.position;
+            OnEntityStartDirectionChangeArgs eventArgs = new OnEntityStartDirectionChangeArgs();
+            eventArgs.Entity = this;
+            eventArgs.Direction = nextDirection;
+            onStartDirectionChange?.Invoke(eventArgs);
+            CheckDirectional(currentDirection, nextDirection);
         }
     }
 
@@ -418,11 +381,6 @@ public abstract class EntityController : MonoBehaviour
             {
                 result.otherEntity = obstacle.GetComponent<EntityController>();
                 result.collided = true;
-                // bool onTheStreet = obstacle.GetComponent<EntityController>().IsOnTheStreet;
-                // if (onTheStreet)
-                // {
-                //     stop = true;
-                // }
             }
         }
         return result;
@@ -446,11 +404,6 @@ public abstract class EntityController : MonoBehaviour
             {
                 result.otherEntity = obstacle.GetComponent<EntityController>();
                 result.collided = true;
-                // bool onTheStreet = obstacle.GetComponent<EntityController>().IsOnTheStreet;
-                // if (onTheStreet)
-                // {
-                //     stop = true;
-                // }
             }
         }
         return result;
@@ -481,14 +434,14 @@ public abstract class EntityController : MonoBehaviour
         collisionCheckResult.otherEntity?.OnEntityCollision();
     }
 
-    private void CheckDirectional()
+    // TODO only cars!!!
+
+    private void CheckDirectional(Vector3 _currentDirection, Vector3 _nextDirection)
     {
-        Vector3 currentDirection = followComponent.GetDirection(lastTParameter) + transform.position;
-        Vector3 nextDirection = nextPath.GetDirectionAt(nextPathStarting_t_Parameter) + transform.position;
         Vector3 directional = Vector3.zero;
         float dot = 0.0f;
         // https://math.stackexchange.com/questions/274712/calculate-on-which-side-of-a-straight-line-is-a-given-point-located
-        dot = (nextDirection.x - 0.0f)*(currentDirection.y - 0.0f) - (nextDirection.y - 0.0f)*(currentDirection.x - 0.0f);
+        dot = (_nextDirection.x - 0.0f)*(_currentDirection.y - 0.0f) - (_nextDirection.y - 0.0f)*(_currentDirection.x - 0.0f);
         if(dot > 0)
         {
             directional = Vector3.right;
@@ -497,15 +450,9 @@ public abstract class EntityController : MonoBehaviour
         {
             directional = -Vector3.right;
         }
-        StartDirectional(directional);
+        onStartDirectional?.Invoke(_nextDirection);
     }
 
-    private void StartDirectional(Vector3 _nextDirection)
-    {
-        OnStartDirectionChangeArgs eventArgs = new OnStartDirectionChangeArgs();
-        eventArgs.Direction = _nextDirection;
-        onStartDirectionChange?.Invoke(eventArgs);
-    }
 
     private void StopDirectional()
     {
