@@ -328,6 +328,7 @@ public abstract class EntityController : MonoBehaviour
             OnEntityStartDirectionChangeArgs eventArgs = new OnEntityStartDirectionChangeArgs();
             eventArgs.Entity = this;
             eventArgs.Direction = nextDirection;
+            eventArgs.NextPath = nextPath;
             onStartDirectionChange?.Invoke(eventArgs);
             CheckDirectional(currentDirection, nextDirection);
         }

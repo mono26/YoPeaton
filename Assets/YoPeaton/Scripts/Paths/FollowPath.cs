@@ -60,8 +60,9 @@ public class FollowPath : MonoBehaviour
 
     private void OnStartDirectionChange(OnEntityStartDirectionChangeArgs _args)
     {
-        connected_t_Parameter_ToNextPath = _args.NextPath.GetTParameter(_args.Entity.transform.position);
-        nextPathStarting_t_Parameter = GetPath.GetTParameter(nextPath.GetPointAt(nextPathStarting_t_Parameter));
+        nextPath = _args.NextPath;
+        nextPathStarting_t_Parameter = nextPath.GetTParameter(_args.Entity.transform.position);
+        connected_t_Parameter_ToNextPath = GetPath.GetTParameter(nextPath.GetPointAt(nextPathStarting_t_Parameter));
         isChangingDirection = true;
     }
 
@@ -95,17 +96,10 @@ public class FollowPath : MonoBehaviour
         {
             if (_time >= connected_t_Parameter_ToNextPath)
             {
-                // transform.position = nextPath.GetPoint(nextPathStarting_t_Parameter);
-                // transform.right = nextPath.GetDirection(nextPathStarting_t_Parameter);
                 SetPath = nextPath;
                 _time = nextPathStarting_t_Parameter;
-                //GetInitialValuesToStartPath();
-                //if (entityType.Equals(EntityType.Car))
-                //{
-                //    movementComponent.SlowDownByPercent(50.0f);
-                //}
-                //isChangingDirection = false;
-                //nextPath = null;
+                isChangingDirection = false;
+                nextPath = null;
             }
         }
         pointToReturn = pathToFollow.GetPointAt(_time);
