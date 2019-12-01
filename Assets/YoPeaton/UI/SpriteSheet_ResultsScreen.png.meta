@@ -4,19 +4,19 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -6114743432849748871
-    second: SpriteSheet_ResultsScreen_0
+    second: ResultsScreen_ResultsBg
   - first:
       213: 1081073145371005198
-    second: SpriteSheet_ResultsScreen_1
+    second: ResultsScreen_ResultBg
   - first:
       213: 6705832869665639801
-    second: SpriteSheet_ResultsScreen_Restar
+    second: ResultsScreen_EmptyButton
   - first:
       213: -1692602282830537923
-    second: SpriteSheet_ResultsScreen_2
+    second: ResultsScreen_QuitButton
   - first:
       213: 4356079974704075364
-    second: SpriteSheet_ResultsScreen_Info
+    second: ResultsScreen_Restart
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpriteSheet_ResultsScreen_0
+      name: ResultsScreen_ResultsBg
       rect:
         serializedVersion: 2
         x: 55
@@ -121,7 +121,7 @@ TextureImporter:
         width: 914
         height: 823
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,7 +134,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_ResultsScreen_1
+      name: ResultsScreen_ResultBg
       rect:
         serializedVersion: 2
         x: 247
@@ -142,7 +142,7 @@ TextureImporter:
         width: 538
         height: 50
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,7 +155,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_ResultsScreen_Restar
+      name: ResultsScreen_EmptyButton
       rect:
         serializedVersion: 2
         x: 420
@@ -163,7 +163,7 @@ TextureImporter:
         width: 184
         height: 121
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,7 +176,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_ResultsScreen_2
+      name: ResultsScreen_QuitButton
       rect:
         serializedVersion: 2
         x: 235
@@ -184,7 +184,7 @@ TextureImporter:
         width: 184
         height: 121
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,7 +197,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpriteSheet_ResultsScreen_Info
+      name: ResultsScreen_Restart
       rect:
         serializedVersion: 2
         x: 604
@@ -205,7 +205,7 @@ TextureImporter:
         width: 184
         height: 121
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
