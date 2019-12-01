@@ -7,8 +7,10 @@ public class DirectionChange : MonoBehaviour
     [SerializeField]
     private PathConnectionPair[] connection = null;
 
-    private void OnDrawGizmos() {
-        if (connection.Length > 0) {
+    private void OnDrawGizmos() 
+    {
+        if (connection.Length > 0) 
+        {
             for (int i = 0; i < connection.Length; i++) {
                 if (connection[i].from && connection[i].to)
                 {

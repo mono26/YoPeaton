@@ -48,6 +48,16 @@ public class FollowPath : MonoBehaviour
         GetComponent<EntityController>().onStartDirectionChange -= OnStartDirectionChange;
     }
 
+    private void OnDrawGizmos()
+    {
+        if (pathToFollow)
+        {
+            float t = pathToFollow.GetTParameter(transform.position);
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(pathToFollow.GetPointAt(t), transform.position);
+        }
+    }
+
     private void OnStartDirectionChange(OnEntityStartDirectionChangeArgs _args)
     {
         connected_t_Parameter_ToNextPath = _args.NextPath.GetTParameter(_args.Entity.transform.position);

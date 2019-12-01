@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 
+[ExecuteInEditMode]
 public class Path : MonoBehaviour
 {
+    [SerializeField]
     public BezierSpline Spline { get; private set; }
 
     private void Awake()
