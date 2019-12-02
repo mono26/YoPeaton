@@ -11,6 +11,7 @@ public class AIController : EntityController
     [SerializeField]
     private InfractionController behaviourController;
 
+    public bool IsThisOnTheStreet;
     public AIState GetCurrentState {
         get {
             return stateMachine.GetCurrentState;
@@ -32,6 +33,7 @@ public class AIController : EntityController
 
     protected override void Awake() 
     {
+        IsThisOnTheStreet = base.IsOnTheStreet;
         entityIsPlayer = false;
         base.Awake();
        
@@ -58,6 +60,7 @@ public class AIController : EntityController
 
     protected override void Update()
     {
+        IsThisOnTheStreet = base.IsOnTheStreet;
         transitionController?.CheckTransitions();
         base.Update();
     }

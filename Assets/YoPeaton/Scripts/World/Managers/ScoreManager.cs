@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
     public static int finalScore;
     public float countDuration = 2f;
 
-    public static float lifeTime = 200;
+    public static float lifeTime = 99999999999999999f;
 
     public static int correctAnswers = 0;
     public static int wrongAnswers = 0;
