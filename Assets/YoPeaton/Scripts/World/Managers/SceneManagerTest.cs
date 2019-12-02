@@ -35,16 +35,17 @@ public class SceneManagerTest : MonoBehaviour
         switch (scene.name.ToLower())
         {
             case "victoryscreenscene":
+                CanvasManager._instance.TurnOffHUD();
                 if (GameManager.didPlayerLose == false)
                 {
                     Debug.LogWarning("Cargue la scena de victoria");
                     ScoreManager.CalculateFinalScore();
                     CanvasManager._instance.FillTextArray();
+                    CanvasManager._instance.FillVictoryButtons();
                     //CanvasManager._instance.CountToWhileWaiting();
                     //ScoreManager.instance.TestFillScoreArray();
                     //CanvasManager._instance.CountToScore();
                     CanvasManager._instance.StartCountSequence();
-                    CanvasManager._instance.TurnOffHUD();
                     StartCoroutine(BackToMenuCR());
                 }
                 else
@@ -52,11 +53,11 @@ public class SceneManagerTest : MonoBehaviour
                     Debug.LogWarning("Cargue la scena de perder");
                     ScoreManager.CalculateLooserScore();
                     CanvasManager._instance.FillTextArray();
+                    CanvasManager._instance.FillVictoryButtons();
                     //CanvasManager._instance.CountToWhileWaiting();
                     //ScoreManager.instance.TestFillScoreArray();
                     //CanvasManager._instance.CountToScore();
                     CanvasManager._instance.StartCountSequence();
-                    CanvasManager._instance.TurnOffHUD();
                     StartCoroutine(BackToMenuCR());
                 }
                 break;
@@ -64,8 +65,8 @@ public class SceneManagerTest : MonoBehaviour
             case "testscene 2":
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TEST 2");
                 ScoreManager.lifeTime = 200;
-                CanvasManager._instance.FillReferences();
                 CanvasManager._instance.TurnOnHUD();
+                CanvasManager._instance.FillReferences();
                 CanvasManager._instance.StartReplacementMethod();
                 break;
 

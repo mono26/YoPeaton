@@ -88,7 +88,7 @@ public class ScoreManager : MonoBehaviour
         correctAnswerScore = 0;
         wrongReportScore = 0;
         wrongAnswerScore = 0;
-        InfractionScore = 99999;
+        InfractionScore = 10;
         finalScore = -InfractionScore;
     }
     public static int CalculateFinalScore()

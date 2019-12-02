@@ -34,6 +34,10 @@ public class CanvasManager : MonoBehaviour
     public Button quitBtn;
     public Button optionsBtn;
 
+    [Header("Botones Victorua: ")]
+    public Button retryBtn;
+    public Button quitFinalBtn;
+
     [Header("Objetos Escena: ")]
     [SerializeField]
     private GameObject hudPanel;
@@ -170,6 +174,18 @@ public class CanvasManager : MonoBehaviour
         optionsBtn = GameObject.Find("Button_Options").GetComponent<Button>();
     }
 
+    public void FillVictoryButtons()
+    {
+        retryBtn = GameObject.Find("BotonVolver").GetComponent<Button>();
+        quitFinalBtn = GameObject.Find("BotonExit").GetComponent<Button>();
+    }
+
+    public void FillVictoryButtonMethods()
+    {
+        retryBtn.onClick.AddListener(delegate { playBtnClicked(); });
+        quitFinalBtn.onClick.AddListener(delegate { quitBtnClicked(); });
+    }
+
     public void FillMenuBtnsMethods()
     {
         Debug.LogError("VOY A LLENAR LOS METODOS DE LOS BOTONES");
@@ -199,24 +215,14 @@ public class CanvasManager : MonoBehaviour
     public void FillReferences()
     {
         Debug.Log("VOY A LLENAR LAS REFERENCIAS");
-        //if (playerGO == null)
-            playerGO = GameObject.Find("PlayerCar_PFB Variant");
-        //if (FeedBackTextGO == null)
+            speedMeter = this.transform.GetChild(2).gameObject;
+        playerGO = GameObject.Find("PlayerCar_PFB Variant");
             FeedBackTextGO = GameObject.Find("FeedbackTest");
-        //if (FeedBackText == null)
             FeedBackText = GameObject.Find("FeedbackTest").GetComponent<Text>();
-        //if (hudPanel == null)
             hudPanel = GameObject.Find("Canvas_HUD");
-        //if (pausePanel == null)
-            //pausePanel = GameObject.Find("PauseCanvas");
             pausePanel = this.transform.GetChild(7).gameObject;
-        //if (crosswalkGuessHUD == null)
             crosswalkGuessHUD = this.transform.GetChild(2).gameObject;
-        //if (crosswalkTypesButtons == null)
-            //crosswalkTypesButtons = GameObject.Find("CrossWalkTypesButtons");
             crosswalkTypesButtons = this.transform.GetChild(2).GetChild(1).gameObject;
-        //if (crosswalkQuestionButtons == null)
-            //crosswalkQuestionButtons = GameObject.Find("QuestionButtons");
             crosswalkQuestionButtons = this.transform.GetChild(2).GetChild(2).gameObject;
         //if (checkAndCrossImg == null)
         checkAndCrossImg = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Image>();
@@ -239,11 +245,11 @@ public class CanvasManager : MonoBehaviour
             var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);
             timeLeftText.text = lifeTimeInt.ToString();
         }
-        if (SceneManagerTest.GetCurrentScene() == "VictoryScreenScene")
+        /*if (SceneManagerTest.GetCurrentScene() == "VictoryScreenScene")
         {
             //PONER A QUE BUSQUE EL BOTON CUANDO SEA LA ESCENA DE VICTORIA Y ASIGNARLE EL METODO QUE TIENE QUE LLAMAR POR CODIGO//
             botonVolver = GameObject.Find("BotonVolver").GetComponent<Button>();
-        }
+        }*/
     }
     #region Manejo De Canvas
     //MANEJO DE CANVAS//
@@ -307,6 +313,7 @@ public class CanvasManager : MonoBehaviour
             StartCoroutine(DisapearCheckOrCross());
         }
     }
+
 
     public void FillTextArray()
     {
