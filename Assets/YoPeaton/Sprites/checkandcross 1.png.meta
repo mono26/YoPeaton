@@ -108,12 +108,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 4
-        width: 272
-        height: 267
+        y: 9
+        width: 240
+        height: 240
       alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 3, y: 0, z: 0, w: 0}
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -128,12 +128,12 @@ TextureImporter:
       name: checkandcross 1_1
       rect:
         serializedVersion: 2
-        x: 319
-        y: 7
-        width: 271
-        height: 265
+        x: 272
+        y: 8
+        width: 240
+        height: 240
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

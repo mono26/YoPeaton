@@ -11,6 +11,15 @@ TextureImporter:
   - first:
       213: 5579245081668181965
     second: StartMenuButtons_Settings
+  - first:
+      213: -8640657375604369700
+    second: Spritesheet_StartMenuButtons_0
+  - first:
+      213: 6166382773465876862
+    second: Spritesheet_StartMenuButtons_1
+  - first:
+      213: -721093032111658808
+    second: Spritesheet_StartMenuButtons_2
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -107,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StartMenuButtons_Play
+      name: Spritesheet_StartMenuButtons_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 744
-        width: 343
-        height: 265
+        x: 46
+        y: 352
+        width: 171
+        height: 136
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 27c614dae60eae84499083905e26370b
-      internalID: -3304144657996074036
+      spriteID: c9e22c4435fb6954fbf27d2183941918
+      internalID: -8640657375604369700
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: StartMenuButtons_Quit
+      name: Spritesheet_StartMenuButtons_1
       rect:
         serializedVersion: 2
-        x: 130
-        y: 398
-        width: 251
-        height: 226
+        x: 70
+        y: 193
+        width: 125
+        height: 115
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 888df5df9c159e44ea7368dae381beee
-      internalID: -2109985163050581545
+      spriteID: 64e44da3272d29848bed4bc781ab6d3f
+      internalID: 6166382773465876862
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: StartMenuButtons_Settings
+      name: Spritesheet_StartMenuButtons_2
       rect:
         serializedVersion: 2
-        x: 130
-        y: 59
-        width: 251
-        height: 226
+        x: 66
+        y: 40
+        width: 125
+        height: 116
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,8 +172,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52dc5be5edebb9e4cb4159f6f5bc739b
-      internalID: 5579245081668181965
+      spriteID: 91147af45bc63004c936cc81c00da794
+      internalID: -721093032111658808
       vertices: []
       indices: 
       edges: []

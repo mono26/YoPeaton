@@ -30,6 +30,8 @@ public abstract class EntityController : MonoBehaviour
     [SerializeField]
     private EntitySubType entitySubType;
     [SerializeField]
+    private Direction currentDirection;
+    [SerializeField]
     private LayerMask layersToCheckCollision;
     #endregion
 
@@ -247,6 +249,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void OnPathChanged()
     {
+
         GetInitialValuesToStartPath();
         if (entityType.Equals(EntityType.Car))
         {
@@ -324,12 +327,13 @@ public abstract class EntityController : MonoBehaviour
         if (nextPath) 
         {
             Vector3 currentDirection = followComponent.GetDirection(lastTParameter) + transform.position;
-            Vector3 nextDirection = nextPath.GetDirectionAt(nextPath.GetTParameter(transform.position)) + transform.position;
+            Vector3 nextDirection = nextPath.GetDirectionAt(nextPath.GetTParameter(transform.position));
             OnEntityStartDirectionChangeArgs eventArgs = new OnEntityStartDirectionChangeArgs();
             eventArgs.Entity = this;
-            eventArgs.Direction = nextDirection;
+            eventArgs.Direction = nextDirection.normalized;
             eventArgs.NextPath = nextPath;
             onStartDirectionChange?.Invoke(eventArgs);
+
             CheckDirectional(currentDirection, nextDirection);
         }
     }

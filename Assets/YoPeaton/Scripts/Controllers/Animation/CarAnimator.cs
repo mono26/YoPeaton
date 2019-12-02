@@ -25,6 +25,7 @@ public class CarAnimator : AnimatorController
 
     public override void OnMovement(OnEntityMovementEventArgs _args)
     {
+        Debug.LogError(_args.MovementDirection);
         if (_args.MovementDirection.Equals(Vector3.right))
         {
             animator.SetBool("Front", false);

@@ -230,7 +230,7 @@ public class CanvasManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.LogError("Pause canvas esta activado? " + pausePanel.activeInHierarchy);
+        //Debug.LogError("Pause canvas esta activado? " + pausePanel.activeInHierarchy);
         if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
         {
             fillPercent = (playerGO.GetComponent<EntityMovement>().GetCurrentSpeed / playerGO.GetComponent<EntityMovement>().GetMaxSpeed);
