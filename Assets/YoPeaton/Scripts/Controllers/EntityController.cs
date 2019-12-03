@@ -376,7 +376,7 @@ public abstract class EntityController : MonoBehaviour
     {
         RaycastCheckResult result = new RaycastCheckResult();
         Vector3 direction = (GetFollowPathComponent.GetPosition(lastTParameter + 0.1f) - GetFollowPathComponent.GetPosition(lastTParameter)).normalized;
-        Vector3 startPosition = transform.position + colliderOffset + (direction * (float)(((colliderRadius) * transform.localScale.x) + 0.1f));
+        Vector3 startPosition = transform.position + (colliderOffset + (direction * ((float)(colliderRadius) + 0.1f))) * transform.localScale.x;
         float distance = (distanceToCheckForStop - colliderRadius) * transform.localScale.x;
         float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
@@ -399,7 +399,7 @@ public abstract class EntityController : MonoBehaviour
     {
         RaycastCheckResult result = new RaycastCheckResult();
         Vector3 direction = (GetFollowPathComponent.GetPosition(lastTParameter + 0.1f) - GetFollowPathComponent.GetPosition(lastTParameter)).normalized;
-        Vector3 startPosition = transform.position + colliderOffset + (direction * (float)(((colliderRadius) * transform.localScale.x) + 0.1f));
+        Vector3 startPosition = transform.position + (colliderOffset + (direction * ((float)(colliderRadius) + 0.1f))) * transform.localScale.x;
         float distance = (distanceToCheckForCollision - colliderRadius) * transform.localScale.x;
         float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);

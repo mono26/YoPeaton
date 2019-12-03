@@ -1,0 +1,120 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Props_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: Android
+      m_MaxTextureSize: 4096
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 65
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: c13c071fd77625646932a8c7e957e2b6, type: 3}
+    - {fileID: 2800000, guid: ea826a404b857db428c81278e9ab8460, type: 3}
+    - {fileID: 2800000, guid: e6ee729c4112d9a48924e610548fdb23, type: 3}
+    - {fileID: 2800000, guid: 386b300d674599643b7604ddbd88ca82, type: 3}
+    - {fileID: 2800000, guid: bcfb32675402fe74db6252a49b71012a, type: 3}
+    - {fileID: 2800000, guid: 134505fd461d4354d867f983cb7b264f, type: 3}
+    - {fileID: 2800000, guid: 54e4a06138a60644bb65cdbed5aadb2b, type: 3}
+    - {fileID: 2800000, guid: 889448f22b6b902449d1d70a99a84c75, type: 3}
+    - {fileID: 2800000, guid: b48783c357b7d86419f1b519efbd444c, type: 3}
+    - {fileID: 2800000, guid: f6cb8e69a0999444d805c1db33c43e70, type: 3}
+    - {fileID: 2800000, guid: 955b6c34a0cea73449631caa8f59e748, type: 3}
+    - {fileID: 2800000, guid: ea8ca5802878ccc49a64bf5ad70e8e16, type: 3}
+    - {fileID: 2800000, guid: 07d1eb0c46379f841a11ba50458cd1ce, type: 3}
+    - {fileID: 2800000, guid: 5328176f938a8e349afd4522ed26ea10, type: 3}
+    - {fileID: 2800000, guid: b48783c357b7d86419f1b519efbd444c, type: 3}
+    - {fileID: 2800000, guid: be275e9956b8ed6408c4c8dc71397d7b, type: 3}
+    - {fileID: 2800000, guid: 912dc18ad1d1bd34499277cd2830d81c, type: 3}
+    - {fileID: 2800000, guid: 75f99021fdd9ca140a78425ed7f5ddaf, type: 3}
+    - {fileID: 2800000, guid: 03b21b70d02637d4ea10f9dad9356086, type: 3}
+    - {fileID: 2800000, guid: 8294103518c5d1148ab48b1d776447e2, type: 3}
+    - {fileID: 2800000, guid: bad24947947cbf44392122e8330126f5, type: 3}
+    - {fileID: 2800000, guid: 9f1fbb371438fd8449b896f7f7c2e9e0, type: 3}
+    - {fileID: 2800000, guid: f6cb8e69a0999444d805c1db33c43e70, type: 3}
+    - {fileID: 2800000, guid: 955b6c34a0cea73449631caa8f59e748, type: 3}
+    - {fileID: 2800000, guid: 05d7f57f5896c0447b3ba7501b5bcf0f, type: 3}
+    totalSpriteSurfaceArea: 25694352
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: ea826a404b857db428c81278e9ab8460, type: 3}
+  - {fileID: 21300000, guid: 03b21b70d02637d4ea10f9dad9356086, type: 3}
+  - {fileID: 21300000, guid: ea8ca5802878ccc49a64bf5ad70e8e16, type: 3}
+  - {fileID: 21300000, guid: 75f99021fdd9ca140a78425ed7f5ddaf, type: 3}
+  - {fileID: 21300000, guid: 54e4a06138a60644bb65cdbed5aadb2b, type: 3}
+  - {fileID: 21300000, guid: 889448f22b6b902449d1d70a99a84c75, type: 3}
+  - {fileID: 21300000, guid: b48783c357b7d86419f1b519efbd444c, type: 3}
+  - {fileID: 21300000, guid: 955b6c34a0cea73449631caa8f59e748, type: 3}
+  - {fileID: 21300000, guid: 8294103518c5d1148ab48b1d776447e2, type: 3}
+  - {fileID: 21300000, guid: 9f1fbb371438fd8449b896f7f7c2e9e0, type: 3}
+  - {fileID: 21300000, guid: bad24947947cbf44392122e8330126f5, type: 3}
+  - {fileID: 21300000, guid: bcfb32675402fe74db6252a49b71012a, type: 3}
+  - {fileID: 21300000, guid: f6cb8e69a0999444d805c1db33c43e70, type: 3}
+  - {fileID: 21300000, guid: be275e9956b8ed6408c4c8dc71397d7b, type: 3}
+  - {fileID: 21300000, guid: 912dc18ad1d1bd34499277cd2830d81c, type: 3}
+  - {fileID: 21300000, guid: 07d1eb0c46379f841a11ba50458cd1ce, type: 3}
+  - {fileID: 21300000, guid: e6ee729c4112d9a48924e610548fdb23, type: 3}
+  - {fileID: 21300000, guid: 386b300d674599643b7604ddbd88ca82, type: 3}
+  - {fileID: 21300000, guid: 134505fd461d4354d867f983cb7b264f, type: 3}
+  - {fileID: 21300000, guid: c13c071fd77625646932a8c7e957e2b6, type: 3}
+  - {fileID: 21300000, guid: 5328176f938a8e349afd4522ed26ea10, type: 3}
+  - {fileID: 21300000, guid: 05d7f57f5896c0447b3ba7501b5bcf0f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Asset 33@4x
+  - 5
+  - 1
+  - 4Asset 55@4x (1)
+  - Hidrante
+  - Lampara
+  - 4
+  - 10
+  - 6
+  - 8
+  - 7
+  - Correo1
+  - 9
+  - 4Asset 54@4x
+  - 4Asset 55@4x
+  - 2
+  - Banca
+  - Caneca
+  - Correo2
+  - Asset 32@4x
+  - 3
+  - 11
+  m_Tag: Props_Atlas
+  m_IsVariant: 0

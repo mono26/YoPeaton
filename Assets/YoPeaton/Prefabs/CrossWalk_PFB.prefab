@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   crossAreaBounds: {fileID: 7449861766069977889}
+  connectedPaths: []
 --- !u!50 &8574809909142508040
 Rigidbody2D:
   serializedVersion: 4
@@ -117,13 +118,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5651082318767513669}
   - component: {fileID: 5651082318767513668}
-  m_Layer: 11
+  m_Layer: 15
   m_Name: CrossWalkTrigger
   m_TagString: CrossWalk
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5651082318767513669
 Transform:
   m_ObjectHideFlags: 0
@@ -231,7 +232,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -335609511
-  m_SortingLayer: 10
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 14681f076da5bd04480ad4bae48840bb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

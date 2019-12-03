@@ -25,12 +25,12 @@ TagManager:
   - Car
   - Pedestrian
   - DirectionChange
-  - CrossWalk
+  - CrossWalk_AI
   - StreetBounds
   - Buildings
   - Goal
-  - 
-  - 
+  - CrossWalk_Player
+  - Player
   - 
   - 
   - 

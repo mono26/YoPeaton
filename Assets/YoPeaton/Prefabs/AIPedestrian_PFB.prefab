@@ -207,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db2591bbd145894a8583fdb8cc36228, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementComponent: {fileID: 0}
   followComponent: {fileID: 270182541731555040}
   animationComponent: {fileID: 0}
   changeDirectionProbability: 100
@@ -214,13 +215,15 @@ MonoBehaviour:
   exitedCrosswalkClearTime: 3
   entityType: 0
   entitySubType: 0
+  currentDirection: 0
   layersToCheckCollision:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 66304
   stateMachine: {fileID: 270182541731555041}
   transitionController: {fileID: 270182541731555043}
   currentCrossingZone: {fileID: 0}
   behaviourController: {fileID: 0}
+  IsThisOnTheStreet: 0
 --- !u!114 &270182541731555043
 MonoBehaviour:
   m_ObjectHideFlags: 0
