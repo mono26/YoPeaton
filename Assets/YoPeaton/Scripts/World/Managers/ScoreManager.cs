@@ -66,7 +66,7 @@ public class ScoreManager : MonoBehaviour
         {
             lifeTime -= Time.deltaTime;
         }
-        if(lifeTime <= 0 && SceneManagerTest.GetCurrentScene() != "VictoryScreenScene")
+        if(lifeTime <= 0 && SceneManagerTest.GetCurrentScene() == "TestScene 2")
         {
             lifeTime = 0;
             {
