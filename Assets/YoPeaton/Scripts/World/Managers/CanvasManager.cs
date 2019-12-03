@@ -212,26 +212,38 @@ public class CanvasManager : MonoBehaviour
         Debug.LogError("Hundi play");
     }
 
+    public void BackToMenuBtnClicked()
+    {
+        SceneManagerTest.LoadNextScene("MainMenu");
+        Debug.LogError("Hundi quit desde la pausa");
+    }
+    public void ContinueBtnClicked()
+    {
+        DeactivatePauseCanvas();
+
+        GameManager.PauseGame();
+    }
+
     public void FillReferences()
     {
         Debug.Log("VOY A LLENAR LAS REFERENCIAS");
-            speedMeter = this.transform.GetChild(2).gameObject;
-        playerGO = GameObject.Find("PlayerCar_PFB Variant");
+            speedMeter = this.transform.GetChild(0).GetChild(1).gameObject;
+            playerGO = GameObject.Find("PlayerCar_PFB Variant");
             FeedBackTextGO = GameObject.Find("FeedbackTest");
             FeedBackText = GameObject.Find("FeedbackTest").GetComponent<Text>();
-            hudPanel = GameObject.Find("Canvas_HUD");
-            pausePanel = this.transform.GetChild(7).gameObject;
-            crosswalkGuessHUD = this.transform.GetChild(2).gameObject;
-            crosswalkTypesButtons = this.transform.GetChild(2).GetChild(1).gameObject;
-            crosswalkQuestionButtons = this.transform.GetChild(2).GetChild(2).gameObject;
+            hudPanel = this.transform.GetChild(0).gameObject; ;
+            pausePanel = this.transform.GetChild(1).gameObject;
+            crosswalkGuessHUD = this.transform.GetChild(0).GetChild(2).gameObject;
+            crosswalkTypesButtons = this.transform.GetChild(0).GetChild(2).GetChild(1).gameObject;
+            crosswalkQuestionButtons = this.transform.GetChild(0).GetChild(2).GetChild(2).gameObject;
         //if (checkAndCrossImg == null)
-        checkAndCrossImg = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Image>();
+            checkAndCrossImg = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Image>();
         //if (checkAndCrossGO == null)
             checkAndCrossGO = GameObject.Find("CheckAndCrossCanvasIMG");
         //if (checkAndCrossAnimator == null)
             checkAndCrossAnimator = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Animator>();
         //if (timeLeftText == null)
-            timeLeftText = this.transform.GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
+            timeLeftText = this.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
     }
 
     private void Update()
@@ -255,19 +267,20 @@ public class CanvasManager : MonoBehaviour
     //MANEJO DE CANVAS//
     public void ActivatePauseCanvas()
     {
-        hudPanel.SetActive(!hudPanel.activeInHierarchy);
-        pausePanel.SetActive(!pausePanel.activeInHierarchy);
-        /*
-        if (!GameManager.isPaused)
-        {
-            hudPanel.SetActive(true);
-            pausePanel.SetActive(false);
-        }
-        else
-        {
+        print("ACTIVATE PAUSE CANVAS");
             hudPanel.SetActive(false);
             pausePanel.SetActive(true);
-        }*/
+        print("Pause Canvas is Active? " + pausePanel.activeInHierarchy);
+
+    }
+
+    public void DeactivatePauseCanvas()
+    {
+        print("DEACTIVATE PAUSE CANVAS");
+        hudPanel.SetActive(!hudPanel.activeInHierarchy);
+        pausePanel.SetActive(!pausePanel.activeInHierarchy);
+        print("Pause Canvas is Active? " + pausePanel.activeInHierarchy);
+
     }
 
     public void ActivateSpecificCanvas(string canvasToActivate)
@@ -431,6 +444,7 @@ public class CanvasManager : MonoBehaviour
         ActivatePauseCanvas();
         Debug.LogWarning("Press Pause Button");
         GameManager.PauseGame();
+
 
     }
 
