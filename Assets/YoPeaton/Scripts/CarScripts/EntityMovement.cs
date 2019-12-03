@@ -76,7 +76,7 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         _position.z = 0;
         direction = GetEntity.GetFollowPathComponent.GetDirection(Time.time);
         //direction = (_position - transform.position).normalized;
-        Debug.LogError(direction);
+        //Debug.LogError(direction);
         carBody.MovePosition(_position);
         //RotateInDirectionOfPosition(_position);
         // currentDirection = (lerpedPosition - transform.position).normalized;
