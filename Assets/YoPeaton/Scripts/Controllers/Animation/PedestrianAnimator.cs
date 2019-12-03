@@ -13,6 +13,7 @@ public class PedestrianAnimator : AnimatorController
         if (entity)
         {
             entity.onEntityCollision += OnPedestrianRunOver;
+            entity.GetMovableComponent.AddOnMovement(OnMovement);
         }
     }
 
@@ -25,6 +26,7 @@ public class PedestrianAnimator : AnimatorController
         if (entity)
         {
             entity.onEntityCollision -= OnPedestrianRunOver;
+            entity.GetMovableComponent.RemoveOnMovement(OnMovement);
         }
     }
 

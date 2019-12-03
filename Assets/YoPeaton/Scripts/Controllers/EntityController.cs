@@ -8,6 +8,7 @@ public abstract class EntityController : MonoBehaviour
     public Action onStopChangingDirection;
     public Action<Vector3> onStartDirectional;
     public Action onEntityCollision;
+    public Action<OnEntityMovementEventArgs> onDirectionChange;
 
 #region Dependencies
     [SerializeField]
@@ -60,9 +61,13 @@ public abstract class EntityController : MonoBehaviour
             }
             return movementComponent;
         }
+        set
+        {
+            GetMovableComponent = value;
+        }
     }
 
-    protected FollowPath GetFollowPathComponent {
+    public FollowPath GetFollowPathComponent {
         get {
             if (followComponent == null) {
                 followComponent = GetComponent<FollowPath>();
@@ -321,19 +326,25 @@ public abstract class EntityController : MonoBehaviour
         return changeDirection; 
     }
 
+    public Path nextPathReference;
+
     private void TryChangeDirection(DirectionChange _directionChanger)
     {
         Path nextPath = _directionChanger.GetConnectionFrom(followComponent.GetPath);
+        nextPathReference = nextPath;
         if (nextPath) 
         {
-            Vector3 currentDirection = followComponent.GetDirection(lastTParameter) + transform.position;
+            Vector3 currentDirection = followComponent.GetDirection(lastTParameter);
             Vector3 nextDirection = nextPath.GetDirectionAt(nextPath.GetTParameter(transform.position));
             OnEntityStartDirectionChangeArgs eventArgs = new OnEntityStartDirectionChangeArgs();
+            OnEntityMovementEventArgs movementArgs = new OnEntityMovementEventArgs();
             eventArgs.Entity = this;
-            eventArgs.Direction = nextDirection.normalized;
+            eventArgs.Direction = nextDirection;
             eventArgs.NextPath = nextPath;
+            movementArgs.MovementDirection = nextDirection;
+            movementArgs.Entity = this;
             onStartDirectionChange?.Invoke(eventArgs);
-
+            //onDirectionChange?.Invoke(movementArgs);
             CheckDirectional(currentDirection, nextDirection);
         }
     }

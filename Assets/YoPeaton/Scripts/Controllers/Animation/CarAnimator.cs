@@ -11,6 +11,7 @@ public class CarAnimator : AnimatorController
         {
             entity.onStartDirectionChange += OnStartDirectionChange;
             entity.onStopChangingDirection += OnDirectionalStop;
+            entity.GetMovableComponent.AddOnMovement(OnMovement);
         }
     }
 
@@ -20,6 +21,7 @@ public class CarAnimator : AnimatorController
         {
             entity.onStartDirectionChange -= OnStartDirectionChange;
             entity.onStopChangingDirection -= OnDirectionalStop;
+            entity.GetMovableComponent.RemoveOnMovement(OnMovement);
         }
     }
 

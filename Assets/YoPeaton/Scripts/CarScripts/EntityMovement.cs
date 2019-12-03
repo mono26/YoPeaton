@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class EntityMovement : MonoBehaviour, IMovable, ISlowable
 {
-    private System.Action<OnEntityMovementEventArgs> onMovement;
+    private Action<OnEntityMovementEventArgs> onMovement;
 
     [SerializeField]
     private EntityController movingEntity;
@@ -74,7 +74,9 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         // carBody.MovePosition(lerpedPosition);
         // RotateInDirectionOfPosition(lerpedPosition);
         _position.z = 0;
-        direction = (_position - transform.position).normalized;
+        direction = GetEntity.GetFollowPathComponent.GetDirection(Time.time);
+        //direction = (_position - transform.position).normalized;
+        Debug.LogError(direction);
         carBody.MovePosition(_position);
         //RotateInDirectionOfPosition(_position);
         // currentDirection = (lerpedPosition - transform.position).normalized;
@@ -82,7 +84,7 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         // currentDirection = (_position - transform.position).normalized;
         OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
         eventArgs.Entity = movingEntity;
-        eventArgs.MovementDirection = direction;
+        eventArgs.MovementDirection = direction; 
         onMovement?.Invoke(eventArgs);
     }
 

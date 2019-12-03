@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 public class AnimatorController : MonoBehaviour
 {
     protected Animator animator;
-    private IMovable movableComponent;
+    protected IMovable movableComponent;
     protected AITransitionsController transitionsController;
     [SerializeField]
     protected EntityController entity;
