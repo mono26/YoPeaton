@@ -40,9 +40,10 @@ public class SignalIdentification : MonoBehaviour
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "CrossWalk")
+        if (collision.CompareTag("CrossWalk"))
         {
-            correctAnswer = collision.GetComponent<Crosswalk>().GetCrossWalkType.ToString();
+            print("COLISION CON CROSSWALK");
+            correctAnswer = collision.GetComponentInParent<Crosswalk>().GetCrossWalkType.ToString(); // GetComponent<Crosswalk>().GetCrossWalkType.ToString();
             //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
             //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
             if (correctAnswer == "Cebra" && canAnswer == true && correctCebraQt < 1)
