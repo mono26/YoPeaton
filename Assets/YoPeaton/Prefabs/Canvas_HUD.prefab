@@ -694,15 +694,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7750861554080518203}
     m_Modifications:
-    - target: {fileID: 7599904748553379737, guid: f31cbc3e4c9a6dc4aa754f307402da00,
-        type: 3}
-      propertyPath: m_Name
-      value: SpeedMeter
-      objectReference: {fileID: 0}
     - target: {fileID: 49224135216873137, guid: f31cbc3e4c9a6dc4aa754f307402da00,
         type: 3}
       propertyPath: m_FillAmount
       value: 0.348
+      objectReference: {fileID: 0}
+    - target: {fileID: 7599904748553379737, guid: f31cbc3e4c9a6dc4aa754f307402da00,
+        type: 3}
+      propertyPath: m_Name
+      value: SpeedMeter
       objectReference: {fileID: 0}
     - target: {fileID: 7599904748553379742, guid: f31cbc3e4c9a6dc4aa754f307402da00,
         type: 3}
@@ -1116,11 +1116,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7750861554080518203}
     m_Modifications:
-    - target: {fileID: 3531399582676418019, guid: b86611c362dfbaa45bb5bef4b418ae42,
-        type: 3}
-      propertyPath: m_Name
-      value: CheckAndCrossCanvasIMG
-      objectReference: {fileID: 0}
     - target: {fileID: 3531399582676418028, guid: b86611c362dfbaa45bb5bef4b418ae42,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1225,6 +1220,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3531399582676418019, guid: b86611c362dfbaa45bb5bef4b418ae42,
+        type: 3}
+      propertyPath: m_Name
+      value: CheckAndCrossCanvasIMG
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b86611c362dfbaa45bb5bef4b418ae42, type: 3}
@@ -1366,11 +1366,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7750861554080518203}
     m_Modifications:
-    - target: {fileID: 7441661880137349795, guid: 7959f1666e53f794aa4d508c4b263aa6,
-        type: 3}
-      propertyPath: m_Name
-      value: BrakeButton
-      objectReference: {fileID: 0}
     - target: {fileID: 7441661880137349796, guid: 7959f1666e53f794aa4d508c4b263aa6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1475,6 +1470,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7441661880137349795, guid: 7959f1666e53f794aa4d508c4b263aa6,
+        type: 3}
+      propertyPath: m_Name
+      value: BrakeButton
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7441661880014350951, guid: 7959f1666e53f794aa4d508c4b263aa6, type: 3}

@@ -88,6 +88,21 @@ public class PedestrianAnimator : AnimatorController
 
     private void OnPedestrianRunOver()
     {
+        print("ON PEDESTRIAN RUN OVER METHOD CALLED");
+        animator.SetBool("Front", false);
+        animator.SetBool("Back", false);
+        animator.SetBool("Right", false);
+        animator.SetBool("Left", false);
+        animator.SetBool("WavingFront", false);
+        animator.SetBool("WavingBack", false);
+        animator.SetBool("WavingRight", false);
+        animator.SetBool("WavingLeft", false);
+        animator.SetBool("RunOver", true);
+    }
+
+    public void OnPublicPedestrianRunOver()
+    {
+        print("ON PEDESTRIAN RUN OVER METHOD CALLED");
         animator.SetBool("Front", false);
         animator.SetBool("Back", false);
         animator.SetBool("Right", false);

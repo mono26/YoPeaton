@@ -176,6 +176,7 @@ public class CanvasManager : MonoBehaviour
 
     public void FillVictoryButtons()
     {
+        Debug.LogError("VOY A LLENAR LOS BOTONES DEL VICTORY");
         retryBtn = GameObject.Find("BotonVolver").GetComponent<Button>();
         quitFinalBtn = GameObject.Find("BotonExit").GetComponent<Button>();
     }

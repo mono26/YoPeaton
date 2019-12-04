@@ -35,15 +35,34 @@ public class PlayerController : EntityController
     //        GetMovableComponent?.SpeedUp(deltaTime);
     //    }
     //}
-
+    private new void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Pedestrian") || collision.CompareTag("Car"))
+        {
+            print("¡¡ME CHOQUE CON EL MACHETAZO!!");
+            base.OnEntityCollision();
+            GameManager.didPlayerLose = true;
+            CanvasManager._instance.GenerateFeedback("Crash");
+            CanvasManager._instance.ActivateCheckOrCross(false);
+            StartCoroutine(CrashCR());
+        }
+    }
     protected override bool ShouldStop() 
     {
+        //NUEVO PUNTO PARA EL LLAMADO DE LA COLISION, PARA NO DEPENDER DEL CHECK DEL ENTITY CONTROLLER//
         bool stop = false;
         collisionCheckResult = CheckForCollision();
         if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet)
         {
             stop = true;
             DebugController.LogErrorMessage("Player should stop!");
+            base.OnEntityCollision();
+            OnEntityCollision();
+            collisionCheckResult.otherEntity?.OnEntityCollision();
+            if (collisionCheckResult.otherEntity.CompareTag("Pedestrian"))
+            {
+                collisionCheckResult.otherEntity?.GetComponent<PedestrianAnimator>().OnPublicPedestrianRunOver();
+            }
         }
         return stop;
         // return input.IsBraking;
@@ -67,14 +86,16 @@ public class PlayerController : EntityController
         base.OnCrossWalkExited(_crossWalk);
     }
 
+
     public override void OnEntityCollision()
     {
+        print("¡¡ME CHOQUE!!");
         base.OnEntityCollision();
-        ShouldStop();
         GameManager.didPlayerLose = true;
         CanvasManager._instance.GenerateFeedback("Crash");
         CanvasManager._instance.ActivateCheckOrCross(false);
         StartCoroutine(CrashCR());
+        //ShouldStop();
 
         // Game over.
     }

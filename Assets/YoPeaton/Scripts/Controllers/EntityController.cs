@@ -282,6 +282,7 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D _other) 
     {
+
         if (_other.CompareTag("ChangeOfDirection") && canTurn == true) 
         {
             canTurn = false;
@@ -416,7 +417,7 @@ public abstract class EntityController : MonoBehaviour
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
         GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
         if (obstacle) {
-            if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car") || obstacle.CompareTag("PlayerCar"))
+            if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car"))
             {
                 result.otherEntity = obstacle.GetComponent<EntityController>();
                 result.collided = true;

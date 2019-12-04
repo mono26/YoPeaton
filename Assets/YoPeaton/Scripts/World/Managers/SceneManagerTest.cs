@@ -42,11 +42,12 @@ public class SceneManagerTest : MonoBehaviour
                     ScoreManager.CalculateFinalScore();
                     CanvasManager._instance.FillTextArray();
                     CanvasManager._instance.FillVictoryButtons();
+                    CanvasManager._instance.FillVictoryButtonMethods();
                     //CanvasManager._instance.CountToWhileWaiting();
                     //ScoreManager.instance.TestFillScoreArray();
                     //CanvasManager._instance.CountToScore();
                     CanvasManager._instance.StartCountSequence();
-                    StartCoroutine(BackToMenuCR());
+                    //StartCoroutine(BackToMenuCR());
                 }
                 else
                 {
@@ -54,11 +55,12 @@ public class SceneManagerTest : MonoBehaviour
                     ScoreManager.CalculateLooserScore();
                     CanvasManager._instance.FillTextArray();
                     CanvasManager._instance.FillVictoryButtons();
+                    CanvasManager._instance.FillVictoryButtonMethods();
                     //CanvasManager._instance.CountToWhileWaiting();
                     //ScoreManager.instance.TestFillScoreArray();
                     //CanvasManager._instance.CountToScore();
                     CanvasManager._instance.StartCountSequence();
-                    StartCoroutine(BackToMenuCR());
+                    //StartCoroutine(BackToMenuCR());
                 }
                 break;
 
