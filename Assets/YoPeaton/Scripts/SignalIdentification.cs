@@ -42,7 +42,7 @@ public class SignalIdentification : MonoBehaviour
     {
         if (collision.CompareTag("CrossWalk"))
         {
-            print("COLISION CON CROSSWALK");
+            DebugController.LogMessage("COLISION CON CROSSWALK");
             correctAnswer = collision.GetComponentInParent<Crosswalk>().GetCrossWalkType.ToString(); // GetComponent<Crosswalk>().GetCrossWalkType.ToString();
             //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
             //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
@@ -50,7 +50,7 @@ public class SignalIdentification : MonoBehaviour
             {
 
                 Time.timeScale = 0f;
-                Debug.LogError("cebra" + "cebra correctas: " + correctCebraQt);
+                DebugController.LogErrorMessage("cebra" + "cebra correctas: " + correctCebraQt);
                 CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
                 StartCoroutine(ChangeCanAnswerValueCR());
                 canAnswer = false;

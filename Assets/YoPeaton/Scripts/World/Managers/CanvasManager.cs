@@ -226,7 +226,7 @@ public class CanvasManager : MonoBehaviour
 
     public void FillReferences()
     {
-        Debug.Log("VOY A LLENAR LAS REFERENCIAS");
+        DebugController.LogMessage("VOY A LLENAR LAS REFERENCIAS");
             speedMeter = this.transform.GetChild(0).GetChild(1).gameObject;
             playerGO = GameObject.Find("PlayerCar_PFB Variant");
             FeedBackTextGO = GameObject.Find("FeedbackTest");

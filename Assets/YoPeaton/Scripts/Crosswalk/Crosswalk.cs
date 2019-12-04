@@ -11,7 +11,7 @@ public class Crosswalk : MonoBehaviour
     [SerializeField]
     private Collider2D crossAreaBounds = null;
     [SerializeField]
-    private BezierSpline[] connectedPaths;
+    private Path[] connectedPaths;
 #endregion
 
     private Dictionary<EntityController, WaitTicket> waitingPedestrians = new Dictionary<EntityController, WaitTicket>();
@@ -341,11 +341,12 @@ public class Crosswalk : MonoBehaviour
         bool valid = false;
         if (_entity && !_entity.JustExitedCrossWalk(this))
         {
-            foreach (BezierSpline path in connectedPaths)
+            foreach (Path path in connectedPaths)
             {
-                if (path != _entity.GetCurrentPath)
+                if (path == _entity.GetCurrentPath)
                 {
                     valid = true;
+                    break;
                 }
             }
         }

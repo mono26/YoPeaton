@@ -58,12 +58,12 @@ public class PlayerController : EntityController
     }
 
     public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
-        // DebugController.LogMessage("Entered crosswalk");
-        // _crossWalk.OnStartedCrossing(this);
+        DebugController.LogMessage("Player entered crosswalk");
+        _crossWalk.OnStartedCrossing(this);
     }
 
     public override void OnCrossWalkExited(Crosswalk _crossWalk) {
-        // DebugController.LogMessage("Exited crosswalk");
+        DebugController.LogMessage("Player exited crosswalk");
         base.OnCrossWalkExited(_crossWalk);
     }
 
