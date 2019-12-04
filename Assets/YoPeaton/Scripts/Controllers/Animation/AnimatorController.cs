@@ -8,6 +8,8 @@ public class AnimatorController : MonoBehaviour
     protected AITransitionsController transitionsController;
     [SerializeField]
     protected EntityController entity;
+    [SerializeField]
+    protected EntityMovement entityMovement;
 
     #region Unity calls
     private void Awake()

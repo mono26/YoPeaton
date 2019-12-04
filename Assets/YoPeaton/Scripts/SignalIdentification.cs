@@ -108,7 +108,7 @@ public class SignalIdentification : MonoBehaviour
 
     public void ActivateCrossingIdentificationCanvas()
     {
-        CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
+        CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
         /*CanvasManager._instance.identifyCrossingCanvas.enabled = true;
         CanvasManager._instance.optInButtonCanvas.enabled = false;*/
     }

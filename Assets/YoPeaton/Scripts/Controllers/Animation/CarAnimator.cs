@@ -13,6 +13,7 @@ public class CarAnimator : AnimatorController
             entity.onStopChangingDirection += OnDirectionalStop;
             entity.GetMovableComponent.AddOnMovement(OnMovement);
         }
+
     }
 
     protected override void OnDisable() 
@@ -23,12 +24,13 @@ public class CarAnimator : AnimatorController
             entity.onStopChangingDirection -= OnDirectionalStop;
             entity.GetMovableComponent.RemoveOnMovement(OnMovement);
         }
+
     }
 
     public override void OnMovement(OnEntityMovementEventArgs _args)
     {
         //Debug.LogError(_args.MovementDirection);
-        if (_args.MovementDirection.Equals(Vector3.right))
+        if (_args.MovementDirection == new Vector3(1, 0, 0))
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", false);
@@ -37,7 +39,7 @@ public class CarAnimator : AnimatorController
             return;
         }
 
-        else if (_args.MovementDirection.Equals(-Vector3.right))
+        else if (_args.MovementDirection == new Vector3(-1,0,0))
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", false);
@@ -46,7 +48,7 @@ public class CarAnimator : AnimatorController
             return;
         }
 
-        if (_args.MovementDirection.Equals(Vector3.up))
+        if (_args.MovementDirection == new Vector3(0, 1, 0))
         {
             animator.SetBool("Front", false);
             animator.SetBool("Back", true);
@@ -55,7 +57,7 @@ public class CarAnimator : AnimatorController
             return;
         }
 
-        else if (_args.MovementDirection.Equals(-Vector3.up))
+        else if (_args.MovementDirection == new Vector3(0, -1, 0))
         {
             animator.SetBool("Front", true);
             animator.SetBool("Back", false);

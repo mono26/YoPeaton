@@ -288,12 +288,10 @@ public class CanvasManager : MonoBehaviour
         if (canvasToActivate == "OptInCanvas")
         {
             crosswalkGuessHUD.SetActive(true);
-        }
-        if (canvasToActivate == "SignalIdentificationCanvas")
-        {
             crosswalkTypesButtons.SetActive(true);
             crosswalkQuestionButtons.SetActive(false);
         }
+
     }
 
     public void BackToBaseCanvas()

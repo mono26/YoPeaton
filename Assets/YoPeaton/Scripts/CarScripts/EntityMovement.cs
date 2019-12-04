@@ -50,7 +50,19 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
     private void Start()
     {
         this.transform.localRotation = new Quaternion(0, 0, 0, 0);
-            //ToggleBrakeLights(false);
+        //ToggleBrakeLights(false);
+        if (GetEntity)
+        {
+            direction = GetEntity.GetFollowPathComponent.GetDirection(Time.time);
+        }
+        else
+        {
+            direction = GetComponent<FollowPath>().GetDirection(Time.time);
+        }
+        OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
+        eventArgs.Entity = movingEntity;
+        eventArgs.MovementDirection = direction;
+        onMovement?.Invoke(eventArgs);
     }
 
     private void Accelerate(float _deltaTime) {
