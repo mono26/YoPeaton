@@ -10,16 +10,16 @@ public abstract class EntityController : MonoBehaviour
     public Action onEntityCollision;
     public Action<OnEntityMovementEventArgs> onDirectionChange;
 
-#region Dependencies
+    #region Dependencies
     [SerializeField]
     private EntityMovement movementComponent;
     [SerializeField]
     private FollowPath followComponent;
     [SerializeField]
     private AnimatorController animationComponent;
-#endregion
+    #endregion
 
-#region Variables
+    #region Variables
     [SerializeField]
     private float changeDirectionProbability = 50.0f;
     [SerializeField]
@@ -34,6 +34,8 @@ public abstract class EntityController : MonoBehaviour
     private Direction currentDirection;
     [SerializeField]
     private LayerMask layersToCheckCollision;
+    [SerializeField]
+    private bool isThisCarCrossingWithPedestrian;
     #endregion
 
     private bool canTurn = true;
@@ -49,7 +51,7 @@ public abstract class EntityController : MonoBehaviour
     private Vector3 colliderOffset;
     private WaitForSeconds exitedCrosswalkClearWait;
 
-#region Properties
+    #region Properties
 
     public EntityMovement GetMovableComponent {
         get {
@@ -84,6 +86,14 @@ public abstract class EntityController : MonoBehaviour
         get
         {
             return followComponent.GetPath;
+        }
+    }
+
+    public bool GetisThisCarCrossingWithPedestrian
+    {
+        get
+        {
+            return isThisCarCrossingWithPedestrian;
         }
     }
 
@@ -124,6 +134,10 @@ public abstract class EntityController : MonoBehaviour
         }
     }
 
+    public void SetCrossingWithPedestrianValue(bool value)
+    {
+        isThisCarCrossingWithPedestrian = value;
+    }
     private void OnEnable()
     {
         if (followComponent)

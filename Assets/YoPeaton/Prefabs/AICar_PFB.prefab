@@ -1139,6 +1139,8 @@ MonoBehaviour:
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 66304
+  isThisCarCrossingWithPedestrian: 0
+  nextPathReference: {fileID: 0}
   stateMachine: {fileID: 7486950390623095033}
   transitionController: {fileID: 7486950390623095037}
   currentCrossingZone: {fileID: 0}
@@ -1171,6 +1173,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infractionsArray:
   - {fileID: 11400000, guid: 0466624b85555164e89de1aaf2d70638, type: 2}
+  - {fileID: 11400000, guid: 564b841a34ead6646945756edcaa5d3c, type: 2}
+  - {fileID: 11400000, guid: 53484b6fe999e204fb3a2518c23a053d, type: 2}
   controlledObject: {fileID: 0}
   ActivePedestrianCount: 0
   isAlreadyReported: 0
@@ -1187,6 +1191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 7486950390623095039}
+  entityMovement: {fileID: 0}
   directionalsAnimator: {fileID: 4159118589642941165}
 --- !u!1 &6443305038234449307
 GameObject:

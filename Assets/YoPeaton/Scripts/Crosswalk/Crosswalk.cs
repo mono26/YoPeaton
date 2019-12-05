@@ -134,6 +134,16 @@ public class Crosswalk : MonoBehaviour
             if (!crossingCars.ContainsKey(_entity)) {
                 if (crossingPedestrians.Count > 0) {
                     DebugController.LogMessage("This car is crossing with pedestrians doing it at the same time: " + _entity.gameObject.name);
+                    if (_entity.gameObject.name == "PlayerCar_PFB Variant")
+                    {
+                        ScoreManager.instance.AddInfraction();
+                        CanvasManager._instance.ActivateCheckOrCross(false);
+                        CanvasManager._instance.GenerateFeedback("CrossWithPedestrian");
+                    }
+                    else if(_entity.gameObject.CompareTag("Car") && _entity.gameObject.name != "PlayerCar_PFB Variant")
+                    {
+                        _entity.SetCrossingWithPedestrianValue(true);
+                    }
                 }
                 // DebugController.LogMessage("Adding car to crossing cars.");
                 _entity.GetMovableComponent.AddOnMovement(OnEntityMoved);
@@ -159,6 +169,10 @@ public class Crosswalk : MonoBehaviour
         }
         else if (_entity.CompareTag("Car")) 
         {
+            if (_entity.gameObject.name != "PlayerCar_PFB Variant")
+            {
+                _entity.SetCrossingWithPedestrianValue(false);
+            }
             if (crossingCars.ContainsKey(_entity)) 
             {
                 _entity.GetMovableComponent.RemoveOnMovement(OnEntityMoved);

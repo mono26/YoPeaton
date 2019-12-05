@@ -391,13 +391,19 @@ public class CanvasManager : MonoBehaviour
                 FeedBackText.text = "¡Tienes que manejar con cuidado!";
                 StartCoroutine(DisapearFeedbackText());
                 break;
+            case "CrossWithPedestrian":
+                FeedBackText.enabled = true;
+                FeedBackText.color = Color.red;
+                FeedBackText.text = "¡Debes esperar a que pase el peatón!";
+                StartCoroutine(DisapearFeedbackText());
+                break;
         }
     }
 
 
     public IEnumerator DisapearFeedbackText()
     {
-        yield return new WaitForSecondsRealtime(2);
+        yield return new WaitForSecondsRealtime(4);
         if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             FeedBackText.enabled = false;
     }
