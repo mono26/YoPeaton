@@ -426,6 +426,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: PressPauseBtn
       objectReference: {fileID: 0}
+    - target: {fileID: 7752862689758437014, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -56.79883
+      objectReference: {fileID: 0}
     - target: {fileID: 3989906393802131760, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -4662,7 +4667,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -5551,7 +5556,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -10119,7 +10124,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -11073,7 +11078,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -12379,7 +12384,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -14949,7 +14954,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -18704,7 +18709,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -19521,7 +19526,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -22329,7 +22334,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -36427,7 +36432,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -43970,7 +43975,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -45639,7 +45644,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -49449,7 +49454,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -63476,7 +63481,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -64993,7 +64998,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -67073,7 +67078,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -70536,7 +70541,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -77213,7 +77218,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -80568,7 +80573,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -82235,11 +82240,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
-    - target: {fileID: 2777969877099797956, guid: 26d6a7f324f079f4e89709766ce95914,
-        type: 3}
-      propertyPath: distanceToCheckForStop
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 9124943525442605881, guid: 26d6a7f324f079f4e89709766ce95914,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -82310,24 +82310,24 @@ PrefabInstance:
       propertyPath: directionChangeLayer.m_Bits
       value: 1024
       objectReference: {fileID: 0}
-    - target: {fileID: 366049910, guid: 26d6a7f324f079f4e89709766ce95914, type: 3}
-      propertyPath: orthographic
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 366049912, guid: 26d6a7f324f079f4e89709766ce95914, type: 3}
       propertyPath: m_LocalPosition.z
       value: -1000
       objectReference: {fileID: 0}
-    - target: {fileID: 5764116578894847997, guid: 26d6a7f324f079f4e89709766ce95914,
-        type: 3}
-      propertyPath: m_Layer
-      value: 16
+    - target: {fileID: 366049910, guid: 26d6a7f324f079f4e89709766ce95914, type: 3}
+      propertyPath: orthographic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 366049909, guid: 26d6a7f324f079f4e89709766ce95914, type: 3}
       propertyPath: m_Layer
       value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 6804324934008494373, guid: 26d6a7f324f079f4e89709766ce95914,
+        type: 3}
+      propertyPath: m_Layer
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 5764116578894847997, guid: 26d6a7f324f079f4e89709766ce95914,
         type: 3}
       propertyPath: m_Layer
       value: 16
@@ -82394,6 +82394,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 53484b6fe999e204fb3a2518c23a053d,
         type: 2}
+    - target: {fileID: 2777969877099797956, guid: 26d6a7f324f079f4e89709766ce95914,
+        type: 3}
+      propertyPath: distanceToCheckForStop
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4159996418502218186, guid: 26d6a7f324f079f4e89709766ce95914, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 26d6a7f324f079f4e89709766ce95914, type: 3}
@@ -82975,7 +82980,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -83979,7 +83984,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -84906,7 +84911,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -88576,7 +88581,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -90495,7 +90500,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -99132,7 +99137,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -103722,7 +103727,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -110227,7 +110232,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -111139,7 +111144,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -112003,7 +112008,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -116856,7 +116861,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -118617,7 +118622,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -120557,7 +120562,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -125592,7 +125597,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -127751,7 +127756,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
@@ -130890,7 +130895,7 @@ PrefabInstance:
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
       propertyPath: layersToCheckCollision.m_Bits
-      value: 256
+      value: 65792
       objectReference: {fileID: 0}
     - target: {fileID: 270182541731555042, guid: a11e7f7a749037d45b2b9fe55ceab514,
         type: 3}
