@@ -7,6 +7,7 @@ using System;
 public class SceneManagerTest : MonoBehaviour
 {
 
+    TutorialEventController tutorialController;
     public static SceneManagerTest instance = null;                //Static instance of GameManager which allows it to be accessed by any other script.
 
     //Awake is always called before any Start functions
@@ -67,6 +68,16 @@ public class SceneManagerTest : MonoBehaviour
             case "testscene 2":
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TEST 2");
                 ScoreManager.lifeTime = 200;
+                CanvasManager._instance.TurnOnHUD();
+                CanvasManager._instance.FillReferences();
+                CanvasManager._instance.StartReplacementMethod();
+                break;
+
+            case "tutorial":
+                Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TUTORIAL");
+                ScoreManager.lifeTime = 200;
+                tutorialController = GameObject.Find("PlayerCar_PFB Variant").GetComponent<TutorialEventController>();
+                tutorialController.FillReferences();
                 CanvasManager._instance.TurnOnHUD();
                 CanvasManager._instance.FillReferences();
                 CanvasManager._instance.StartReplacementMethod();
