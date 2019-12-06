@@ -74,7 +74,7 @@ public class AIController : EntityController
     {
         // Si esta esperando en un crosswalk
         bool stop = false;
-        if (GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
+        if (GetCurrentState.Equals(AIState.WaitingAtCrossWalkAskingForCross)) {
             stop = true;
         }
         else if (GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) {

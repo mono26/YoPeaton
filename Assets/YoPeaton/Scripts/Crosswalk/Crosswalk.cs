@@ -186,7 +186,7 @@ public class Crosswalk : MonoBehaviour
     /// </summary>
     /// <param name="_entity">Entity to check if it can cross.</param>
     /// <returns>Returns true for if the entity can cross, false if not.</returns>
-    public bool CanCross(EntityController _entity)
+    public bool HasTurn(EntityController _entity)
     {
         bool cross = true;
         WaitTicket entityTicket = GetWaitingTicket(_entity);
@@ -203,7 +203,6 @@ public class Crosswalk : MonoBehaviour
             else if (waitingPedestrians.Count > 0) {
                 // TODO refactor into compare to pedestrians tickets.
                 values = waitingPedestrians.Values;
-
             }
         }
         else if (_entity.GetEntityType.Equals(EntityType.Pedestrian) && !crossingPedestrians.ContainsKey(_entity)) 
@@ -293,7 +292,7 @@ public class Crosswalk : MonoBehaviour
             EntityController[] keysArray = keys.ToArray();
             keys = null;
             for (int i = 0; i < keysArray.Length; i++) {
-                if (keysArray[i] is AIController && ((AIController)keysArray[i]).GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
+                if (keysArray[i] is AIController && ((AIController)keysArray[i]).GetCurrentState.Equals(AIState.WaitingAtCrossWalkAskingForCross)) {
                     isAnEntityAskingForPass = true;
                     break;
                 }
