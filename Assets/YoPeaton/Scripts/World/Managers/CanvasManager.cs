@@ -60,6 +60,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     public Image checkAndCrossImg;
 
+    public bool canBrake = false;
+
     [SerializeField]
     public GameObject checkAndCrossGO;
 
@@ -436,12 +438,22 @@ public class CanvasManager : MonoBehaviour
     }
     public void PressBrakeBtn()
     {
-        playerGO.GetComponent<PlayerCarInput>().Brake();
+        if (SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        {
+            print("Hundi el brake");
+            playerGO.GetComponent<PlayerCarInput>().Brake();
+        }
+        if (SceneManagerTest.GetCurrentScene() == "Tutorial" && canBrake)
+        {
+            print("Hundi el brake");
+            playerGO.GetComponent<PlayerCarInput>().Brake();
+        }
     }
 
     public void ReleaseBrakeBtn()
     {
-        playerGO.GetComponent<PlayerCarInput>().StopBrake();
+            print("Solte el brake");
+            playerGO.GetComponent<PlayerCarInput>().StopBrake();
     }
 
     public void PressPauseBtn()

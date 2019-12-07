@@ -41,6 +41,9 @@ public class TutorialEventController : MonoBehaviour
         tutorialStep0.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep1.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep2.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep3.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep4.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep5.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -72,15 +75,27 @@ public class TutorialEventController : MonoBehaviour
         }
         if (collision.gameObject.name == "TutorialTrigger (3)")
         {
-
+            print("COLISION CON TUTORIAL TRIGGER 3");
+            currentStep = tutorialStep3;
+            tutorialStep3.transform.GetChild(0).gameObject.SetActive(true);
+            Time.timeScale = 0;
+            StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (4)")
         {
-
+            print("COLISION CON TUTORIAL TRIGGER 4");
+            currentStep = tutorialStep4;
+            tutorialStep4.transform.GetChild(0).gameObject.SetActive(true);
+            Time.timeScale = 0;
+            StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (5)")
         {
-
+            print("COLISION CON TUTORIAL TRIGGER 5");
+            currentStep = tutorialStep5;
+            tutorialStep5.transform.GetChild(0).gameObject.SetActive(true);
+            Time.timeScale = 0;
+            StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (6)")
         {
