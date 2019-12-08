@@ -42,6 +42,10 @@ public class Crosswalk : MonoBehaviour
         {
             DebugController.LogErrorMessage("Missing crooss are bouds reference.");
         }
+        if (connectedPaths == null || connectedPaths.Length.Equals(0))
+        {
+            DebugController.LogErrorMessage($"{ gameObject.name } has no connectedPaths!");
+        }
     }
 
     /// <summary>
@@ -345,8 +349,8 @@ public class Crosswalk : MonoBehaviour
     {
         if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) 
         {
-            DebugController.LogMessage("A car or pedestrian entered.");
             EntityController entity = _other.transform.GetComponent<EntityController>();
+            DebugController.LogMessage(entity.ToString());
             if (IsAValidEntity(entity)) 
             {
                 OnEntering(entity);
