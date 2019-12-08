@@ -91,7 +91,7 @@ public class AIController : EntityController
     
     public override void OnCrossWalkEntered(Crosswalk _crossWalk)
     {
-        // DebugController.LogMessage("Entered crosswalk");
+        DebugController.LogMessage("Entered crosswalk");
         if (!currentCrossingZone || !currentCrossingZone.Equals(_crossWalk))
         {
             currentCrossingZone?.OnFinishedCrossing(this);
@@ -124,5 +124,10 @@ public class AIController : EntityController
     {
         base.OnEntityCollision();
         // Generar reporte de collision.
+    }
+
+    protected override bool ShouldSpeedUp()
+    {
+        return GetCurrentState.Equals(AIState.Moving);
     }
 }

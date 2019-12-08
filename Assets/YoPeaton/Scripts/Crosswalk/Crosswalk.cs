@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Crosswalk : MonoBehaviour
@@ -247,15 +246,18 @@ public class Crosswalk : MonoBehaviour
         {
             Dictionary<EntityController, CrossingInfo>.ValueCollection values = crossingPedestrians.Values;
             CrossingInfo[] valuesArray = values.ToArray();
-            values = null;
+            DebugController.LogMessage("Checking cross with other corssing pedestrians");
             for (int i = 0; i < valuesArray.Length; i++)
             {
                 if (valuesArray[i].distanceTravelled < crossWalkLenght * 0.5f)
                 {
+                    DebugController.LogMessage("There is a pedestrian recently crossing");
                     canCross = true;
                     break;
                 }
             }
+            values = null;
+            valuesArray = null;
         }
         return canCross;
     }
@@ -339,10 +341,14 @@ public class Crosswalk : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D _other) {
-        if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) {
+    private void OnTriggerEnter2D(Collider2D _other) 
+    {
+        if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) 
+        {
+            DebugController.LogMessage("A car or pedestrian entered.");
             EntityController entity = _other.transform.GetComponent<EntityController>();
-            if (IsAValidEntity(entity)) {
+            if (IsAValidEntity(entity)) 
+            {
                 OnEntering(entity);
                 entity.OnCrossWalkEntered(this);
             }

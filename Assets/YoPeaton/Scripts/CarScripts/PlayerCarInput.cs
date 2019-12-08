@@ -5,39 +5,31 @@ using UnityEngine;
 public class PlayerCarInput : MonoBehaviour
 {
     [SerializeField]
-    private bool isBraking = false;
-
-    public bool IsBraking {
-        get {
-            return isBraking;
-        }
-    }
+    public bool IsBraking { get; private set; }
+    [SerializeField]
+    public bool IsAccelerating { get; private set; }
 
     public void Brake()
     {
-        isBraking = true;
+        IsBraking = true;
         Debug.Log("Is Braking");
         //return isBraking;
     }
 
     public void StopBrake()
     {
-        isBraking = false;
+        IsBraking = false;
         Debug.Log("Stop Braking");
         //return isBraking;
     }
-    /*private void Update() {
-        CheckBrakeInput();
+
+    public void Accelerate()
+    {
+        IsAccelerating = true;
     }
 
-    private void CheckBrakeInput()
+    public void StopAccelerate()
     {
-        if (Input.GetMouseButton(0)) {
-            Debug.Log("Is Braking");
-            isBraking = true;
-        }
-        else {
-            isBraking = false;
-        }
-    }*/
+        IsAccelerating = false;
+    }
 }

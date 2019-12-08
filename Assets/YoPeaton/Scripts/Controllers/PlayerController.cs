@@ -5,36 +5,18 @@ using UnityEngine;
 public class PlayerController : EntityController
 {
     [SerializeField]
-    private PlayerCarInput input = null;
+    public PlayerCarInput Input { get; private set; }
 
     //Awake is always called before any Start functions
     protected override void Awake()
     {
         base.Awake();
-        if (!input)
+        if (!Input)
         {
-            input = GetComponent<PlayerCarInput>();
+            Input = GetComponent<PlayerCarInput>();
         }
     }
-
-    //protected override void Update()
-    //{
-    //    float deltaTime = Time.deltaTime;
-    //    if (ShouldStop())
-    //    {
-    //        // DebugController.LogMessage("STOP!");
-    //        GetMovableComponent?.SlowDownByPercent(100.0f);
-    //    }
-    //    else if (ShouldSlowDown())
-    //    {
-    //        // DebugController.LogMessage("Slowing down");
-    //        GetMovableComponent?.SlowDown(deltaTime);
-    //    }
-    //    else
-    //    {
-    //        GetMovableComponent?.SpeedUp(deltaTime);
-    //    }
-    //}
+    
     private new void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Pedestrian") || collision.CompareTag("Car"))
@@ -70,7 +52,7 @@ public class PlayerController : EntityController
 
     protected override bool ShouldSlowDown() {
         bool slowdown = false;
-        if (input.IsBraking) {
+        if (Input.IsBraking) {
             slowdown = true;
         }
         return slowdown;
@@ -104,5 +86,14 @@ public class PlayerController : EntityController
     {
         yield return CanvasManager._instance.DisapearFeedbackText();
         SceneManagerTest.LoadNextScene("VictoryScreenScene");
+    }
+
+    protected override bool ShouldSpeedUp()
+    {
+        bool speedUp = false;
+        if (Input.IsAccelerating) {
+            speedUp = true;
+        }
+        return speedUp;
     }
 }

@@ -232,7 +232,7 @@ public abstract class EntityController : MonoBehaviour
             // DebugController.LogMessage("Slowing down");
             GetMovableComponent?.SlowDown(deltaTime);
         }
-        else 
+        else if (ShouldSpeedUp()) 
         {
             GetMovableComponent?.SpeedUp(deltaTime);
         }
@@ -268,7 +268,6 @@ public abstract class EntityController : MonoBehaviour
 
     private void OnPathChanged()
     {
-
         GetInitialValuesToStartPath();
         if (entityType.Equals(EntityType.Car))
         {
@@ -294,9 +293,10 @@ public abstract class EntityController : MonoBehaviour
 
     protected abstract bool ShouldSlowDown();
 
+    protected abstract bool ShouldSpeedUp();
+
     protected virtual void OnTriggerEnter2D(Collider2D _other) 
     {
-
         if (_other.CompareTag("ChangeOfDirection") && canTurn == true) 
         {
             canTurn = false;

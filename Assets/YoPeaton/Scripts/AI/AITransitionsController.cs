@@ -139,6 +139,7 @@ public class AITransitionsController : MonoBehaviour
 
     public void OnCrossWalkEntered() 
     {
+        DebugController.LogMessage("Waiting at crosswalk");
         aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
     }
 
