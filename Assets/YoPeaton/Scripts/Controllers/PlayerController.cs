@@ -11,17 +11,28 @@ public class PlayerController : EntityController
     protected override void Awake()
     {
         base.Awake();
-        if (!Input)
+        Input = GetComponent<PlayerCarInput>();
+        SignalIdentification signaler = GetComponent<SignalIdentification>();
+        if (signaler)
         {
-            Input = GetComponent<PlayerCarInput>();
+            signaler.onQuestionAsk += OnQuestionAsk;
         }
     }
     
+    private void OnDestroy() 
+    {
+        SignalIdentification signaler = GetComponent<SignalIdentification>();
+        if (signaler)
+        {
+            signaler.onQuestionAsk -= OnQuestionAsk;
+        }
+    }
+
     private new void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Pedestrian") || collision.CompareTag("Car"))
         {
-            print("¡¡ME CHOQUE CON EL MACHETAZO!!");
+            DebugController.LogMessage("¡¡ME CHOQUE CON EL MACHETAZO!!");
             base.OnEntityCollision();
             GameManager.didPlayerLose = true;
             CanvasManager._instance.GenerateFeedback("Crash");
@@ -95,5 +106,10 @@ public class PlayerController : EntityController
             speedUp = true;
         }
         return speedUp;
+    }
+
+    private void OnQuestionAsk()
+    {
+        GetMovableComponent.SlowDownByPercent(100.0f);
     }
 }
