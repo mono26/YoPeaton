@@ -236,6 +236,11 @@ public abstract class EntityController : MonoBehaviour
         {
             GetMovableComponent?.SpeedUp(deltaTime);
         }
+        else
+        {
+            // Slow down by friction.
+            GetMovableComponent?.SlowDownByPercent(3f);
+        }
     }
 
     protected virtual void FixedUpdate() 
@@ -406,7 +411,8 @@ public abstract class EntityController : MonoBehaviour
         float distance = (distanceToCheckForStop - colliderRadius) * transform.localScale.x;
         float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
-        GameObject obstacle = PhysicsHelper.RaycastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
+        // GameObject obstacle = PhysicsHelper.RaycastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
+        GameObject obstacle = PhysicsHelper.RaycastInAConeForFirstGameObject(gameObject, startPosition, direction, distance, layersToCheckCollision, 90.0f, 5);
         if (obstacle) {
             if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car") || obstacle.CompareTag("PlayerCar"))
             {

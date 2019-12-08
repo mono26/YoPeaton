@@ -57,7 +57,7 @@ public static class PhysicsHelper
         for (int i = 0; i < _numberOfRaycast; i++) {
             startPosition = _startPosition + (_checkAxis * ((_lineLenght / 2)
              - (checkIncrement * i)));
-            goToReturn = RaycastForFirstGameObject(_castingGO, startPosition, _direction, _distance, _layersToCheckCollision);
+            goToReturn = RaycastForFirstGameObject(_castingGO, startPosition, _direction, _distance, _layersToCheckCollision, Color.magenta);
             if (goToReturn) 
             {
                 break;
@@ -66,19 +66,19 @@ public static class PhysicsHelper
         return goToReturn;
     }
 
-    public static GameObject RaycastForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision) 
+    public static GameObject RaycastForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision, Color _debugColor) 
     {
         GameObject goToReturn = null;
         GameObject objectHit = null;
         RaycastHit2D castHit = Physics2D.Raycast(_startPosition, _direction, _distance, _layersToCheckCollision);
-        DebugController.DrawDebugRay(_startPosition, _direction, _distance, Color.magenta);
-        DebugController.DrawDebugRay(_startPosition, _direction, _distance, Color.magenta);
+        DebugController.DrawDebugRay(_startPosition, _direction, _distance, _debugColor);
+        DebugController.DrawDebugRay(_startPosition, _direction, _distance, _debugColor);
         if (castHit.collider) 
         {
             objectHit = castHit.collider.gameObject;
             if (objectHit && !objectHit.Equals(_castingGO)) 
             {
-                DebugController.DrawDebugLine(_startPosition, castHit.point, Color.cyan);
+                DebugController.DrawDebugLine(_startPosition, castHit.point, _debugColor.gamma);
                 goToReturn = objectHit;
             }
         }
@@ -95,7 +95,7 @@ public static class PhysicsHelper
         {
             angle = (-_coneAngle / 2) + (i * checkIncrement);
             direction = Quaternion.AngleAxis(angle, Vector3.forward) * _direction;
-            goToReturn = RaycastForFirstGameObject(_castingGO, _startPosition, direction, _distance, _layersToCheckCollision);
+            goToReturn = RaycastForFirstGameObject(_castingGO, _startPosition, direction, _distance, _layersToCheckCollision, Color.green);
             if (goToReturn)
             {
                 break;
