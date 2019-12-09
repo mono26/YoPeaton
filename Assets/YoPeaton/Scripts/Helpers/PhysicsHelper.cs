@@ -4,14 +4,10 @@ using UnityEngine;
 
 public static class PhysicsHelper
 {
-    private static GameObject objectHit;
-    private static GameObject goToReturn;
-    private static RaycastHit2D castHit;
-
     public static void CircleCastForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, float _checkRadius, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision) {
-        goToReturn = null;
-        objectHit = null;
-        castHit = Physics2D.CircleCast((Vector2)_startPosition, _checkRadius, _direction, _distance, _layersToCheckCollision);
+        GameObject goToReturn = null;
+        GameObject objectHit = null;
+        RaycastHit2D castHit = Physics2D.CircleCast((Vector2)_startPosition, _checkRadius, _direction, _distance, _layersToCheckCollision);
         if (castHit.collider) {
             objectHit = castHit.collider.gameObject;
             if (objectHit && !objectHit.Equals(_castingGO)) {
@@ -25,9 +21,9 @@ public static class PhysicsHelper
     }
 
     public static void BoxCastForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _size, float _angle, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision) {
-        goToReturn = null;
-        objectHit = null;
-        castHit = Physics2D.BoxCast((Vector2)_startPosition, _size, _angle, _direction, _distance, _layersToCheckCollision);
+        GameObject goToReturn = null;
+        GameObject objectHit = null;
+        RaycastHit2D castHit = Physics2D.BoxCast((Vector2)_startPosition, _size, _angle, _direction, _distance, _layersToCheckCollision);
         if (castHit.collider) {
             objectHit = castHit.collider.gameObject;
             if (objectHit && !objectHit.Equals(_castingGO)) {
@@ -52,42 +48,57 @@ public static class PhysicsHelper
     /// <param name="_direction">Direction of the rays.</param>
     /// <param name="_distance">Distance for the rays to travel.</param>
     /// <param name="_layersToCheckCollision">Layers to check collision with.</param>
-    /// <param name="_numberOfRayCasts">Number of rays to cast.</param>
+    /// <param name="_numberOfRaycast">Number of rays to cast.</param>
     /// <returns></returns>
-    public static GameObject RayCastOverALineForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _checkAxis, float _lineLenght, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision, int _numberOfRayCasts) {
-        goToReturn = null;
-        objectHit = null;
-        float checkIncrement =_lineLenght / (float)_numberOfRayCasts;
+    public static GameObject RaycastOverALineForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _checkAxis, float _lineLenght, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision, int _numberOfRaycast) {
+        GameObject goToReturn = null;
+        float checkIncrement =_lineLenght / (float)_numberOfRaycast;
         Vector3 startPosition;
-        for (int i = 0; i < _numberOfRayCasts; i++) {
+        for (int i = 0; i < _numberOfRaycast; i++) {
             startPosition = _startPosition + (_checkAxis * ((_lineLenght / 2)
              - (checkIncrement * i)));
-            castHit = Physics2D.Raycast(startPosition, _direction, _distance, _layersToCheckCollision);
-            DebugController.DrawDebugRay(startPosition, _direction, _distance, Color.magenta);
-            DebugController.DrawDebugRay(startPosition, _direction, _distance, Color.magenta);
-            if (castHit.collider) {
-                objectHit = castHit.collider.gameObject;
-                if (objectHit && !objectHit.Equals(_castingGO)) {
-                    DebugController.DrawDebugLine(_startPosition, castHit.point, Color.magenta);
-                    goToReturn = objectHit;
-                    break;
-                }
+            goToReturn = RaycastForFirstGameObject(_castingGO, startPosition, _direction, _distance, _layersToCheckCollision, Color.magenta);
+            if (goToReturn) 
+            {
+                break;
             }
         }
         return goToReturn;
     }
 
-    public static GameObject RayCastForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision) {
-        goToReturn = null;
-        objectHit = null;
-        castHit = Physics2D.Raycast(_startPosition, _direction, _distance, _layersToCheckCollision);
-        DebugController.DrawDebugRay(_startPosition, _direction, _distance, Color.magenta);
-        DebugController.DrawDebugRay(_startPosition, _direction, _distance, Color.magenta);
-        if (castHit.collider) {
+    public static GameObject RaycastForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision, Color _debugColor) 
+    {
+        GameObject goToReturn = null;
+        GameObject objectHit = null;
+        RaycastHit2D castHit = Physics2D.Raycast(_startPosition, _direction, _distance, _layersToCheckCollision);
+        DebugController.DrawDebugRay(_startPosition, _direction, _distance, _debugColor);
+        DebugController.DrawDebugRay(_startPosition, _direction, _distance, _debugColor);
+        if (castHit.collider) 
+        {
             objectHit = castHit.collider.gameObject;
-            if (objectHit && !objectHit.Equals(_castingGO)) {
-                DebugController.DrawDebugLine(_startPosition, castHit.point, Color.magenta);
+            if (objectHit && !objectHit.Equals(_castingGO)) 
+            {
+                DebugController.DrawDebugLine(_startPosition, castHit.point, _debugColor.gamma);
                 goToReturn = objectHit;
+            }
+        }
+        return goToReturn;
+    }
+
+    public static GameObject RaycastInAConeForFirstGameObject(GameObject _castingGO, Vector3 _startPosition, Vector3 _direction, float _distance, LayerMask _layersToCheckCollision, float _coneAngle, int _numberOfRaycast)
+    {
+        GameObject goToReturn = null;
+        float checkIncrement = _coneAngle / (float)_numberOfRaycast;
+        Vector3 direction;
+        float angle;
+        for (int i = 0; i < _numberOfRaycast; i++)
+        {
+            angle = (-_coneAngle / 2) + (i * checkIncrement);
+            direction = Quaternion.AngleAxis(angle, Vector3.forward) * _direction;
+            goToReturn = RaycastForFirstGameObject(_castingGO, _startPosition, direction, _distance, _layersToCheckCollision, Color.green);
+            if (goToReturn)
+            {
+                break;
             }
         }
         return goToReturn;

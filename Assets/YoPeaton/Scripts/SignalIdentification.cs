@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SignalIdentification : MonoBehaviour
 {
-
+    public Action onQuestionAsk;
     /*Detección de contacto con un paso peatonal
    los pasos peatonales deben tener un collider en modo trigger
    una vez detecte una colisión dispara un canvas inactivo 
@@ -40,10 +41,10 @@ public class SignalIdentification : MonoBehaviour
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("CrossWalk"))
+        if (collision.CompareTag("CrossWalkQuestion"))
         {
             DebugController.LogMessage("COLISION CON CROSSWALK");
-            correctAnswer = collision.GetComponentInParent<Crosswalk>().GetCrossWalkType.ToString(); // GetComponent<Crosswalk>().GetCrossWalkType.ToString();
+            correctAnswer = collision.GetComponent<CrosswalkTrigger>().GetCrosswalk.GetCrossWalkType.ToString(); // GetComponent<Crosswalk>().GetCrossWalkType.ToString();
             //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
             //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
             if (correctAnswer == "Cebra" && canAnswer == true && correctCebraQt < 1)
@@ -51,6 +52,7 @@ public class SignalIdentification : MonoBehaviour
 
                 Time.timeScale = 0f;
                 DebugController.LogErrorMessage("cebra" + "cebra correctas: " + correctCebraQt);
+                onQuestionAsk?.Invoke();
                 CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
                 StartCoroutine(ChangeCanAnswerValueCR());
                 canAnswer = false;
@@ -59,7 +61,8 @@ public class SignalIdentification : MonoBehaviour
             if (correctAnswer == "Bocacalle" && canAnswer == true && correctPasacallesQt < 1)
             {
                 Time.timeScale = 0f;
-                Debug.LogError("Bocacalle" + "bocacalles correctas: " + correctPasacallesQt);
+                DebugController.LogErrorMessage("Bocacalle" + "bocacalles correctas: " + correctPasacallesQt);
+                onQuestionAsk?.Invoke();
                 CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
                 StartCoroutine(ChangeCanAnswerValueCR());
                 canAnswer = false;
@@ -96,6 +99,7 @@ public class SignalIdentification : MonoBehaviour
     {
         //El tiempo se pone lento//
         Time.timeScale = 0f;
+        onQuestionAsk?.Invoke();
         //Debug.LogWarning("Accepted");
         CanvasManager._instance.ActivateSpecificCanvas("SignalIdentificationCanvas");
     }

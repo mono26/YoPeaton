@@ -134,7 +134,7 @@ public class FollowPath : MonoBehaviour
     {
         Vector3 endOfPath = pathToFollow.GetPointAt(1.0f);
         Vector3 directionVector = endOfPath - transform.position;
-        GameObject directionChange = PhysicsHelper.RayCastForFirstGameObject(gameObject, transform.position, directionVector.normalized, directionVector.magnitude, directionChangeLayer);
+        GameObject directionChange = PhysicsHelper.RaycastForFirstGameObject(gameObject, transform.position, directionVector.normalized, directionVector.magnitude, directionChangeLayer, Color.yellow);
         return directionChange != null;
     }
 }

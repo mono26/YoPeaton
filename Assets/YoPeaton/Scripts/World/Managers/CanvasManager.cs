@@ -60,8 +60,6 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     public Image checkAndCrossImg;
 
-    public bool canBrake = false;
-
     [SerializeField]
     public GameObject checkAndCrossGO;
 
@@ -75,7 +73,7 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     private Image speedImage;
     [SerializeField]
-    private GameObject playerGO;
+    private PlayerController player;
     private float fillPercent;
 
     public Text timeLeftText;
@@ -231,7 +229,7 @@ public class CanvasManager : MonoBehaviour
     {
         DebugController.LogMessage("VOY A LLENAR LAS REFERENCIAS");
             speedMeter = this.transform.GetChild(0).GetChild(1).gameObject;
-            playerGO = GameObject.Find("PlayerCar_PFB Variant");
+            player = FindObjectOfType<PlayerController>();
             FeedBackTextGO = GameObject.Find("FeedbackTest");
             FeedBackText = GameObject.Find("FeedbackTest").GetComponent<Text>();
             hudPanel = this.transform.GetChild(0).gameObject; ;
@@ -252,11 +250,14 @@ public class CanvasManager : MonoBehaviour
     private void Update()
     {
         //Debug.LogError("Pause canvas esta activado? " + pausePanel.activeInHierarchy);
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
         {
-            fillPercent = (playerGO.GetComponent<EntityMovement>().GetCurrentSpeed / playerGO.GetComponent<EntityMovement>().GetMaxSpeed);
-            //Debug.Log("Fill Percent: "  + fillPercent);
-            speedImage.fillAmount = fillPercent;
+            if (player)
+            {
+                fillPercent = (player.GetMovableComponent.GetCurrentSpeed / player.GetMovableComponent.GetMaxSpeed);
+                //Debug.Log("Fill Percent: "  + fillPercent);
+                speedImage.fillAmount = fillPercent;
+            }
             var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);
             timeLeftText.text = lifeTimeInt.ToString();
         }
@@ -406,7 +407,7 @@ public class CanvasManager : MonoBehaviour
     public IEnumerator DisapearFeedbackText()
     {
         yield return new WaitForSecondsRealtime(4);
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             FeedBackText.enabled = false;
     }
 
@@ -414,7 +415,7 @@ public class CanvasManager : MonoBehaviour
     {
         //Debug.Log("TENGO QUE APAGAR EL CHECK");
         yield return new WaitForSecondsRealtime(2);
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             checkAndCrossImg.enabled = false;
     }
 
@@ -424,36 +425,36 @@ public class CanvasManager : MonoBehaviour
 
     public void PressAcceptBtn()
     {
-        playerGO.GetComponent<SignalIdentification>().AcceptSignalIdentification();
+        player.GetComponent<SignalIdentification>().AcceptSignalIdentification();
     }
 
     public void PressDeclineBtn()
     {
-        playerGO.GetComponent<SignalIdentification>().DeclineSignalIdentification();
+        player.GetComponent<SignalIdentification>().DeclineSignalIdentification();
     }
 
     public void PressAnswerBtn(string selectedAnswer)
     {
-        playerGO.GetComponent<SignalIdentification>().CheckAnswer(selectedAnswer);
+        player.GetComponent<SignalIdentification>().CheckAnswer(selectedAnswer);
     }
     public void PressBrakeBtn()
     {
-        if (SceneManagerTest.GetCurrentScene() == "TestScene 2")
-        {
-            print("Hundi el brake");
-            playerGO.GetComponent<PlayerCarInput>().Brake();
-        }
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" && canBrake)
-        {
-            print("Hundi el brake");
-            playerGO.GetComponent<PlayerCarInput>().Brake();
-        }
+        player.Input.Brake();
     }
 
     public void ReleaseBrakeBtn()
     {
-            print("Solte el brake");
-            playerGO.GetComponent<PlayerCarInput>().StopBrake();
+        player.Input.StopBrake();
+    }
+
+    public void PressAccelerateBtn()
+    {
+        player.Input.Accelerate();
+    }
+
+    public void ReleaseAccelerateBtn()
+    {
+        player.Input.StopAccelerate();
     }
 
     public void PressPauseBtn()

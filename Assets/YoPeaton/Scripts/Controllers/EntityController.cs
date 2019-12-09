@@ -44,6 +44,7 @@ public abstract class EntityController : MonoBehaviour
     private float distanceTravelled = 0.0f;
     private float distanceToCheckForCollision = 0.1f;
     private float lastTParameter = 0.0f;
+    public bool IsCrossingCrosswalk { get; private set; }
     public bool IsOnTheStreet { get; private set; }
     private bool move = true;
     protected bool entityIsPlayer = true;
@@ -110,6 +111,7 @@ public abstract class EntityController : MonoBehaviour
     }
 #endregion
 
+#region Unity Functions
     //Awake is always called before any Start functions
     protected virtual void Awake()
     {
@@ -125,6 +127,7 @@ public abstract class EntityController : MonoBehaviour
 
     private void Start() {
         IsOnTheStreet = false;
+        IsCrossingCrosswalk = false;
         GetInitialValuesToStartPath();
         if (animationComponent) {
             OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
@@ -134,10 +137,6 @@ public abstract class EntityController : MonoBehaviour
         }
     }
 
-    public void SetCrossingWithPedestrianValue(bool value)
-    {
-        isThisCarCrossingWithPedestrian = value;
-    }
     private void OnEnable()
     {
         if (followComponent)
@@ -152,6 +151,64 @@ public abstract class EntityController : MonoBehaviour
         {
             followComponent.onPathChanged -= OnPathChanged;
         }
+    }
+
+    protected virtual void Update() 
+    {
+        float deltaTime = Time.deltaTime;
+        if (ShouldStop()) 
+        {
+            // DebugController.LogMessage("STOP!");
+            GetMovableComponent?.SlowDownByPercent(100.0f);
+        }
+        else if (ShouldSlowDown()) 
+        {
+            // DebugController.LogMessage("Slowing down");
+            GetMovableComponent?.SlowDown(deltaTime);
+        }
+        else if (ShouldSpeedUp()) 
+        {
+            GetMovableComponent?.SpeedUp(deltaTime);
+        }
+        else
+        {
+            // Slow down by friction.
+            GetMovableComponent?.SlowDownByPercent(3f);
+        }
+    }
+
+    protected virtual void FixedUpdate() 
+    {
+        if (HasCollided())
+        {
+            OnEntityCollision();
+        }
+        else if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f) 
+        {
+            distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
+            if (move) {
+                float t;
+                if (distanceTravelled / GetFollowPathComponent.PathLength < lastTParameter) 
+                {
+                    t = lastTParameter;
+                }
+                else 
+                {
+                    t = distanceTravelled / GetFollowPathComponent.PathLength;
+                }
+                if (!t.Equals(lastTParameter)) 
+                {
+                    GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
+                    lastTParameter = t;
+                }
+            }
+        }
+    }
+#endregion
+
+    public void SetCrossingWithPedestrianValue(bool value)
+    {
+        isThisCarCrossingWithPedestrian = value;
     }
 
     private void SetEntityType()
@@ -219,56 +276,8 @@ public abstract class EntityController : MonoBehaviour
         lastTParameter = timeOnCurrentPath;
     }
 
-    protected virtual void Update() 
-    {
-        float deltaTime = Time.deltaTime;
-        if (ShouldStop()) 
-        {
-            // DebugController.LogMessage("STOP!");
-            GetMovableComponent?.SlowDownByPercent(100.0f);
-        }
-        else if (ShouldSlowDown()) 
-        {
-            // DebugController.LogMessage("Slowing down");
-            GetMovableComponent?.SlowDown(deltaTime);
-        }
-        else 
-        {
-            GetMovableComponent?.SpeedUp(deltaTime);
-        }
-    }
-
-    protected virtual void FixedUpdate() 
-    {
-        if (HasCollided())
-        {
-            OnEntityCollision();
-        }
-        else if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f) 
-        {
-            distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
-            if (move) {
-                float t;
-                if (distanceTravelled / GetFollowPathComponent.PathLength < lastTParameter) 
-                {
-                    t = lastTParameter;
-                }
-                else 
-                {
-                    t = distanceTravelled / GetFollowPathComponent.PathLength;
-                }
-                if (!t.Equals(lastTParameter)) 
-                {
-                    GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
-                    lastTParameter = t;
-                }
-            }
-        }
-    }
-
     private void OnPathChanged()
     {
-
         GetInitialValuesToStartPath();
         if (entityType.Equals(EntityType.Car))
         {
@@ -294,9 +303,10 @@ public abstract class EntityController : MonoBehaviour
 
     protected abstract bool ShouldSlowDown();
 
+    protected abstract bool ShouldSpeedUp();
+
     protected virtual void OnTriggerEnter2D(Collider2D _other) 
     {
-
         if (_other.CompareTag("ChangeOfDirection") && canTurn == true) 
         {
             canTurn = false;
@@ -406,7 +416,8 @@ public abstract class EntityController : MonoBehaviour
         float distance = (distanceToCheckForStop - colliderRadius) * transform.localScale.x;
         float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
-        GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
+        // GameObject obstacle = PhysicsHelper.RaycastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
+        GameObject obstacle = PhysicsHelper.RaycastInAConeForFirstGameObject(gameObject, startPosition, direction, distance, layersToCheckCollision, 90.0f, 5);
         if (obstacle) {
             if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car") || obstacle.CompareTag("PlayerCar"))
             {
@@ -429,7 +440,7 @@ public abstract class EntityController : MonoBehaviour
         float distance = (distanceToCheckForCollision - colliderRadius) * transform.localScale.x;
         float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
-        GameObject obstacle = PhysicsHelper.RayCastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
+        GameObject obstacle = PhysicsHelper.RaycastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
         if (obstacle) {
             if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car"))
             {
@@ -484,9 +495,18 @@ public abstract class EntityController : MonoBehaviour
         onStartDirectional?.Invoke(_nextDirection);
     }
 
-
     private void StopDirectional()
     {
         onStopChangingDirection?.Invoke();
+    }
+
+    public virtual void OnStartedCrossing()
+    {
+        IsCrossingCrosswalk = true;
+    }
+
+    public virtual void OnFinishedCrossing()
+    {
+        IsCrossingCrosswalk = false;
     }
 }

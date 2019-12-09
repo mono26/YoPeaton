@@ -1,4 +1,4 @@
 ﻿public enum AIState
 {
-    Moving, SlowDown, WaitingAtCrossWalk, WaitingAtCrossWalkAndAskingForPass
+    Moving, SlowDown, WaitingAtCrossWalk, WaitingAtCrossWalkAskingForCross
 }

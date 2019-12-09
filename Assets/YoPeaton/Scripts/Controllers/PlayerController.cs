@@ -5,41 +5,34 @@ using UnityEngine;
 public class PlayerController : EntityController
 {
     [SerializeField]
-    private PlayerCarInput input = null;
+    public PlayerCarInput Input { get; private set; }
 
     //Awake is always called before any Start functions
     protected override void Awake()
     {
         base.Awake();
-        if (!input)
+        Input = GetComponent<PlayerCarInput>();
+        SignalIdentification signaler = GetComponent<SignalIdentification>();
+        if (signaler)
         {
-            input = GetComponent<PlayerCarInput>();
+            signaler.onQuestionAsk += OnQuestionAsk;
+        }
+    }
+    
+    private void OnDestroy() 
+    {
+        SignalIdentification signaler = GetComponent<SignalIdentification>();
+        if (signaler)
+        {
+            signaler.onQuestionAsk -= OnQuestionAsk;
         }
     }
 
-    //protected override void Update()
-    //{
-    //    float deltaTime = Time.deltaTime;
-    //    if (ShouldStop())
-    //    {
-    //        // DebugController.LogMessage("STOP!");
-    //        GetMovableComponent?.SlowDownByPercent(100.0f);
-    //    }
-    //    else if (ShouldSlowDown())
-    //    {
-    //        // DebugController.LogMessage("Slowing down");
-    //        GetMovableComponent?.SlowDown(deltaTime);
-    //    }
-    //    else
-    //    {
-    //        GetMovableComponent?.SpeedUp(deltaTime);
-    //    }
-    //}
     private new void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Pedestrian") || collision.CompareTag("Car"))
         {
-            print("¡¡ME CHOQUE CON EL MACHETAZO!!");
+            DebugController.LogMessage("¡¡ME CHOQUE CON EL MACHETAZO!!");
             base.OnEntityCollision();
             GameManager.didPlayerLose = true;
             CanvasManager._instance.GenerateFeedback("Crash");
@@ -70,7 +63,7 @@ public class PlayerController : EntityController
 
     protected override bool ShouldSlowDown() {
         bool slowdown = false;
-        if (input.IsBraking) {
+        if (Input.IsBraking) {
             slowdown = true;
         }
         return slowdown;
@@ -79,6 +72,7 @@ public class PlayerController : EntityController
     public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
         DebugController.LogMessage("Player entered crosswalk");
         _crossWalk.OnStartedCrossing(this);
+        OnStartedCrossing();
     }
 
     public override void OnCrossWalkExited(Crosswalk _crossWalk) {
@@ -104,5 +98,19 @@ public class PlayerController : EntityController
     {
         yield return CanvasManager._instance.DisapearFeedbackText();
         SceneManagerTest.LoadNextScene("VictoryScreenScene");
+    }
+
+    protected override bool ShouldSpeedUp()
+    {
+        bool speedUp = false;
+        if (Input.IsAccelerating) {
+            speedUp = true;
+        }
+        return speedUp;
+    }
+
+    private void OnQuestionAsk()
+    {
+        GetMovableComponent.SlowDownByPercent(100.0f);
     }
 }

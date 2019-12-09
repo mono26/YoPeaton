@@ -1,6 +1,5 @@
-﻿using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Crosswalk : MonoBehaviour
@@ -42,6 +41,10 @@ public class Crosswalk : MonoBehaviour
         else
         {
             DebugController.LogErrorMessage("Missing crooss are bouds reference.");
+        }
+        if (connectedPaths == null || connectedPaths.Length.Equals(0))
+        {
+            DebugController.LogErrorMessage($"{ gameObject.name } has no connectedPaths!");
         }
     }
 
@@ -186,7 +189,7 @@ public class Crosswalk : MonoBehaviour
     /// </summary>
     /// <param name="_entity">Entity to check if it can cross.</param>
     /// <returns>Returns true for if the entity can cross, false if not.</returns>
-    public bool CanCross(EntityController _entity)
+    public bool HasTurn(EntityController _entity)
     {
         bool cross = true;
         WaitTicket entityTicket = GetWaitingTicket(_entity);
@@ -203,7 +206,6 @@ public class Crosswalk : MonoBehaviour
             else if (waitingPedestrians.Count > 0) {
                 // TODO refactor into compare to pedestrians tickets.
                 values = waitingPedestrians.Values;
-
             }
         }
         else if (_entity.GetEntityType.Equals(EntityType.Pedestrian) && !crossingPedestrians.ContainsKey(_entity)) 
@@ -248,15 +250,18 @@ public class Crosswalk : MonoBehaviour
         {
             Dictionary<EntityController, CrossingInfo>.ValueCollection values = crossingPedestrians.Values;
             CrossingInfo[] valuesArray = values.ToArray();
-            values = null;
+            DebugController.LogMessage("Checking cross with other corssing pedestrians");
             for (int i = 0; i < valuesArray.Length; i++)
             {
                 if (valuesArray[i].distanceTravelled < crossWalkLenght * 0.5f)
                 {
+                    DebugController.LogMessage("There is a pedestrian recently crossing");
                     canCross = true;
                     break;
                 }
             }
+            values = null;
+            valuesArray = null;
         }
         return canCross;
     }
@@ -293,7 +298,7 @@ public class Crosswalk : MonoBehaviour
             EntityController[] keysArray = keys.ToArray();
             keys = null;
             for (int i = 0; i < keysArray.Length; i++) {
-                if (keysArray[i] is AIController && ((AIController)keysArray[i]).GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
+                if (keysArray[i] is AIController && ((AIController)keysArray[i]).GetCurrentState.Equals(AIState.WaitingAtCrossWalkAskingForCross)) {
                     isAnEntityAskingForPass = true;
                     break;
                 }
@@ -340,10 +345,14 @@ public class Crosswalk : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D _other) {
-        if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) {
+    private void OnTriggerEnter2D(Collider2D _other) 
+    {
+        if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) 
+        {
             EntityController entity = _other.transform.GetComponent<EntityController>();
-            if (IsAValidEntity(entity)) {
+            DebugController.LogMessage(entity.ToString());
+            if (IsAValidEntity(entity)) 
+            {
                 OnEntering(entity);
                 entity.OnCrossWalkEntered(this);
             }

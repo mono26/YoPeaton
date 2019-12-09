@@ -74,10 +74,12 @@ public class AIController : EntityController
     {
         // Si esta esperando en un crosswalk
         bool stop = false;
-        if (GetCurrentState.Equals(AIState.WaitingAtCrossWalkAndAskingForPass)) {
+        if (GetCurrentState.Equals(AIState.WaitingAtCrossWalkAskingForCross)) 
+        {
             stop = true;
         }
-        else if (GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) {
+        else if (GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) 
+        {
             stop = true;
         }
         return stop;
@@ -91,7 +93,7 @@ public class AIController : EntityController
     
     public override void OnCrossWalkEntered(Crosswalk _crossWalk)
     {
-        // DebugController.LogMessage("Entered crosswalk");
+        DebugController.LogMessage("Entered crosswalk");
         if (!currentCrossingZone || !currentCrossingZone.Equals(_crossWalk))
         {
             currentCrossingZone?.OnFinishedCrossing(this);
@@ -124,5 +126,17 @@ public class AIController : EntityController
     {
         base.OnEntityCollision();
         // Generar reporte de collision.
+    }
+
+    protected override bool ShouldSpeedUp()
+    {
+        return GetCurrentState.Equals(AIState.Moving);
+    }
+
+    public override void OnStartedCrossing()
+    {
+        base.OnStartedCrossing();
+        GetCurrentCrossingZone.OnStartedCrossing(this);
+        SwitchToState(AIState.Moving);
     }
 }
