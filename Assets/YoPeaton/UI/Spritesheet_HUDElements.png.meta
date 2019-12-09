@@ -29,6 +29,9 @@ TextureImporter:
   - first:
       213: -5253500739941442394
     second: HUDElements_PauseButton
+  - first:
+      213: 6681631767331157344
+    second: Spritesheet_HUDElements_AccelerateButton
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -192,7 +195,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 841
-        y: 823
+        y: 822
         width: 159
         height: 159
       alignment: 0
@@ -301,7 +304,7 @@ TextureImporter:
         width: 95
         height: 93
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -309,6 +312,27 @@ TextureImporter:
       bones: []
       spriteID: 0672f8a9b99794e499d3eb1331f006d8
       internalID: -5253500739941442394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Spritesheet_HUDElements_AccelerateButton
+      rect:
+        serializedVersion: 2
+        x: 669
+        y: 821
+        width: 159
+        height: 159
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80a016f8ed097b1408404334f57bdd77
+      internalID: 6681631767331157344
       vertices: []
       indices: 
       edges: []

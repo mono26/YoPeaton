@@ -195,14 +195,17 @@ public abstract class EntityController : MonoBehaviour
 
         if (gameObject.tag == "Car" && !entityIsPlayer)
         {
-            if(probability < 0.4f)
+            if(probability < 0.25f)
             {
-                entitySubType = EntitySubType.RedCar;
-            } else if (probability < 0.65f)
+                entitySubType = EntitySubType.Motorcycle;
+            } else if (probability < 0.60f)
             {
                 entitySubType = EntitySubType.GreenCar;
             }
-            else
+            else if (probability < 0.80f)
+            {
+                entitySubType = EntitySubType.RedCar;
+            } else
             {
                 entitySubType = EntitySubType.YellowCar;
             }
