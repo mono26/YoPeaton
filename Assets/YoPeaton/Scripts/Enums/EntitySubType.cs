@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum EntitySubType
 {
-    Male, MaleWithDog, MaleWithBaby, MaleWithWalker, Female, FemaleWithDog, FemaleWithBaby, FemaleWithWalker, YellowCar ,BlueCar, RedCar, GreenCar
+    Male, MaleWithDog, MaleWithBaby, MaleWithWalker, Female, FemaleWithDog, FemaleWithBaby, FemaleWithWalker, YellowCar ,BlueCar, RedCar, GreenCar, Motorcycle
 }

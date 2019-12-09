@@ -50,7 +50,7 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
     private void Start()
     {
         this.transform.localRotation = new Quaternion(0, 0, 0, 0);
-        //ToggleBrakeLights(false);
+        ToggleBrakeLights(false);
         if (GetEntity)
         {
             direction = GetEntity.GetFollowPathComponent.GetDirection(Time.time);
@@ -72,7 +72,7 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         else if (currentSpeed >  maxSpeed) {
             currentSpeed = maxSpeed;
         }
-        //ToggleBrakeLights(false);
+        ToggleBrakeLights(false);
     }
 
     private void MoveWithDirection(float _detltaTime, Vector3 _direction) {
@@ -117,7 +117,7 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
             currentSpeed -= brakeSpeed * _deltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0.0f, maxSpeed);
         }
-        //ToggleBrakeLights(true);
+        ToggleBrakeLights(true);
     }
 
     private void ApplyInmediateStop()
@@ -139,11 +139,11 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         
     }
 
-    /*private void ToggleBrakeLights(bool status)
+    private void ToggleBrakeLights(bool status)
     {
-        if (GetEntity.GetEntityType == EntityTypes.BlueCar || GetEntity.GetEntityType == EntityTypes.YellowCar)
+        if (GetEntity.GetEntityType == EntityType.Car)
         {
-            if (status && GetEntity.GetCurrentDirection == new Vector3(0, 1, 0))
+            if (status && direction == new Vector3(0, 1, 0))
             {
                 carLightsVFX.SetActive(true);
             }
@@ -153,11 +153,11 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
             }
         }
             
-    }*/
+    }
 
     public void SlowDownByPercent(float _slowPercent) {
         currentSpeed = currentSpeed * ((100 - _slowPercent) / 100);
-        //ToggleBrakeLights(true);
+        ToggleBrakeLights(true);
     }
 
     public void MoveToPosition(Vector3 position) {

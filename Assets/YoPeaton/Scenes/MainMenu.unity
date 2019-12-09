@@ -18051,9 +18051,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'YoPeaton
-
-    Play'
+  m_Text: "YoPeat\xF3n\nPlay"
 --- !u!222 &1690384463
 CanvasRenderer:
   m_ObjectHideFlags: 0
