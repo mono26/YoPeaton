@@ -101,10 +101,10 @@ public class AITransitionsController : MonoBehaviour
     private bool IsThereAObstacle()
     {
         bool isThereAObstacle = false;
-        RaycastCheckResult obstacleCheckResult = aiEntity.CheckForObstacles();
-        if (aiEntity.IsOnTheStreet && obstacleCheckResult.collided)
+        if (aiEntity.IsOnTheStreet /* && !aiEntity.IsCrossingCrosswalk */)
         {
-            if (obstacleCheckResult.otherEntity.IsOnTheStreet)
+            RaycastCheckResult obstacleCheckResult = aiEntity.CheckForObstacles();
+            if (obstacleCheckResult.collided && obstacleCheckResult.otherEntity.IsOnTheStreet)
             {
                 isThereAObstacle = true;
             }
@@ -216,8 +216,9 @@ public class AITransitionsController : MonoBehaviour
 
     private void StartCross()
     {
-        aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
-        aiEntity.SwitchToState(AIState.Moving);
+        aiEntity.OnStartedCrossing();
+        // aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
+        // aiEntity.SwitchToState(AIState.Moving);
         alreadyGaveCross = false;
         //aiEntity.CheckIfIsBreakingTheLaw();
     }

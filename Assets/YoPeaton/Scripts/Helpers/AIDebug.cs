@@ -51,6 +51,11 @@ public class AIDebug : MonoBehaviour
             }
             if (obstacle)
             {
+                // if (!aiToDebug.IsCrossingCrosswalk)
+                // {
+                //     RaycastCheckResult obstacleResult = aiToDebug.CheckForObstacles();
+                //     obstacle.text = "Obstacle: " + (obstacleResult.collided && obstacleResult.otherEntity.IsOnTheStreet).ToString();
+                // }
                 RaycastCheckResult obstacleResult = aiToDebug.CheckForObstacles();
                 obstacle.text = "Obstacle: " + (obstacleResult.collided && obstacleResult.otherEntity.IsOnTheStreet).ToString();
             }
