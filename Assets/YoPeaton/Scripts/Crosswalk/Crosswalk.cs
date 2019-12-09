@@ -350,7 +350,7 @@ public class Crosswalk : MonoBehaviour
         if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) 
         {
             EntityController entity = _other.transform.GetComponent<EntityController>();
-            DebugController.LogMessage(entity.ToString());
+            // DebugController.LogMessage(entity.ToString());
             if (IsAValidEntity(entity)) 
             {
                 OnEntering(entity);
