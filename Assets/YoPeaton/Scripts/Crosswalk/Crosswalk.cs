@@ -345,20 +345,20 @@ public class Crosswalk : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D _other) 
-    {
-        if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) 
-        {
-            EntityController entity = _other.transform.GetComponent<EntityController>();
-            // DebugController.LogMessage(entity.ToString());
-            OnEnteredWaitingZone(entity);
-            //if (IsAValidEntity(entity)) 
-            //{
-            //    OnEnter(entity);
-            //    entity.OnCrossWalkEntered(this);
-            //}
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D _other) 
+    //{
+    //    if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) 
+    //    {
+    //        EntityController entity = _other.transform.GetComponent<EntityController>();
+    //        // DebugController.LogMessage(entity.ToString());
+    //        OnEnteredWaitingZone(entity);
+    //        //if (IsAValidEntity(entity)) 
+    //        //{
+    //        //    OnEnter(entity);
+    //        //    entity.OnCrossWalkEntered(this);
+    //        //}
+    //    }
+    //}
 
     /// <summary>
     /// Called when a entity entered the waiting zone.
@@ -390,16 +390,16 @@ public class Crosswalk : MonoBehaviour
         return valid;
     }
 
-    private void OnTriggerExit2D(Collider2D _other) {
-        if (_other.CompareTag("Car") || _other.CompareTag("Pedestrian")) {
-            EntityController entity = _other.transform.GetComponent<EntityController>();
-            if (entity) {
-                OnExited(entity);
-                OnFinishedCrossing(entity);
-                entity.OnCrossWalkExited(this);
-            }
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D _other) {
+    //    if (_other.CompareTag("Car") || _other.CompareTag("Pedestrian")) {
+    //        EntityController entity = _other.transform.GetComponent<EntityController>();
+    //        if (entity) {
+    //            OnExited(entity);
+    //            OnFinishedCrossing(entity);
+    //            entity.OnCrossWalkExited(this);
+    //        }
+    //    }
+    //}
 
     public void OnExitedCrossingZone(EntityController _entity)
     {
