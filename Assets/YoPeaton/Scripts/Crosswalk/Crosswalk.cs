@@ -52,7 +52,7 @@ public class Crosswalk : MonoBehaviour
     /// Called when a entity enter the crosswalk hotzone.
     /// </summary>
     /// <param name="_entity">Entity that entered.</param>
-    public void OnEntering(EntityController _entity) {
+    public void OnEnter(EntityController _entity) {
         if (_entity.GetEntityType.Equals(EntityType.Pedestrian)) {
             if (!HasAlreadyATicket(_entity)) {
                 WaitTicket newTicket = new WaitTicket();
@@ -351,11 +351,25 @@ public class Crosswalk : MonoBehaviour
         {
             EntityController entity = _other.transform.GetComponent<EntityController>();
             // DebugController.LogMessage(entity.ToString());
-            if (IsAValidEntity(entity)) 
-            {
-                OnEntering(entity);
-                entity.OnCrossWalkEntered(this);
-            }
+            OnEnteredWaitingZone(entity);
+            //if (IsAValidEntity(entity)) 
+            //{
+            //    OnEnter(entity);
+            //    entity.OnCrossWalkEntered(this);
+            //}
+        }
+    }
+
+    /// <summary>
+    /// Called when a entity entered the waiting zone.
+    /// </summary>
+    /// <param name="_entity"></param>
+    public void OnEnteredWaitingZone(EntityController _entity)
+    {
+        if (IsAValidEntity(_entity))
+        {
+            OnEnter(_entity);
+            _entity.OnCrossWalkEntered(this);
         }
     }
 
@@ -384,6 +398,16 @@ public class Crosswalk : MonoBehaviour
                 OnFinishedCrossing(entity);
                 entity.OnCrossWalkExited(this);
             }
+        }
+    }
+
+    public void OnExitedCrossingZone(EntityController _entity)
+    {
+        if (_entity)
+        {
+            OnExited(_entity);
+            OnFinishedCrossing(_entity);
+            _entity.OnCrossWalkExited(this);
         }
     }
 
