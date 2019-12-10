@@ -48,6 +48,8 @@ public class CanvasManager : MonoBehaviour
     [SerializeField]
     private GameObject brakeBtn;
     [SerializeField]
+    private GameObject accelBtn;
+    [SerializeField]
     private GameObject pauseBtn;
     [SerializeField]
     private GameObject pausePanel;
@@ -62,6 +64,9 @@ public class CanvasManager : MonoBehaviour
 
     [SerializeField]
     public GameObject checkAndCrossGO;
+
+    [SerializeField]
+    public Canvas wholeCanvas;
 
     [SerializeField]
     public Animator checkAndCrossAnimator;
@@ -116,7 +121,7 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
 
-        FillReferences();
+        //FillReferences();
         //playerGO = GameObject.Find("PlayerCar_PFB Variant");
         checkAndCrossImg.enabled = false;
         currentScore = 0;
@@ -136,18 +141,22 @@ public class CanvasManager : MonoBehaviour
 
     public void TurnOffHUD()
     {
-        scoreContainer.SetActive(false);
+        wholeCanvas.enabled = false;
+        /*scoreContainer.SetActive(false);
         speedMeter.SetActive(false);
         brakeBtn.SetActive(false);
         pauseBtn.SetActive(false);
+        accelBtn.SetActive(false);*/
     }
 
     public void TurnOnHUD()
     {
-        scoreContainer.SetActive(true);
+        wholeCanvas.enabled = true;
+        /*scoreContainer.SetActive(true);
         speedMeter.SetActive(true);
         brakeBtn.SetActive(true);
         pauseBtn.SetActive(true);
+        accelBtn.SetActive(true);*/
     }
     public void StartReplacementMethod()
     {
@@ -209,8 +218,21 @@ public class CanvasManager : MonoBehaviour
 
     private void playBtnClicked()
     {
+        //PASO AL TUTORIAL//
+        /*if (GameManager.timesTutorialFinished >= 1)
+        {
+            SceneManagerTest.LoadNextScene("TestScene 2");
+            Debug.LogError("Hundi play y vamos al juego");
+        }
+        else if (GameManager.timesTutorialFinished == 0)
+        {
+            SceneManagerTest.LoadNextScene("Tutorial");
+            Debug.LogError("Hundi play y vamos al tutorial");
+        }*/
+
+        //METODO DE LLAMADO BASICO//
         SceneManagerTest.LoadNextScene("TestScene 2");
-        Debug.LogError("Hundi play");
+        Debug.LogError("Hundi play y vamos al juego");
     }
 
     public void BackToMenuBtnClicked()

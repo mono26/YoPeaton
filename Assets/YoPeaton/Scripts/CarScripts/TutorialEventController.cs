@@ -33,11 +33,12 @@ public class TutorialEventController : MonoBehaviour
         tutorialStep0 = GameObject.Find("TutorialSteps (0)");
         tutorialStep1 = GameObject.Find("TutorialSteps (1)");
         tutorialStep2 = GameObject.Find("TutorialSteps (2)");
-        /*tutorialStep3 = GameObject.Find("TutorialSteps (3)");
+        tutorialStep3 = GameObject.Find("TutorialSteps (3)");
         tutorialStep4 = GameObject.Find("TutorialSteps (4)");
         tutorialStep5 = GameObject.Find("TutorialSteps (5)");
         tutorialStep6 = GameObject.Find("TutorialSteps (6)");
-        tutorialStep7 = GameObject.Find("TutorialSteps (7)");*/
+        tutorialStep7 = GameObject.Find("TutorialSteps (7)");
+        tutorialStep8 = GameObject.Find("TutorialSteps (8)");
 
         tutorialStep0.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep1.transform.GetChild(0).gameObject.SetActive(false);
