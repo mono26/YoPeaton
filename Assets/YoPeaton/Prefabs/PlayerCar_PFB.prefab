@@ -743,7 +743,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4acc856e11df1474bb6ab07d20e685b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBraking: 0
 --- !u!114 &2761844312484328689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,7 +786,6 @@ MonoBehaviour:
     m_Bits: 768
   isThisCarCrossingWithPedestrian: 0
   nextPathReference: {fileID: 0}
-  input: {fileID: 5162524990170631433}
 --- !u!114 &5084227755347083799
 MonoBehaviour:
   m_ObjectHideFlags: 0

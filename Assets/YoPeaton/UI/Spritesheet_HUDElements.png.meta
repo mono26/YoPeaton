@@ -31,7 +31,7 @@ TextureImporter:
     second: HUDElements_PauseButton
   - first:
       213: 6681631767331157344
-    second: Spritesheet_HUDElements_AccelerateButton
+    second: HUDElements_AccelerateButton
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -317,7 +317,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Spritesheet_HUDElements_AccelerateButton
+      name: HUDElements_AccelerateButton
       rect:
         serializedVersion: 2
         x: 669
