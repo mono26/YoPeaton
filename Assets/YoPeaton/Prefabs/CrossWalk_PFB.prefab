@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
-  crossAreaBounds: {fileID: 0}
+  crossAreaBounds: {fileID: 7649200525126830799}
   connectedPaths: []
 --- !u!1 &5651082318340459105
 GameObject:
