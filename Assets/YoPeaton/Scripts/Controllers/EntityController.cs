@@ -441,7 +441,7 @@ public abstract class EntityController : MonoBehaviour
         Vector3 direction = (GetFollowPathComponent.GetPosition(lastTParameter + 0.1f) - GetFollowPathComponent.GetPosition(lastTParameter)).normalized;
         Vector3 startPosition = transform.position + (colliderOffset + (direction * ((float)(colliderRadius) + 0.1f))) * transform.localScale.x;
         float distance = (distanceToCheckForCollision - colliderRadius) * transform.localScale.x;
-        float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
+        float checkWidth = (colliderRadius * 2) * transform.localScale.x;
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
         GameObject obstacle = PhysicsHelper.RaycastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
         if (obstacle) {

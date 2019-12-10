@@ -202,6 +202,7 @@ public class AITransitionsController : MonoBehaviour
 
     private void AskForCross()
     {
+        DebugController.LogMessage($"{ gameObject.name } is asking for cross!");
         aiEntity.SwitchToState(AIState.WaitingAtCrossWalkAskingForCross);
         canCrossAfterWait = false;
         StartCoroutine(AskedForCrossWait());
