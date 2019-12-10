@@ -11,5 +11,9 @@ public class Goal : MonoBehaviour
         {
             SceneManagerTest.instance.LoadVictory();
         }
+        if (this.gameObject.name== "Goal_Tutorial" && collision.gameObject.name == "PlayerCar_PFB Variant")
+        {
+            SceneManagerTest.instance.LoadScene("TestScene 2");
+        }
     }
 }

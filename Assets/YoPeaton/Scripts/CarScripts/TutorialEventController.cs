@@ -13,6 +13,7 @@ public class TutorialEventController : MonoBehaviour
     public GameObject tutorialStep5;
     public GameObject tutorialStep6;
     public GameObject tutorialStep7;
+    public GameObject tutorialStep8;
 
     public GameObject currentStep;
     // Start is called before the first frame update
@@ -46,6 +47,7 @@ public class TutorialEventController : MonoBehaviour
         tutorialStep5.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep6.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep7.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep8.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -112,6 +114,14 @@ public class TutorialEventController : MonoBehaviour
             print("COLISION CON TUTORIAL TRIGGER 7");
             currentStep = tutorialStep7;
             tutorialStep7.transform.GetChild(0).gameObject.SetActive(true);
+            Time.timeScale = 0;
+            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+        }
+        if (collision.gameObject.name == "TutorialTrigger (8)")
+        {
+            print("COLISION CON TUTORIAL TRIGGER 8");
+            currentStep = tutorialStep8;
+            tutorialStep8.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
             StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
