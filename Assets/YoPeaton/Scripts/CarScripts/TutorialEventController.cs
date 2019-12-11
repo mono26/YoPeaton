@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TutorialEventController : MonoBehaviour
 {
+    private GameObject tutorialSteps;
     public GameObject tutorialStep0;
     public GameObject tutorialStep1;
     public GameObject tutorialStep2;
@@ -30,7 +31,8 @@ public class TutorialEventController : MonoBehaviour
     public void FillReferences()
     {
         Debug.Log("voy a llenar las referencias de los tutorial steps");
-        tutorialStep0 = GameObject.Find("TutorialSteps (0)");
+        CanvasManager._instance.debugText.text = "EVENTO DE tutorial Controller: Llenar referencias";
+        /*tutorialStep0 = GameObject.Find("TutorialSteps (0)");
         tutorialStep1 = GameObject.Find("TutorialSteps (1)");
         tutorialStep2 = GameObject.Find("TutorialSteps (2)");
         tutorialStep3 = GameObject.Find("TutorialSteps (3)");
@@ -38,8 +40,27 @@ public class TutorialEventController : MonoBehaviour
         tutorialStep5 = GameObject.Find("TutorialSteps (5)");
         tutorialStep6 = GameObject.Find("TutorialSteps (6)");
         tutorialStep7 = GameObject.Find("TutorialSteps (7)");
-        tutorialStep8 = GameObject.Find("TutorialSteps (8)");
+        tutorialStep8 = GameObject.Find("TutorialSteps (8)");*/
+        tutorialSteps = GameObject.Find("TutorialStepsParent");
+        if(tutorialSteps != null)
+            CanvasManager._instance.debugText.text = "Tutorial Steps: " + tutorialSteps.name;
+        tutorialStep0 = tutorialSteps.transform.GetChild(0).gameObject;
+        tutorialStep1 = tutorialSteps.transform.GetChild(1).gameObject;
+        tutorialStep2 = tutorialSteps.transform.GetChild(2).gameObject;
+        tutorialStep3 = tutorialSteps.transform.GetChild(3).gameObject;
+        tutorialStep4 = tutorialSteps.transform.GetChild(4).gameObject;
+        tutorialStep5 = tutorialSteps.transform.GetChild(5).gameObject;
+        tutorialStep6 = tutorialSteps.transform.GetChild(6).gameObject;
+        tutorialStep7 = tutorialSteps.transform.GetChild(7).gameObject;
+        tutorialStep8 = tutorialSteps.transform.GetChild(8).gameObject;
+        TurnOffSteps();
+    }
 
+    public void TurnOffSteps()
+    {
+        print("Apagando los steps");
+        //CanvasManager._instance.debugText.text = "EVENTO DE tutorial Controller: Apagar Steps Metodo";
+        //StartCoroutine(TurnOffAllStepsCR());
         tutorialStep0.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep1.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep2.transform.GetChild(0).gameObject.SetActive(false);
@@ -134,5 +155,20 @@ public class TutorialEventController : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
         currentStep.transform.GetChild(0).gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    IEnumerator TurnOffAllStepsCR()
+    {
+        yield return new WaitForEndOfFrame();
+        //CanvasManager._instance.debugText.text = "EVENTO DE tutorial Controller: Apagar Steps Corutina";
+        tutorialStep0.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep1.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep2.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep3.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep4.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep5.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep6.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep7.transform.GetChild(0).gameObject.SetActive(false);
+        tutorialStep8.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

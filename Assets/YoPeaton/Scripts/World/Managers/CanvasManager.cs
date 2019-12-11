@@ -61,6 +61,8 @@ public class CanvasManager : MonoBehaviour
     public GameObject crosswalkQuestionButtons;
     [SerializeField]
     public Image checkAndCrossImg;
+    [SerializeField]
+    public Text debugText;
 
     [SerializeField]
     public GameObject checkAndCrossGO;
@@ -82,6 +84,7 @@ public class CanvasManager : MonoBehaviour
     private float fillPercent;
 
     public Text timeLeftText;
+
 
     private Button botonVolver;
 
@@ -219,7 +222,7 @@ public class CanvasManager : MonoBehaviour
     private void playBtnClicked()
     {
         //PASO AL TUTORIAL//
-        /*if (GameManager.timesTutorialFinished >= 1)
+        if (GameManager.timesTutorialFinished >= 1)
         {
             SceneManagerTest.LoadNextScene("TestScene 2");
             Debug.LogError("Hundi play y vamos al juego");
@@ -228,11 +231,11 @@ public class CanvasManager : MonoBehaviour
         {
             SceneManagerTest.LoadNextScene("Tutorial");
             Debug.LogError("Hundi play y vamos al tutorial");
-        }*/
+        }
 
         //METODO DE LLAMADO BASICO//
-        SceneManagerTest.LoadNextScene("TestScene 2");
-        Debug.LogError("Hundi play y vamos al juego");
+        /*SceneManagerTest.LoadNextScene("TestScene 2");
+        Debug.LogError("Hundi play y vamos al juego");*/
     }
 
     public void BackToMenuBtnClicked()
@@ -247,6 +250,10 @@ public class CanvasManager : MonoBehaviour
         GameManager.PauseGame();
     }
 
+    public void AssignDebugText()
+    {
+        debugText = GameObject.Find("DebugText").GetComponent<Text>();
+    }
     public void FillReferences()
     {
         DebugController.LogMessage("VOY A LLENAR LAS REFERENCIAS");
