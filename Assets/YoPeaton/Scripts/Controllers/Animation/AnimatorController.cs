@@ -19,10 +19,12 @@ public class AnimatorController : MonoBehaviour
         transitionsController = GetComponent<AITransitionsController>();
     }
 
-    void Start()
+    protected void Start()
     {
         string keyName = movableComponent.GetEntity.GetEntitySubType.ToString();
+
         animator.runtimeAnimatorController = AnimatorControllerDispatcher.GetInstance.Request(keyName);
+        Debug.LogError(keyName);
     }
 
     protected virtual void OnEnable()
