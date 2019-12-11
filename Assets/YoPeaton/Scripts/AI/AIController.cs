@@ -36,6 +36,8 @@ public class AIController : EntityController
         IsThisOnTheStreet = base.IsOnTheStreet;
         entityIsPlayer = false;
         base.Awake();
+        base.SetEntityType();
+
        
         // Catching the transitions controller.
         if (!transitionController)

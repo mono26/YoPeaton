@@ -212,7 +212,7 @@ public abstract class EntityController : MonoBehaviour
         isThisCarCrossingWithPedestrian = value;
     }
 
-    private void SetEntityType()
+    protected void SetEntityType()
     {
         float probability = UnityEngine.Random.Range(0f, 1f);
 
@@ -260,10 +260,10 @@ public abstract class EntityController : MonoBehaviour
             {
                 entitySubType = EntitySubType.GreenCar;
             }
-            else if (probability < 0.80f)
+            else if (probability < 0.8f)
             {
                 entitySubType = EntitySubType.RedCar;
-            } else
+            } else if(probability <= 1f)
             {
                 entitySubType = EntitySubType.YellowCar;
             }
