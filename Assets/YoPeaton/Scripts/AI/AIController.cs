@@ -122,12 +122,6 @@ public class AIController : EntityController
         behaviourController?.CheckAllInfractions(currentCrossingZone);
     }
 
-    public override void OnEntityCollision()
-    {
-        base.OnEntityCollision();
-        // Generar reporte de collision.
-    }
-
     protected override bool ShouldSpeedUp()
     {
         return GetCurrentState.Equals(AIState.Moving);

@@ -42,13 +42,12 @@ public abstract class EntityController : MonoBehaviour
     private Crosswalk exitedCrosswalk;
     private float colliderRadius;
     private float distanceTravelled = 0.0f;
-    private float distanceToCheckForCollision = 0.1f;
+    private float distanceToCheckForCollision = 0.3f;
     private float lastTParameter = 0.0f;
     public bool IsCrossingCrosswalk { get; private set; }
     public bool IsOnTheStreet { get; private set; }
     private bool move = true;
     protected bool entityIsPlayer = true;
-    protected RaycastCheckResult collisionCheckResult;
     private Vector3 colliderOffset;
     private WaitForSeconds exitedCrosswalkClearWait;
 
@@ -118,7 +117,7 @@ public abstract class EntityController : MonoBehaviour
         var collider = GetComponent<CircleCollider2D>();
         colliderRadius = collider.radius;
         colliderOffset = collider.offset;
-        distanceToCheckForCollision = colliderRadius + 0.1f;
+        distanceToCheckForCollision = colliderRadius + 0.3f;
         SetEntityType();
         animationComponent = this.GetComponent<AnimatorController>();
         exitedCrosswalkClearWait = new WaitForSeconds(exitedCrosswalkClearTime);
@@ -179,11 +178,13 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void FixedUpdate() 
     {
-        if (HasCollided())
+        RaycastCheckResult collisionCheck = HasCollided();
+        if (collisionCheck.collided)
         {
-            OnEntityCollision();
+            OnEntityCollision(collisionCheck.otherEntity);
         }
-        else if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f) 
+        else if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f)
+        // if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f)
         {
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
@@ -289,17 +290,14 @@ public abstract class EntityController : MonoBehaviour
         }
     }
 
-    public bool HasCollided()
+    public RaycastCheckResult HasCollided()
     {
-        bool collided = false;
-        collisionCheckResult = CheckForCollision();
+        RaycastCheckResult collisionCheckResult = CheckForCollision();
         if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet && GetMovableComponent.GetCurrentSpeed != 0)
         {
             DebugController.LogMessage($"Llamar metodo para cambiar a animacion de atropellado, { gameObject.name } Atropello a: { collisionCheckResult.otherEntity.name }");
-            onEntityCollision?.Invoke();
-            collided = true;
         }
-        return collided;
+        return collisionCheckResult;
     }
 
     protected abstract bool ShouldStop();
@@ -420,7 +418,7 @@ public abstract class EntityController : MonoBehaviour
         float checkWidth = ((colliderRadius + colliderRadius/4) * 2) * transform.localScale.x;
         Vector3 axis = Vector3.Cross(direction, Vector3.forward);
         // GameObject obstacle = PhysicsHelper.RaycastOverALineForFirstGameObject(gameObject, startPosition, axis, checkWidth, direction, distance, layersToCheckCollision, 5);
-        GameObject obstacle = PhysicsHelper.RaycastInAConeForFirstGameObject(gameObject, startPosition, direction, distance, layersToCheckCollision, 90.0f, 5);
+        GameObject obstacle = PhysicsHelper.RaycastInAConeForFirstGameObject(gameObject, startPosition, direction, distance, layersToCheckCollision, 60.0f, 5);
         if (obstacle) {
             if (obstacle.CompareTag("Pedestrian") || obstacle.CompareTag("Car") || obstacle.CompareTag("PlayerCar"))
             {
@@ -473,10 +471,14 @@ public abstract class EntityController : MonoBehaviour
         exitedCrosswalk = null;
     }
 
-    public virtual void OnEntityCollision()
+    public virtual void OnEntityCollision(EntityController _otherEntity)
     {
         move = false;
-        collisionCheckResult.otherEntity?.OnEntityCollision();
+        onEntityCollision?.Invoke();
+        if (_otherEntity)
+        {
+            _otherEntity?.OnEntityCollision(null);
+        }
     }
 
     // TODO only cars!!!

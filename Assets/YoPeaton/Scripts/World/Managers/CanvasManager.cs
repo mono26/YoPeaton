@@ -121,7 +121,7 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
 
-        //FillReferences();
+        // FillReferences();
         //playerGO = GameObject.Find("PlayerCar_PFB Variant");
         checkAndCrossImg.enabled = false;
         currentScore = 0;

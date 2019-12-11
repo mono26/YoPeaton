@@ -33,7 +33,7 @@ public class PlayerController : EntityController
         if (collision.CompareTag("Pedestrian") || collision.CompareTag("Car"))
         {
             DebugController.LogMessage("¡¡ME CHOQUE CON EL MACHETAZO!!");
-            base.OnEntityCollision();
+            OnEntityCollision(collision.gameObject.GetComponent<EntityController>());
             GameManager.didPlayerLose = true;
             CanvasManager._instance.GenerateFeedback("Crash");
             CanvasManager._instance.ActivateCheckOrCross(false);
@@ -44,18 +44,12 @@ public class PlayerController : EntityController
     {
         //NUEVO PUNTO PARA EL LLAMADO DE LA COLISION, PARA NO DEPENDER DEL CHECK DEL ENTITY CONTROLLER//
         bool stop = false;
-        collisionCheckResult = CheckForCollision();
-        if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet)
+        RaycastCheckResult collisionCheck = HasCollided();
+        if (collisionCheck.collided)
         {
             stop = true;
             DebugController.LogErrorMessage("Player should stop!");
-            base.OnEntityCollision();
-            OnEntityCollision();
-            collisionCheckResult.otherEntity?.OnEntityCollision();
-            if (collisionCheckResult.otherEntity.CompareTag("Pedestrian"))
-            {
-                collisionCheckResult.otherEntity?.GetComponent<PedestrianAnimator>().OnPublicPedestrianRunOver();
-            }
+            OnEntityCollision(collisionCheck.otherEntity);
         }
         return stop;
         // return input.IsBraking;
@@ -81,10 +75,14 @@ public class PlayerController : EntityController
     }
 
 
-    public override void OnEntityCollision()
+    public override void OnEntityCollision(EntityController _otherEntity)
     {
         print("¡¡ME CHOQUE!!");
-        base.OnEntityCollision();
+        base.OnEntityCollision(_otherEntity);
+        if (_otherEntity && _otherEntity.gameObject.CompareTag("Pedestrian"))
+        {
+            _otherEntity.GetComponent<PedestrianAnimator>().OnPublicPedestrianRunOver();
+        }
         GameManager.didPlayerLose = true;
         CanvasManager._instance.GenerateFeedback("Crash");
         CanvasManager._instance.ActivateCheckOrCross(false);
