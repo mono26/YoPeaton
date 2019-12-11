@@ -31,7 +31,7 @@ public class TutorialEventController : MonoBehaviour
     public void FillReferences()
     {
         Debug.Log("voy a llenar las referencias de los tutorial steps");
-        CanvasManager._instance.debugText.text = "EVENTO DE tutorial Controller: Llenar referencias";
+        //CanvasManager._instance.debugText.text = "EVENTO DE tutorial Controller: Llenar referencias";
         /*tutorialStep0 = GameObject.Find("TutorialSteps (0)");
         tutorialStep1 = GameObject.Find("TutorialSteps (1)");
         tutorialStep2 = GameObject.Find("TutorialSteps (2)");
@@ -43,7 +43,7 @@ public class TutorialEventController : MonoBehaviour
         tutorialStep8 = GameObject.Find("TutorialSteps (8)");*/
         tutorialSteps = GameObject.Find("TutorialStepsParent");
         if(tutorialSteps != null)
-            CanvasManager._instance.debugText.text = "Tutorial Steps: " + tutorialSteps.name;
+            //CanvasManager._instance.debugText.text = "Tutorial Steps: " + tutorialSteps.name;
         tutorialStep0 = tutorialSteps.transform.GetChild(0).gameObject;
         tutorialStep1 = tutorialSteps.transform.GetChild(1).gameObject;
         tutorialStep2 = tutorialSteps.transform.GetChild(2).gameObject;

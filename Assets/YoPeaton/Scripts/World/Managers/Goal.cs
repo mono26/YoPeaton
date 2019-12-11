@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour
         }
         if (this.gameObject.name== "Goal_Tutorial" && collision.gameObject.name == "PlayerCar_PFB Variant")
         {
-            GameManager.timesTutorialFinished++;
+            GameManager.SetTutorialPref();
             SceneManagerTest.instance.LoadScene("TestScene 2");
         }
     }

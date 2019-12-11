@@ -33,5 +33,13 @@ public static class GameManager
             Time.timeScale = 1;
         }
     }
-    
+
+    public static void SetTutorialPref()
+    {
+        PlayerPrefs.SetInt("timestutorialfinished", timesTutorialFinished + 1);
+    }
+    public static int GetTutorialPref()
+    {
+        return PlayerPrefs.GetInt("timestutorialfinished");
+    }
 }

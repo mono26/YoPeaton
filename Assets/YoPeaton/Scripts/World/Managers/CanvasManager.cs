@@ -221,13 +221,14 @@ public class CanvasManager : MonoBehaviour
 
     private void playBtnClicked()
     {
+        int timestutorialfinished = GameManager.GetTutorialPref();
         //PASO AL TUTORIAL//
-        if (GameManager.timesTutorialFinished >= 1)
+        if (timestutorialfinished > 0)
         {
             SceneManagerTest.LoadNextScene("TestScene 2");
             Debug.LogError("Hundi play y vamos al juego");
         }
-        else if (GameManager.timesTutorialFinished == 0)
+        else if (timestutorialfinished == 0)
         {
             SceneManagerTest.LoadNextScene("Tutorial");
             Debug.LogError("Hundi play y vamos al tutorial");
@@ -252,7 +253,7 @@ public class CanvasManager : MonoBehaviour
 
     public void AssignDebugText()
     {
-        debugText = GameObject.Find("DebugText").GetComponent<Text>();
+        //debugText = GameObject.Find("DebugText").GetComponent<Text>();
     }
     public void FillReferences()
     {
