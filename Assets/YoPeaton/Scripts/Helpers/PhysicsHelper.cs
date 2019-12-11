@@ -54,7 +54,7 @@ public static class PhysicsHelper
         GameObject goToReturn = null;
         float checkIncrement =_lineLenght / (float)_numberOfRaycast;
         Vector3 startPosition;
-        for (int i = 0; i < _numberOfRaycast; i++) {
+        for (int i = 0; i <= _numberOfRaycast; i++) {
             startPosition = _startPosition + (_checkAxis * ((_lineLenght / 2)
              - (checkIncrement * i)));
             goToReturn = RaycastForFirstGameObject(_castingGO, startPosition, _direction, _distance, _layersToCheckCollision, Color.magenta);
@@ -91,7 +91,7 @@ public static class PhysicsHelper
         float checkIncrement = _coneAngle / (float)_numberOfRaycast;
         Vector3 direction;
         float angle;
-        for (int i = 0; i < _numberOfRaycast; i++)
+        for (int i = 0; i <= _numberOfRaycast; i++)
         {
             angle = (-_coneAngle / 2) + (i * checkIncrement);
             direction = Quaternion.AngleAxis(angle, Vector3.forward) * _direction;

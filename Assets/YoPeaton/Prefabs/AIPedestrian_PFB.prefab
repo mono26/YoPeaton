@@ -211,7 +211,7 @@ MonoBehaviour:
   followComponent: {fileID: 270182541731555040}
   animationComponent: {fileID: 0}
   changeDirectionProbability: 100
-  distanceToCheckForStop: 3
+  distanceToCheckForStop: 2.5
   exitedCrosswalkClearTime: 3
   entityType: 0
   entitySubType: 0
@@ -219,6 +219,8 @@ MonoBehaviour:
   layersToCheckCollision:
     serializedVersion: 2
     m_Bits: 66304
+  isThisCarCrossingWithPedestrian: 0
+  nextPathReference: {fileID: 0}
   stateMachine: {fileID: 270182541731555041}
   transitionController: {fileID: 270182541731555043}
   currentCrossingZone: {fileID: 0}
@@ -255,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 270182541731555042}
+  entityMovement: {fileID: 0}
 --- !u!1 &1363044618323740226
 GameObject:
   m_ObjectHideFlags: 0
