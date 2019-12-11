@@ -178,13 +178,13 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void FixedUpdate() 
     {
-        RaycastCheckResult collisionCheck = HasCollided();
-        if (collisionCheck.collided)
-        {
-            OnEntityCollision(collisionCheck.otherEntity);
-        }
-        else if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f)
-        // if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f)
+        //RaycastCheckResult collisionCheck = HasCollided();
+        //if (collisionCheck.collided)
+        //{
+        //    OnEntityCollision(collisionCheck.otherEntity);
+        //}
+        //else if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f)
+        if (GetFollowPathComponent && GetMovableComponent.GetCurrentSpeed > 0.0f)
         {
             distanceTravelled += GetMovableComponent.GetCurrentSpeed * Time.fixedDeltaTime;
             if (move) {
