@@ -510,6 +510,7 @@ MonoBehaviour:
     type: 3}
   checkAndCrossImg: {fileID: 3531399582676418030, guid: b86611c362dfbaa45bb5bef4b418ae42,
     type: 3}
+  debugText: {fileID: 0}
   checkAndCrossGO: {fileID: 3531399582676418019, guid: b86611c362dfbaa45bb5bef4b418ae42,
     type: 3}
   wholeCanvas: {fileID: 0}
@@ -774,7 +775,7 @@ PrefabInstance:
     - target: {fileID: 7441661880137349796, guid: 7959f1666e53f794aa4d508c4b263aa6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 958
+      value: 114
       objectReference: {fileID: 0}
     - target: {fileID: 7441661880137349796, guid: 7959f1666e53f794aa4d508c4b263aa6,
         type: 3}
@@ -1620,7 +1621,7 @@ PrefabInstance:
     - target: {fileID: 7441661880137349796, guid: 7959f1666e53f794aa4d508c4b263aa6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -955
+      value: -124
       objectReference: {fileID: 0}
     - target: {fileID: 7441661880137349796, guid: 7959f1666e53f794aa4d508c4b263aa6,
         type: 3}

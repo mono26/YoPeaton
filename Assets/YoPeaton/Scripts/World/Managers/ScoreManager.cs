@@ -62,16 +62,19 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        if (Time.timeScale == 1)
+        if (SceneManagerTest.GetCurrentScene() == "TestScene 2" && SceneManagerTest.GetCurrentScene() == "Tutorial")
         {
-            lifeTime -= Time.deltaTime;
-        }
-        if(lifeTime <= 0)
-        {
-            lifeTime = 0;
-            if(SceneManagerTest.GetCurrentScene() == "TestScene 2")
+            if (Time.timeScale == 1)
             {
-                StartCoroutine(FinishLevelCR());
+                lifeTime -= Time.deltaTime;
+            }
+            if (lifeTime <= 0)
+            {
+                lifeTime = 0;
+                if (SceneManagerTest.GetCurrentScene() == "TestScene 2")
+                {
+                    StartCoroutine(FinishLevelCR());
+                }
             }
         }
     }

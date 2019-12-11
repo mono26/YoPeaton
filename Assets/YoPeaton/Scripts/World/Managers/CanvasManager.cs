@@ -280,16 +280,17 @@ public class CanvasManager : MonoBehaviour
     private void Update()
     {
         //Debug.LogError("Pause canvas esta activado? " + pausePanel.activeInHierarchy);
-        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
         {
             if (player)
             {
                 fillPercent = (player.GetMovableComponent.GetCurrentSpeed / player.GetMovableComponent.GetMaxSpeed);
                 //Debug.Log("Fill Percent: "  + fillPercent);
                 speedImage.fillAmount = fillPercent;
+                var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);
+                timeLeftText.text = lifeTimeInt.ToString();
             }
-            var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);
-            timeLeftText.text = lifeTimeInt.ToString();
+
         }
         /*if (SceneManagerTest.GetCurrentScene() == "VictoryScreenScene")
         {
@@ -436,8 +437,8 @@ public class CanvasManager : MonoBehaviour
 
     public IEnumerator DisapearFeedbackText()
     {
-        yield return new WaitForSecondsRealtime(4);
-        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        yield return new WaitForSecondsRealtime(3);
+        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             FeedBackText.enabled = false;
     }
 
@@ -445,7 +446,7 @@ public class CanvasManager : MonoBehaviour
     {
         //Debug.Log("TENGO QUE APAGAR EL CHECK");
         yield return new WaitForSecondsRealtime(2);
-        if (SceneManagerTest.GetCurrentScene() == "TestScene" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
             checkAndCrossImg.enabled = false;
     }
 
