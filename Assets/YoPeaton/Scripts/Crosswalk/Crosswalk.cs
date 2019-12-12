@@ -298,7 +298,7 @@ public class Crosswalk : MonoBehaviour
             EntityController[] keysArray = keys.ToArray();
             keys = null;
             for (int i = 0; i < keysArray.Length; i++) {
-                if (keysArray[i] is AIController && ((AIController)keysArray[i]).GetCurrentState.Equals(AIState.WaitingAtCrossWalkAskingForCross)) {
+                if (keysArray[i] is AIController && ((AIController)keysArray[i]).GetCurrentState.Equals(AIState.WaitingAndAsking)) {
                     isAnEntityAskingForPass = true;
                     break;
                 }

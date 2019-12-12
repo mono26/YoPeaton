@@ -11,7 +11,10 @@ public class AIController : EntityController
     [SerializeField]
     private InfractionController behaviourController;
 
+    private MovementState currentMovementState;
+
     public bool IsThisOnTheStreet;
+
     public AIState GetCurrentState {
         get {
             return stateMachine.GetCurrentState;
@@ -76,11 +79,11 @@ public class AIController : EntityController
     {
         // Si esta esperando en un crosswalk
         bool stop = false;
-        if (GetCurrentState.Equals(AIState.WaitingAtCrossWalkAskingForCross)) 
+        if (GetCurrentState.Equals(AIState.WaitingAndAsking)) 
         {
             stop = true;
         }
-        else if (GetCurrentState.Equals(AIState.WaitingAtCrossWalk)) 
+        else if (GetCurrentState.Equals(AIState.Waiting)) 
         {
             stop = true;
         }
@@ -89,8 +92,12 @@ public class AIController : EntityController
 
     protected override bool ShouldSlowDown()
     {
-        // Si esta por collisionar
-        return GetCurrentState.Equals(AIState.SlowDown);
+        bool slowDown = false;
+        if (GetCurrentState.Equals(AIState.Moving) || GetCurrentState.Equals(AIState.Crossing))
+        {
+            slowDown = currentMovementState.Equals(MovementState.SlowDown);
+        }
+        return slowDown;
     }
     
     public override void OnCrossWalkEntered(Crosswalk _crossWalk)
@@ -126,13 +133,23 @@ public class AIController : EntityController
 
     protected override bool ShouldSpeedUp()
     {
-        return GetCurrentState.Equals(AIState.Moving);
+        bool speedUp = false;
+        if (GetCurrentState.Equals(AIState.Moving) || GetCurrentState.Equals(AIState.Crossing))
+        {
+            speedUp = currentMovementState.Equals(MovementState.SpeedUp);
+        }
+        return speedUp;
     }
 
     public override void OnStartedCrossing()
     {
         base.OnStartedCrossing();
         GetCurrentCrossingZone.OnStartedCrossing(this);
-        SwitchToState(AIState.Moving);
+        SwitchToState(AIState.Crossing);
+    }
+
+    public void SetMovementState(MovementState _state)
+    {
+        currentMovementState = _state;
     }
 }

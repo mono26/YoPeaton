@@ -39,19 +39,20 @@ public abstract class EntityController : MonoBehaviour
     #endregion
 
     private bool canTurn = true;
+    private bool move = true;
+    protected bool entityIsPlayer = true;
     private Crosswalk exitedCrosswalk;
     private float colliderRadius;
     private float distanceTravelled = 0.0f;
     private float distanceToCheckForCollision = 0.3f;
     private float lastTParameter = 0.0f;
-    public bool IsCrossingCrosswalk { get; private set; }
-    public bool IsOnTheStreet { get; private set; }
-    private bool move = true;
-    protected bool entityIsPlayer = true;
     private Vector3 colliderOffset;
     private WaitForSeconds exitedCrosswalkClearWait;
 
     #region Properties
+
+    public bool IsCrossingCrosswalk { get; private set; }
+    public bool IsOnTheStreet { get; private set; }
 
     public EntityMovement GetMovableComponent {
         get {
@@ -292,10 +293,14 @@ public abstract class EntityController : MonoBehaviour
 
     public RaycastCheckResult HasCollided()
     {
-        RaycastCheckResult collisionCheckResult = CheckForCollision();
-        if (IsOnTheStreet && collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet && GetMovableComponent.GetCurrentSpeed != 0)
+        RaycastCheckResult collisionCheckResult = default;
+        if (IsOnTheStreet && GetMovableComponent.GetCurrentSpeed != 0)
         {
-            DebugController.LogMessage($"Llamar metodo para cambiar a animacion de atropellado, { gameObject.name } Atropello a: { collisionCheckResult.otherEntity.name }");
+            collisionCheckResult = CheckForCollision();
+            if (collisionCheckResult.collided && collisionCheckResult.otherEntity.IsOnTheStreet)
+            {
+                DebugController.LogMessage($"Llamar metodo para cambiar a animacion de atropellado, { gameObject.name } Atropello a: { collisionCheckResult.otherEntity.name }");
+            }
         }
         return collisionCheckResult;
     }

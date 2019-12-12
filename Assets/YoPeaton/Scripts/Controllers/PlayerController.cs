@@ -45,7 +45,7 @@ public class PlayerController : EntityController
         //NUEVO PUNTO PARA EL LLAMADO DE LA COLISION, PARA NO DEPENDER DEL CHECK DEL ENTITY CONTROLLER//
         bool stop = false;
         RaycastCheckResult collisionCheck = HasCollided();
-        if (collisionCheck.collided)
+        if (collisionCheck.collided && collisionCheck.otherEntity.IsOnTheStreet)
         {
             stop = true;
             DebugController.LogErrorMessage("Player should stop!");

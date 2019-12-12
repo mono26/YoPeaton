@@ -43,53 +43,137 @@ public class AITransitionsController : MonoBehaviour
     {
         // Waiting to cross and asking for cross.
         AIState currentState = aiEntity.GetCurrentState;
-        if (currentState.Equals(AIState.WaitingAtCrossWalkAskingForCross))
+        ProcessState(currentState);
+        //if (currentState.Equals(AIState.WaitingAndAsking))
+        //{
+        //    // TODO: Run probability of wait for clear pass?!
+        //    if (canCrossAfterWait)
+        //    {
+        //        if (!ShouldWaitForClearCross() || HasTurnForCrossing())
+        //        {
+        //            StartCross();
+        //            //aiEntity.CheckIfIsBreakingTheLaw();
+        //        }
+        //    }
+        //}
+        //// Waiting to cross a crosswalk.
+        //else if (currentState.Equals(AIState.Waiting))
+        //{
+        //    if (HasTurnForCrossing())
+        //    {
+        //        // TODO: Run probability for letting an entity asking for pass cross?!
+        //        if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
+        //        {
+        //            aiEntity.GetCurrentCrossingZone?.OnEntityGivingCross(aiEntity);
+        //            alreadyGaveCross = true;
+        //        }
+        //        else
+        //        {
+        //            StartCross();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (ShouldAskForCross())
+        //        {
+        //            AskForCross();
+        //            // DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
+        //        }
+        //    }
+        //}
+        //// Is moving on the street or on the sidewalks.
+        //else
+        //{
+        //    if (IsThereAObstacle() && ShouldAvoidCollision())
+        //    {
+        //        aiEntity.SwitchToState(AIState.SlowDown);
+        //    }
+        //    else
+        //    {
+        //        aiEntity.SwitchToState(AIState.Moving);
+        //    }
+        //}
+    }
+
+    private void ProcessState(AIState _state)
+    {
+        switch (_state)
         {
-            // TODO: Run probability of wait for clear pass?!
-            if (canCrossAfterWait)
+            case AIState.Crossing:
             {
-                if (!ShouldWaitForClearCross() || HasTurnForCrossing())
+                if (ShouldAvoidCollision())
                 {
-                    StartCross();
-                    //aiEntity.CheckIfIsBreakingTheLaw();
-                }
-            }
-        }
-        // Waiting to cross a crosswalk.
-        else if (currentState.Equals(AIState.WaitingAtCrossWalk))
-        {
-            if (HasTurnForCrossing())
-            {
-                // TODO: Run probability for letting an entity asking for pass cross?!
-                if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
-                {
-                    aiEntity.GetCurrentCrossingZone?.OnEntityGivingCross(aiEntity);
-                    alreadyGaveCross = true;
+                    RaycastCheckResult result = IsThereAObstacle();
+                    if (result.collided && result.otherEntity.IsCrossingCrosswalk)
+                    {
+                        aiEntity.SetMovementState(MovementState.SlowDown);
+                    }
+                    else
+                    {
+                        aiEntity.SetMovementState(MovementState.SpeedUp);
+                    }
+                    // Speed up
                 }
                 else
                 {
-                    StartCross();
+                    aiEntity.SetMovementState(MovementState.SpeedUp);
                 }
+                break;
             }
-            else
+            case AIState.Moving:
+            {
+                if (ShouldAvoidCollision())
+                {
+                    RaycastCheckResult result = IsThereAObstacle();
+                    if (result.collided && result.otherEntity.IsOnTheStreet)
+                    {
+                        aiEntity.SetMovementState(MovementState.SlowDown);
+                    }
+                    else
+                    {
+                        aiEntity.SetMovementState(MovementState.SpeedUp);
+                    }
+                }
+                else
+                {
+                    aiEntity.SetMovementState(MovementState.SpeedUp);
+                }
+                break;
+            }
+            case AIState.Waiting:
             {
                 if (ShouldAskForCross())
                 {
                     AskForCross();
-                    // DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
                 }
+                else
+                {
+                    if (HasTurnForCrossing())
+                    {
+                        if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
+                        {
+                            aiEntity.GetCurrentCrossingZone?.OnEntityGivingCross(aiEntity);
+                            alreadyGaveCross = true;
+                        }
+                        else
+                        {
+                            StartCross();
+                        }
+                    }
+                }
+                break;
             }
-        }
-        // Is moving on the street or on the sidewalks.
-        else
-        {
-            if (IsThereAObstacle() && ShouldAvoidCollision())
+            case AIState.WaitingAndAsking:
             {
-                aiEntity.SwitchToState(AIState.SlowDown);
-            }
-            else
-            {
-                aiEntity.SwitchToState(AIState.Moving);
+                if (canCrossAfterWait)
+                {
+                    if (!ShouldWaitForClearCross() || HasTurnForCrossing())
+                    {
+                        StartCross();
+                        //aiEntity.CheckIfIsBreakingTheLaw();
+                    }
+                }
+                break;
             }
         }
     }
@@ -98,18 +182,14 @@ public class AITransitionsController : MonoBehaviour
     /// Checks using a raycast if there is a obstacle in front of the entity.
     /// </summary>
     /// <returns></returns>
-    private bool IsThereAObstacle()
+    private RaycastCheckResult IsThereAObstacle()
     {
-        bool isThereAObstacle = false;
+        RaycastCheckResult obstacleCheckResult = default;
         if (aiEntity.IsOnTheStreet /* && !aiEntity.IsCrossingCrosswalk */)
         {
-            RaycastCheckResult obstacleCheckResult = aiEntity.CheckForObstacles();
-            if (obstacleCheckResult.collided && obstacleCheckResult.otherEntity.IsOnTheStreet)
-            {
-                isThereAObstacle = true;
-            }
+            obstacleCheckResult = aiEntity.CheckForObstacles();
         }
-        return isThereAObstacle;
+        return obstacleCheckResult;
     }
 
     /// <summary>
@@ -140,7 +220,7 @@ public class AITransitionsController : MonoBehaviour
     public void OnCrossWalkEntered() 
     {
         DebugController.LogMessage("Waiting at crosswalk");
-        aiEntity.SwitchToState(AIState.WaitingAtCrossWalk);
+        aiEntity.SwitchToState(AIState.Waiting);
     }
 
     /// <summary>
@@ -203,7 +283,7 @@ public class AITransitionsController : MonoBehaviour
     private void AskForCross()
     {
         DebugController.LogMessage($"{ gameObject.name } is asking for cross!");
-        aiEntity.SwitchToState(AIState.WaitingAtCrossWalkAskingForCross);
+        aiEntity.SwitchToState(AIState.WaitingAndAsking);
         canCrossAfterWait = false;
         StartCoroutine(AskedForCrossWait());
         onStartedAskingForCross?.Invoke(aiEntity.GetCurrentDirection);
