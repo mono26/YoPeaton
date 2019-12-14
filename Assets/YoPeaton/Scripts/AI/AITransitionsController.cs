@@ -38,61 +38,12 @@ public class AITransitionsController : MonoBehaviour
     {
         askedForCrossWait = new WaitForSeconds(askedForCrossWaitTime);
     }
-
+    
     public void CheckTransitions() 
     {
         // Waiting to cross and asking for cross.
         AIState currentState = aiEntity.GetCurrentState;
         ProcessState(currentState);
-        //if (currentState.Equals(AIState.WaitingAndAsking))
-        //{
-        //    // TODO: Run probability of wait for clear pass?!
-        //    if (canCrossAfterWait)
-        //    {
-        //        if (!ShouldWaitForClearCross() || HasTurnForCrossing())
-        //        {
-        //            StartCross();
-        //            //aiEntity.CheckIfIsBreakingTheLaw();
-        //        }
-        //    }
-        //}
-        //// Waiting to cross a crosswalk.
-        //else if (currentState.Equals(AIState.Waiting))
-        //{
-        //    if (HasTurnForCrossing())
-        //    {
-        //        // TODO: Run probability for letting an entity asking for pass cross?!
-        //        if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
-        //        {
-        //            aiEntity.GetCurrentCrossingZone?.OnEntityGivingCross(aiEntity);
-        //            alreadyGaveCross = true;
-        //        }
-        //        else
-        //        {
-        //            StartCross();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (ShouldAskForCross())
-        //        {
-        //            AskForCross();
-        //            // DebugController.LogMessage(string.Format("{0} asked for cross!", gameObject.name));
-        //        }
-        //    }
-        //}
-        //// Is moving on the street or on the sidewalks.
-        //else
-        //{
-        //    if (IsThereAObstacle() && ShouldAvoidCollision())
-        //    {
-        //        aiEntity.SwitchToState(AIState.SlowDown);
-        //    }
-        //    else
-        //    {
-        //        aiEntity.SwitchToState(AIState.Moving);
-        //    }
-        //}
     }
 
     private void ProcessState(AIState _state)
@@ -152,8 +103,7 @@ public class AITransitionsController : MonoBehaviour
                     {
                         if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
                         {
-                            aiEntity.GetCurrentCrossingZone?.OnEntityGivingCross(aiEntity);
-                            alreadyGaveCross = true;
+                            GiveCross();
                         }
                         else
                         {
@@ -210,9 +160,9 @@ public class AITransitionsController : MonoBehaviour
     private bool HasTurnForCrossing()
     {
         bool canCross = true;
-        if (aiEntity.GetCurrentCrossingZone)
+        if (aiEntity.GetCurrentCrossingZone != null)
         {
-            canCross = aiEntity.GetCurrentCrossingZone.HasTurn(aiEntity);
+            canCross = aiEntity.GetCurrentCrossingZone.CanCross(aiEntity);
         }
         return canCross;
     }
@@ -220,6 +170,12 @@ public class AITransitionsController : MonoBehaviour
     public void OnCrossWalkEntered() 
     {
         DebugController.LogMessage("Waiting at crosswalk");
+        aiEntity.SwitchToState(AIState.Waiting);
+    }
+
+    public void OnIntersectionEntered()
+    {
+        DebugController.LogMessage("Waiting at intersection");
         aiEntity.SwitchToState(AIState.Waiting);
     }
 
@@ -292,15 +248,29 @@ public class AITransitionsController : MonoBehaviour
     private bool IsAnotherEntityAskingForCross()
     {
         EntityType otherEntity = (aiEntity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
-        return aiEntity.GetCurrentCrossingZone.IsThereAEntityAskingForCross(otherEntity);
+        bool asking = false;
+        if (aiEntity.GetCurrentCrossingZone is Crosswalk)
+        {
+            asking = ((Crosswalk)aiEntity.GetCurrentCrossingZone).IsThereAEntityAskingForCross(otherEntity);
+        }
+        return asking;
     }
 
     private void StartCross()
     {
-        aiEntity.OnStartedCrossing();
+        aiEntity.OnStartedCrossing(aiEntity.GetCurrentCrossingZone);
         // aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
         // aiEntity.SwitchToState(AIState.Moving);
         alreadyGaveCross = false;
         //aiEntity.CheckIfIsBreakingTheLaw();
+    }
+
+    private void GiveCross()
+    {
+        if (aiEntity.GetCurrentCrossingZone != null && aiEntity.GetCurrentCrossingZone is Crosswalk)
+        {
+            ((Crosswalk)aiEntity.GetCurrentCrossingZone).OnEntityGivingCross(aiEntity);
+            alreadyGaveCross = true;
+        }
     }
 }

@@ -2,11 +2,11 @@
 using System.Linq;
 using UnityEngine;
 
-public class Crosswalk : MonoBehaviour
+public class Crosswalk : MonoBehaviour, ICrossable
 {
 #region "Variables to set"
     [SerializeField]
-    private CrossWalkTypes type = CrossWalkTypes.Bocacalle;
+    private CrossWalkTypes crossWalkType = CrossWalkTypes.Bocacalle;
     [SerializeField]
     private Collider2D crossAreaBounds = null;
     [SerializeField]
@@ -19,21 +19,27 @@ public class Crosswalk : MonoBehaviour
     private Dictionary<EntityController, CrossingInfo> crossingCars = new Dictionary<EntityController, CrossingInfo>();
 
     private float crossWalkLenght = 0.0f;
+    public CrossableType CrossableType { get; set; }
 
-    public int GetNumberOfCrossingPedestrians {
-        get {
+    public int GetNumberOfCrossingPedestrians 
+    {
+        get 
+        {
             return crossingPedestrians.Count;
         }
     }
 
-    public CrossWalkTypes GetCrossWalkType {
-        get {
-            return type;
+    public CrossWalkTypes GetCrossWalkType 
+    {
+        get 
+        {
+            return crossWalkType;
         }
     }
 
     private void Start() 
     {
+        CrossableType = CrossableType.CrossWalk;
         if (crossAreaBounds)
         {
             crossWalkLenght = crossAreaBounds.bounds.size.x * transform.localScale.x;
@@ -189,7 +195,7 @@ public class Crosswalk : MonoBehaviour
     /// </summary>
     /// <param name="_entity">Entity to check if it can cross.</param>
     /// <returns>Returns true for if the entity can cross, false if not.</returns>
-    public bool HasTurn(EntityController _entity)
+    public bool CanCross(EntityController _entity)
     {
         bool cross = true;
         WaitTicket entityTicket = GetWaitingTicket(_entity);
@@ -345,21 +351,6 @@ public class Crosswalk : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter2D(Collider2D _other) 
-    //{
-    //    if (_other.gameObject.CompareTag("Car") || _other.gameObject.CompareTag("Pedestrian")) 
-    //    {
-    //        EntityController entity = _other.transform.GetComponent<EntityController>();
-    //        // DebugController.LogMessage(entity.ToString());
-    //        OnEnteredWaitingZone(entity);
-    //        //if (IsAValidEntity(entity)) 
-    //        //{
-    //        //    OnEnter(entity);
-    //        //    entity.OnCrossWalkEntered(this);
-    //        //}
-    //    }
-    //}
-
     /// <summary>
     /// Called when a entity entered the waiting zone.
     /// </summary>
@@ -369,7 +360,7 @@ public class Crosswalk : MonoBehaviour
         if (IsAValidEntity(_entity))
         {
             OnEnter(_entity);
-            _entity.OnCrossWalkEntered(this);
+            _entity.OnCrossableEntered(this);
         }
     }
 
@@ -390,24 +381,13 @@ public class Crosswalk : MonoBehaviour
         return valid;
     }
 
-    //private void OnTriggerExit2D(Collider2D _other) {
-    //    if (_other.CompareTag("Car") || _other.CompareTag("Pedestrian")) {
-    //        EntityController entity = _other.transform.GetComponent<EntityController>();
-    //        if (entity) {
-    //            OnExited(entity);
-    //            OnFinishedCrossing(entity);
-    //            entity.OnCrossWalkExited(this);
-    //        }
-    //    }
-    //}
-
     public void OnExitedCrossingZone(EntityController _entity)
     {
         if (_entity)
         {
             OnExited(_entity);
             OnFinishedCrossing(_entity);
-            _entity.OnCrossWalkExited(this);
+            _entity.OnCrossableExited(this);
         }
     }
 

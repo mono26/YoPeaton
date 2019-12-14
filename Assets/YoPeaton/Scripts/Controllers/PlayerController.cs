@@ -63,17 +63,19 @@ public class PlayerController : EntityController
         return slowdown;
     }
 
-    public override void OnCrossWalkEntered(Crosswalk _crossWalk) {
+    #region Crosswalk methods
+    public override void OnCrossWalkEntered(ICrossable _crossWalk) {
         DebugController.LogMessage("Player entered crosswalk");
+        OnStartedCrossing(_crossWalk);
         _crossWalk.OnStartedCrossing(this);
-        OnStartedCrossing();
     }
 
-    public override void OnCrossWalkExited(Crosswalk _crossWalk) {
+    public override void OnCrossWalkExited(ICrossable _crossWalk) {
         DebugController.LogMessage("Player exited crosswalk");
-        base.OnCrossWalkExited(_crossWalk);
+        OnCrossableExited(_crossWalk);
+        _crossWalk.OnFinishedCrossing(this);
     }
-
+    #endregion
 
     public override void OnEntityCollision(EntityController _otherEntity)
     {
@@ -110,5 +112,15 @@ public class PlayerController : EntityController
     private void OnQuestionAsk()
     {
         GetMovableComponent.SlowDownByPercent(100.0f);
+    }
+
+    public override void OnIntersectionEntered(ICrossable _crossWalk)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnIntersectionExited(ICrossable _intersection)
+    {
+        throw new System.NotImplementedException();
     }
 }

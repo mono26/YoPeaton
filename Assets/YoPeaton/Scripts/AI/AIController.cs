@@ -7,7 +7,7 @@ public class AIController : EntityController
     [SerializeField]
     private AITransitionsController transitionController;
     [SerializeField]
-    private Crosswalk currentCrossingZone;
+    private ICrossable currentCrossingZone;
     [SerializeField]
     private InfractionController behaviourController;
 
@@ -21,7 +21,7 @@ public class AIController : EntityController
         }
     }
 
-    public Crosswalk GetCurrentCrossingZone {
+    public ICrossable GetCurrentCrossingZone {
         get {
             return currentCrossingZone;
         }
@@ -100,22 +100,22 @@ public class AIController : EntityController
         return slowDown;
     }
     
-    public override void OnCrossWalkEntered(Crosswalk _crossWalk)
+    public override void OnCrossWalkEntered(ICrossable _crossWalk)
     {
         DebugController.LogMessage("Entered crosswalk");
-        if (!currentCrossingZone || !currentCrossingZone.Equals(_crossWalk))
+        if (currentCrossingZone == null || !currentCrossingZone.Equals(_crossWalk))
         {
             currentCrossingZone?.OnFinishedCrossing(this);
-            currentCrossingZone = _crossWalk;
+            currentCrossingZone = _crossWalk as Crosswalk;
             transitionController?.OnCrossWalkEntered();
         }
     }
 
-    public override void OnCrossWalkExited(Crosswalk _crossWalk)
+    public override void OnCrossWalkExited(ICrossable _crossWalk)
     {
         base.OnCrossWalkExited(_crossWalk);
         // DebugController.LogMessage("Exited crosswalk");
-        if (currentCrossingZone)
+        if (currentCrossingZone != null)
         {
             if (currentCrossingZone.Equals(_crossWalk)) 
             {
@@ -128,7 +128,10 @@ public class AIController : EntityController
     public void CheckIfIsBreakingTheLaw()
     {
         //if(currentCrossingZone != null)
-        behaviourController?.CheckAllInfractions(currentCrossingZone);
+        if (currentCrossingZone is Crosswalk)
+        {
+            behaviourController?.CheckAllInfractions(currentCrossingZone as Crosswalk);
+        }
     }
 
     protected override bool ShouldSpeedUp()
@@ -141,9 +144,9 @@ public class AIController : EntityController
         return speedUp;
     }
 
-    public override void OnStartedCrossing()
+    public override void OnStartedCrossing(ICrossable _crossable)
     {
-        base.OnStartedCrossing();
+        base.OnStartedCrossing(_crossable);
         GetCurrentCrossingZone.OnStartedCrossing(this);
         SwitchToState(AIState.Crossing);
     }
@@ -151,5 +154,30 @@ public class AIController : EntityController
     public void SetMovementState(MovementState _state)
     {
         currentMovementState = _state;
+    }
+
+    public override void OnIntersectionEntered(ICrossable _intersection)
+    {
+        DebugController.LogMessage("Entered crosswalk");
+        if (currentCrossingZone == null || !currentCrossingZone.Equals(_intersection))
+        {
+            currentCrossingZone?.OnFinishedCrossing(this);
+            currentCrossingZone = _intersection as Crosswalk;
+            transitionController?.OnIntersectionEntered();
+        }
+    }
+
+    public override void OnIntersectionExited(ICrossable _intersection)
+    {
+        // base.OnIntersectionExited(_intersection);
+        // DebugController.LogMessage("Exited crosswalk");
+        if (currentCrossingZone != null)
+        {
+            if (currentCrossingZone.Equals(_intersection))
+            {
+                currentCrossingZone = null;
+            }
+        }
+        SwitchToState(AIState.Moving);
     }
 }

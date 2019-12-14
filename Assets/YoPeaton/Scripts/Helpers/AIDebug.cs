@@ -38,7 +38,7 @@ public class AIDebug : MonoBehaviour
             }
             if (canCross)
             {
-                canCross.text = "Cross: " + aiToDebug.GetCurrentCrossingZone?.HasTurn(aiToDebug).ToString();
+                canCross.text = "Cross: " + aiToDebug.GetCurrentCrossingZone?.CanCross(aiToDebug).ToString();
             }
             
             if (onTheStreet)
