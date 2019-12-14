@@ -14,6 +14,7 @@ TagManager:
   - Building
   - PlayerCar
   - CrossWalkQuestion
+  - Intersection
   layers:
   - Default
   - TransparentFX
