@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Crosswalk : MonoBehaviour, ICrossable
+public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
 {
 #region "Variables to set"
     [SerializeField]
@@ -36,6 +37,8 @@ public class Crosswalk : MonoBehaviour, ICrossable
             return crossWalkType;
         }
     }
+
+    public TurnInfo CurrentTurn { get; private set; }
 
     private void Start() 
     {
@@ -198,29 +201,39 @@ public class Crosswalk : MonoBehaviour, ICrossable
     public bool CanCross(EntityController _entity)
     {
         bool cross = true;
+        //cross = TicketHasTurn(_entity);
+        cross = HasTurn(_entity.GetEntityType);
+        return cross;
+    }
+
+    private bool TicketHasTurn(EntityController _entity)
+    {
+        bool cross = true;
         WaitTicket entityTicket = GetWaitingTicket(_entity);
         Dictionary<EntityController, WaitTicket>.ValueCollection values = null;
         WaitTicket[] valuesArray = null;
         int waitTimeComparisson;
         int gaveCrossTimeComparison;
-        if (_entity.GetEntityType.Equals(EntityType.Car) && !crossingCars.ContainsKey(_entity)) 
+        if (_entity.GetEntityType.Equals(EntityType.Car) && !crossingCars.ContainsKey(_entity))
         {
-            if (crossingPedestrians.Count > 0) 
+            if (crossingPedestrians.Count > 0)
             {
                 cross = false;
             }
-            else if (waitingPedestrians.Count > 0) {
+            else if (waitingPedestrians.Count > 0)
+            {
                 // TODO refactor into compare to pedestrians tickets.
                 values = waitingPedestrians.Values;
             }
         }
-        else if (_entity.GetEntityType.Equals(EntityType.Pedestrian) && !crossingPedestrians.ContainsKey(_entity)) 
+        else if (_entity.GetEntityType.Equals(EntityType.Pedestrian) && !crossingPedestrians.ContainsKey(_entity))
         {
-            if (crossingCars.Count > 0) 
+            if (crossingCars.Count > 0)
             {
                 cross = false;
             }
-            else if (waitingCars.Count > 0) {
+            else if (waitingCars.Count > 0)
+            {
                 if (!CanCrossWithCrossingPedestrians())
                 {
                     values = waitingCars.Values;
@@ -323,7 +336,7 @@ public class Crosswalk : MonoBehaviour, ICrossable
     /// </summary>
     /// <param name="_entity">Enity to look for ticket.</param>
     /// <returns></returns>
-    public WaitTicket GetWaitingTicket(EntityController _entity) {
+    private WaitTicket GetWaitingTicket(EntityController _entity) {
         WaitTicket tiquetToReturn = WaitTicket.invalidTicket;
         if (_entity.GetEntityType.Equals(EntityType.Car)) {
             if (waitingCars.ContainsKey(_entity))
@@ -349,6 +362,7 @@ public class Crosswalk : MonoBehaviour, ICrossable
         else {
             DebugController.LogErrorMessage(string.Format("{0} gave cross but there is no ticket under the entity" , _entityThatGaveCross.gameObject.name));
         }
+        ChangeTurn((_entityThatGaveCross.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car, 3.0f);
     }
 
     /// <summary>
@@ -426,6 +440,38 @@ public class Crosswalk : MonoBehaviour, ICrossable
             {
                 DebugController.LogErrorMessage(string.Format("{0} moved but it has no crossing info stored.", _args.Entity.gameObject.name));
             }
+        }
+    }
+
+    public void ChangeTurn(EntityType _type, float _duration)
+    {
+        TurnInfo nextTurn = new TurnInfo();
+        nextTurn.Type = _type;
+        nextTurn.EndTime = System.DateTime.UtcNow.AddSeconds(_duration);
+        CurrentTurn = nextTurn;
+    }
+
+    public void ChangeTurn(EntityType _type)
+    {
+        ChangeTurn(_type, TurnInfo.DEFAULT_DURATION);
+    }
+
+    public bool HasTurn(EntityType _type)
+    {
+        bool hasTurn = false;
+        if (CurrentTurn.Type.Equals(_type))
+        {
+            hasTurn = true;
+        }
+        return hasTurn;
+    }
+
+    public void UpdateTurn(float _deltaTime)
+    {
+        DateTime current = DateTime.UtcNow;
+        if (CurrentTurn.EndTime < current)
+        {
+            ChangeTurn((CurrentTurn.Type.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car);
         }
     }
 }
