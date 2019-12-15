@@ -17,7 +17,7 @@ public class Intersection : MonoBehaviour, ICrossable
     public bool CanCross(EntityController _entity)
     {
         bool canCross = true;
-        if (crossingCars != null && crossingCars.Count > 0 && pathsInfo.Length > 0)
+        if ((crossingCars != null && crossingCars.Count > 0) && (pathsInfo != null && pathsInfo.Length > 0))
         {
             for (int i = 0; i < pathsInfo.Length; i++)
             {

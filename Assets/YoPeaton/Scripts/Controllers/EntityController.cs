@@ -174,7 +174,7 @@ public abstract class EntityController : MonoBehaviour
         else
         {
             // Slow down by friction.
-            GetMovableComponent?.SlowDownByPercent(3f);
+            GetMovableComponent?.SlowDownByPercent(0.001f);
         }
     }
 
@@ -199,11 +199,8 @@ public abstract class EntityController : MonoBehaviour
                 {
                     t = distanceTravelled / GetFollowPathComponent.PathLength;
                 }
-                if (!t.Equals(lastTParameter))
-                {
-                    GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
-                    lastTParameter = t;
-                }
+                GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
+                lastTParameter = t;
             }
         }
     }
