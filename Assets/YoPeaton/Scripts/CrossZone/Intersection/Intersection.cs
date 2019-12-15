@@ -5,7 +5,7 @@ public class Intersection : MonoBehaviour, ICrossable
 {
     [SerializeField]
     private PathFreePassInfo[] pathsInfo;
-    List<EntityController> crossingCars;
+    private readonly List<EntityController> crossingCars = new List<EntityController>();
 
     public CrossableType CrossableType { get; private set; }
 
@@ -17,7 +17,7 @@ public class Intersection : MonoBehaviour, ICrossable
     public bool CanCross(EntityController _entity)
     {
         bool canCross = true;
-        if (crossingCars != null && crossingCars.Count > 0)
+        if (crossingCars != null && crossingCars.Count > 0 && pathsInfo.Length > 0)
         {
             for (int i = 0; i < pathsInfo.Length; i++)
             {
@@ -27,10 +27,13 @@ public class Intersection : MonoBehaviour, ICrossable
                     {
                         for (int k = 0; k < crossingCars.Count; k++)
                         {
-                            if (pathsInfo[i].pathsToCheck[j] == _entity.GetCurrentPath)
+                            if (crossingCars[k] != _entity)
                             {
-                                canCross = false;
-                                break;
+                                if (pathsInfo[i].pathsToCheck[j] == crossingCars[k].GetCurrentPath)
+                                {
+                                    canCross = false;
+                                    break;
+                                }
                             }
                         }
                     }
