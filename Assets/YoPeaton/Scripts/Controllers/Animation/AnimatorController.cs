@@ -5,7 +5,7 @@ public class AnimatorController : MonoBehaviour
 {
     protected Animator animator;
     protected IMovable movableComponent;
-    protected AITransitionsController transitionsController;
+    protected AIStateController transitionsController;
     [SerializeField]
     protected EntityController entity;
     [SerializeField]
@@ -16,7 +16,7 @@ public class AnimatorController : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         movableComponent = GetComponent<IMovable>();
-        transitionsController = GetComponent<AITransitionsController>();
+        transitionsController = GetComponent<AIStateController>();
     }
 
     protected void Start()

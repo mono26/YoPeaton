@@ -19,7 +19,7 @@ public class Crosswalk : MonoBehaviour, ICrossable
     private Dictionary<EntityController, CrossingInfo> crossingCars = new Dictionary<EntityController, CrossingInfo>();
 
     private float crossWalkLenght = 0.0f;
-    public CrossableType CrossableType { get; set; }
+    public CrossableType CrossableType { get; private set; }
 
     public int GetNumberOfCrossingPedestrians 
     {

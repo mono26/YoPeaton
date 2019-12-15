@@ -7,7 +7,7 @@ public class Intersection : MonoBehaviour, ICrossable
     private PathFreePassInfo[] pathsInfo;
     List<EntityController> crossingCars;
 
-    public CrossableType CrossableType { get; set; }
+    public CrossableType CrossableType { get; private set; }
 
     private void Start()
     {

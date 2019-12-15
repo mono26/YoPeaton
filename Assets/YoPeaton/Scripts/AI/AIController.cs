@@ -5,7 +5,7 @@ public class AIController : EntityController
     [SerializeField]
     private AIStateMachine stateMachine = null;
     [SerializeField]
-    private AITransitionsController transitionController;
+    private AIStateController transitionController;
     [SerializeField]
     private ICrossable currentCrossingZone;
     [SerializeField]
@@ -45,10 +45,10 @@ public class AIController : EntityController
         // Catching the transitions controller.
         if (!transitionController)
         {
-            transitionController = GetComponent<AITransitionsController>();
+            transitionController = GetComponent<AIStateController>();
             if (!transitionController)
             {
-                transitionController = gameObject.AddComponent<AITransitionsController>();
+                transitionController = gameObject.AddComponent<AIStateController>();
             }
         }
         transitionController.SetController = this;
@@ -66,7 +66,7 @@ public class AIController : EntityController
     protected override void Update()
     {
         IsThisOnTheStreet = base.IsOnTheStreet;
-        transitionController?.CheckTransitions();
+        transitionController?.UpdateState();
         base.Update();
     }
 
