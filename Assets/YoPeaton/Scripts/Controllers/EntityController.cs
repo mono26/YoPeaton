@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EntityController : MonoBehaviour
 {
-    public Action<OnEntityStartDirectionChangeArgs> onStartDirectionChange;
+    public Action<OnStartDirectionChangeArgs> onStartDirectionChange;
     public Action onStopChangingDirection;
     public Action<Vector3> onStartDirectional;
     public Action onEntityCollision;
@@ -199,8 +199,8 @@ public abstract class EntityController : MonoBehaviour
                 {
                     t = distanceTravelled / GetFollowPathComponent.PathLength;
                 }
-                GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
                 lastTParameter = t;
+                GetMovableComponent?.MoveToPosition(GetFollowPathComponent.GetPosition(t));
             }
         }
     }
@@ -326,14 +326,13 @@ public abstract class EntityController : MonoBehaviour
         {
             Vector3 currentDirection = followComponent.GetDirection(lastTParameter);
             Vector3 nextDirection = nextPath.GetDirectionAt(nextPath.GetTParameter(transform.position));
-            OnEntityStartDirectionChangeArgs eventArgs = new OnEntityStartDirectionChangeArgs();
+            OnStartDirectionChangeArgs directionArgs = new OnStartDirectionChangeArgs();
             OnEntityMovementEventArgs movementArgs = new OnEntityMovementEventArgs();
-            eventArgs.Entity = this;
-            eventArgs.Direction = nextDirection;
-            eventArgs.NextPath = nextPath;
+            directionArgs.Direction = nextDirection;
+            directionArgs.NextPath = nextPath;
             movementArgs.MovementDirection = nextDirection;
             movementArgs.Entity = this;
-            onStartDirectionChange?.Invoke(eventArgs);
+            onStartDirectionChange?.Invoke(directionArgs);
             //onDirectionChange?.Invoke(movementArgs);
             CheckDirectional(currentDirection, nextDirection);
         }

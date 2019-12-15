@@ -58,10 +58,10 @@ public class FollowPath : MonoBehaviour
         }
     }
 
-    private void OnStartDirectionChange(OnEntityStartDirectionChangeArgs _args)
+    private void OnStartDirectionChange(OnStartDirectionChangeArgs _args)
     {
         nextPath = _args.NextPath;
-        nextPathStarting_t_Parameter = nextPath.GetTParameter(_args.Entity.transform.position);
+        nextPathStarting_t_Parameter = nextPath.GetTParameter(transform.position);
         connected_t_Parameter_ToNextPath = GetPath.GetTParameter(nextPath.GetPointAt(nextPathStarting_t_Parameter));
         isChangingDirection = true;
     }

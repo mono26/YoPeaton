@@ -68,7 +68,7 @@ public class CarAnimator : AnimatorController
         }
     }
 
-    private void OnStartDirectionChange(OnEntityStartDirectionChangeArgs _args)
+    private void OnStartDirectionChange(OnStartDirectionChangeArgs _args)
     {
         StartDirectional(_args.Direction);
     }
