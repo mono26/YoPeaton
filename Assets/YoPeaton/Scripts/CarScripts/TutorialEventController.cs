@@ -26,24 +26,19 @@ public class TutorialEventController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (SceneManagerTest.GetCurrentScene() == "Tutorial" && currentStep != null)
+        {
+            if (Input.touchCount == 2)
+            {
+                TurnOffCurrentStepMehtod(currentStep);
+            }
+
+        }
     }
     public void FillReferences()
     {
         Debug.Log("voy a llenar las referencias de los tutorial steps");
-        //CanvasManager._instance.debugText.text = "EVENTO DE tutorial Controller: Llenar referencias";
-        /*tutorialStep0 = GameObject.Find("TutorialSteps (0)");
-        tutorialStep1 = GameObject.Find("TutorialSteps (1)");
-        tutorialStep2 = GameObject.Find("TutorialSteps (2)");
-        tutorialStep3 = GameObject.Find("TutorialSteps (3)");
-        tutorialStep4 = GameObject.Find("TutorialSteps (4)");
-        tutorialStep5 = GameObject.Find("TutorialSteps (5)");
-        tutorialStep6 = GameObject.Find("TutorialSteps (6)");
-        tutorialStep7 = GameObject.Find("TutorialSteps (7)");
-        tutorialStep8 = GameObject.Find("TutorialSteps (8)");*/
         tutorialSteps = GameObject.Find("TutorialStepsParent");
-        if(tutorialSteps != null)
-            //CanvasManager._instance.debugText.text = "Tutorial Steps: " + tutorialSteps.name;
         tutorialStep0 = tutorialSteps.transform.GetChild(0).gameObject;
         tutorialStep1 = tutorialSteps.transform.GetChild(1).gameObject;
         tutorialStep2 = tutorialSteps.transform.GetChild(2).gameObject;
@@ -59,8 +54,6 @@ public class TutorialEventController : MonoBehaviour
     public void TurnOffSteps()
     {
         print("Apagando los steps");
-        //CanvasManager._instance.debugText.text = "EVENTO DE tutorial Controller: Apagar Steps Metodo";
-        //StartCoroutine(TurnOffAllStepsCR());
         tutorialStep0.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep1.transform.GetChild(0).gameObject.SetActive(false);
         tutorialStep2.transform.GetChild(0).gameObject.SetActive(false);
@@ -80,7 +73,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep0;
             tutorialStep0.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
 
         }
         if (collision.gameObject.name == "TutorialTrigger (1)")
@@ -89,7 +82,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep1;
             tutorialStep1.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (2)")
         {
@@ -97,7 +90,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep2;
             tutorialStep2.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (3)")
         {
@@ -105,7 +98,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep3;
             tutorialStep3.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (4)")
         {
@@ -113,7 +106,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep4;
             tutorialStep4.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (5)")
         {
@@ -121,7 +114,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep5;
             tutorialStep5.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (6)")
         {
@@ -129,7 +122,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep6;
             tutorialStep6.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (7)")
         {
@@ -137,7 +130,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep7;
             tutorialStep7.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
         if (collision.gameObject.name == "TutorialTrigger (8)")
         {
@@ -145,7 +138,7 @@ public class TutorialEventController : MonoBehaviour
             currentStep = tutorialStep8;
             tutorialStep8.transform.GetChild(0).gameObject.SetActive(true);
             Time.timeScale = 0;
-            StartCoroutine(TurnOffCurrentStepCR(currentStep));
+            //StartCoroutine(TurnOffCurrentStepCR(currentStep));
         }
 
     }
@@ -155,6 +148,13 @@ public class TutorialEventController : MonoBehaviour
         yield return new WaitForSecondsRealtime(3);
         currentStep.transform.GetChild(0).gameObject.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void TurnOffCurrentStepMehtod(GameObject currentStep)
+    {
+        currentStep.transform.GetChild(0).gameObject.SetActive(false);
+        Time.timeScale = 1;
+        currentStep = null; 
     }
 
     IEnumerator TurnOffAllStepsCR()

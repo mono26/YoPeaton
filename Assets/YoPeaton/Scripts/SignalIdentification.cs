@@ -37,6 +37,10 @@ public class SignalIdentification : MonoBehaviour
     private void Start()
     {
         canAnswer = true;
+        if (GameManager.GetTutorialPref() > 1)
+        {
+            canAnswer = false;
+        }
     }
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
