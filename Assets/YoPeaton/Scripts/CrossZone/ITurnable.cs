@@ -28,6 +28,5 @@ public interface ITurnable
     /// <summary>
     /// Updates the current turn.
     /// </summary>
-    /// <param name="_deltaTime"></param>
-    void UpdateTurn(float _deltaTime);
+    bool UpdateTurn();
 }

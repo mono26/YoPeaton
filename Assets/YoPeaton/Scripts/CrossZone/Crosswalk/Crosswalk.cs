@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -43,6 +44,9 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     private void Start() 
     {
         CrossableType = CrossableType.CrossWalk;
+        //int randomType = UnityEngine.Random.Range(0, Enum.GetNames(typeof(EntityType)).Length);
+        //ChangeTurn((EntityType)randomType);
+        ChangeTurn(EntityType.Car);
         if (crossAreaBounds)
         {
             crossWalkLenght = crossAreaBounds.bounds.size.x * transform.localScale.x;
@@ -56,6 +60,11 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
             DebugController.LogErrorMessage($"{ gameObject.name } has no connectedPaths!");
         }
     }
+
+    //private void Update()
+    //{
+    //    UpdateTurn();
+    //}
 
     /// <summary>
     /// Called when a entity enter the crosswalk hotzone.
@@ -353,16 +362,25 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         return tiquetToReturn;
     }
 
-    public void OnEntityGivingCross(EntityController _entityThatGaveCross) {
-        WaitTicket ticket = GetWaitingTicket(_entityThatGaveCross);
-        if (!ticket.Equals(WaitTicket.invalidTicket)) {
+    public void OnEntityGivingCross(EntityController _entity) {
+        WaitTicket ticket = GetWaitingTicket(_entity);
+        if (!ticket.Equals(WaitTicket.invalidTicket)) 
+        {
             ticket.gaveCrossTime = ticket.waitStartTime.AddSeconds(WaitTicket.maxWaitTimeInSeconds);
             ticket.gaveCross = true;
         }
-        else {
-            DebugController.LogErrorMessage(string.Format("{0} gave cross but there is no ticket under the entity" , _entityThatGaveCross.gameObject.name));
+        else 
+        {
+            DebugController.LogErrorMessage(string.Format("{0} gave cross but there is no ticket under the entity" , _entity.gameObject.name));
         }
-        ChangeTurn((_entityThatGaveCross.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car, 3.0f);
+        EntityType other = (_entity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
+        ChangeTurn(other);
+        // float time = 3.0f;
+        if (other.Equals(EntityType.Pedestrian))
+        {
+            // time = 9.0f;
+            StartCoroutine(StartPedestrianTurn());
+        }
     }
 
     /// <summary>
@@ -459,19 +477,34 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     public bool HasTurn(EntityType _type)
     {
         bool hasTurn = false;
-        if (CurrentTurn.Type.Equals(_type))
+        if (waitingCars.Count == 0)
+        {
+            hasTurn = true;
+        }
+        else if (CurrentTurn.Type.Equals(_type))
         {
             hasTurn = true;
         }
         return hasTurn;
     }
 
-    public void UpdateTurn(float _deltaTime)
+    public bool UpdateTurn()
     {
+        bool updated = false;
         DateTime current = DateTime.UtcNow;
         if (CurrentTurn.EndTime < current)
         {
             ChangeTurn((CurrentTurn.Type.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car);
+            updated = true;
+        }
+        return updated;
+    }
+
+    private IEnumerator StartPedestrianTurn()
+    {
+        while (!UpdateTurn())
+        {
+            yield return null;
         }
     }
 }

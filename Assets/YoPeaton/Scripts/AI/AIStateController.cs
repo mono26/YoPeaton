@@ -130,13 +130,27 @@ public class AIStateController : MonoBehaviour
                     {
                         if (HasTurnForCrossing())
                         {
-                            if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
+                            if (aiEntity.GetEntityType.Equals(EntityType.Car))
                             {
-                                GiveCross();
+                                if ((IsAnotherEntityAskingForCross() || IsAnotherEntityWaiting()) && ShouldGiveCross())
+                                {
+                                    GiveCross();
+                                }
+                                else
+                                {
+                                    StartCross();
+                                }
                             }
                             else
                             {
-                                StartCross();
+                                if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
+                                {
+                                    GiveCross();
+                                }
+                                else
+                                {
+                                    StartCross();
+                                }
                             }
                         }
                     }
@@ -266,6 +280,17 @@ public class AIStateController : MonoBehaviour
             asking = ((Crosswalk)aiEntity.GetCurrentCrossingZone).IsThereAEntityAskingForCross(otherEntity);
         }
         return asking;
+    }
+
+    private bool IsAnotherEntityWaiting()
+    {
+        EntityType otherEntity = (aiEntity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
+        bool waiting = false;
+        if (aiEntity.GetCurrentCrossingZone is Crosswalk)
+        {
+            waiting = ((Crosswalk)aiEntity.GetCurrentCrossingZone).IsThereAEntityWaiting(otherEntity);
+        }
+        return waiting;
     }
     #endregion
 
