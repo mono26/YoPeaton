@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PedestrianAnimator : AnimatorController
 {
+
+    public Vector3 currentDirection;
     protected override void OnEnable() 
     {
         if(transitionsController != null)
@@ -32,6 +34,7 @@ public class PedestrianAnimator : AnimatorController
 
     public override void OnMovement(OnEntityMovementEventArgs _args)
     {
+        currentDirection = _args.MovementDirection;
         //Debug.LogError(_args.MovementDirection);
         if (_args.MovementDirection == new Vector3(1, 0, 0))
         {
