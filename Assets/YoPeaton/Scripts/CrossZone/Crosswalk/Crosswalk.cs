@@ -142,6 +142,8 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     /// <param name="_entity">Entity that started crossing.</param>
     public void OnStartedCrossing(EntityController _entity) {
         // DebugController.LogMessage("Entity started crossing");
+        ClearTicket(_entity);
+        ChangeTurn(_entity.GetEntityType);
         if (_entity.GetEntityType.Equals(EntityType.Pedestrian)) {
             if (!crossingPedestrians.ContainsKey(_entity)) {
                 _entity.GetMovableComponent.AddOnMovement(OnEntityMoved);
@@ -376,11 +378,6 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         EntityType other = (_entity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
         ChangeTurn(other);
         // float time = 3.0f;
-        if (other.Equals(EntityType.Pedestrian))
-        {
-            // time = 9.0f;
-            StartCoroutine(StartPedestrianTurn());
-        }
     }
 
     /// <summary>
@@ -463,10 +460,24 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
 
     public void ChangeTurn(EntityType _type, float _duration)
     {
-        TurnInfo nextTurn = new TurnInfo();
-        nextTurn.Type = _type;
-        nextTurn.EndTime = System.DateTime.UtcNow.AddSeconds(_duration);
+        if (gameObject.name == "CrossWalk_PFB")
+        {
+            DebugController.LogErrorMessage("Changing turn");
+        }
+        TurnInfo nextTurn = new TurnInfo 
+        {
+            Type = _type,
+            EndTime = System.DateTime.UtcNow.AddSeconds(_duration)
+        };
         CurrentTurn = nextTurn;
+        if (_type.Equals(EntityType.Pedestrian))
+        {
+            StartCoroutine(StartPedestrianTurn());
+            if (gameObject.name == "CrossWalk_PFB")
+            {
+                DebugController.LogErrorMessage("Is pedestrian turn");
+            }
+        }
     }
 
     public void ChangeTurn(EntityType _type)
@@ -477,13 +488,26 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     public bool HasTurn(EntityType _type)
     {
         bool hasTurn = false;
-        if (waitingCars.Count == 0)
+        if (_type.Equals(EntityType.Pedestrian))
         {
-            hasTurn = true;
+            if (waitingCars.Count == 0 && crossingCars.Count == 0)
+            {
+                hasTurn = true;
+            }
+            else if (CurrentTurn.Type.Equals(_type))
+            {
+                hasTurn = true;
+            }
         }
-        else if (CurrentTurn.Type.Equals(_type))
+        else if (_type.Equals(EntityType.Car))
         {
-            hasTurn = true;
+            if (CurrentTurn.Type.Equals(_type))
+            {
+                if (crossingPedestrians.Count == 0)
+                {
+                    hasTurn = true;
+                }
+            }
         }
         return hasTurn;
     }

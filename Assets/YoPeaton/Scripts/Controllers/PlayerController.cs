@@ -64,15 +64,16 @@ public class PlayerController : EntityController
     }
 
     #region Crosswalk methods
-    public override void OnCrossWalkEntered(ICrossable _crossWalk) {
+    public override void OnCrossWalkEntered(ICrossable _crossWalk) 
+    {
         DebugController.LogMessage("Player entered crosswalk");
         OnStartedCrossing(_crossWalk);
         _crossWalk.OnStartedCrossing(this);
     }
 
-    public override void OnCrossWalkExited(ICrossable _crossWalk) {
+    public override void OnCrossWalkExited(ICrossable _crossWalk) 
+    {
         DebugController.LogMessage("Player exited crosswalk");
-        OnCrossableExited(_crossWalk);
         _crossWalk.OnFinishedCrossing(this);
     }
     #endregion
