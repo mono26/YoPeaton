@@ -77,23 +77,24 @@ public class AIStateController : MonoBehaviour
     #region State Actions
     private void OnCrossing()
     {
-        if (ShouldAvoidCollision())
-        {
-            RaycastCheckResult result = IsThereAObstacle();
-            if (result.collided && result.otherEntity.IsCrossingCrosswalk)
-            {
-                aiEntity.SetMovementState(MovementState.SlowDown);
-            }
-            else
-            {
-                aiEntity.SetMovementState(MovementState.SpeedUp);
-            }
-            // Speed up
-        }
-        else
-        {
-            aiEntity.SetMovementState(MovementState.SpeedUp);
-        }
+        OnMoving();
+        //if (ShouldAvoidCollision())
+        //{
+        //    RaycastCheckResult result = IsThereAObstacle();
+        //    if (result.collided && result.otherEntity.IsCrossingCrosswalk)
+        //    {
+        //        aiEntity.SetMovementState(MovementState.SlowDown);
+        //    }
+        //    else
+        //    {
+        //        aiEntity.SetMovementState(MovementState.SpeedUp);
+        //    }
+        //    // Speed up
+        //}
+        //else
+        //{
+        //    aiEntity.SetMovementState(MovementState.SpeedUp);
+        //}
     }
 
     private void OnMoving()
@@ -118,52 +119,60 @@ public class AIStateController : MonoBehaviour
 
     private void OnWaiting()
     {
-        switch (aiEntity.GetCurrentCrossingZone.CrossableType)
+        if (ShouldWaitForClearCross())
         {
-            case CrossableType.CrossWalk:
-                {
-                    if (ShouldAskForCross())
+            switch (aiEntity.GetCurrentCrossingZone.CrossableType)
+            {
+                case CrossableType.CrossWalk:
                     {
-                        AskForCross();
-                    }
-                    else
-                    {
-                        if (HasTurnForCrossing())
+                        // Can run probaility for should wait for clear pass.
+                        if (ShouldAskForCross())
                         {
-                            if (aiEntity.GetEntityType.Equals(EntityType.Car))
+                            AskForCross();
+                        }
+                        else
+                        {
+                            if (HasTurnForCrossing())
                             {
-                                if ((IsAnotherEntityAskingForCross() || IsAnotherEntityWaiting()) && ShouldGiveCross())
+                                if (aiEntity.GetEntityType.Equals(EntityType.Car))
                                 {
-                                    GiveCross();
+                                    if ((IsAnotherEntityAskingForCross() || IsAnotherEntityWaiting()) && ShouldGiveCross())
+                                    {
+                                        GiveCross();
+                                    }
+                                    else
+                                    {
+                                        StartCross();
+                                    }
                                 }
                                 else
                                 {
-                                    StartCross();
-                                }
-                            }
-                            else
-                            {
-                                if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
-                                {
-                                    GiveCross();
-                                }
-                                else
-                                {
-                                    StartCross();
+                                    if (IsAnotherEntityAskingForCross() && ShouldGiveCross())
+                                    {
+                                        GiveCross();
+                                    }
+                                    else
+                                    {
+                                        StartCross();
+                                    }
                                 }
                             }
                         }
+                        break;
                     }
-                    break;
-                }
-            case CrossableType.Intersection:
-                {
-                    if (HasTurnForCrossing())
+                case CrossableType.Intersection:
                     {
-                        StartCross();
+                        if (HasTurnForCrossing())
+                        {
+                            StartCross();
+                        }
+                        break;
                     }
-                    break;
-                }
+            }
+        }
+        else
+        {
+            StartCross();
         }
     }
 
