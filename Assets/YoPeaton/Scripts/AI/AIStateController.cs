@@ -9,7 +9,7 @@ public class AIStateController : MonoBehaviour
     [SerializeField]
     private float askForCrossProbability = 0.0f;
     [SerializeField]
-    private float askedForCrossWaitTime = 3.0f;
+    private float askedForCrossWaitTime = 1.5f;
     [SerializeField]
     private float avoidCollisionProbability = 100.0f;
     [SerializeField]
@@ -312,7 +312,7 @@ public class AIStateController : MonoBehaviour
     #region Transitions
     private void AskForCross()
     {
-        DebugController.LogMessage($"{ gameObject.name } is asking for cross!");
+        // DebugController.LogMessage($"{ gameObject.name } is asking for cross!");
         aiEntity.SwitchToState(AIState.WaitingAndAsking);
         canCrossAfterWait = false;
         StartCoroutine(AskedForCrossWait());

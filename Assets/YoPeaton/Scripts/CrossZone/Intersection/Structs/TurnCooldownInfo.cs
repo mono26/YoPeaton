@@ -13,4 +13,9 @@ public struct TurnCooldownInfo
     {
         return CooldownFinish > System.DateTime.UtcNow;
     }
+
+    public void ClearCooldown()
+    {
+        CooldownFinish = System.DateTime.MinValue;
+    }
 }
