@@ -67,6 +67,17 @@ public class PlayerController : EntityController
     public override void OnCrossWalkEntered(ICrossable _crossWalk) 
     {
         DebugController.LogMessage("Player entered crosswalk");
+        // Si hay peatones cruzando sacar lo de las infracciones
+        Crosswalk cross = ((Crosswalk)_crossWalk);
+        if (cross.GetNumberOfCrossingPedestrians > 0)
+        {
+            if (!cross.CanCrossIfPathIsFree(this))
+            {
+                ScoreManager.instance.AddInfraction();
+                CanvasManager._instance.ActivateCheckOrCross(false);
+                CanvasManager._instance.GenerateFeedback("CrossWithPedestrian");
+            }
+        }
         OnStartedCrossing(_crossWalk);
         _crossWalk.OnStartedCrossing(this);
     }

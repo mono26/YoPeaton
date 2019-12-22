@@ -136,7 +136,6 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         else 
         {
             waitingPedestrians.Remove(_entity);
-            // serializableWaitPedestrians.RemoveKey(_entity);
         }
     }
 
@@ -517,19 +516,30 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         return hasTurn;
     }
 
-    private bool CanCrossIfPathIsFree(EntityController _entity)
+    public bool CanCrossIfPathIsFree(EntityController _entity)
     {
         bool canCross = false;
         if (_entity.GetEntityType.Equals(EntityType.Pedestrian))
         {
-            if (crossingCars.Count == 0)
+            if (crossingCars.Count > 0)
+            {
+                Dictionary<EntityController, CrossingInfo>.KeyCollection cars = crossingCars.Keys;
+                foreach (EntityController car in cars)
+                {
+                    if (car.GetMovableComponent.GetCurrentSpeed.Equals(0.0f))
+                    {
+                        canCross = true;
+                    }
+                }
+            }
+            else
             {
                 if (waitingCars.Count > 0)
                 {
                     Dictionary<EntityController, WaitTicket>.KeyCollection cars = waitingCars.Keys;
                     foreach (EntityController car in cars)
                     {
-                        if (((AIController)car).GetCurrentState.Equals(AIState.Waiting))
+                        if (((AIController)car).GetCurrentState.Equals(AIState.Waiting) && car.GetMovableComponent.GetCurrentSpeed.Equals(0.0f))
                         {
                             canCross = true;
                         }
