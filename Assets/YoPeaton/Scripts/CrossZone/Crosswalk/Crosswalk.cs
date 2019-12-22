@@ -160,6 +160,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
             if (!crossingCars.ContainsKey(_entity)) {
                 if (crossingPedestrians.Count > 0) {
                     DebugController.LogMessage("This car is crossing with pedestrians doing it at the same time: " + _entity.gameObject.name);
+                    // TODO remover eso de aca
                     if(_entity.gameObject.CompareTag("Car") && _entity.gameObject.name != "PlayerCar_PFB Variant")
                     {
                         _entity.SetCrossingWithPedestrianValue(true);
