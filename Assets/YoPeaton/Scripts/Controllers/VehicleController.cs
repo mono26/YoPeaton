@@ -24,34 +24,27 @@ public class VehicleController : AIController
 
     protected override void SetRandomEntityType()
     {
-        if (!entityIsPlayer)
+        float probability = UnityEngine.Random.Range(0f, 1f);
+        BrakeLight brakeLights = GetComponent<BrakeLight>();
+        if (probability < 0.25f)
         {
-            float probability = UnityEngine.Random.Range(0f, 1f);
-            BrakeLight brakeLights = GetComponent<BrakeLight>();
-            if (probability < 0.25f)
-            {
-                SetEntitySubType = EntitySubType.Motorcycle;
-                brakeLights.VehicleType = VehicleType.Motorcycle;
-            }
-            else if (probability < 0.60f)
-            {
-                SetEntitySubType = EntitySubType.GreenCar;
-                brakeLights.VehicleType = VehicleType.Car;
-            }
-            else if (probability < 0.8f)
-            {
-                SetEntitySubType = EntitySubType.RedCar;
-                brakeLights.VehicleType = VehicleType.Car;
-            }
-            else if (probability <= 1f)
-            {
-                SetEntitySubType = EntitySubType.YellowCar;
-                brakeLights.VehicleType = VehicleType.Car;
-            }
+            SetEntitySubType = EntitySubType.Motorcycle;
+            brakeLights.VehicleType = VehicleType.Motorcycle;
         }
-        else if (entityIsPlayer)
+        else if (probability < 0.60f)
         {
-            SetEntitySubType = EntitySubType.BlueCar;
+            SetEntitySubType = EntitySubType.GreenCar;
+            brakeLights.VehicleType = VehicleType.Car;
+        }
+        else if (probability < 0.8f)
+        {
+            SetEntitySubType = EntitySubType.RedCar;
+            brakeLights.VehicleType = VehicleType.Car;
+        }
+        else if (probability <= 1f)
+        {
+            SetEntitySubType = EntitySubType.YellowCar;
+            brakeLights.VehicleType = VehicleType.Car;
         }
     }
 

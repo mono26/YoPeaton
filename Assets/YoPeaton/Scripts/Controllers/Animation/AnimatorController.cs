@@ -24,7 +24,7 @@ public class EntityAnimationController : MonoBehaviour
         string keyName = movableComponent.GetEntity.GetEntitySubType.ToString();
 
         animator.runtimeAnimatorController = AnimatorControllerDispatcher.GetInstance.Request(keyName);
-        Debug.LogError(keyName);
+        // Debug.LogError(keyName);
     }
 
     protected virtual void OnEnable()

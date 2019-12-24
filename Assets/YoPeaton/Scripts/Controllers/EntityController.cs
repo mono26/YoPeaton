@@ -35,7 +35,6 @@ public abstract class EntityController : MonoBehaviour
     #endregion
 
     private bool move = true;
-    protected bool entityIsPlayer = true;
     private Crosswalk exitedCrosswalk;
     private float colliderRadius;
     private float distanceToCheckForCollision = 0.3f;

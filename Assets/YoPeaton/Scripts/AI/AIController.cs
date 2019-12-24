@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AIController : EntityController
+public abstract class AIController : EntityController
 {
     [SerializeField]
     private AIStateMachine stateMachine = null;
@@ -175,10 +175,5 @@ public class AIController : EntityController
             }
         }
         SwitchToState(AIState.Moving);
-    }
-
-    protected override void SetRandomEntityType()
-    {
-
     }
 }
