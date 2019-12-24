@@ -101,8 +101,7 @@ public class AIStateController : MonoBehaviour
     {
         if (ShouldAvoidCollision())
         {
-            RaycastCheckResult result = IsThereAObstacle();
-            if (result.collided && result.otherEntity.IsOnTheStreet)
+            if (IsThereAObstacle())
             {
                 aiEntity.SetMovementState(MovementState.SlowDown);
             }
@@ -194,14 +193,19 @@ public class AIStateController : MonoBehaviour
     /// Checks using a raycast if there is a obstacle in front of the entity.
     /// </summary>
     /// <returns></returns>
-    private RaycastCheckResult IsThereAObstacle()
+    private bool IsThereAObstacle()
     {
+        bool obstacle = false;
         RaycastCheckResult obstacleCheckResult = default;
-        if (aiEntity.IsOnTheStreet /* && !aiEntity.IsCrossingCrosswalk */)
+        if (aiEntity.IsOnTheStreet)
         {
-            obstacleCheckResult = aiEntity.CheckForObstacles();
+            obstacleCheckResult = aiEntity.HasAObstacleUpFront();
+            if (obstacleCheckResult.collided && obstacleCheckResult.otherEntity.IsOnTheStreet)
+            {
+                obstacle = true;
+            }
         }
-        return obstacleCheckResult;
+        return obstacle;
     }
 
     /// <summary>

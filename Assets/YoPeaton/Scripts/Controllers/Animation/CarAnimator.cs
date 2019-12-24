@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CarAnimator : AnimatorController
+public class CarAnimator : EntityAnimationController
 {
     [SerializeField]
     private Animator directionalsAnimator;
@@ -9,8 +9,8 @@ public class CarAnimator : AnimatorController
     {
         if (entity)
         {
-            entity.onStartDirectionChange += OnStartDirectionChange;
-            entity.onStopChangingDirection += OnDirectionalStop;
+            entity.GetDirectionChangeComponent.onStartDirectionChange += OnStartDirectionChange;
+            entity.GetDirectionChangeComponent.onStopChangingDirection += OnDirectionalStop;
             entity.GetMovableComponent.AddOnMovement(OnMovement);
         }
 
@@ -20,8 +20,8 @@ public class CarAnimator : AnimatorController
     {
         if (entity)
         {
-            entity.onStartDirectionChange -= OnStartDirectionChange;
-            entity.onStopChangingDirection -= OnDirectionalStop;
+            entity.GetDirectionChangeComponent.onStartDirectionChange -= OnStartDirectionChange;
+            entity.GetDirectionChangeComponent.onStopChangingDirection -= OnDirectionalStop;
             entity.GetMovableComponent.RemoveOnMovement(OnMovement);
         }
 
@@ -70,7 +70,7 @@ public class CarAnimator : AnimatorController
 
     private void OnStartDirectionChange(OnStartDirectionChangeArgs _args)
     {
-        StartDirectional(_args.Direction);
+        StartDirectional(_args.NextDirection);
     }
 
     private void StartDirectional(Vector3 _directional)

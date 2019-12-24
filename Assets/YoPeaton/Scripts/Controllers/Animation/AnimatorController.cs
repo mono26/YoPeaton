@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Text.RegularExpressions;
 
-public class AnimatorController : MonoBehaviour
+public class EntityAnimationController : MonoBehaviour
 {
     protected Animator animator;
     protected IMovable movableComponent;

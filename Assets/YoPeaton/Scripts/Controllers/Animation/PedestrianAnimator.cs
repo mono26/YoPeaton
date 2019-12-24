@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PedestrianAnimator : AnimatorController
+public class PedestrianAnimator : EntityAnimationController
 {
 
     public Vector3 currentDirection;
