@@ -34,14 +34,10 @@ public class AIController : EntityController
         }
     }
 
+    #region Unity functions
     protected override void Awake() 
     {
-        IsThisOnTheStreet = base.IsOnTheStreet;
-        entityIsPlayer = false;
         base.Awake();
-        base.SetEntityType();
-
-       
         // Catching the transitions controller.
         if (!transitionController)
         {
@@ -65,10 +61,10 @@ public class AIController : EntityController
 
     protected override void Update()
     {
-        IsThisOnTheStreet = base.IsOnTheStreet;
         transitionController?.UpdateState();
         base.Update();
     }
+    #endregion
 
     public void SwitchToState(AIState _newState)
     {
@@ -179,5 +175,10 @@ public class AIController : EntityController
             }
         }
         SwitchToState(AIState.Moving);
+    }
+
+    protected override void SetRandomEntityType()
+    {
+
     }
 }
