@@ -122,6 +122,12 @@ public class SceneManagerTest : MonoBehaviour
 
     }
 
+    public IEnumerator LoadGameScene(string scene)
+    {
+        AsyncOperation loadGame = SceneManager.LoadSceneAsync(scene);
+        yield return null;
+    }
+
     public IEnumerator WaitToCount()
     {
         yield return new WaitForSeconds(1f);
