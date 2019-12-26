@@ -32,13 +32,25 @@ public class BrakeLight : MonoBehaviour
     {
         if (_type.Equals(VehicleType.Car))
         {
-            carLights.SetActive(_activate);
-            motorcycleLights.SetActive(false);
+            if (carLights)
+            {
+                carLights.SetActive(_activate);
+            }
+            if (motorcycleLights)
+            {
+                motorcycleLights.SetActive(false);
+            }
         }
         else
         {
-            carLights.SetActive(false);
-            motorcycleLights.SetActive(_activate);
+            if (carLights)
+            {
+                carLights.SetActive(false);
+            }
+            if (motorcycleLights)
+            {
+                motorcycleLights.SetActive(_activate);
+            }
         }
     }
 }

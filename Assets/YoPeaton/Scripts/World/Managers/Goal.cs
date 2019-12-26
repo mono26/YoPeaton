@@ -7,14 +7,18 @@ public class Goal : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.LogError("Colision de: " + this.name + ", con: " + collision.name);
-        if(collision.gameObject.name == "PlayerCar_PFB Variant")
+        PlayerController player = collision.gameObject.GetComponent<PlayerController>();
+        if (player)
         {
-            SceneManagerTest.instance.LoadVictory();
-        }
-        if (this.gameObject.name== "Goal_Tutorial" && collision.gameObject.name == "PlayerCar_PFB Variant")
-        {
-            GameManager.SetTutorialPref();
-            SceneManagerTest.instance.LoadScene("TestScene 2");
+            if (this.gameObject.name == "Goal_Tutorial")
+            {
+                GameManager.SetTutorialPref();
+                SceneManagerTest.instance.LoadScene("TestScene 2");
+            }
+            else
+            {
+                SceneManagerTest.instance.LoadVictory();
+            }
         }
     }
 }

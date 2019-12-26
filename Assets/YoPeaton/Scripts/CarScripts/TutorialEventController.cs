@@ -28,11 +28,17 @@ public class TutorialEventController : MonoBehaviour
     {
         if (SceneManagerTest.GetCurrentScene() == "Tutorial" && currentStep != null)
         {
+#if UNITY_EDITOR
+            if (Input.GetMouseButtonDown(0))
+            {
+                TurnOffCurrentStepMehtod(currentStep);
+            }
+#elif !UNITY_EDITOR && UNITY_ANDROID
             if (Input.touchCount == 2)
             {
                 TurnOffCurrentStepMehtod(currentStep);
             }
-
+#endif
         }
     }
     public void FillReferences()
