@@ -4,5 +4,5 @@ using UnityEngine;
 
 public enum EntityType
 {
-    Car, Pedestrian
+    Vehicle, Pedestrian
 }

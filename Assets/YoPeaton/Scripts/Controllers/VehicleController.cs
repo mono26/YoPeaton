@@ -6,6 +6,8 @@ public class VehicleController : AIController
 {
     protected override void Start()
     {
+        base.Start();
+        SetEntityType = EntityType.Vehicle;
         if (GetDirectionChangeComponent)
         {
             GetDirectionChangeComponent.onStartDirectionChange += OnStartDirectionChange;

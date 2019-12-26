@@ -133,7 +133,7 @@ public class AIStateController : MonoBehaviour
                         {
                             if (HasTurnForCrossing())
                             {
-                                if (aiEntity.GetEntityType.Equals(EntityType.Car))
+                                if (aiEntity.GetEntityType.Equals(EntityType.Vehicle))
                                 {
                                     if ((IsAnotherEntityAskingForCross() || IsAnotherEntityWaiting()) && ShouldGiveCross())
                                     {
@@ -286,7 +286,7 @@ public class AIStateController : MonoBehaviour
 
     private bool IsAnotherEntityAskingForCross()
     {
-        EntityType otherEntity = (aiEntity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
+        EntityType otherEntity = (aiEntity.GetEntityType.Equals(EntityType.Vehicle)) ? EntityType.Pedestrian : EntityType.Vehicle;
         bool asking = false;
         if (aiEntity.GetCurrentCrossingZone is Crosswalk)
         {
@@ -297,7 +297,7 @@ public class AIStateController : MonoBehaviour
 
     private bool IsAnotherEntityWaiting()
     {
-        EntityType otherEntity = (aiEntity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
+        EntityType otherEntity = (aiEntity.GetEntityType.Equals(EntityType.Vehicle)) ? EntityType.Pedestrian : EntityType.Vehicle;
         bool waiting = false;
         if (aiEntity.GetCurrentCrossingZone is Crosswalk)
         {

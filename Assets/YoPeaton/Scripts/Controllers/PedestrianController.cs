@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PedestrianController : AIController
 {
+    protected override void Start()
+    {
+        base.Start();
+        SetEntityType = EntityType.Pedestrian;
+    }
+
     protected override void SetRandomEntityType()
     {
         float probability = UnityEngine.Random.Range(0f, 1f);

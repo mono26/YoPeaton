@@ -109,6 +109,7 @@ public abstract class EntityController : MonoBehaviour
     protected EntitySubType SetEntitySubType { set => entitySubType = value; }
 
     public EntityType GetEntityType { get => entityType; }
+    protected EntityType SetEntityType { set => entityType = value; }
     #endregion
 
     #region Unity Functions
