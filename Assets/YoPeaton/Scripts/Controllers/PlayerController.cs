@@ -7,6 +7,7 @@ public class PlayerController : EntityController
     [SerializeField]
     public PlayerCarInput Input { get; private set; }
 
+    #region Unity functions
     //Awake is always called before any Start functions
     protected override void Awake()
     {
@@ -40,6 +41,13 @@ public class PlayerController : EntityController
             StartCoroutine(CrashCR());
         }
     }
+    #endregion
+
+    protected override void SetRandomEntityType()
+    {
+        SetEntitySubType = EntitySubType.BlueCar;
+    }
+
     protected override bool ShouldStop() 
     {
         //NUEVO PUNTO PARA EL LLAMADO DE LA COLISION, PARA NO DEPENDER DEL CHECK DEL ENTITY CONTROLLER//
@@ -67,6 +75,17 @@ public class PlayerController : EntityController
     public override void OnCrossWalkEntered(ICrossable _crossWalk) 
     {
         DebugController.LogMessage("Player entered crosswalk");
+        // Si hay peatones cruzando sacar lo de las infracciones
+        Crosswalk cross = ((Crosswalk)_crossWalk);
+        if (cross.GetNumberOfCrossingPedestrians > 0)
+        {
+            if (!cross.CanCrossIfPathIsFree(this))
+            {
+                ScoreManager.instance.AddInfraction();
+                CanvasManager._instance.ActivateCheckOrCross(false);
+                CanvasManager._instance.GenerateFeedback("CrossWithPedestrian");
+            }
+        }
         OnStartedCrossing(_crossWalk);
         _crossWalk.OnStartedCrossing(this);
     }

@@ -16,9 +16,11 @@ GameObject:
   - component: {fileID: 270182541731555045}
   - component: {fileID: 270182541731555040}
   - component: {fileID: 270182541731555041}
-  - component: {fileID: 270182541731555042}
   - component: {fileID: 270182541731555043}
   - component: {fileID: 4090319706780739683}
+  - component: {fileID: 4880517858193252525}
+  - component: {fileID: 7707399254142496842}
+  - component: {fileID: 5337615851926395776}
   m_Layer: 9
   m_Name: AIPedestrian_PFB
   m_TagString: Pedestrian
@@ -158,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00af334cadf43f41b156bd92a883f1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movingEntity: {fileID: 270182541731555042}
+  movingEntity: {fileID: 5337615851926395776}
   carBody: {fileID: 270182541731555046}
   maxSpeed: 0.3
   brakeSpeed: 0.2
@@ -181,7 +183,7 @@ MonoBehaviour:
   pathToFollow: {fileID: 0}
   directionChangeLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &270182541731555041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,37 +197,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
---- !u!114 &270182541731555042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 270182541731555055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6db2591bbd145894a8583fdb8cc36228, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  movementComponent: {fileID: 0}
-  followComponent: {fileID: 270182541731555040}
-  animationComponent: {fileID: 0}
-  changeDirectionProbability: 100
-  distanceToCheckForStop: 2.5
-  exitedCrosswalkClearTime: 3
-  entityType: 0
-  entitySubType: 0
-  currentDirection: 0
-  layersToCheckCollision:
-    serializedVersion: 2
-    m_Bits: 66304
-  isThisCarCrossingWithPedestrian: 0
-  nextPathReference: {fileID: 0}
-  stateMachine: {fileID: 270182541731555041}
-  transitionController: {fileID: 270182541731555043}
-  currentCrossingZone: {fileID: 0}
-  behaviourController: {fileID: 0}
-  IsThisOnTheStreet: 0
 --- !u!114 &270182541731555043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,7 +214,7 @@ MonoBehaviour:
   avoidCollisionProbability: 100
   giveCrossProbability: 0
   waitForClearCrossProbability: 100
-  aiEntity: {fileID: 270182541731555042}
+  aiEntity: {fileID: 5337615851926395776}
 --- !u!114 &4090319706780739683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -256,8 +227,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03c2d7627cf64d4e93c3e4bab44da05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  entity: {fileID: 270182541731555042}
-  entityMovement: {fileID: 0}
+  entity: {fileID: 5337615851926395776}
+  entityMovement: {fileID: 270182541731555045}
+  currentDirection: {x: 0, y: 0, z: 0}
+--- !u!114 &4880517858193252525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270182541731555055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4dc9bf004eabfa42a99cf15c7d25e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layersToCheckCollision:
+    serializedVersion: 2
+    m_Bits: 65792
+--- !u!114 &7707399254142496842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270182541731555055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca74b1ae85bd144e833f01308b265e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5337615851926395776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 270182541731555055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b34d749f2de2e0241bb07ed12db226d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementComponent: {fileID: 270182541731555045}
+  followComponent: {fileID: 270182541731555040}
+  animationComponent: {fileID: 4090319706780739683}
+  collisionComponent: {fileID: 4880517858193252525}
+  directionChangeComponent: {fileID: 7707399254142496842}
+  changeDirectionProbability: 100
+  distanceToCheckForStop: 2.5
+  exitedCrosswalkClearTime: 3
+  entityType: 0
+  entitySubType: 0
+  isThisCarCrossingWithPedestrian: 0
+  stateMachine: {fileID: 270182541731555041}
+  transitionController: {fileID: 270182541731555043}
+  behaviourController: {fileID: 0}
+  IsThisOnTheStreet: 0
 --- !u!1 &1363044618323740226
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,7 +1208,7 @@ MonoBehaviour:
   canCross: {fileID: 4318198734098785471}
   onTheStreet: {fileID: 3292637155794090441}
   obstacle: {fileID: 3534732042608705109}
-  aiToDebug: {fileID: 270182541731555042}
+  aiToDebug: {fileID: 5337615851926395776}
 --- !u!1 &8448472092927895364
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ public class AIStateController : MonoBehaviour
     [SerializeField]
     private float askForCrossProbability = 0.0f;
     [SerializeField]
-    private float askedForCrossWaitTime = 3.0f;
+    private float askedForCrossWaitTime = 1.5f;
     [SerializeField]
     private float avoidCollisionProbability = 100.0f;
     [SerializeField]
@@ -101,8 +101,7 @@ public class AIStateController : MonoBehaviour
     {
         if (ShouldAvoidCollision())
         {
-            RaycastCheckResult result = IsThereAObstacle();
-            if (result.collided && result.otherEntity.IsOnTheStreet)
+            if (IsThereAObstacle())
             {
                 aiEntity.SetMovementState(MovementState.SlowDown);
             }
@@ -194,14 +193,19 @@ public class AIStateController : MonoBehaviour
     /// Checks using a raycast if there is a obstacle in front of the entity.
     /// </summary>
     /// <returns></returns>
-    private RaycastCheckResult IsThereAObstacle()
+    private bool IsThereAObstacle()
     {
+        bool obstacle = false;
         RaycastCheckResult obstacleCheckResult = default;
-        if (aiEntity.IsOnTheStreet /* && !aiEntity.IsCrossingCrosswalk */)
+        if (aiEntity.IsOnTheStreet)
         {
-            obstacleCheckResult = aiEntity.CheckForObstacles();
+            obstacleCheckResult = aiEntity.HasAObstacleUpFront();
+            if (obstacleCheckResult.collided && obstacleCheckResult.otherEntity.IsOnTheStreet)
+            {
+                obstacle = true;
+            }
         }
-        return obstacleCheckResult;
+        return obstacle;
     }
 
     /// <summary>
@@ -312,7 +316,7 @@ public class AIStateController : MonoBehaviour
     #region Transitions
     private void AskForCross()
     {
-        DebugController.LogMessage($"{ gameObject.name } is asking for cross!");
+        // DebugController.LogMessage($"{ gameObject.name } is asking for cross!");
         aiEntity.SwitchToState(AIState.WaitingAndAsking);
         canCrossAfterWait = false;
         StartCoroutine(AskedForCrossWait());

@@ -5,6 +5,7 @@ using UnityEngine;
 public interface ITurnable
 {
     TurnInfo CurrentTurn { get; }
+    TurnCooldownInfo TurnInCooldown { get; }
 
     /// <summary>
     /// Changes the currento turn to a new turn.
@@ -23,7 +24,7 @@ public interface ITurnable
     /// Check if the currento turn is for the entity.
     /// </summary>
     /// <param name="_type">Type of entity to see if has the turn.</param>
-    bool HasTurn(EntityType _type);
+    bool HasTurn(EntityController _entity);
 
     /// <summary>
     /// Updates the current turn.

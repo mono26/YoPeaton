@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Text.RegularExpressions;
 
-public class AnimatorController : MonoBehaviour
+public class EntityAnimationController : MonoBehaviour
 {
     protected Animator animator;
     protected IMovable movableComponent;
@@ -24,7 +24,7 @@ public class AnimatorController : MonoBehaviour
         string keyName = movableComponent.GetEntity.GetEntitySubType.ToString();
 
         animator.runtimeAnimatorController = AnimatorControllerDispatcher.GetInstance.Request(keyName);
-        Debug.LogError(keyName);
+        // Debug.LogError(keyName);
     }
 
     protected virtual void OnEnable()

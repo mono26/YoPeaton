@@ -37,6 +37,10 @@ public class SignalIdentification : MonoBehaviour
     private void Start()
     {
         canAnswer = true;
+        if (GameManager.GetSignalIdPref() > 0)
+        {
+            canAnswer = false;
+        }
     }
     //Funciones
     private string OnTriggerEnter2D(Collider2D collision)
@@ -47,24 +51,24 @@ public class SignalIdentification : MonoBehaviour
             correctAnswer = collision.GetComponent<CrosswalkTrigger>().GetCrosswalk.GetCrossWalkType.ToString(); // GetComponent<Crosswalk>().GetCrossWalkType.ToString();
             //Cada que entra a una señal, actia el canvas que le permite decidir si la quiere identificar o no//
             //Tambien defne la repuesta correcta como el nobre del cruce en el que acaba de entrar//
-            if (correctAnswer == "Cebra" && canAnswer == true && correctCebraQt < 1)
+            if (correctAnswer == "Cebra" && canAnswer == true)
             {
 
                 Time.timeScale = 0f;
                 DebugController.LogErrorMessage("cebra" + "cebra correctas: " + correctCebraQt);
                 onQuestionAsk?.Invoke();
                 CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
-                StartCoroutine(ChangeCanAnswerValueCR());
+                //StartCoroutine(ChangeCanAnswerValueCR());
                 canAnswer = false;
                 return correctAnswer;
             }
-            if (correctAnswer == "Bocacalle" && canAnswer == true && correctPasacallesQt < 1)
+            if (correctAnswer == "Bocacalle" && canAnswer == true)
             {
                 Time.timeScale = 0f;
                 DebugController.LogErrorMessage("Bocacalle" + "bocacalles correctas: " + correctPasacallesQt);
                 onQuestionAsk?.Invoke();
                 CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
-                StartCoroutine(ChangeCanAnswerValueCR());
+                //StartCoroutine(ChangeCanAnswerValueCR());
                 canAnswer = false;
                 return correctAnswer;
             }
@@ -83,7 +87,7 @@ public class SignalIdentification : MonoBehaviour
     IEnumerator ChangeCanAnswerValueCR()
     {
         yield return new WaitForSeconds(3);
-        canAnswer = true;
+        //canAnswer = true;
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -122,6 +126,7 @@ public class SignalIdentification : MonoBehaviour
         //El tiempo se pone normal//
         Time.timeScale = 1f;
         selectedName = selectedAnswer;
+        GameManager.SetSignalIdPref();
         if (correctAnswer == selectedAnswer)
         {
             if (correctAnswer == "Cebra")

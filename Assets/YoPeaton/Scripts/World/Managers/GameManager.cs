@@ -8,8 +8,9 @@ public static class GameManager
     public static float timeLeft;
     public static bool didPlayerLose = false;
     public static int timesTutorialFinished = 0;
+    public static int timesAnsweredCorrectly = 0;
 
-   
+
 
     //private static int printScore;
     public static void FinishLevel()
@@ -42,4 +43,14 @@ public static class GameManager
     {
         return PlayerPrefs.GetInt("timestutorialfinished");
     }
+
+    public static void SetSignalIdPref()
+    {
+        PlayerPrefs.SetInt("timesAnsweredCorrectly", timesAnsweredCorrectly + 1);
+    }
+    public static int GetSignalIdPref()
+    {
+        return PlayerPrefs.GetInt("timesAnsweredCorrectly");
+    }
+
 }
