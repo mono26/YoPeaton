@@ -538,6 +538,10 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                         {
                             canCross = true;
                         }
+                        else
+                        {
+                            return false;
+                        }
                     }
                 }
                 else
