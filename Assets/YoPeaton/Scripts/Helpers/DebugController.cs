@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class DebugController
 {
-    public static bool debugActive = true;
+    public static bool debugActive = false;
     public static float drawDebugDuration = 1.0f;
     public static int circleSteps = 50;
 
