@@ -58,13 +58,13 @@ public abstract class AIController : EntityController
             }
         }
     }
+    #endregion
 
-    protected override void Update()
+    protected override void UpdateState()
     {
         transitionController?.UpdateState();
-        base.Update();
+        base.UpdateState();
     }
-    #endregion
 
     public void SwitchToState(AIState _newState)
     {

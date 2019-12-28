@@ -518,23 +518,20 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     public bool HasTurn(EntityController _entity)
     {
         bool hasTurn = false;
-        if (!IsTurnInCooldown(_entity.GetEntityType))
+        if (CanCrossIfPathIsFree(_entity))
         {
-            if (CurrentTurn.Type.Equals(_entity.GetEntityType))
-            {
-                hasTurn = true;
-            }
-            else if (CanCrossIfPathIsFree(_entity))
-            {
-                hasTurn = true;
-            }
+            hasTurn = true;
+        }
+        else if (CurrentTurn.Type.Equals(_entity.GetEntityType))
+        {
+            hasTurn = true;
         }
         return hasTurn;
     }
 
     public bool CanCrossIfPathIsFree(EntityController _entity)
     {
-        bool canCross = false;
+        bool canCross = true;
         if (_entity.GetEntityType.Equals(EntityType.Pedestrian))
         {
             if (crossingVehicle.Count > 0)
@@ -542,9 +539,10 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                 Dictionary<EntityController, CrossingInfo>.KeyCollection cars = crossingVehicle.Keys;
                 foreach (EntityController car in cars)
                 {
-                    if (car.GetMovableComponent.GetCurrentSpeed.Equals(0.0f))
+                    if (car.GetMovableComponent.GetCurrentSpeed >= 0.0f)
                     {
-                        canCross = true;
+                        canCross = false;
+                        break;
                     }
                 }
             }
@@ -555,29 +553,18 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                     Dictionary<EntityController, WaitTicket>.KeyCollection cars = waitingCars.Keys;
                     foreach (EntityController car in cars)
                     {
-                        if (((AIController)car).GetCurrentState.Equals(AIState.Waiting) && car.GetMovableComponent.GetCurrentSpeed.Equals(0.0f))
+                        if (!((AIController)car).GetCurrentState.Equals(AIState.Waiting) || car.GetMovableComponent.GetCurrentSpeed >= 0.0f)
                         {
-                            canCross = true;
-                        }
-                        else
-                        {
-                            return false;
+                            canCross = false;
+                            break;
                         }
                     }
-                }
-                else
-                {
-                    canCross = true;
                 }
             }
         }
         else if (_entity.GetEntityType.Equals(EntityType.Vehicle))
         {
-            if (crossingPedestrians.Count == 0)
-            {
-                canCross = true;
-            }
-            else
+            if (crossingPedestrians.Count > 0)
             {
                 foreach (KeyValuePair<EntityController, CrossingInfo> pedestrian in crossingPedestrians)
                 {
@@ -591,15 +578,18 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                                 {
                                     if (freePassInfo[i].pathsToCheck[j] == pedestrian.Key.GetCurrentPath)
                                     {
-                                        return false;
-                                    }
-                                    else
-                                    {
-                                        canCross = true;
+                                        canCross = false;
+                                        break;
                                     }
                                 }
+                                break;
                             }
                         }
+                    }
+                    else
+                    {
+                        canCross = false;
+                        break;
                     }
                 }
             }
@@ -645,7 +635,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         }
     }
 
-    private bool IsTurnInCooldown(EntityType _type)
+    public bool IsTurnInCooldown(EntityType _type)
     {
         bool cooldown = false;
         if (TurnInCooldown.Type.Equals(_type))

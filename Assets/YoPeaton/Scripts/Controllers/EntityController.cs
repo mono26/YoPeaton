@@ -123,13 +123,11 @@ public abstract class EntityController : MonoBehaviour
         SetRandomEntityType();
         animationComponent = GetComponent<EntityAnimationController>();
         exitedCrosswalkClearWait = new WaitForSeconds(exitedCrosswalkClearTime);
-        //animationComponent.SetAnimator(type);
     }
 
     protected virtual void Start() {
         IsOnTheStreet = false;
         IsCrossingCrosswalk = false;
-        // GetInitialValuesToStartPath();
         if (animationComponent)
         {
             OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
@@ -139,7 +137,12 @@ public abstract class EntityController : MonoBehaviour
         }
     }
 
-    protected virtual void Update()
+    //protected virtual void Update()
+    //{
+        
+    //}
+
+    protected virtual void UpdateState()
     {
         float deltaTime = Time.deltaTime;
         if (ShouldStop())
@@ -165,6 +168,7 @@ public abstract class EntityController : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        UpdateState();
         //RaycastCheckResult collisionCheck = HasCollided();
         //if (collisionCheck.collided)
         //{

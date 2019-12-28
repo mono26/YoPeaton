@@ -9,7 +9,7 @@ public class AIStateController : MonoBehaviour
     [SerializeField]
     private float askForCrossProbability = 0.0f;
     [SerializeField]
-    private float askedForCrossWaitTime = 1.5f;
+    private float askedForCrossWaitTime = 3.0f;
     [SerializeField]
     private float avoidCollisionProbability = 100.0f;
     [SerializeField]
@@ -24,6 +24,7 @@ public class AIStateController : MonoBehaviour
 
     private bool alreadyGaveCross = false;
     private bool canCrossAfterWait = true;
+    private Coroutine canCrossWait;
     private WaitForSeconds askedForCrossWait;
 
     public AIController SetController
@@ -242,6 +243,14 @@ public class AIStateController : MonoBehaviour
         bool askForCross = false;
         if (!alreadyGaveCross)
         {
+            //if (!((Crosswalk)aiEntity.GetCurrentCrossingZone).IsTurnInCooldown(aiEntity.GetEntityType))
+            //{
+            //    float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
+            //    if (randomNumber >= 100 - askForCrossProbability)
+            //    {
+            //        askForCross = true;
+            //    }
+            //}
             float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
             if (randomNumber >= 100 - askForCrossProbability)
             {
@@ -319,7 +328,7 @@ public class AIStateController : MonoBehaviour
         // DebugController.LogMessage($"{ gameObject.name } is asking for cross!");
         aiEntity.SwitchToState(AIState.WaitingAndAsking);
         canCrossAfterWait = false;
-        StartCoroutine(AskedForCrossWait());
+        canCrossWait = StartCoroutine(AskedForCrossWait());
         onStartedAskingForCross?.Invoke(aiEntity.GetCurrentDirection);
     }
 
