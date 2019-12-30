@@ -1,5 +1,88 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &366049909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 366049912}
+  - component: {fileID: 366049910}
+  - component: {fileID: 366049911}
+  m_Layer: 16
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &366049912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366049909}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1000}
+  m_LocalScale: {x: 1.1111112, y: 1.1111112, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5162524990170631424}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &366049910
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366049909}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_FocalLength: 50
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 10
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &366049911
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366049909}
+  m_Enabled: 1
 --- !u!1 &389142552601040165
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5826201948349776907}
   - component: {fileID: 26070573071064351}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Directionals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,7 +146,7 @@ GameObject:
   - component: {fileID: 2294547901461459543}
   - component: {fileID: 8990024555839274524}
   - component: {fileID: 6351855178615475963}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Text (TMP) (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -218,7 +301,7 @@ GameObject:
   - component: {fileID: 6482971686674664361}
   - component: {fileID: 581902889807827729}
   - component: {fileID: 8648899732635101457}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Text (TMP) (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +456,7 @@ GameObject:
   - component: {fileID: 3703617855083520848}
   - component: {fileID: 3478000776707356613}
   - component: {fileID: 5840275835402656252}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -539,8 +622,11 @@ GameObject:
   - component: {fileID: 2273158963274417149}
   - component: {fileID: 5084227755347083799}
   - component: {fileID: 5162524990170631432}
-  - component: {fileID: 53463038678503411}
-  m_Layer: 8
+  - component: {fileID: 858217444}
+  - component: {fileID: 2081252940005476406}
+  - component: {fileID: 7004430238793126979}
+  - component: {fileID: 1689122914259404007}
+  m_Layer: 16
   m_Name: PlayerCar_PFB
   m_TagString: Car
   m_Icon: {fileID: 0}
@@ -561,6 +647,7 @@ Transform:
   - {fileID: 3608862414294763224}
   - {fileID: 2040591241616916976}
   - {fileID: 5826201948349776907}
+  - {fileID: 366049912}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
@@ -592,7 +679,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daa84f2d62c6e004bb0af401fbe18915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
+  cam: {fileID: 366049910}
   controller: {fileID: 0}
 --- !u!114 &6610728040275199548
 MonoBehaviour:
@@ -664,8 +751,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 597400935
+  m_SortingLayer: 10
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 261732bedecdb1041bdc7ab649fced1c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -692,9 +779,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movingEntity: {fileID: 2273158963274417149}
   carBody: {fileID: 5162524990170631430}
-  maxSpeed: 2
-  brakeSpeed: 0.25
-  acceleration: 0.25
+  maxSpeed: 5
+  brakeSpeed: 1.2
+  acceleration: 1
   currentSpeed: 0
   direction: {x: 0, y: 0, z: 0}
   carLightsVFX: {fileID: 8572874119321010628}
@@ -713,7 +800,7 @@ MonoBehaviour:
   pathToFollow: {fileID: 0}
   directionChangeLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1024
 --- !u!114 &6740240251312668058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,6 +844,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   infractionsArray:
   - {fileID: 11400000, guid: 0466624b85555164e89de1aaf2d70638, type: 2}
+  - {fileID: 11400000, guid: 564b841a34ead6646945756edcaa5d3c, type: 2}
+  - {fileID: 11400000, guid: 53484b6fe999e204fb3a2518c23a053d, type: 2}
   controlledObject: {fileID: 0}
   ActivePedestrianCount: 0
   isAlreadyReported: 0
@@ -772,20 +861,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2201198391bdd47960dc099fcd5b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementComponent: {fileID: 0}
+  movementComponent: {fileID: 5162524990170631429}
   followComponent: {fileID: 5162524990170631425}
-  animationComponent: {fileID: 0}
+  animationComponent: {fileID: 858217444}
+  collisionComponent: {fileID: 7004430238793126979}
+  directionChangeComponent: {fileID: 2081252940005476406}
   changeDirectionProbability: 100
-  distanceToCheckForStop: 3
+  distanceToCheckForStop: 2.5
   exitedCrosswalkClearTime: 3
   entityType: 0
   entitySubType: 0
-  currentDirection: 0
-  layersToCheckCollision:
-    serializedVersion: 2
-    m_Bits: 768
   isThisCarCrossingWithPedestrian: 0
-  nextPathReference: {fileID: 0}
 --- !u!114 &5084227755347083799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,7 +904,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &53463038678503411
+--- !u!114 &858217444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -827,11 +913,54 @@ MonoBehaviour:
   m_GameObject: {fileID: 5162524990170631428}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b796aa581aa47f645bb223630ff9613c, type: 3}
+  m_Script: {fileID: 11500000, guid: f918b9aeda299a142b8e5b6f2f7e29d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   entity: {fileID: 2273158963274417149}
-  entityMovement: {fileID: 0}
+  entityMovement: {fileID: 5162524990170631429}
+  directionalsAnimator: {fileID: 26070573071064351}
+--- !u!114 &2081252940005476406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162524990170631428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca74b1ae85bd144e833f01308b265e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7004430238793126979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162524990170631428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4dc9bf004eabfa42a99cf15c7d25e79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  layersToCheckCollision:
+    serializedVersion: 2
+    m_Bits: 768
+--- !u!114 &1689122914259404007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5162524990170631428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78c1a5005755802438207d3409bd7cef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  motorcycleLights: {fileID: 0}
+  carLights: {fileID: 8572874119321010628}
+  vehicleType: 0
 --- !u!1 &5205927758825495846
 GameObject:
   m_ObjectHideFlags: 0
@@ -842,7 +971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 280307506408258167}
   - component: {fileID: 1298451974218605307}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,8 +1027,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 162866693
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0.89685977, b: 0, a: 1}
@@ -923,7 +1052,7 @@ GameObject:
   - component: {fileID: 467070330259772723}
   - component: {fileID: 458070821882645909}
   - component: {fileID: 1153314391577989610}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Text (TMP) (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1081,7 +1210,7 @@ GameObject:
   - component: {fileID: 2682145078238876311}
   - component: {fileID: 141999325797816241}
   - component: {fileID: 1312724273176267654}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1228,7 +1357,7 @@ GameObject:
   - component: {fileID: 6893864243886785329}
   - component: {fileID: 8448614301525891761}
   - component: {fileID: 5656351270197513591}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Text (TMP) (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1382,7 +1511,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6524715023441720238}
   - component: {fileID: 4336800292673897320}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1438,8 +1567,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 162866693
+  m_SortingLayer: 3
   m_SortingOrder: 2
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 0.89685977, b: 0, a: 1}
@@ -1476,7 +1605,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8572874119321010628}
-  m_LocalRotation: {x: -0, y: -0, z: -1, w: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.045, z: 0}
   m_LocalScale: {x: 0.90971607, y: 0.90971607, z: 0.8187444}
   m_Children: []
@@ -1518,9 +1647,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingLayerID: 597400935
+  m_SortingLayer: 10
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 90a0b8605dbe9a7439febaf94799deaf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1543,7 +1672,7 @@ GameObject:
   - component: {fileID: 338012023258343028}
   - component: {fileID: 7717450964040822276}
   - component: {fileID: 7208799727526600280}
-  m_Layer: 8
+  m_Layer: 16
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

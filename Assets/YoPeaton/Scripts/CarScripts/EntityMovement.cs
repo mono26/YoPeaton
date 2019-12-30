@@ -4,6 +4,8 @@ using UnityEngine;
 public class EntityMovement : MonoBehaviour, IMovable, ISlowable
 {
     private Action<OnEntityMovementEventArgs> onMovement;
+    private Action<EntityController> onAccelerate;
+    private Action<EntityController> onBrake;
 
     [SerializeField]
     private EntityController movingEntity;
@@ -50,14 +52,14 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
     private void Start()
     {
         this.transform.localRotation = new Quaternion(0, 0, 0, 0);
-        ToggleBrakeLights(false);
+        // ToggleBrakeLights(false);
         if (GetEntity)
         {
             direction = GetEntity.GetFollowPathComponent.GetDirection(Time.time);
         }
         else
         {
-            direction = GetComponent<FollowPath>().GetDirection(Time.time);
+            direction = GetComponent<EntityFollowPath>().GetDirection(Time.time);
         }
         OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
         eventArgs.Entity = movingEntity;
@@ -72,13 +74,8 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         else if (currentSpeed >  maxSpeed) {
             currentSpeed = maxSpeed;
         }
-        ToggleBrakeLights(false);
-    }
-
-    private void MoveWithDirection(float _detltaTime, Vector3 _direction) {
-        Vector3 currentPosition = carBody.position;
-        Vector3 nextPosition = currentPosition + (_direction.normalized * currentSpeed * _detltaTime);
-        MoveToNextPosition(nextPosition);
+        onAccelerate?.Invoke(GetEntity);
+        // ToggleBrakeLights(false);
     }
 
     private void MoveToNextPosition(Vector3 _position) {
@@ -117,7 +114,8 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
             currentSpeed -= brakeSpeed * _deltaTime;
             currentSpeed = Mathf.Clamp(currentSpeed, 0.0f, maxSpeed);
         }
-        ToggleBrakeLights(true);
+        onBrake?.Invoke(GetEntity);
+        // ToggleBrakeLights(true);
     }
 
     private void ApplyInmediateStop()
@@ -139,25 +137,26 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         
     }
 
-    private void ToggleBrakeLights(bool status)
-    {
-        if (GetEntity.GetEntityType == EntityType.Car)
-        {
-            if (status && direction == new Vector3(0, 1, 0))
-            {
-                carLightsVFX.SetActive(true);
-            }
-            else
-            {
-                carLightsVFX.SetActive(false);
-            }
-        }
+    //private void ToggleBrakeLights(bool status)
+    //{
+    //    if (GetEntity.GetEntityType == EntityType.Car)
+    //    {
+    //        if (status && direction == new Vector3(0, 1, 0))
+    //        {
+    //            carLightsVFX.SetActive(true);
+    //        }
+    //        else
+    //        {
+    //            carLightsVFX.SetActive(false);
+    //        }
+    //    }
             
-    }
+    //}
 
     public void SlowDownByPercent(float _slowPercent) {
         currentSpeed = currentSpeed * ((100 - _slowPercent) / 100);
-        ToggleBrakeLights(true);
+        onBrake?.Invoke(GetEntity);
+        // ToggleBrakeLights(true);
     }
 
     public void MoveToPosition(Vector3 position) {
@@ -170,5 +169,25 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
 
     public void RemoveOnMovement(Action<OnEntityMovementEventArgs> _onMovementAction) {
         onMovement -= _onMovementAction;
+    }
+
+    public void AddOnAccelerate(Action<EntityController> _onMovementAction)
+    {
+        onAccelerate += _onMovementAction;
+    }
+
+    public void RemoveOnAccelerate(Action<EntityController> _onMovementAction)
+    {
+        onAccelerate -= _onMovementAction;
+    }
+
+    public void AddOnBrake(Action<EntityController> _onMovementAction)
+    {
+        onBrake += _onMovementAction;
+    }
+
+    public void RemoveOnBrake(Action<EntityController> _onMovementAction)
+    {
+        onBrake -= _onMovementAction;
     }
 }

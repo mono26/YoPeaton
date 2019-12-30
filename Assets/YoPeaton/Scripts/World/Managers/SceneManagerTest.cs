@@ -78,7 +78,7 @@ public class SceneManagerTest : MonoBehaviour
                 //CanvasManager._instance.AssignDebugText();
                 //CanvasManager._instance.debugText.text = "EVENTO DE SCENEMANAGER: CARGAR TUTORIAL";
                 ScoreManager.lifeTime = 200;
-                tutorialController = GameObject.Find("PlayerCar_PFB Variant").GetComponent<TutorialEventController>();
+                tutorialController = FindObjectOfType<TutorialEventController>();
                 //CanvasManager._instance.debugText.text = "Tutorial Controller: " + tutorialController;
                 tutorialController.FillReferences();
                 //tutorialController.TurnOffSteps();

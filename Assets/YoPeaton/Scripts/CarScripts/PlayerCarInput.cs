@@ -25,6 +25,7 @@ public class PlayerCarInput : MonoBehaviour
 
     public void Accelerate()
     {
+        DebugController.LogMessage("Is accelerating!");
         IsAccelerating = true;
     }
 

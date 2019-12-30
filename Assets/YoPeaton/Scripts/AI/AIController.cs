@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class AIController : EntityController
+public abstract class AIController : EntityController
 {
     [SerializeField]
     private AIStateMachine stateMachine = null;
@@ -34,14 +34,10 @@ public class AIController : EntityController
         }
     }
 
+    #region Unity functions
     protected override void Awake() 
     {
-        IsThisOnTheStreet = base.IsOnTheStreet;
-        entityIsPlayer = false;
         base.Awake();
-        base.SetEntityType();
-
-       
         // Catching the transitions controller.
         if (!transitionController)
         {
@@ -62,12 +58,12 @@ public class AIController : EntityController
             }
         }
     }
+    #endregion
 
-    protected override void Update()
+    protected override void UpdateState()
     {
-        IsThisOnTheStreet = base.IsOnTheStreet;
         transitionController?.UpdateState();
-        base.Update();
+        base.UpdateState();
     }
 
     public void SwitchToState(AIState _newState)
@@ -102,7 +98,7 @@ public class AIController : EntityController
     
     public override void OnCrossWalkEntered(ICrossable _crossWalk)
     {
-        DebugController.LogMessage("Entered crosswalk");
+        DebugController.LogMessage($"Entered crosswalk { gameObject.name }");
         if (currentCrossingZone == null || !currentCrossingZone.Equals(_crossWalk))
         {
             currentCrossingZone?.OnFinishedCrossing(this);

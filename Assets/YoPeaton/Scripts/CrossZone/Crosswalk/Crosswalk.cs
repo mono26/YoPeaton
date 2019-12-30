@@ -6,22 +6,26 @@ using UnityEngine;
 
 public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
 {
-#region "Variables to set"
+    #region "Variables to set"
     [SerializeField]
     private CrossWalkTypes crossWalkType = CrossWalkTypes.Bocacalle;
     [SerializeField]
     private Collider2D crossAreaBounds = null;
     [SerializeField]
     private Path[] connectedPaths;
+    [SerializeField]
+    private PathFreePassInfo[] freePassInfo;
 #endregion
 
     private Dictionary<EntityController, WaitTicket> waitingPedestrians = new Dictionary<EntityController, WaitTicket>();
     private Dictionary<EntityController, WaitTicket> waitingCars = new Dictionary<EntityController, WaitTicket>();
     private Dictionary<EntityController, CrossingInfo> crossingPedestrians = new Dictionary<EntityController, CrossingInfo>();
-    private Dictionary<EntityController, CrossingInfo> crossingCars = new Dictionary<EntityController, CrossingInfo>();
+    private Dictionary<EntityController, CrossingInfo> crossingVehicle = new Dictionary<EntityController, CrossingInfo>();
 
     private float crossWalkLenght = 0.0f;
     public CrossableType CrossableType { get; private set; }
+
+    Coroutine pedestrianTurn;
 
     public int GetNumberOfCrossingPedestrians 
     {
@@ -41,12 +45,14 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
 
     public TurnInfo CurrentTurn { get; private set; }
 
+    public TurnCooldownInfo TurnInCooldown { get; private set; }
+
     private void Start() 
     {
         CrossableType = CrossableType.CrossWalk;
         //int randomType = UnityEngine.Random.Range(0, Enum.GetNames(typeof(EntityType)).Length);
         //ChangeTurn((EntityType)randomType);
-        ChangeTurn(EntityType.Car);
+        ChangeTurn(EntityType.Vehicle);
         if (crossAreaBounds)
         {
             crossWalkLenght = crossAreaBounds.bounds.size.x * transform.localScale.x;
@@ -79,7 +85,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                 // serializableWaitPedestrians.AddData(_entity, newTicket);
             }
         }
-        else if (_entity.GetEntityType.Equals(EntityType.Car)) {
+        else if (_entity.GetEntityType.Equals(EntityType.Vehicle)) {
             if (!HasAlreadyATicket(_entity)) {
                 WaitTicket newTicket = new WaitTicket();
                 newTicket.waitStartTime = System.DateTime.UtcNow;
@@ -95,7 +101,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     /// <returns></returns>
     private bool HasAlreadyATicket(EntityController _entity) {
         bool hasTicket = false;
-        if (_entity.GetEntityType.Equals(EntityType.Car)) {
+        if (_entity.GetEntityType.Equals(EntityType.Vehicle)) {
             if (waitingCars.ContainsKey(_entity)) {
                 hasTicket = true;
             }
@@ -125,14 +131,13 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     /// </summary>
     /// <param name="_entity"> Entity to check for tickets.</param>
     private void ClearTicket(EntityController _entity) {
-        if (_entity.GetEntityType.Equals(EntityType.Car))
+        if (_entity.GetEntityType.Equals(EntityType.Vehicle))
         {
             waitingCars.Remove(_entity);
         }
         else 
         {
             waitingPedestrians.Remove(_entity);
-            // serializableWaitPedestrians.RemoveKey(_entity);
         }
     }
 
@@ -141,9 +146,9 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     /// </summary>
     /// <param name="_entity">Entity that started crossing.</param>
     public void OnStartedCrossing(EntityController _entity) {
-        // DebugController.LogMessage("Entity started crossing");
+        DebugController.LogMessage($"Entity started crossing {  _entity.gameObject.name }");
         ClearTicket(_entity);
-        ChangeTurn(_entity.GetEntityType);
+        SetTurnForCrossingEntity(_entity.GetEntityType);
         if (_entity.GetEntityType.Equals(EntityType.Pedestrian)) {
             if (!crossingPedestrians.ContainsKey(_entity)) {
                 _entity.GetMovableComponent.AddOnMovement(OnEntityMoved);
@@ -152,18 +157,13 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                 crossingPedestrians.Add(_entity, newInfo);
             }
         }
-        else if (_entity.GetEntityType.Equals(EntityType.Car))
+        else if (_entity.GetEntityType.Equals(EntityType.Vehicle))
         {
-            if (!crossingCars.ContainsKey(_entity)) {
+            if (!crossingVehicle.ContainsKey(_entity)) {
                 if (crossingPedestrians.Count > 0) {
                     DebugController.LogMessage("This car is crossing with pedestrians doing it at the same time: " + _entity.gameObject.name);
-                    if (_entity.gameObject.name == "PlayerCar_PFB Variant")
-                    {
-                        ScoreManager.instance.AddInfraction();
-                        CanvasManager._instance.ActivateCheckOrCross(false);
-                        CanvasManager._instance.GenerateFeedback("CrossWithPedestrian");
-                    }
-                    else if(_entity.gameObject.CompareTag("Car") && _entity.gameObject.name != "PlayerCar_PFB Variant")
+                    // TODO remover eso de aca
+                    if(_entity.gameObject.CompareTag("Car") && _entity.gameObject.name != "PlayerCar_PFB Variant")
                     {
                         _entity.SetCrossingWithPedestrianValue(true);
                     }
@@ -172,7 +172,25 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                 _entity.GetMovableComponent.AddOnMovement(OnEntityMoved);
                 CrossingInfo newInfo = new CrossingInfo();
                 newInfo.lastPosition = _entity.transform.position;
-                crossingCars.Add(_entity, newInfo);
+                crossingVehicle.Add(_entity, newInfo);
+            }
+        }
+    }
+
+    private void SetTurnForCrossingEntity(EntityType _type)
+    {
+        if (CurrentTurn.Type.Equals(EntityType.Pedestrian))
+        {
+            if (crossingPedestrians.Count == 0)
+            {
+                ChangeTurn(_type);
+            }
+        }
+        else if (CurrentTurn.Type.Equals(EntityType.Vehicle))
+        {
+            if (crossingVehicle.Count == 0)
+            {
+                ChangeTurn(_type);
             }
         }
     }
@@ -196,10 +214,10 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
             {
                 _entity.SetCrossingWithPedestrianValue(false);
             }
-            if (crossingCars.ContainsKey(_entity)) 
+            if (crossingVehicle.ContainsKey(_entity)) 
             {
                 _entity.GetMovableComponent.RemoveOnMovement(OnEntityMoved);
-                crossingCars.Remove(_entity);
+                crossingVehicle.Remove(_entity);
             }
         }
     }
@@ -213,7 +231,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     {
         bool cross = true;
         //cross = TicketHasTurn(_entity);
-        cross = HasTurn(_entity.GetEntityType);
+        cross = HasTurn(_entity);
         return cross;
     }
 
@@ -225,7 +243,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         WaitTicket[] valuesArray = null;
         int waitTimeComparisson;
         int gaveCrossTimeComparison;
-        if (_entity.GetEntityType.Equals(EntityType.Car) && !crossingCars.ContainsKey(_entity))
+        if (_entity.GetEntityType.Equals(EntityType.Vehicle) && !crossingVehicle.ContainsKey(_entity))
         {
             if (crossingPedestrians.Count > 0)
             {
@@ -239,7 +257,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         }
         else if (_entity.GetEntityType.Equals(EntityType.Pedestrian) && !crossingPedestrians.ContainsKey(_entity))
         {
-            if (crossingCars.Count > 0)
+            if (crossingVehicle.Count > 0)
             {
                 cross = false;
             }
@@ -308,7 +326,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                 isAEntityWaiting = true;
             }
         }
-        else if (_entityType.Equals(EntityType.Car)) {
+        else if (_entityType.Equals(EntityType.Vehicle)) {
             if (waitingCars.Count > 0) {
                 isAEntityWaiting = true;
             }
@@ -349,7 +367,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     /// <returns></returns>
     private WaitTicket GetWaitingTicket(EntityController _entity) {
         WaitTicket tiquetToReturn = WaitTicket.invalidTicket;
-        if (_entity.GetEntityType.Equals(EntityType.Car)) {
+        if (_entity.GetEntityType.Equals(EntityType.Vehicle)) {
             if (waitingCars.ContainsKey(_entity))
             {
                 tiquetToReturn = waitingCars[_entity];
@@ -370,13 +388,18 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         {
             ticket.gaveCrossTime = ticket.waitStartTime.AddSeconds(WaitTicket.maxWaitTimeInSeconds);
             ticket.gaveCross = true;
+            DebugController.LogErrorMessage($"crosswalk recibed gave cross from: { _entity.gameObject.name }");
         }
         else 
         {
             DebugController.LogErrorMessage(string.Format("{0} gave cross but there is no ticket under the entity" , _entity.gameObject.name));
         }
-        EntityType other = (_entity.GetEntityType.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car;
+        EntityType other = (_entity.GetEntityType.Equals(EntityType.Vehicle)) ? EntityType.Pedestrian : EntityType.Vehicle;
         ChangeTurn(other);
+        if (other.Equals(EntityType.Pedestrian) && TurnInCooldown.Type.Equals(EntityType.Pedestrian))
+        {
+            TurnInCooldown.ClearCooldown();
+        }
         // float time = 3.0f;
     }
 
@@ -428,10 +451,12 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
             {
                 CrossingInfo info = crossingPedestrians[_args.Entity];
                 // First calculate the distance travelled since last frame.
-                float distance = (_args.Entity.transform.position - info.lastPosition).magnitude;
-                // Add to the calculated distance the sotored distance to get the total.
-                distance += info.distanceTravelled;
+                float distance;
+                float delta = (_args.Entity.transform.position - info.lastPosition).magnitude;
+                // Add to the calculated delta the stored distance to get the total.
+                distance = info.distanceTravelled + delta;
                 info.distanceTravelled = distance;
+                info.lastPosition = _args.Entity.transform.position;
                 crossingPedestrians[_args.Entity] = info;
             }
             else
@@ -439,17 +464,17 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                 DebugController.LogErrorMessage(string.Format("{0} moved but it has no crossing info stored.", _args.Entity.gameObject.name));
             }
         }
-        else if (_args.Entity.GetEntityType.Equals(EntityType.Car))
+        else if (_args.Entity.GetEntityType.Equals(EntityType.Vehicle))
         {
-            if (crossingCars.ContainsKey(_args.Entity))
+            if (crossingVehicle.ContainsKey(_args.Entity))
             {
-                CrossingInfo info = crossingCars[_args.Entity];
+                CrossingInfo info = crossingVehicle[_args.Entity];
                 // First calculate the distance travelled since last frame.
                 float distance = (_args.Entity.transform.position - info.lastPosition).magnitude;
                 // Add to the calculated distance the sotored distance to get the total.
                 distance += info.distanceTravelled;
                 info.distanceTravelled = distance;
-                crossingCars[_args.Entity] = info;
+                crossingVehicle[_args.Entity] = info;
             }
             else
             {
@@ -460,22 +485,27 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
 
     public void ChangeTurn(EntityType _type, float _duration)
     {
-        if (gameObject.name == "CrossWalk_PFB")
-        {
-            DebugController.LogErrorMessage("Changing turn");
-        }
-        TurnInfo nextTurn = new TurnInfo 
+        TurnInfo nextTurn = new TurnInfo
         {
             Type = _type,
             EndTime = System.DateTime.UtcNow.AddSeconds(_duration)
         };
+        TurnInfo pastTurn = CurrentTurn;
         CurrentTurn = nextTurn;
         if (_type.Equals(EntityType.Pedestrian))
         {
-            StartCoroutine(StartPedestrianTurn());
-            if (gameObject.name == "CrossWalk_PFB")
+            TurnInCooldown = new TurnCooldownInfo()
             {
-                DebugController.LogErrorMessage("Is pedestrian turn");
+                Type = pastTurn.Type,
+                CooldownFinish = System.DateTime.UtcNow.AddSeconds(TurnCooldownInfo.DEFAULT_COOLDOWN)
+            };
+            pedestrianTurn = StartCoroutine(StartPedestrianTurn());
+        }
+        else
+        {
+            if (pedestrianTurn != null)
+            {
+                StopCoroutine(pedestrianTurn);
             }
         }
     }
@@ -485,41 +515,114 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         ChangeTurn(_type, TurnInfo.DEFAULT_DURATION);
     }
 
-    public bool HasTurn(EntityType _type)
+    public bool HasTurn(EntityController _entity)
     {
         bool hasTurn = false;
-        if (_type.Equals(EntityType.Pedestrian))
+        if (CanCrossIfPathIsFree(_entity))
         {
-            if (waitingCars.Count == 0 && crossingCars.Count == 0)
-            {
-                hasTurn = true;
-            }
-            else if (CurrentTurn.Type.Equals(_type))
-            {
-                hasTurn = true;
-            }
+            hasTurn = true;
         }
-        else if (_type.Equals(EntityType.Car))
+        else if (CurrentTurn.Type.Equals(_entity.GetEntityType))
         {
-            if (CurrentTurn.Type.Equals(_type))
+            hasTurn = true;
+        }
+        return hasTurn;
+    }
+
+    public bool CanCrossIfPathIsFree(EntityController _entity)
+    {
+        bool canCross = true;
+        if (_entity.GetEntityType.Equals(EntityType.Pedestrian))
+        {
+            if (crossingVehicle.Count > 0)
             {
-                if (crossingPedestrians.Count == 0)
+                Dictionary<EntityController, CrossingInfo>.KeyCollection cars = crossingVehicle.Keys;
+                foreach (EntityController car in cars)
                 {
-                    hasTurn = true;
+                    if (car.GetMovableComponent.GetCurrentSpeed >= 0.0f)
+                    {
+                        canCross = false;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                if (waitingCars.Count > 0)
+                {
+                    Dictionary<EntityController, WaitTicket>.KeyCollection cars = waitingCars.Keys;
+                    foreach (EntityController car in cars)
+                    {
+                        if (!((AIController)car).GetCurrentState.Equals(AIState.Waiting) || car.GetMovableComponent.GetCurrentSpeed >= 0.0f)
+                        {
+                            canCross = false;
+                            break;
+                        }
+                    }
                 }
             }
         }
-        return hasTurn;
+        else if (_entity.GetEntityType.Equals(EntityType.Vehicle))
+        {
+            if (crossingPedestrians.Count > 0)
+            {
+                foreach (KeyValuePair<EntityController, CrossingInfo> pedestrian in crossingPedestrians)
+                {
+                    if (pedestrian.Value.distanceTravelled >= crossWalkLenght * 0.7f)
+                    {
+                        for (int i = 0; i < freePassInfo.Length; i++)
+                        {
+                            if (freePassInfo[i].path == _entity.GetCurrentPath)
+                            {
+                                for (int j = 0; j < freePassInfo[i].pathsToCheck.Length; j++)
+                                {
+                                    if (freePassInfo[i].pathsToCheck[j] == pedestrian.Key.GetCurrentPath)
+                                    {
+                                        canCross = false;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        canCross = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return canCross;
     }
 
     public bool UpdateTurn()
     {
         bool updated = false;
-        DateTime current = DateTime.UtcNow;
-        if (CurrentTurn.EndTime < current)
+        if (CurrentTurn.EndTime < DateTime.UtcNow)
         {
-            ChangeTurn((CurrentTurn.Type.Equals(EntityType.Car)) ? EntityType.Pedestrian : EntityType.Car);
-            updated = true;
+            if (CurrentTurn.Type.Equals(EntityType.Pedestrian))
+            {
+                if (crossingPedestrians.Count.Equals(0))
+                {
+                    ChangeTurn((CurrentTurn.Type.Equals(EntityType.Vehicle)) ? EntityType.Pedestrian : EntityType.Vehicle);
+                    updated = true;
+                }
+                else
+                {
+                    TurnInCooldown = new TurnCooldownInfo()
+                    {
+                        Type = CurrentTurn.Type,
+                        CooldownFinish = System.DateTime.UtcNow.AddSeconds(TurnCooldownInfo.DEFAULT_COOLDOWN)
+                    };
+                }
+            }
+            else
+            {
+                ChangeTurn((CurrentTurn.Type.Equals(EntityType.Vehicle)) ? EntityType.Pedestrian : EntityType.Vehicle);
+                updated = true;
+            }
         }
         return updated;
     }
@@ -530,5 +633,15 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         {
             yield return null;
         }
+    }
+
+    public bool IsTurnInCooldown(EntityType _type)
+    {
+        bool cooldown = false;
+        if (TurnInCooldown.Type.Equals(_type))
+        {
+            cooldown = TurnInCooldown.IsInCooldown();
+        }
+        return cooldown;
     }
 }
