@@ -102,7 +102,7 @@ public abstract class AIController : EntityController
         if (currentCrossingZone == null || !currentCrossingZone.Equals(_crossWalk))
         {
             currentCrossingZone?.OnFinishedCrossing(this);
-            currentCrossingZone = _crossWalk as Crosswalk;
+            currentCrossingZone = (Crosswalk)_crossWalk;
             transitionController?.OnCrossWalkEntered();
         }
     }
@@ -158,7 +158,7 @@ public abstract class AIController : EntityController
         if (currentCrossingZone == null || !currentCrossingZone.Equals(_intersection))
         {
             currentCrossingZone?.OnFinishedCrossing(this);
-            currentCrossingZone = _intersection as Crosswalk;
+            currentCrossingZone = (Intersection)_intersection;
             transitionController?.OnIntersectionEntered();
         }
     }
