@@ -98,7 +98,7 @@ public abstract class AIController : EntityController
     
     public override void OnCrossWalkEntered(ICrossable _crossWalk)
     {
-        DebugController.LogMessage($"Entered crosswalk { gameObject.name }");
+        //DebugController.LogMessage($"Entered crosswalk { gameObject.name }");
         if (currentCrossingZone == null || !currentCrossingZone.Equals(_crossWalk))
         {
             currentCrossingZone?.OnFinishedCrossing(this);

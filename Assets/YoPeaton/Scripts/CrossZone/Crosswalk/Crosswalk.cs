@@ -146,7 +146,7 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
     /// </summary>
     /// <param name="_entity">Entity that started crossing.</param>
     public void OnStartedCrossing(EntityController _entity) {
-        DebugController.LogMessage($"Entity started crossing {  _entity.gameObject.name }");
+        //DebugController.LogMessage($"Entity started crossing {  _entity.gameObject.name }");
         ClearTicket(_entity);
         SetTurnForCrossingEntity(_entity.GetEntityType);
         if (_entity.GetEntityType.Equals(EntityType.Pedestrian)) {

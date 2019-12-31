@@ -225,7 +225,7 @@ public class CanvasManager : MonoBehaviour
         //PASO AL TUTORIAL//
         if (timestutorialfinished > 0)
         {
-            SceneManagerTest.LoadNextScene("TestScene 2");
+            SceneManagerTest.LoadNextScene("GameScene");
             Debug.LogError("Hundi play y vamos al juego");
         }
         else if (timestutorialfinished == 0)

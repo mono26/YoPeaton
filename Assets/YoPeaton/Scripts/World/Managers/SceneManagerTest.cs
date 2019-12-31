@@ -74,7 +74,7 @@ public class SceneManagerTest : MonoBehaviour
                 }
                 break;
 
-            case "testscene 2":
+            case "gamescene":
                 startCanvas = null;
                 loadingScreen = null;
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TEST 2");
@@ -115,15 +115,10 @@ public class SceneManagerTest : MonoBehaviour
     IEnumerator BackToMenuCR()
     {
         yield return new WaitForSeconds(15);
-        LoadScene("MainMenu");
+        LoadNextScene("MainMenu");
     }
 
     public static void LoadNextScene(string sceneToLoad)
-    {
-        SceneManager.LoadScene(sceneToLoad);
-    }
-
-    public void LoadScene(string sceneToLoad)
     {
         SceneManager.LoadScene(sceneToLoad);
     }

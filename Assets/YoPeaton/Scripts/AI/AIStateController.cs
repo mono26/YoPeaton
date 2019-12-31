@@ -352,7 +352,7 @@ public class AIStateController : MonoBehaviour
 
     public void OnCrossWalkEntered()
     {
-        DebugController.LogMessage($"Waiting at crosswalk { gameObject.name }");
+        //DebugController.LogMessage($"Waiting at crosswalk { gameObject.name }");
         aiEntity.SwitchToState(AIState.Waiting);
     }
 
