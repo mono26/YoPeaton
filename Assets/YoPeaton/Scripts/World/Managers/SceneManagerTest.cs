@@ -10,6 +10,12 @@ public class SceneManagerTest : MonoBehaviour
     TutorialEventController tutorialController;
     public static SceneManagerTest instance = null;                //Static instance of GameManager which allows it to be accessed by any other script.
 
+    [SerializeField]
+    private GameObject loadingScreen;
+    [SerializeField]
+    private GameObject startCanvas;
+
+
     //Awake is always called before any Start functions
     void Awake()
     {
@@ -27,6 +33,7 @@ public class SceneManagerTest : MonoBehaviour
 
         //Sets this to not be destroyed when reloading scene
         DontDestroyOnLoad(gameObject);
+
     }
 
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
@@ -36,6 +43,8 @@ public class SceneManagerTest : MonoBehaviour
         switch (scene.name.ToLower())
         {
             case "victoryscreenscene":
+                startCanvas = null;
+                loadingScreen = null;
                 CanvasManager._instance.TurnOffHUD();
                 if (GameManager.didPlayerLose == false)
                 {
@@ -66,6 +75,8 @@ public class SceneManagerTest : MonoBehaviour
                 break;
 
             case "testscene 2":
+                startCanvas = null;
+                loadingScreen = null;
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TEST 2");
                 ScoreManager.lifeTime = 200;
                 CanvasManager._instance.TurnOnHUD();
@@ -74,6 +85,8 @@ public class SceneManagerTest : MonoBehaviour
                 break;
 
             case "tutorial":
+                startCanvas = null;
+                loadingScreen = null;
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TUTORIAL");
                 //CanvasManager._instance.AssignDebugText();
                 //CanvasManager._instance.debugText.text = "EVENTO DE SCENEMANAGER: CARGAR TUTORIAL";
@@ -88,6 +101,10 @@ public class SceneManagerTest : MonoBehaviour
                 break;
 
             case "mainmenu":
+                startCanvas = GameObject.Find("StartCanvas");
+                startCanvas.SetActive(true);
+                loadingScreen = GameObject.Find("LoadingScreen");
+                loadingScreen.SetActive(false);
                 CanvasManager._instance.FillMenuBtns();
                 CanvasManager._instance.TurnOffHUD();
                 CanvasManager._instance.FillMenuBtnsMethods();
@@ -120,6 +137,28 @@ public class SceneManagerTest : MonoBehaviour
         //StartCoroutine(WaitToCount());
 
 
+    }
+
+    public void LoadGame(string scene)
+    {
+        StartCoroutine("LoadGameScene", scene);
+    }
+
+    public IEnumerator LoadGameScene(string scene)
+    {
+        AsyncOperation loadGameOp = SceneManager.LoadSceneAsync(scene);
+
+        if(startCanvas != null)
+        {
+            startCanvas.SetActive(false);
+        }
+
+        if(loadingScreen != null)
+        {
+            loadingScreen.SetActive(true);
+        }
+        
+        yield return null;
     }
 
     public IEnumerator WaitToCount()
