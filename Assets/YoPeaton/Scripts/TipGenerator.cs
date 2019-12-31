@@ -9,7 +9,7 @@ public class TipGenerator : MonoBehaviour
     private string[] tips;
     private Text tipText;
 
-    void Awake()
+    void OnEnable()
     {
         tipText = this.GetComponent<Text>();
         int tipIndex = Random.Range(0, tips.Length);

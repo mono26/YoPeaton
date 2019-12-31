@@ -450,6 +450,7 @@ public class CanvasManager : MonoBehaviour
             checkAndCrossImg.enabled = false;
     }
 
+
     #region Manejo de Botones
 
     //BOTONES//
