@@ -225,12 +225,12 @@ public class CanvasManager : MonoBehaviour
         //PASO AL TUTORIAL//
         if (timestutorialfinished > 0)
         {
-            SceneManagerTest.LoadNextScene("GameScene");
+            SceneManagerTest.LoadNextScene(GameManager.gameScene);
             Debug.LogError("Hundi play y vamos al juego");
         }
         else if (timestutorialfinished == 0)
         {
-            SceneManagerTest.LoadNextScene("Tutorial");
+            SceneManagerTest.LoadNextScene(GameManager.tutorialScene);
             Debug.LogError("Hundi play y vamos al tutorial");
         }
 
@@ -241,7 +241,7 @@ public class CanvasManager : MonoBehaviour
 
     public void BackToMenuBtnClicked()
     {
-        SceneManagerTest.LoadNextScene("MainMenu");
+        SceneManagerTest.LoadNextScene(GameManager.menuScene);
         Debug.LogError("Hundi quit desde la pausa");
     }
     public void ContinueBtnClicked()
@@ -280,7 +280,7 @@ public class CanvasManager : MonoBehaviour
     private void Update()
     {
         //Debug.LogError("Pause canvas esta activado? " + pausePanel.activeInHierarchy);
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene || SceneManagerTest.GetCurrentScene() == GameManager.gameScene)
         {
             if (player)
             {
@@ -364,7 +364,7 @@ public class CanvasManager : MonoBehaviour
     public void FillTextArray()
     {
         //Llenar el array de textos para poder hacer un ciclo para llenar los textos con los scores con el countto//
-        if (SceneManagerTest.GetCurrentScene() == "VictoryScreenScene")
+        if (SceneManagerTest.GetCurrentScene() == GameManager.victoryScene)
         {
             textsForScores[0] = GameObject.Find("TiempoCounter").GetComponent<Text>();
             textsForScores[1] = GameObject.Find("RespuestasCorrectasCounter").GetComponent<Text>();
@@ -438,7 +438,7 @@ public class CanvasManager : MonoBehaviour
     public IEnumerator DisapearFeedbackText()
     {
         yield return new WaitForSecondsRealtime(3);
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene || SceneManagerTest.GetCurrentScene() == GameManager.gameScene)
             FeedBackText.enabled = false;
     }
 
@@ -446,7 +446,7 @@ public class CanvasManager : MonoBehaviour
     {
         //Debug.Log("TENGO QUE APAGAR EL CHECK");
         yield return new WaitForSecondsRealtime(2);
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" || SceneManagerTest.GetCurrentScene() == "TestScene 2")
+        if (SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene || SceneManagerTest.GetCurrentScene() == GameManager.gameScene)
             checkAndCrossImg.enabled = false;
     }
 

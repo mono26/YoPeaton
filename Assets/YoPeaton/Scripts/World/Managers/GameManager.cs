@@ -10,13 +10,16 @@ public static class GameManager
     public static int timesTutorialFinished = 0;
     public static int timesAnsweredCorrectly = 0;
 
-
+    public const string gameScene = "GameScene";
+    public const string tutorialScene = "Tutorial";
+    public const string victoryScene = "VictoryScreenScene";
+    public const string menuScene = "MainMenu";
 
     //private static int printScore;
     public static void FinishLevel()
     {
-        if(SceneManagerTest.GetCurrentScene() != "VictoryScreenScene")
-            SceneManagerTest.LoadNextScene("VictoryScreenScene");
+        if(SceneManagerTest.GetCurrentScene() != GameManager.victoryScene)
+            SceneManagerTest.LoadNextScene(GameManager.victoryScene);
            //printScore = ScoreManager.instance.CalculateFinalScore();
         
     } 

@@ -26,7 +26,7 @@ public class TutorialEventController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial" && currentStep != null)
+        if (SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene && currentStep != null)
         {
 #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))

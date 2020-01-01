@@ -13,7 +13,7 @@ public class Goal : MonoBehaviour
             if (this.gameObject.name == "Goal_Tutorial")
             {
                 GameManager.SetTutorialPref();
-                SceneManagerTest.LoadNextScene("GameScene");
+                SceneManagerTest.instance.LoadScene(GameManager.gameScene);
             }
             else
             {

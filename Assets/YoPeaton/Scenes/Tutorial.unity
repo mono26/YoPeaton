@@ -404,43 +404,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1300327973578557781, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4098605855527679719, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_Text
-      value: 999
-      objectReference: {fileID: 0}
-    - target: {fileID: 177384776, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707608216943310248, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1847260884}
-    - target: {fileID: 1707608216943310248, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressAnswerBtn
-      objectReference: {fileID: 0}
-    - target: {fileID: 1707608217267151930, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1847260884}
-    - target: {fileID: 1707608217267151930, guid: 99b488569796fa9458cab172179bbe8c,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: PressAnswerBtn
-      objectReference: {fileID: 0}
     - target: {fileID: 3989906394332265231, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1300327973578557781, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3989906393802131760, guid: 99b488569796fa9458cab172179bbe8c,
@@ -458,10 +429,35 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4098605855527679719, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_Text
+      value: 999
+      objectReference: {fileID: 0}
     - target: {fileID: 3989906393038498957, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707608216943310248, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1847260884}
+    - target: {fileID: 1707608216943310248, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PressAnswerBtn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707608217267151930, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1847260884}
+    - target: {fileID: 1707608217267151930, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PressAnswerBtn
       objectReference: {fileID: 0}
     - target: {fileID: 3989906393802131766, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
@@ -483,6 +479,10 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 177384776, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7626467793138209917, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
@@ -85221,6 +85221,11 @@ PrefabInstance:
       propertyPath: pathToFollow
       value: 
       objectReference: {fileID: 1109167071}
+    - target: {fileID: 4109172826553066561, guid: 26d6a7f324f079f4e89709766ce95914,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26d6a7f324f079f4e89709766ce95914, type: 3}
 --- !u!4 &1625583221 stripped
