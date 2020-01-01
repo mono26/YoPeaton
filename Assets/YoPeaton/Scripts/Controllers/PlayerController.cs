@@ -117,7 +117,7 @@ public class PlayerController : EntityController
     IEnumerator CrashCR()
     {
         yield return CanvasManager._instance.DisapearFeedbackText();
-        SceneManagerTest.LoadNextScene("VictoryScreenScene");
+        SceneManagerTest.LoadNextScene(GameManager.victoryScene);
     }
 
     protected override bool ShouldSpeedUp()

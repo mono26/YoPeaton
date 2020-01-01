@@ -62,7 +62,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManagerTest.GetCurrentScene() == "TestScene 2" && SceneManagerTest.GetCurrentScene() == "Tutorial")
+        if (SceneManagerTest.GetCurrentScene() == GameManager.gameScene && SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene)
         {
             if (Time.timeScale == 1)
             {
@@ -71,7 +71,7 @@ public class ScoreManager : MonoBehaviour
             if (lifeTime <= 0)
             {
                 lifeTime = 0;
-                if (SceneManagerTest.GetCurrentScene() == "TestScene 2")
+                if (SceneManagerTest.GetCurrentScene() == GameManager.gameScene)
                 {
                     StartCoroutine(FinishLevelCR());
                 }

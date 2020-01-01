@@ -40,9 +40,9 @@ public class SceneManagerTest : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        switch (scene.name.ToLower())
+        switch (scene.name)
         {
-            case "victoryscreenscene":
+            case GameManager.victoryScene:
                 startCanvas = null;
                 loadingScreen = null;
                 CanvasManager._instance.TurnOffHUD();
@@ -74,7 +74,7 @@ public class SceneManagerTest : MonoBehaviour
                 }
                 break;
 
-            case "testscene 2":
+            case GameManager.gameScene:
                 startCanvas = null;
                 loadingScreen = null;
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TEST 2");
@@ -84,7 +84,7 @@ public class SceneManagerTest : MonoBehaviour
                 CanvasManager._instance.StartReplacementMethod();
                 break;
 
-            case "tutorial":
+            case GameManager.tutorialScene:
                 startCanvas = null;
                 loadingScreen = null;
                 Debug.Log("SE DISPARO EL EVENTO DE QUE CARGO LA ESCENA DE TUTORIAL");
@@ -100,7 +100,7 @@ public class SceneManagerTest : MonoBehaviour
                 CanvasManager._instance.StartReplacementMethod();
                 break;
 
-            case "mainmenu":
+            case GameManager.menuScene:
                 startCanvas = GameObject.Find("StartCanvas");
                 startCanvas.SetActive(true);
                 loadingScreen = GameObject.Find("LoadingScreen");
@@ -115,7 +115,7 @@ public class SceneManagerTest : MonoBehaviour
     IEnumerator BackToMenuCR()
     {
         yield return new WaitForSeconds(15);
-        LoadScene("MainMenu");
+        LoadScene(GameManager.menuScene);
     }
 
     public static void LoadNextScene(string sceneToLoad)
@@ -130,7 +130,7 @@ public class SceneManagerTest : MonoBehaviour
 
     public void LoadVictory()
     {
-        SceneManager.LoadScene("VictoryScreenScene");
+        SceneManager.LoadScene(GameManager.victoryScene);
         //CanvasManager._instance.StartSequence();
         //CanvasManager._instance.FillTextArray();
         //ScoreManager.instance.TestFillScoreArray();
