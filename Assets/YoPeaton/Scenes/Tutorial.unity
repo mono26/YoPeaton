@@ -5945,8 +5945,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Recuerda que el peaton tiene prelacion en la via, cuando vayan cruzando
-    por una cebra o bocacalle debes detenerte.
+  m_Text: Recuerda que los peatones tienen prioridad en cebras y bocacalles, debes
+    detenerte para ellos.
 --- !u!222 &110728666
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -18646,8 +18646,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Aqui veras tu velocidad, tienes que manejar con cuidado. Si vas muy rapido
-    no podras frenar a tiempo!
+  m_Text: "Aqu\xED ver\xE1s tu velocidad, maneja con cuidado, si vas muy r\xE1pido
+    no podr\xE1s detenerte a tiempo "
 --- !u!222 &345005864
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -38475,8 +38475,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "reporta vehiculos que veas romp\xEDendo las normas, asi ganaras mas puntos
-    (y ayudaras a tener una via mas segura), reporta tocandolos con tu dedo."
+  m_Text: "Reporta veh\xEDculos infractores toc\xE1ndolos con tu dedo; as\xED ganar\xE1s
+    puntos ayudando a una movilidad segura."
 --- !u!222 &744904932
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -42430,8 +42430,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Mientras manejas encontraras distintos obsaculos, maneja con cuidado, cualquier
-    colision con otro vehiculo te hara perder inmediatamente.
+  m_Text: "Encontrar\xE1s obst\xE1culos y otros veh\xEDculos, maneja con cuidado.
+    Toda colisi\xF3n causa p\xE9rdida y tendr\xE1s que recomenzar."
 --- !u!222 &829871579
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -60249,8 +60249,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Los vehiculos (inluido el tuyo) siempre iran en la direccion que te dice
-    la flecha.
+  m_Text: "No manejar\xE1s la direcci\xF3n, \xA1tiene piloto autom\xE1tico!"
 --- !u!222 &1167993486
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -60550,7 +60549,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Este es tu vehiculo, siempre sera el unico vehiculo azul en la ciudad.
+  m_Text: "Este es tu veh\xEDculo, siempre ser\xE1 el azul"
 --- !u!222 &1175813690
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -65671,13 +65670,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Las infracciones que puedes reportar son:
-
-    1) bloquear un paso peatonal.
-
-    2)no dar via a un peaton que esta pidiendo.
-
-    3)pasar al mismo tiempo que un peaton poniendolo en riesgo.'
+  m_Text: "Las infracciones reportables son: \n1) Bloquear un paso peatonal.\n2) Irrespetar
+    la prelaci\xF3n peatonal.\n3) Pasar al mismo tiempo que un peat\xF3n, pon\xEDendolo
+    en riesgo."
 --- !u!222 &1259725615
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -71617,8 +71612,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Este es tu freno, mantenlo presionado para disminuir tu velocidad hasta
-    frenar.\n\xA1Si vas muy rapido no podras frenar a tiempo!"
+  m_Text: "Este es el freno, \xFAsalo con anticipaci\xF3n. No lo presiones fuerte,
+    suave funciona igual."
 --- !u!222 &1368894720
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -71880,8 +71875,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Esta es la meta, una vez llegues ahi sin colisionar con nada, terminaras
-    el nivel.
+  m_Text: "Tu meta es respetar la prelaci\xF3n peatonal y evitar colisiones \xA1Buen
+    juego!"
 --- !u!222 &1375472101
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -93648,8 +93643,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: tambien debes estar atento por si un peaton esta pidiendo via por donde
-    vas manejando.
+  m_Text: "Con su mano, los peatones te anunciar\xE1n su prioridad, pon atenci\xF3n
+    para respetar su prelaci\xF3n."
 --- !u!222 &1789388116
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -104770,7 +104765,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Este es tu acelerador, presionalo para que tu vehiculo avance.
+  m_Text: "Este es el acelerador, \xFAsalo con calma \xA1Si vas muy r\xE1pido no podr\xE1s
+    respetar la prelaci\xF3n peatonal!"
 --- !u!222 &1965109981
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -105714,7 +105710,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: TAMBIEN PODRAS VER EL TIEMPO QUE TIENES PARA LLEGAR A TU DESTINO.
+  m_Text: "Ver\xE1s tambi\xE9n el tiempo que tienes para llegar a tu destino"
 --- !u!222 &1978534998
 CanvasRenderer:
   m_ObjectHideFlags: 0
