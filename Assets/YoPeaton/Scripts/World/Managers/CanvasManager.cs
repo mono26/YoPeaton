@@ -219,18 +219,20 @@ public class CanvasManager : MonoBehaviour
         Debug.LogError("Hundi quit");
     }
 
+
+
     private void playBtnClicked()
     {
         int timestutorialfinished = GameManager.GetTutorialPref();
         //PASO AL TUTORIAL//
         if (timestutorialfinished > 0)
         {
-            SceneManagerTest.LoadNextScene(GameManager.gameScene);
+            SceneManagerTest.LoadGame(GameManager.gameScene);
             Debug.LogError("Hundi play y vamos al juego");
         }
         else if (timestutorialfinished == 0)
         {
-            SceneManagerTest.LoadNextScene(GameManager.tutorialScene);
+            SceneManagerTest.LoadGame(GameManager.tutorialScene);
             Debug.LogError("Hundi play y vamos al tutorial");
         }
 

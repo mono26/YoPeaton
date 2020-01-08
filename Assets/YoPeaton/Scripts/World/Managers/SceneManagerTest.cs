@@ -139,26 +139,36 @@ public class SceneManagerTest : MonoBehaviour
 
     }
 
-    public void LoadGame(string scene)
+    public static void LoadGame(string scene)
     {
+        instance.StartCoroutine("FakeLoad", scene);
+    }
+
+    public IEnumerator FakeLoad(string scene)
+    {
+        Debug.LogError("wtf");
+
+        if (startCanvas != null)
+        {
+            startCanvas.SetActive(false);
+        }
+
+        if (loadingScreen != null)
+        {
+            loadingScreen.SetActive(true);
+        }
+
+        yield return new WaitForSeconds(5.0f);
         StartCoroutine("LoadGameScene", scene);
     }
 
     public IEnumerator LoadGameScene(string scene)
     {
-        AsyncOperation loadGameOp = SceneManager.LoadSceneAsync(scene);
+        AsyncOperation loadGameOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
 
-        if(startCanvas != null)
-        {
-            startCanvas.SetActive(false);
-        }
-
-        if(loadingScreen != null)
-        {
-            loadingScreen.SetActive(true);
-        }
-        
         yield return null;
+
+        loadingScreen.SetActive(false);
     }
 
     public IEnumerator WaitToCount()
