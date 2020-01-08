@@ -146,19 +146,30 @@ public class SceneManagerTest : MonoBehaviour
 
     public IEnumerator LoadGameScene(string scene)
     {
+        DebugController.LogMessage("CAlling load CR");
+        //if (startCanvas != null)
+        //{
+        //    startCanvas.SetActive(false);
+        //}
+
+        //if (loadingScreen != null)
+        //{
+        //    loadingScreen.SetActive(true);
+        //}
         AsyncOperation loadGameOp = SceneManager.LoadSceneAsync(scene);
 
-        if(startCanvas != null)
+        if (startCanvas != null)
         {
             startCanvas.SetActive(false);
         }
 
-        if(loadingScreen != null)
+        if (loadingScreen != null)
         {
             loadingScreen.SetActive(true);
         }
-        
+
         yield return null;
+        //yield return SceneManager.LoadSceneAsync(scene);
     }
 
     public IEnumerator WaitToCount()
