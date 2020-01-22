@@ -195,7 +195,7 @@ public class CanvasManager : MonoBehaviour
 
     public void FillVictoryButtonMethods()
     {
-        retryBtn.onClick.AddListener(delegate { playBtnClicked(); });
+        retryBtn.onClick.AddListener(delegate { BackToMenuBtnClicked(); });
         quitFinalBtn.onClick.AddListener(delegate { quitBtnClicked(); });
     }
 
