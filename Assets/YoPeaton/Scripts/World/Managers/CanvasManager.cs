@@ -40,7 +40,7 @@ public class CanvasManager : MonoBehaviour
 
     [Header("Objetos Escena: ")]
     [SerializeField]
-    private GameObject hudPanel;
+    public GameObject hudPanel;
     [SerializeField]
     private GameObject scoreContainer;
     [SerializeField]
