@@ -103,6 +103,7 @@ public class PlayerController : EntityController
         base.OnEntityCollision(_otherEntity);
         if (_otherEntity && _otherEntity.gameObject.CompareTag("Pedestrian"))
         {
+            _otherEntity.GetComponent<AIController>().SwitchToState(AIState.Waiting);
             _otherEntity.GetComponent<PedestrianAnimator>().OnPublicPedestrianRunOver();
         }
         GameManager.didPlayerLose = true;
