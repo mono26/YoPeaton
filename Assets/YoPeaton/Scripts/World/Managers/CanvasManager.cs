@@ -260,23 +260,23 @@ public class CanvasManager : MonoBehaviour
     public void FillReferences()
     {
         DebugController.LogMessage("VOY A LLENAR LAS REFERENCIAS");
-            speedMeter = this.transform.GetChild(0).GetChild(1).gameObject;
-            player = FindObjectOfType<PlayerController>();
-            FeedBackTextGO = GameObject.Find("FeedbackTest");
-            FeedBackText = GameObject.Find("FeedbackTest").GetComponent<Text>();
-            hudPanel = this.transform.GetChild(0).gameObject; ;
-            pausePanel = this.transform.GetChild(1).gameObject;
-            crosswalkGuessHUD = this.transform.GetChild(0).GetChild(2).gameObject;
-            crosswalkTypesButtons = this.transform.GetChild(0).GetChild(2).GetChild(1).gameObject;
-            crosswalkQuestionButtons = this.transform.GetChild(0).GetChild(2).GetChild(2).gameObject;
+        speedMeter = this.transform.GetChild(0).GetChild(1).gameObject;
+        player = FindObjectOfType<PlayerController>();
+        FeedBackTextGO = GameObject.Find("FeedbackTest");
+        FeedBackText = GameObject.Find("FeedbackTest").GetComponent<Text>();
+        hudPanel = this.transform.GetChild(0).gameObject; ;
+        pausePanel = this.transform.GetChild(1).gameObject;
+        crosswalkGuessHUD = this.transform.GetChild(0).GetChild(2).gameObject;
+        crosswalkTypesButtons = this.transform.GetChild(0).GetChild(2).GetChild(1).gameObject;
+        crosswalkQuestionButtons = this.transform.GetChild(0).GetChild(2).GetChild(2).gameObject;
         //if (checkAndCrossImg == null)
-            checkAndCrossImg = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Image>();
+        checkAndCrossImg = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Image>();
         //if (checkAndCrossGO == null)
-            checkAndCrossGO = GameObject.Find("CheckAndCrossCanvasIMG");
+        checkAndCrossGO = GameObject.Find("CheckAndCrossCanvasIMG");
         //if (checkAndCrossAnimator == null)
-            checkAndCrossAnimator = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Animator>();
+        checkAndCrossAnimator = GameObject.Find("CheckAndCrossCanvasIMG").GetComponent<Animator>();
         //if (timeLeftText == null)
-            timeLeftText = this.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
+        timeLeftText = this.transform.GetChild(0).GetChild(0).GetChild(0).gameObject.GetComponent<Text>();
     }
 
     private void Update()
@@ -305,8 +305,8 @@ public class CanvasManager : MonoBehaviour
     public void ActivatePauseCanvas()
     {
         print("ACTIVATE PAUSE CANVAS");
-            hudPanel.SetActive(false);
-            pausePanel.SetActive(true);
+        hudPanel.SetActive(false);
+        pausePanel.SetActive(true);
         print("Pause Canvas is Active? " + pausePanel.activeInHierarchy);
 
     }
@@ -342,8 +342,8 @@ public class CanvasManager : MonoBehaviour
     #endregion
 
     public void ActivateCheckOrCross(bool isCorrect)
-    { 
-        if(isCorrect)
+    {
+        if (isCorrect)
         {
             Debug.Log("ACTIVE EL CHECK");
             checkAndCrossImg.enabled = true;
@@ -388,7 +388,8 @@ public class CanvasManager : MonoBehaviour
         }
     }
     public void GenerateFeedback(string feedbackType)
-    { 
+    {
+        player.Input.Brake();
         switch (feedbackType)
         {
             case "NoWayReportCorrect":
@@ -436,6 +437,12 @@ public class CanvasManager : MonoBehaviour
         }
     }
 
+    public void DisapearFeedback()
+    {
+        FeedBackText.enabled = false;
+        checkAndCrossImg.enabled = false;
+        player.Input.StopBrake();
+    }
 
     public IEnumerator DisapearFeedbackText()
     {
@@ -449,7 +456,10 @@ public class CanvasManager : MonoBehaviour
         //Debug.Log("TENGO QUE APAGAR EL CHECK");
         yield return new WaitForSecondsRealtime(2);
         if (SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene || SceneManagerTest.GetCurrentScene() == GameManager.gameScene)
+        {
             checkAndCrossImg.enabled = false;
+            player.Input.StopBrake();
+        }
     }
 
 
@@ -633,9 +643,6 @@ public class CanvasManager : MonoBehaviour
     public IEnumerator EraseFeedback()
     {
         yield return new WaitForSeconds(2);
-        //Machetazo para testeo, se deben resetear a tiempos diferentes//
-        //testAnswerText.text = "Report: null";
-        //testReportText.text = "Report: null";
     }
     #endregion
 
