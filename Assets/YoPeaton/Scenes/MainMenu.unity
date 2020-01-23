@@ -7543,6 +7543,14 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+      propertyPath: accelBtn
+      value: 
+      objectReference: {fileID: 894520402}
+    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
+      propertyPath: wholeCanvas
+      value: 
+      objectReference: {fileID: 1682907852}
     - target: {fileID: 1026663267, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -7557,14 +7565,6 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
-      propertyPath: accelBtn
-      value: 
-      objectReference: {fileID: 894520402}
-    - target: {fileID: 1847260884, guid: 99b488569796fa9458cab172179bbe8c, type: 3}
-      propertyPath: wholeCanvas
-      value: 
-      objectReference: {fileID: 1682907852}
     - target: {fileID: 1684414832880559125, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_IsActive
@@ -7595,6 +7595,21 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7626467794304338679, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210223747695952354, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 218
+      objectReference: {fileID: 0}
+    - target: {fileID: 8210223747695952354, guid: 99b488569796fa9458cab172179bbe8c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -55
+      objectReference: {fileID: 0}
+    - target: {fileID: 4360756693098623669, guid: 99b488569796fa9458cab172179bbe8c,
         type: 3}
       propertyPath: m_IsActive
       value: 0

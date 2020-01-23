@@ -54,23 +54,11 @@ public class SignalIdentification : MonoBehaviour
             if (correctAnswer == "Cebra" && canAnswer == true)
             {
 
-                Time.timeScale = 0f;
-                DebugController.LogErrorMessage("cebra" + "cebra correctas: " + correctCebraQt);
-                onQuestionAsk?.Invoke();
-                CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
-                //StartCoroutine(ChangeCanAnswerValueCR());
-                canAnswer = false;
-                return correctAnswer;
+                return null;
             }
             if (correctAnswer == "Bocacalle" && canAnswer == true)
             {
-                Time.timeScale = 0f;
-                DebugController.LogErrorMessage("Bocacalle" + "bocacalles correctas: " + correctPasacallesQt);
-                onQuestionAsk?.Invoke();
-                CanvasManager._instance.ActivateSpecificCanvas("OptInCanvas");
-                //StartCoroutine(ChangeCanAnswerValueCR());
-                canAnswer = false;
-                return correctAnswer;
+                return null;
             }
             else
             {
@@ -81,7 +69,7 @@ public class SignalIdentification : MonoBehaviour
         {
             return null;
         }
-
+        
     }
 
     IEnumerator ChangeCanAnswerValueCR()

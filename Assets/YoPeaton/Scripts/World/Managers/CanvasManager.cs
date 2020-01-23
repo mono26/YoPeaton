@@ -124,22 +124,7 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
 
-        // FillReferences();
-        //playerGO = GameObject.Find("PlayerCar_PFB Variant");
-        checkAndCrossImg.enabled = false;
-        currentScore = 0;
 
-        FeedBackTextGO.SetActive(false);
-        //Activar unicamente el base
-        hudPanel.SetActive(true);
-        currentActiveCanvas = hudPanel.name;
-
-        //scoresToCountTo = new int[7];
-        //Desastivar todos los otros canvas
-        pausePanel.SetActive(false);
-        crosswalkGuessHUD.SetActive(false);
-        crosswalkTypesButtons.SetActive(false);
-        //crosswalkQuestionButtons.SetActive(false);
 
     }
 
@@ -167,6 +152,8 @@ public class CanvasManager : MonoBehaviour
         checkAndCrossImg.enabled = false;
         currentScore = 0;
 
+        //FeedBackTextGO.SetActive(false);
+
         //Activar unicamente el base
         hudPanel.SetActive(true);
         currentActiveCanvas = hudPanel.name;
@@ -177,6 +164,8 @@ public class CanvasManager : MonoBehaviour
         crosswalkGuessHUD.SetActive(false);
         crosswalkTypesButtons.SetActive(false);
         //crosswalkQuestionButtons.SetActive(false);
+
+
     }
 
     public void FillMenuBtns()
@@ -392,7 +381,7 @@ public class CanvasManager : MonoBehaviour
     {
         player.Input.Brake();
         Time.timeScale = 0;
-        FeedBackTextGO.SetActive(true);
+        //FeedBackTextGO.SetActive(true);
         switch (feedbackType)
         {
             case "NoWayReportCorrect":
@@ -445,7 +434,7 @@ public class CanvasManager : MonoBehaviour
         Time.timeScale = 1;
         FeedBackText.enabled = false;
         checkAndCrossImg.enabled = false;
-        FeedBackTextGO.SetActive(false);
+        //FeedBackTextGO.SetActive(false);
         player.Input.StopBrake();
     }
 
