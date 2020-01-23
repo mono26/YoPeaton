@@ -119,6 +119,7 @@ public class PlayerController : EntityController
     {
         yield return CanvasManager._instance.DisapearFeedbackText();
         SceneManagerTest.LoadNextScene(GameManager.victoryScene);
+        Time.timeScale = 1;
     }
 
     protected override bool ShouldSpeedUp()
