@@ -129,6 +129,7 @@ public class CanvasManager : MonoBehaviour
         checkAndCrossImg.enabled = false;
         currentScore = 0;
 
+        FeedBackTextGO.SetActive(false);
         //Activar unicamente el base
         hudPanel.SetActive(true);
         currentActiveCanvas = hudPanel.name;
@@ -262,7 +263,7 @@ public class CanvasManager : MonoBehaviour
         DebugController.LogMessage("VOY A LLENAR LAS REFERENCIAS");
         speedMeter = this.transform.GetChild(0).GetChild(1).gameObject;
         player = FindObjectOfType<PlayerController>();
-        FeedBackTextGO = GameObject.Find("FeedbackTest");
+        FeedBackTextGO = GameObject.Find("FeedbackTextBG");
         FeedBackText = GameObject.Find("FeedbackTest").GetComponent<Text>();
         hudPanel = this.transform.GetChild(0).gameObject; ;
         pausePanel = this.transform.GetChild(1).gameObject;
@@ -349,16 +350,16 @@ public class CanvasManager : MonoBehaviour
             checkAndCrossImg.enabled = true;
             checkAndCrossImg.sprite = checkSprite;
             checkAndCrossAnimator.enabled = true;
-            checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
-            StartCoroutine(DisapearCheckOrCross());
+            //checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
+            //StartCoroutine(DisapearCheckOrCross());
         }
         else
         {
             checkAndCrossImg.enabled = true;
             checkAndCrossImg.sprite = crossSprite;
             checkAndCrossAnimator.enabled = true;
-            checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
-            StartCoroutine(DisapearCheckOrCross());
+            //checkAndCrossAnimator.Play("Expand And Spin", -1, 0);
+            //StartCoroutine(DisapearCheckOrCross());
         }
     }
 
@@ -390,57 +391,61 @@ public class CanvasManager : MonoBehaviour
     public void GenerateFeedback(string feedbackType)
     {
         player.Input.Brake();
+        Time.timeScale = 0;
+        FeedBackTextGO.SetActive(true);
         switch (feedbackType)
         {
             case "NoWayReportCorrect":
                 FeedBackText.enabled = true;
                 FeedBackText.color = Color.green;
                 FeedBackText.text = "No dio paso al peatón.";
-                StartCoroutine(DisapearFeedbackText());
+                //StartCoroutine(DisapearFeedbackText());
                 break;
             case "BlockCrossingReportCorrect":
                 FeedBackText.enabled = true;
                 FeedBackText.color = Color.green;
                 FeedBackText.text = "Bloqueando un paso peatonal.";
-                StartCoroutine(DisapearFeedbackText());
+                //StartCoroutine(DisapearFeedbackText());
                 break;
             case "WrongAnswer":
                 FeedBackText.enabled = true;
                 FeedBackText.color = Color.red;
                 FeedBackText.text = "¡Respuesta Incorrecta!";
-                StartCoroutine(DisapearFeedbackText());
+                //StartCoroutine(DisapearFeedbackText());
                 break;
             case "CorrectAnswer":
                 FeedBackText.enabled = true;
                 FeedBackText.color = Color.green;
                 FeedBackText.text = "¡Respuesta Correcta!";
-                StartCoroutine(DisapearFeedbackText());
+                //StartCoroutine(DisapearFeedbackText());
                 break;
             case "WrongReport":
                 FeedBackText.enabled = true;
                 FeedBackText.color = Color.red;
                 FeedBackText.text = "Conduciendo correctamente.";
-                StartCoroutine(DisapearFeedbackText());
+                //StartCoroutine(DisapearFeedbackText());
                 break;
             case "Crash":
                 FeedBackText.enabled = true;
                 FeedBackText.color = Color.red;
                 FeedBackText.text = "¡Tienes que manejar con cuidado!";
-                StartCoroutine(DisapearFeedbackText());
+                //StartCoroutine(DisapearFeedbackText());
                 break;
             case "CrossWithPedestrian":
                 FeedBackText.enabled = true;
                 FeedBackText.color = Color.red;
                 FeedBackText.text = "¡Debes esperar a que pase el peatón!";
-                StartCoroutine(DisapearFeedbackText());
+                //StartCoroutine(DisapearFeedbackText());
                 break;
         }
     }
 
     public void DisapearFeedback()
     {
+        Time.timeScale = 1;
         FeedBackText.enabled = false;
         checkAndCrossImg.enabled = false;
+        FeedBackTextGO.SetActive(false);
         player.Input.StopBrake();
     }
 
@@ -494,6 +499,7 @@ public class CanvasManager : MonoBehaviour
     public void PressAccelerateBtn()
     {
         player.Input.Accelerate();
+        DisapearFeedback();
     }
 
     public void ReleaseAccelerateBtn()
