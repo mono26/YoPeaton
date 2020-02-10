@@ -13,14 +13,12 @@ public class PlayerCarInput : MonoBehaviour
     {
         IsBraking = true;
         Debug.Log("Is Braking");
-        //return isBraking;
     }
 
     public void StopBrake()
     {
         IsBraking = false;
         Debug.Log("Stop Braking");
-        //return isBraking;
     }
 
     public void Accelerate()

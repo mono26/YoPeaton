@@ -52,7 +52,6 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
     private void Start()
     {
         this.transform.localRotation = new Quaternion(0, 0, 0, 0);
-        // ToggleBrakeLights(false);
         if (GetEntity)
         {
             direction = GetEntity.GetFollowPathComponent.GetDirection(Time.time);
@@ -79,18 +78,9 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
     }
 
     private void MoveToNextPosition(Vector3 _position) {
-        // Vector3 lerpedPosition = Vector2.Lerp(transform.position, _position, Time.fixedDeltaTime);
-        // carBody.MovePosition(lerpedPosition);
-        // RotateInDirectionOfPosition(lerpedPosition);
         _position.z = 0;
         direction = GetEntity.GetFollowPathComponent.GetDirection(Time.time);
-        //direction = (_position - transform.position).normalized;
-        //Debug.LogError(direction);
         carBody.MovePosition(_position);
-        //RotateInDirectionOfPosition(_position);
-        // currentDirection = (lerpedPosition - transform.position).normalized;
-        // onMovement?.Invoke(currentDirection);
-        // currentDirection = (_position - transform.position).normalized;
         OnEntityMovementEventArgs eventArgs = new OnEntityMovementEventArgs();
         eventArgs.Entity = movingEntity;
         eventArgs.MovementDirection = direction; 
@@ -99,14 +89,6 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
 
     private void RotateInDirectionOfPosition(Vector3 _position) {
         Vector3 directionTowardsPosition = (_position - transform.position).normalized;
-        // bool isOpositeDirection = Vector3.Dot(transform.right, directionTowardsPosition) < 0;
-        // if (!isOpositeDirection) {
-        //     Vector2 targetRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
-        //     transform.right = targetRotation;
-        // }
-        // Vector2 lerpedRotation = Vector2.Lerp((Vector2)transform.right, directionTowardsPosition, Time.fixedDeltaTime);
-        // transform.right = lerpedRotation;
-        //transform.right = directionTowardsPosition;
     }
 
     public void ApplyBrakes(float _deltaTime) {
@@ -115,7 +97,6 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
             currentSpeed = Mathf.Clamp(currentSpeed, 0.0f, maxSpeed);
         }
         onBrake?.Invoke(GetEntity);
-        // ToggleBrakeLights(true);
     }
 
     private void ApplyInmediateStop()
@@ -137,26 +118,9 @@ public class EntityMovement : MonoBehaviour, IMovable, ISlowable
         
     }
 
-    //private void ToggleBrakeLights(bool status)
-    //{
-    //    if (GetEntity.GetEntityType == EntityType.Car)
-    //    {
-    //        if (status && direction == new Vector3(0, 1, 0))
-    //        {
-    //            carLightsVFX.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            carLightsVFX.SetActive(false);
-    //        }
-    //    }
-            
-    //}
-
     public void SlowDownByPercent(float _slowPercent) {
         currentSpeed = currentSpeed * ((100 - _slowPercent) / 100);
         onBrake?.Invoke(GetEntity);
-        // ToggleBrakeLights(true);
     }
 
     public void MoveToPosition(Vector3 position) {

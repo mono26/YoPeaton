@@ -13,7 +13,6 @@ public class CarAnimator : EntityAnimationController
             entity.GetDirectionChangeComponent.onStopChangingDirection += OnDirectionalStop;
             entity.GetMovableComponent.AddOnMovement(OnMovement);
         }
-
     }
 
     protected override void OnDisable() 
