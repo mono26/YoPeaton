@@ -164,7 +164,7 @@ public class SceneManagerTest : MonoBehaviour
 
     public IEnumerator LoadGameScene(string scene)
     {
-        AsyncOperation loadGameOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Additive);
+        AsyncOperation loadGameOp = SceneManager.LoadSceneAsync(scene, LoadSceneMode.Single);
 
         yield return null;
 

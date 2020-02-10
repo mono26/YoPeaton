@@ -28,7 +28,7 @@ public class ScoreManager : MonoBehaviour
     public static int finalScore;
     public float countDuration = 2f;
 
-    public static float lifeTime = 99999999999999999f;
+    public static float lifeTime = 200f;
 
     public static int correctAnswers = 0;
     public static int wrongAnswers = 0;
@@ -62,11 +62,12 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        if (SceneManagerTest.GetCurrentScene() == GameManager.gameScene && SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene)
+        if (SceneManagerTest.GetCurrentScene() == GameManager.gameScene || SceneManagerTest.GetCurrentScene() == GameManager.tutorialScene)
         {
-            if (Time.timeScale == 1)
+            if (Time.timeScale != 0)
             {
                 lifeTime -= Time.deltaTime;
+                print("Lifetime Scoremanager: " + lifeTime);
             }
             if (lifeTime <= 0)
             {

@@ -276,10 +276,12 @@ public class CanvasManager : MonoBehaviour
         {
             if (player)
             {
+
                 fillPercent = (player.GetMovableComponent.GetCurrentSpeed / player.GetMovableComponent.GetMaxSpeed);
                 //Debug.Log("Fill Percent: "  + fillPercent);
                 speedImage.fillAmount = fillPercent;
                 var lifeTimeInt = Mathf.RoundToInt(ScoreManager.lifeTime);
+                print("Lifetime: " +lifeTimeInt);
                 timeLeftText.text = lifeTimeInt.ToString();
             }
 
