@@ -17,40 +17,10 @@ public class TutorialEventController : MonoBehaviour
     public GameObject tutorialStep7;
     public GameObject tutorialStep8;
 
-    public Text countText;
 
     public GameObject currentStep;
 
-    // Update is called once per frame
-    void Update()
-    {
-        Debug.Log("Current Step: " + currentStep);
-        if (SceneManagerTest.GetCurrentScene() == "Tutorial")
-        {
-            if(currentStep != null)
-            {
-                countText.text = "!";
-                if(Input.touchCount > 1)
-                { 
-                    countText.text = Input.touchCount.ToString();
-                    /*if (Input.GetMouseButtonDown(0) || Input.touchCount == 2)
-                    {
-                        TurnOffCurrentStepMehtod(currentStep);
-                    }*/
-                    TurnOffCurrentStepMehtod(currentStep);
-                    if (Input.touchCount == 2)
-                    {
 
-                    }
-                }
-                else
-                {
-                    countText.text = "#";
-                }
-            }
-        }
-        
-    }
     public void FillReferences()
     {
         Debug.Log("voy a llenar las referencias de los tutorial steps");

@@ -28,12 +28,22 @@ public class VehicleController : AIController
     {
         float probability = UnityEngine.Random.Range(0f, 1f);
         BrakeLight brakeLights = GetComponent<BrakeLight>();
-        if (probability < 0.25f)
+        /*if (probability < 0.0f)
         {
-            SetEntitySubType = EntitySubType.Motorcycle;
-            brakeLights.VehicleType = VehicleType.Motorcycle;
+            if(SceneManagerTest.GetCurrentScene() == "GameScene")
+            {
+                SetEntitySubType = EntitySubType.Motorcycle;
+                brakeLights.VehicleType = VehicleType.Motorcycle;
+            }
+            else
+            {
+                SetEntitySubType = EntitySubType.GreenCar;
+                brakeLights.VehicleType = VehicleType.Car;
+            }
+
         }
-        else if (probability < 0.60f)
+        else*/
+        if (probability < 0.60f)
         {
             SetEntitySubType = EntitySubType.GreenCar;
             brakeLights.VehicleType = VehicleType.Car;

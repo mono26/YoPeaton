@@ -36,6 +36,7 @@ public class SceneManagerTest : MonoBehaviour
 
     }
 
+
     void OnEnable() => SceneManager.sceneLoaded += OnSceneLoaded;
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -82,6 +83,7 @@ public class SceneManagerTest : MonoBehaviour
                 CanvasManager._instance.TurnOnHUD();
                 CanvasManager._instance.FillReferences();
                 CanvasManager._instance.StartReplacementMethod();
+                GameManager.didPlayerLose = false;
                 break;
 
             case GameManager.tutorialScene:
@@ -141,7 +143,10 @@ public class SceneManagerTest : MonoBehaviour
 
     public static void LoadGame(string scene)
     {
-        instance.StartCoroutine("FakeLoad", scene);
+        if (scene == "GameScene")
+            instance.StartCoroutine("FakeLoad", scene);
+        else 
+            LoadNextScene(scene);
     }
 
     public IEnumerator FakeLoad(string scene)

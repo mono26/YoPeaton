@@ -25,25 +25,36 @@ public class ScoreManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    [SerializeField]
     public static int finalScore;
     public float countDuration = 2f;
 
+    [SerializeField]
     public static float lifeTime = 200f;
 
+    [SerializeField]
     public static int correctAnswers = 0;
+    [SerializeField]
     public static int wrongAnswers = 0;
 
     public static int infractionsCommited = 0;
 
+    [SerializeField]
     public static int wrongReports = 0;
+    [SerializeField]
     public static int correctReports = 0;
 
+    [SerializeField]
     public static int correctReportScore;
+    [SerializeField]
     public static int correctAnswerScore;
 
+    [SerializeField]
     public static int wrongReportScore;
+    [SerializeField]
     public static int wrongAnswerScore;
 
+    [SerializeField]
     public static int InfractionScore;
 
     public static int timeScore;
@@ -58,6 +69,17 @@ public class ScoreManager : MonoBehaviour
 
     public static void AddScore(int _score) {
         finalScore = +_score;
+    }
+
+    private void ResetValues()
+    {
+        wrongAnswerScore = 0;
+        wrongAnswers = 0;
+        correctAnswers = 0;
+        correctAnswerScore = 0;
+        finalScore = 0;
+        timeScore = 0;
+        infractionsCommited = 0;
     }
 
     private void Update()

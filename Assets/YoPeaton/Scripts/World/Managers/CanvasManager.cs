@@ -33,8 +33,9 @@ public class CanvasManager : MonoBehaviour
     public Button playBtn;
     public Button quitBtn;
     public Button optionsBtn;
+    public Button tutorialBtn;
 
-    [Header("Botones Victorua: ")]
+    [Header("Botones Victoria: ")]
     public Button retryBtn;
     public Button quitFinalBtn;
 
@@ -121,12 +122,6 @@ public class CanvasManager : MonoBehaviour
 
     #endregion
     // Start is called before the first frame update
-    void Start()
-    {
-
-
-
-    }
 
     public void TurnOffHUD()
     {
@@ -174,6 +169,7 @@ public class CanvasManager : MonoBehaviour
         playBtn = GameObject.Find("Button_Play").GetComponent<Button>();
         quitBtn = GameObject.Find("Button_Quit").GetComponent<Button>();
         optionsBtn = GameObject.Find("Button_Options").GetComponent<Button>();
+        tutorialBtn = GameObject.Find("Button_Tutorial").GetComponent<Button>();
     }
 
     public void FillVictoryButtons()
@@ -196,11 +192,17 @@ public class CanvasManager : MonoBehaviour
         playBtn.onClick.AddListener(delegate { playBtnClicked(); });
         quitBtn.onClick.AddListener(delegate { quitBtnClicked(); });
         optionsBtn.onClick.AddListener(delegate { optionsBtnClicked(); });
+        tutorialBtn.onClick.AddListener(delegate { tutorialBtnClicked(); });
     }
 
     private void optionsBtnClicked()
     {
         Debug.LogError("Hundi opciones");
+    }
+
+    private void tutorialBtnClicked()
+    {
+        SceneManagerTest.LoadNextScene("Tutorial");
     }
 
     private void quitBtnClicked()
