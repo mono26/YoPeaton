@@ -138,11 +138,11 @@ public class PlayerController : EntityController
 
     public override void OnIntersectionEntered(ICrossable _crossWalk)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void OnIntersectionExited(ICrossable _intersection)
     {
-        throw new System.NotImplementedException();
+
     }
 }

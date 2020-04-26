@@ -79,23 +79,6 @@ public class AIStateController : MonoBehaviour
     private void OnCrossing()
     {
         OnMoving();
-        //if (ShouldAvoidCollision())
-        //{
-        //    RaycastCheckResult result = IsThereAObstacle();
-        //    if (result.collided && result.otherEntity.IsCrossingCrosswalk)
-        //    {
-        //        aiEntity.SetMovementState(MovementState.SlowDown);
-        //    }
-        //    else
-        //    {
-        //        aiEntity.SetMovementState(MovementState.SpeedUp);
-        //    }
-        //    // Speed up
-        //}
-        //else
-        //{
-        //    aiEntity.SetMovementState(MovementState.SpeedUp);
-        //}
     }
 
     private void OnMoving()
@@ -119,6 +102,7 @@ public class AIStateController : MonoBehaviour
 
     private void OnWaiting()
     {
+        // Check the the ai controller should wait for it's current zone to be cleared.
         if (ShouldWaitForClearCross())
         {
             switch (aiEntity.GetCurrentCrossingZone.CrossableType)
@@ -128,7 +112,15 @@ public class AIStateController : MonoBehaviour
                         // Can run probaility for should wait for clear pass.
                         if (ShouldAskForCross())
                         {
-                            AskForCross();
+                            if (IsAnotherEntityTurnToCross())
+                            {
+                                // Don't ask for cross or ask but without waving animation.
+                            }
+                            else
+                            {
+                                AskForCross();
+                            }
+                            //AskForCross();
                         }
                         else
                         {
@@ -136,7 +128,7 @@ public class AIStateController : MonoBehaviour
                             {
                                 if (aiEntity.GetEntityType.Equals(EntityType.Vehicle))
                                 {
-                                    if ((IsAnotherEntityAskingForCross() || IsAnotherEntityWaiting()) && ShouldGiveCross())
+                                    if ((IsAnotherEntityWaiting() || IsAnotherEntityAskingForCross()) && ShouldGiveCross())
                                     {
                                         GiveCross();
                                     }
@@ -174,6 +166,11 @@ public class AIStateController : MonoBehaviour
         {
             StartCross();
         }
+    }
+
+    private bool IsAnotherEntityTurnToCross()
+    {
+        return !((Crosswalk)aiEntity.GetCurrentCrossingZone).HasTurnPriority(aiEntity);
     }
 
     private void OnWaitingAndAsking()
@@ -243,14 +240,6 @@ public class AIStateController : MonoBehaviour
         bool askForCross = false;
         if (!alreadyGaveCross)
         {
-            //if (!((Crosswalk)aiEntity.GetCurrentCrossingZone).IsTurnInCooldown(aiEntity.GetEntityType))
-            //{
-            //    float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
-            //    if (randomNumber >= 100 - askForCrossProbability)
-            //    {
-            //        askForCross = true;
-            //    }
-            //}
             float randomNumber = UnityEngine.Random.Range(0.0f, 1.0f) * 100;
             if (randomNumber >= 100 - askForCrossProbability)
             {
@@ -335,10 +324,7 @@ public class AIStateController : MonoBehaviour
     private void StartCross()
     {
         aiEntity.OnStartedCrossing(aiEntity.GetCurrentCrossingZone);
-        // aiEntity.GetCurrentCrossingZone.OnStartedCrossing(aiEntity);
-        // aiEntity.SwitchToState(AIState.Moving);
         alreadyGaveCross = false;
-        //aiEntity.CheckIfIsBreakingTheLaw();
     }
 
     private void GiveCross()

@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
 {
-    #region "Variables to set"
+    #region "Variables to set in editor"
     [SerializeField]
     private CrossWalkTypes crossWalkType = CrossWalkTypes.Bocacalle;
     [SerializeField]
@@ -67,11 +67,6 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         }
     }
 
-    //private void Update()
-    //{
-    //    UpdateTurn();
-    //}
-
     /// <summary>
     /// Called when a entity enter the crosswalk hotzone.
     /// </summary>
@@ -82,7 +77,6 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                 WaitTicket newTicket = new WaitTicket();
                 newTicket.waitStartTime = System.DateTime.UtcNow;
                 waitingPedestrians.Add(_entity, newTicket);
-                // serializableWaitPedestrians.AddData(_entity, newTicket);
             }
         }
         else if (_entity.GetEntityType.Equals(EntityType.Vehicle)) {
@@ -168,7 +162,6 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
                         _entity.SetCrossingWithPedestrianValue(true);
                     }
                 }
-                // DebugController.LogMessage("Adding car to crossing cars.");
                 _entity.GetMovableComponent.AddOnMovement(OnEntityMoved);
                 CrossingInfo newInfo = new CrossingInfo();
                 newInfo.lastPosition = _entity.transform.position;
@@ -232,58 +225,6 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
         bool cross = true;
         //cross = TicketHasTurn(_entity);
         cross = HasTurn(_entity);
-        return cross;
-    }
-
-    private bool TicketHasTurn(EntityController _entity)
-    {
-        bool cross = true;
-        WaitTicket entityTicket = GetWaitingTicket(_entity);
-        Dictionary<EntityController, WaitTicket>.ValueCollection values = null;
-        WaitTicket[] valuesArray = null;
-        int waitTimeComparisson;
-        int gaveCrossTimeComparison;
-        if (_entity.GetEntityType.Equals(EntityType.Vehicle) && !crossingVehicle.ContainsKey(_entity))
-        {
-            if (crossingPedestrians.Count > 0)
-            {
-                cross = false;
-            }
-            else if (waitingPedestrians.Count > 0)
-            {
-                // TODO refactor into compare to pedestrians tickets.
-                values = waitingPedestrians.Values;
-            }
-        }
-        else if (_entity.GetEntityType.Equals(EntityType.Pedestrian) && !crossingPedestrians.ContainsKey(_entity))
-        {
-            if (crossingVehicle.Count > 0)
-            {
-                cross = false;
-            }
-            else if (waitingCars.Count > 0)
-            {
-                if (!CanCrossWithCrossingPedestrians())
-                {
-                    values = waitingCars.Values;
-                }
-            }
-        }
-        if (values != null)
-        {
-            valuesArray = values.ToArray();
-            values = null;
-            for (int i = 0; i < valuesArray.Length; i++)
-            {
-                waitTimeComparisson = System.DateTime.Compare(entityTicket.waitStartTime, valuesArray[i].waitStartTime);
-                gaveCrossTimeComparison = System.DateTime.Compare(entityTicket.gaveCrossTime, valuesArray[i].waitStartTime);
-                if ((entityTicket.gaveCross && gaveCrossTimeComparison >= 0) || (!entityTicket.gaveCross && waitTimeComparisson >= 0))
-                {
-                    cross = false;
-                    break;
-                }
-            }
-        }
         return cross;
     }
 
@@ -643,5 +584,101 @@ public class Crosswalk : MonoBehaviour, ICrossable, ITurnable
             cooldown = TurnInCooldown.IsInCooldown();
         }
         return cooldown;
+    }
+
+    public bool HasTurnPriority(EntityController _entity)
+    {
+        return TicketHasTurn(_entity);
+    }
+
+    private bool TicketHasTurn(EntityController _entity)
+    {
+        bool cross = true;
+        Dictionary<EntityController, WaitTicket>.ValueCollection values = null;
+        if (_entity.GetEntityType.Equals(EntityType.Vehicle) && !crossingVehicle.ContainsKey(_entity))
+        {
+            if (crossingPedestrians.Count > 0)
+            {
+                cross = false;
+            }
+            else if (waitingPedestrians.Count > 0)
+            {
+                if (!CanCrossWithCrossingPedestrians())
+                {
+                    values = waitingPedestrians.Values;
+                }
+            }
+        }
+        else if (_entity.GetEntityType.Equals(EntityType.Pedestrian) && !crossingPedestrians.ContainsKey(_entity))
+        {
+            if (crossingVehicle.Count > 0)
+            {
+                cross = false;
+            }
+            else if (waitingCars.Count > 0)
+            {
+                values = waitingCars.Values;
+            }
+        }
+
+        if (values != null)
+        {
+            HasTurnAboveWaitingEntities(GetWaitingTicket(_entity), values.ToArray(), _entity.GetEntityType);
+        }
+        return cross;
+    }
+
+    private bool HasTurnAboveWaitingEntities(WaitTicket _entityTicket, WaitTicket[] _waitingTickets, EntityType _type)
+    {
+        bool hasTurn = true;
+        int waitComparison;
+        int gaveWaitComparison;
+        int waitGaveComparison;
+        int gaveComparison;
+        for (int i = 0; i < _waitingTickets.Length; i++)
+        {
+            waitComparison = DateTime.Compare(_entityTicket.waitStartTime, _waitingTickets[i].waitStartTime);
+            gaveWaitComparison = DateTime.Compare(_entityTicket.gaveCrossTime, _waitingTickets[i].waitStartTime);
+            waitGaveComparison = DateTime.Compare(_entityTicket.waitStartTime, _waitingTickets[i].gaveCrossTime);
+            gaveComparison = DateTime.Compare(_entityTicket.gaveCrossTime, _waitingTickets[i].gaveCrossTime);
+            if ((_entityTicket.gaveCross && gaveWaitComparison >= 0) || (!_entityTicket.gaveCross && waitComparison >= 0))
+            {
+                hasTurn = false;
+                break;
+            }
+
+            if (_entityTicket.gaveCross)
+            {
+                if (_waitingTickets[i].gaveCross && IsCompareGreater(gaveComparison, _type))
+                {
+                    hasTurn = false;
+                    break;
+                }
+                else if (IsCompareGreater(gaveWaitComparison, _type)) 
+                {
+                    hasTurn = false;
+                    break;
+                }
+            }
+            else
+            {
+                if (_waitingTickets[i].gaveCross && IsCompareGreater(waitGaveComparison, _type))
+                {
+                    hasTurn = false;
+                    break;
+                }
+                else if (IsCompareGreater(waitComparison, _type))
+                {
+                    hasTurn = false;
+                    break;
+                }
+            }
+        }
+        return hasTurn;
+    }
+
+    private bool IsCompareGreater(int _result, EntityType _type)
+    {
+        return (_type.Equals(EntityType.Pedestrian)) ? _result > 0 : _result >= 0;
     }
 }

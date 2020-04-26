@@ -102,7 +102,7 @@ public abstract class AIController : EntityController
         if (currentCrossingZone == null || !currentCrossingZone.Equals(_crossWalk))
         {
             currentCrossingZone?.OnFinishedCrossing(this);
-            currentCrossingZone = (Crosswalk)_crossWalk;
+            currentCrossingZone = _crossWalk;
             transitionController?.OnCrossWalkEntered();
         }
     }
